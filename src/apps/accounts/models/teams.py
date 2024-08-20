@@ -6,6 +6,7 @@ from src.apps.accounts.models.constants import TEAM_NAME_MAX_LENGTH
 
 User = get_user_model()
 
+
 class Team(models.Model):
     class Meta:
         verbose_name = _("Team")
