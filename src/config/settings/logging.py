@@ -41,7 +41,6 @@ LOGGING = {
             "level": LOG_LEVEL,
             "propagate": True,
         },
-
     },
 }
 logging.config.dictConfig(LOGGING)
