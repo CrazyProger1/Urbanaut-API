@@ -1,6 +1,6 @@
 .PHONY: docker.up
 docker.up:
-	docker-compose --build -d -f compose.dev.yaml up
+	docker-compose -f docker-compose.yml up
 
 .PHONY: docker.down
 docker.down:
@@ -11,7 +11,7 @@ docker.bash:
 	docker-compose exec web bash
 
 .PHONY: docker.log
-docker.bash:
+docker.log:
 	docker container logs web --follow
 
 .PHONY: cleancode

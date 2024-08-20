@@ -21,6 +21,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "src.apps.accounts.apps.AccountsConfig",
+    "src.apps.abandoned.apps.AbandonedConfig",
+    "src.apps.media.apps.MediaConfig",
 ]
 
 MIDDLEWARE = [
