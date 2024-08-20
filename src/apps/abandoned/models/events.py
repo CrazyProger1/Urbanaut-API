@@ -3,6 +3,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 
 from src.apps.abandoned.models.constants import EVENT_NAME_MAX_LENGTH
+from src.apps.abandoned.models.enums import EventStatus
 
 User = get_user_model()
 
@@ -21,7 +22,6 @@ class Event(models.Model):
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
-        editable=False,
         verbose_name=_("Created At"),
         help_text=_("Event creation date and time."),
     )
@@ -41,7 +41,24 @@ class Event(models.Model):
 
     participants = models.ManyToManyField(
         User,
-        related_name="reports",
+        related_name="events",
         verbose_name=_("Participants"),
         help_text=_("Users that participate in this trip."),
+        through="Participation",
+    )
+    organizer = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name="my_events",
+        blank=False,
+        null=False,
+        verbose_name=_("Organizer"),
+        help_text=_(""),
+    )
+    status = models.CharField(
+        max_length=100,
+        choices=EventStatus,
+        default=EventStatus.PLANNED,
+        blank=False,
+        null=False,
     )

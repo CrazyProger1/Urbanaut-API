@@ -1,10 +1,10 @@
 from modeltranslation.translator import TranslationOptions, translator
 
-from src.apps.abandoned.models import AttendanceReport
+from src.apps.abandoned.models import ParticipationReport
 
 
-class AttendanceReportTranslationOptions(TranslationOptions):
+class ParticipationReportTranslationOptions(TranslationOptions):
     pass
 
 
-translator.register(AttendanceReport, AttendanceReportTranslationOptions)
+translator.register(ParticipationReport, ParticipationReportTranslationOptions)

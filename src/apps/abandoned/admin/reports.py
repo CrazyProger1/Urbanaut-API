@@ -1,9 +1,9 @@
 from django.contrib import admin
 from modeltranslation.admin import TranslationAdmin
 
-from src.apps.abandoned.models import AttendanceReport
+from src.apps.abandoned.models import ParticipationReport
 
 
-@admin.register(AttendanceReport)
-class AttendanceReportAdmin(TranslationAdmin):
-    pass
+@admin.register(ParticipationReport)
+class ParticipationReportAdmin(TranslationAdmin):
+    readonly_fields = ("created_at",)
