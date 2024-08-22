@@ -81,11 +81,23 @@ class AbandonedObject(models.Model):
         help_text=_("Object updated date and time."),
         auto_now=True,
     )
+    built_at = models.DateField(
+        verbose_name=_("Built At"),
+        help_text=_("Object built date and time."),
+        null=True,
+        blank=True,
+    )
+    abandoned_at = models.DateField(
+        verbose_name=_("Abandoned At"),
+        help_text=_("When object became abandoned date and time."),
+        null=True,
+        blank=True,
+    )
     creator = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
         related_name="objects",
-        blank=False,
+        blank=True,
         null=True,
         verbose_name=_("Creator"),
         help_text=_(""),
