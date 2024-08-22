@@ -23,3 +23,6 @@ class ParticipationReport(models.Model):
         verbose_name=_("Participation"),
         help_text=_("Report destination participation."),
     )
+
+    def __str__(self):
+        return f"Report(participation={self.participation})"

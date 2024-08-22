@@ -64,3 +64,6 @@ class AbandonedArea(models.Model):
         verbose_name=_("Security Level"),
         help_text=_("Security level of the area."),
     )
+
+    def __str__(self):
+        return f"Area(name={self.name})"

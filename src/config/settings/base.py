@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "src.apps.accounts.apps.AccountsConfig",
     "src.apps.abandoned.apps.AbandonedConfig",
     "src.apps.media.apps.MediaConfig",
+    "src.apps.docs.apps.DocsConfig",
 ]
 
 MIDDLEWARE = [

@@ -62,3 +62,6 @@ class Event(models.Model):
         blank=False,
         null=False,
     )
+
+    def __str__(self):
+        return f"Event(name={self.name})"

@@ -34,3 +34,6 @@ class Participation(models.Model):
         blank=False,
         null=False,
     )
+
+    def __str__(self):
+        return f"Participation(event={self.event}, user={self.user})"

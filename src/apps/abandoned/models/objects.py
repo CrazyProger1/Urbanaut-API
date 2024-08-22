@@ -102,3 +102,6 @@ class AbandonedObject(models.Model):
         verbose_name=_("Creator"),
         help_text=_(""),
     )
+
+    def __str__(self):
+        return f"Object(name={self.name})"
