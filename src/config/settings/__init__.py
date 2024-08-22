@@ -8,4 +8,5 @@ include(
     "logging.py",
     "cors.py",
     "docs.py",
+    "auth.py",
 )

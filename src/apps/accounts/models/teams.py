@@ -1,10 +1,8 @@
-from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext as _
 
+from src.apps.accounts.models.users import User
 from src.apps.accounts.models.constants import TEAM_NAME_MAX_LENGTH
-
-User = get_user_model()
 
 
 class Team(models.Model):

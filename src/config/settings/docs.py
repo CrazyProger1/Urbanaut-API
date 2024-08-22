@@ -7,3 +7,9 @@ SWAGGER_SETTINGS = {
     "SUPPORTED_SUBMIT_METHODS": ["get", "post", "put", "delete", "patch"],
     "HEADERS": {"Accept-Language": "ru"},
 }
+SPECTACULAR_SETTINGS = {
+    "TITLE": "Urbanaut-API",
+    "DESCRIPTION": "Urbanaut API",
+    "VERSION": "0.0.1",
+    "SERVE_INCLUDE_SCHEMA": False,
+}
