@@ -6,4 +6,6 @@ include(
     "i18n.py",
     "celery.py",
     "logging.py",
+    "cors.py",
+    "docs.py",
 )

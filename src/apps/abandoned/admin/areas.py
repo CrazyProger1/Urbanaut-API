@@ -6,4 +6,7 @@ from src.apps.abandoned.models import AbandonedArea
 
 @admin.register(AbandonedArea)
 class AbandonedAreaAdmin(TranslationAdmin):
-    list_display = ("name", "area",)
+    list_display = (
+        "name",
+        "area",
+    )

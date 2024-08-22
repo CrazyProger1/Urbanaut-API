@@ -3,9 +3,17 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext as _
 
-from src.apps.abandoned.models.constants import OBJECT_NAME_MAX_LENGTH, SECURITY_LEVEL_LENGTH, \
-    OBJECT_PRESERVATION_LEVEL_LENGTH, OBJECT_DIFFICULTY_LEVEL_LENGTH
-from src.apps.abandoned.models.enums import SecurityLevel, PreservationLevel, DifficultyLevel
+from src.apps.abandoned.models.constants import (
+    OBJECT_NAME_MAX_LENGTH,
+    SECURITY_LEVEL_LENGTH,
+    OBJECT_PRESERVATION_LEVEL_LENGTH,
+    OBJECT_DIFFICULTY_LEVEL_LENGTH,
+)
+from src.apps.abandoned.models.enums import (
+    SecurityLevel,
+    PreservationLevel,
+    DifficultyLevel,
+)
 
 User = get_user_model()
 
