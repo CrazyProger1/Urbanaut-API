@@ -26,7 +26,7 @@ class AbandonedObject(models.Model):
     area = models.ForeignKey(
         "AbandonedArea",
         on_delete=models.CASCADE,
-        related_name="objects",
+        related_name="abandoned_objects",
         null=True,
         blank=True,
         verbose_name=_("Area"),
@@ -104,7 +104,7 @@ class AbandonedObject(models.Model):
     creator = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
-        related_name="objects",
+        related_name="abandoned_objects",
         blank=True,
         null=True,
         verbose_name=_("Creator"),

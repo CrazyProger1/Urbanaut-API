@@ -4,7 +4,7 @@ from src.apps.abandoned.models import AbandonedArea
 
 
 class AbandonedAreaTranslationOptions(TranslationOptions):
-    pass
+    fields = ("name", "description")
 
 
 translator.register(AbandonedArea, AbandonedAreaTranslationOptions)
