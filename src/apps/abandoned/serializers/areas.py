@@ -8,6 +8,7 @@ class AreaListSerializer(serializers.ModelSerializer):
         model = AbandonedArea
         fields = "__all__"
 
+
 class AreaRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = AbandonedArea

@@ -7,6 +7,4 @@ router = routers.SimpleRouter()
 router.register("objects", ObjectViewSet)
 router.register("areas", AreaViewSet)
 
-urlpatterns = [
-    *router.urls
-]
+urlpatterns = [*router.urls]

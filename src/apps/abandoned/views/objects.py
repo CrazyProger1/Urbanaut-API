@@ -1,6 +1,9 @@
 from rest_framework import viewsets, generics, mixins, permissions
 
-from src.apps.abandoned.serializers import ObjectListSerializer, ObjectRetrieveSerializer
+from src.apps.abandoned.serializers import (
+    ObjectListSerializer,
+    ObjectRetrieveSerializer,
+)
 from src.apps.abandoned.services import get_all_objects
 
 
