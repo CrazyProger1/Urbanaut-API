@@ -12,6 +12,10 @@ SECRET_KEY = config("SECRET_KEY", cast=str)
 DEBUG = config("DEBUG", cast=bool, default=False)
 
 ALLOWED_HOSTS = ["*"]
+CSRF_TRUSTED_ORIGINS = [
+    "http://localhost:8001",
+    "https://urbanaut.onrender.com/",
+]
 
 INSTALLED_APPS = [
     "django.contrib.admin",
