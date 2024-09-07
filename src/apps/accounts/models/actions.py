@@ -21,7 +21,7 @@ class UserAction(models.Model):
         blank=True,
         null=True,
         verbose_name=_("Data"),
-        help_text=_("User action additional data."),
+        help_text=_("Action additional data."),
     )
     user = models.ForeignKey(
         "User",
@@ -31,3 +31,6 @@ class UserAction(models.Model):
         verbose_name=_("User"),
         help_text=_("User who made the action."),
     )
+
+    def __str__(self):
+        return f"{type(self).__name__}(id={self.id})"

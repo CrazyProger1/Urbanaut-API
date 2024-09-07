@@ -3,12 +3,6 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from src.apps.abandoned.models.constants import (
-    OBJECT_NAME_MAX_LENGTH,
-    SECURITY_LEVEL_LENGTH,
-    OBJECT_PRESERVATION_LEVEL_LENGTH,
-    OBJECT_DIFFICULTY_LEVEL_LENGTH,
-)
 from src.apps.abandoned.enums import (
     SecurityLevel,
     PreservationLevel,
@@ -33,7 +27,7 @@ class AbandonedObject(models.Model):
         help_text=_("Area that contains current object."),
     )
     name = models.CharField(
-        max_length=OBJECT_NAME_MAX_LENGTH,
+        max_length=250,
         verbose_name=_("Name"),
         help_text=_("Name of the abandoned object."),
         null=False,
@@ -53,7 +47,6 @@ class AbandonedObject(models.Model):
         blank=False,
     )
     security_level = models.CharField(
-        max_length=SECURITY_LEVEL_LENGTH,
         choices=SecurityLevel,
         default=SecurityLevel.NONE,
         null=False,
@@ -62,7 +55,6 @@ class AbandonedObject(models.Model):
         help_text=_("Security level of the object."),
     )
     preservation_level = models.CharField(
-        max_length=OBJECT_PRESERVATION_LEVEL_LENGTH,
         choices=PreservationLevel,
         default=PreservationLevel.HIGH,
         null=False,
@@ -71,7 +63,6 @@ class AbandonedObject(models.Model):
         help_text=_("Preservation level of the object."),
     )
     difficulty_level = models.CharField(
-        max_length=OBJECT_DIFFICULTY_LEVEL_LENGTH,
         choices=DifficultyLevel,
         default=DifficultyLevel.NEWBIE,
         null=False,

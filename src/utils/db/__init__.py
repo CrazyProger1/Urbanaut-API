@@ -4,6 +4,7 @@ from .shortcuts import (
     get_object_or_none,
     get_all_objects,
     filter_objects,
+    create_object,
 )
 
 __all__ = [
@@ -12,4 +13,5 @@ __all__ = [
     "get_object_or_none",
     "get_all_objects",
     "filter_objects",
+    "create_object",
 ]

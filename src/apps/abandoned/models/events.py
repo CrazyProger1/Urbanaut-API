@@ -2,7 +2,6 @@ from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from src.apps.abandoned.models.constants import EVENT_NAME_MAX_LENGTH
 from src.apps.abandoned.enums import EventStatus
 
 User = get_user_model()
@@ -14,7 +13,7 @@ class Event(models.Model):
         verbose_name_plural = _("Events")
 
     name = models.CharField(
-        max_length=EVENT_NAME_MAX_LENGTH,
+        max_length=250,
         verbose_name=_("Name"),
         help_text=_("Name of the event."),
         null=False,

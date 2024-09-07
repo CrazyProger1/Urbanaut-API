@@ -3,10 +3,6 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from src.apps.abandoned.models.constants import (
-    AREA_NAME_MAX_LENGTH,
-    SECURITY_LEVEL_LENGTH,
-)
 from src.apps.abandoned.enums import SecurityLevel
 
 User = get_user_model()
@@ -37,7 +33,7 @@ class AbandonedArea(models.Model):
         help_text=_("Area that contains current area."),
     )
     name = models.CharField(
-        max_length=AREA_NAME_MAX_LENGTH,
+        max_length=250,
         verbose_name=_("Name"),
         help_text=_("Name of the abandoned area."),
         null=False,
@@ -59,7 +55,6 @@ class AbandonedArea(models.Model):
         help_text=_(""),
     )
     security_level = models.CharField(
-        max_length=SECURITY_LEVEL_LENGTH,
         choices=SecurityLevel,
         default=SecurityLevel.NONE,
         null=False,

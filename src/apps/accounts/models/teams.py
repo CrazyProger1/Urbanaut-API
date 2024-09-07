@@ -2,7 +2,6 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.accounts.models.users import User
-from src.apps.accounts.models.constants import TEAM_NAME_MAX_LENGTH
 
 
 class Team(models.Model):
@@ -11,11 +10,14 @@ class Team(models.Model):
         verbose_name_plural = _("Teams")
 
     name = models.CharField(
-        max_length=TEAM_NAME_MAX_LENGTH,
+        max_length=250,
         unique=True,
         verbose_name=_("Name"),
         help_text=_("Name of the team."),
     )
+
+    def __str__(self):
+        return f"{type(self).__name__}(id={self.id})"
 
 
 class TeamMember(models.Model):
@@ -41,3 +43,6 @@ class TeamMember(models.Model):
         verbose_name=_("User"),
         help_text=_(""),
     )
+
+    def __str__(self):
+        return f"{type(self).__name__}(id={self.id})"

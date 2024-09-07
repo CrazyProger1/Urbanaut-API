@@ -31,7 +31,8 @@ class TMAAuthentication(authentication.BaseAuthentication):
 
         data_hash = parsed_data.pop("hash")
         data_check_string = "\n".join(
-            f"{key}={value}" for key, value in sorted(parsed_data.items(), key=itemgetter(0))
+            f"{key}={value}"
+            for key, value in sorted(parsed_data.items(), key=itemgetter(0))
         )
         secret_key = hmac.new(
             key=b"WebAppData",
