@@ -1,4 +1,4 @@
-from rest_framework import viewsets, generics, mixins, permissions
+from rest_framework import viewsets, mixins, permissions
 
 from src.apps.abandoned.serializers import (
     ObjectListSerializer,

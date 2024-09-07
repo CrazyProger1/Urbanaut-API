@@ -25,20 +25,19 @@ class Event(models.Model):
         verbose_name=_("Created At"),
         help_text=_("Event creation date and time."),
     )
-    start_datetime = models.DateTimeField(
+    start_at = models.DateTimeField(
         null=False,
         blank=False,
-        verbose_name=_("Start Datetime"),
+        verbose_name=_("Start At"),
         help_text=_("Date and time of start of trip."),
     )
 
-    end_datetime = models.DateTimeField(
+    end_at = models.DateTimeField(
         null=False,
         blank=False,
-        verbose_name=_("End Datetime"),
+        verbose_name=_("End At"),
         help_text=_("Date and time of end of trip."),
     )
-
     participants = models.ManyToManyField(
         User,
         related_name="events",

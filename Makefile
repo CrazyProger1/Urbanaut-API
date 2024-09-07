@@ -1,6 +1,12 @@
 .PHONY: docker.up
 docker.up:
-	docker-compose -f docker-compose.yml up
+	docker-compose -f docker-compose.yml up --detach
+
+
+.PHONY: docker.up.build
+docker.up.build:
+	docker-compose -f docker-compose.yml up --detach --build
+
 
 .PHONY: docker.down
 docker.down:
@@ -8,7 +14,7 @@ docker.down:
 
 .PHONY: docker.bash
 docker.bash:
-	docker-compose exec web bash
+	docker-compose exec api bash
 
 .PHONY: docker.log
 docker.log:
