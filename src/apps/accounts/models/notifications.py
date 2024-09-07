@@ -18,7 +18,6 @@ class NotificationStatus(models.Model):
         null=False,
         verbose_name=_("Recipient"),
         help_text=_(""),
-
     )
     notification = models.ForeignKey(
         "Notification",
@@ -35,8 +34,10 @@ class NotificationStatus(models.Model):
         verbose_name=_("Read"),
         help_text=_(""),
     )
+
     def __str__(self):
         return f"{type(self).__name__}(id={self.id})"
+
 
 class Notification(models.Model):
     class Meta:
@@ -49,6 +50,13 @@ class Notification(models.Model):
         default=timezone.now,
         verbose_name=_("Show At"),
         help_text=_("Planned time to show."),
+    )
+    is_shown = models.BooleanField(
+        default=False,
+        blank=False,
+        null=False,
+        verbose_name=_("Shown"),
+        help_text=_("Notification is already shown."),
     )
     recipients = models.ManyToManyField(
         "User",
@@ -75,7 +83,7 @@ class Notification(models.Model):
         null=False,
         blank=False,
         verbose_name=_("Type"),
-        help_text=_("Type of the notification.")
+        help_text=_("Type of the notification."),
     )
     icon = models.CharField(
         choices=NotificationIcon,
@@ -83,7 +91,7 @@ class Notification(models.Model):
         null=False,
         blank=False,
         verbose_name=_("Icon"),
-        help_text=_("Icon of the notification.")
+        help_text=_("Icon of the notification."),
     )
 
     def __str__(self):

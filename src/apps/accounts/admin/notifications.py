@@ -6,6 +6,9 @@ from src.apps.accounts.models import Notification, NotificationStatus
 
 @admin.register(NotificationStatus)
 class NotificationStatusAdmin(admin.ModelAdmin):
+    list_display = ("id", "notification", "user", "is_read")
+    list_display_links = ("notification",)
+
     def has_delete_permission(self, request, obj=None):
         return False
 
@@ -29,3 +32,6 @@ class NotificationStatusInline(admin.TabularInline):
 @admin.register(Notification)
 class NotificationAdmin(TranslationAdmin):
     inlines = (NotificationStatusInline,)
+    list_display = ("id", "title", "type", "is_shown",)
+    readonly_fields = ("is_shown",)
+    list_display_links = ("title",)
