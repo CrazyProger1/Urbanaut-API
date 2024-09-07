@@ -45,7 +45,7 @@ class AbandonedObject(models.Model):
         null=True,
         blank=True,
     )
-    hidden = models.BooleanField(
+    is_hidden = models.BooleanField(
         verbose_name=_("Hidden"),
         help_text=_("Hidden from general users and available only for admins."),
         default=False,

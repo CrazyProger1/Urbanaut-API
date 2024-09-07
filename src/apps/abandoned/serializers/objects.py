@@ -16,3 +16,14 @@ class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = AbandonedObject
         fields = "__all__"
+
+
+class AbandonedObjectCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = AbandonedObject
+        exclude = (
+            "created_at",
+            "updated_at",
+            "is_hidden",
+            "creator",
+        )

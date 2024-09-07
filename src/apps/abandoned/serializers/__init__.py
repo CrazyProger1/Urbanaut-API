@@ -1,6 +1,7 @@
 from src.apps.abandoned.serializers.objects import (
     AbandonedObjectListSerializer,
     AbandonedObjectRetrieveSerializer,
+    AbandonedObjectCreateSerializer,
 )
 from src.apps.abandoned.serializers.areas import (
     AbandonedAreaListSerializer,
