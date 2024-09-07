@@ -1,5 +1,5 @@
 from django.db import models
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
 from src.apps.accounts.models.users import User
 from src.apps.accounts.models.constants import TEAM_NAME_MAX_LENGTH
