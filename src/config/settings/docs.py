@@ -12,4 +12,6 @@ SPECTACULAR_SETTINGS = {
     "DESCRIPTION": "Urbanaut API",
     "VERSION": "0.0.1",
     "SERVE_INCLUDE_SCHEMA": False,
+    "SCHEMA_PATH_PREFIX": r"/api/v[0-9]",
+    "COMPONENT_SPLIT_REQUEST": True,
 }

@@ -9,7 +9,7 @@ from src.apps.abandoned.models.constants import (
     OBJECT_PRESERVATION_LEVEL_LENGTH,
     OBJECT_DIFFICULTY_LEVEL_LENGTH,
 )
-from src.apps.abandoned.models.enums import (
+from src.apps.abandoned.enums import (
     SecurityLevel,
     PreservationLevel,
     DifficultyLevel,

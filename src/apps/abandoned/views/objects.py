@@ -1,25 +1,25 @@
 from rest_framework import viewsets, mixins, permissions
 
 from src.apps.abandoned.serializers import (
-    ObjectListSerializer,
-    ObjectRetrieveSerializer,
+    AbandonedObjectListSerializer,
+    AbandonedObjectRetrieveSerializer,
 )
-from src.apps.abandoned.services import get_all_objects
+from src.apps.abandoned.services import get_all_abandoned_objects
 
 
-class ObjectViewSet(
+class AbandonedObjectViewSet(
     viewsets.GenericViewSet,
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
 ):
-    queryset = get_all_objects()
+    queryset = get_all_abandoned_objects()
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
-    serializer_class = ObjectListSerializer
+    serializer_class = AbandonedObjectListSerializer
 
     def get_serializer_class(self):
         match self.action:
             case "list":
-                return ObjectListSerializer
+                return AbandonedObjectListSerializer
             case "retrieve":
-                return ObjectRetrieveSerializer
+                return AbandonedObjectRetrieveSerializer
         return self.serializer_class

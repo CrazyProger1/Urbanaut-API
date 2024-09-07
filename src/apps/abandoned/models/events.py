@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext as _
 
 from src.apps.abandoned.models.constants import EVENT_NAME_MAX_LENGTH
-from src.apps.abandoned.models.enums import EventStatus
+from src.apps.abandoned.enums import EventStatus
 
 User = get_user_model()
 

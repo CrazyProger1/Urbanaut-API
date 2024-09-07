@@ -27,6 +27,7 @@ INSTALLED_APPS = [
     "corsheaders",
     "rest_framework",
     "django_celery_beat",
+    "drf_spectacular",
     "src.apps.accounts.apps.AccountsConfig",
     "src.apps.abandoned.apps.AbandonedConfig",
     "src.apps.media.apps.MediaConfig",

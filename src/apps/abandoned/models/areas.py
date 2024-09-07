@@ -7,7 +7,7 @@ from src.apps.abandoned.models.constants import (
     AREA_NAME_MAX_LENGTH,
     SECURITY_LEVEL_LENGTH,
 )
-from src.apps.abandoned.models.enums import SecurityLevel
+from src.apps.abandoned.enums import SecurityLevel
 
 User = get_user_model()
 
