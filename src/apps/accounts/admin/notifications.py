@@ -29,7 +29,12 @@ class NotificationStatusInline(admin.TabularInline):
 @admin.register(Notification)
 class NotificationAdmin(TranslationAdmin):
     inlines = (NotificationStatusInline,)
-    list_display = ("id", "title", "type", "is_shown",)
+    list_display = (
+        "id",
+        "title",
+        "type",
+        "is_shown",
+    )
     readonly_fields = ("is_shown",)
     list_display_links = ("title",)
 

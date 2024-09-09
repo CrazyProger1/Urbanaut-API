@@ -32,8 +32,8 @@ def filter_notification_status(**data):
 
 
 def mark_read(
-        notifications: QuerySet[Notification],
-        user: User,
+    notifications: QuerySet[Notification],
+    user: User,
 ) -> None:
     queryset = filter_notification_status(
         notification__in=notifications,

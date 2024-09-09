@@ -1,11 +1,18 @@
 import django_filters as filters
 
 from src.apps.abandoned.models import AbandonedObject
+from src.utils.filters import LocalizedFilter
 
 
 class AbandonedObjectFilter(filters.FilterSet):
-    name = filters.CharFilter(lookup_expr="icontains", field_name="name")
-    description = filters.CharFilter(lookup_expr="icontains", field_name="description")
+    name = LocalizedFilter(
+        field_name="name",
+        lookup_expr="icontains",
+    )
+    description = LocalizedFilter(
+        field_name="description",
+        lookup_expr="icontains",
+    )
 
     ordering = filters.OrderingFilter(
         fields=(
