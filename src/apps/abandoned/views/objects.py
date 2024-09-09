@@ -1,5 +1,6 @@
 from rest_framework import viewsets, mixins, permissions, serializers
 
+from src.apps.abandoned.filters import AbandonedObjectFilter
 from src.apps.abandoned.serializers import (
     AbandonedObjectListSerializer,
     AbandonedObjectRetrieveSerializer,
@@ -19,6 +20,7 @@ class AbandonedObjectViewSet(
     queryset = get_unhidden_abandoned_objects()
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = AbandonedObjectListSerializer
+    filterset_class = AbandonedObjectFilter
 
     def get_serializer_class(self):
         match self.action:

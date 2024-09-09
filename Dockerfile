@@ -16,7 +16,7 @@ RUN poetry config virtualenvs.create false \
 
 COPY . /urbanaut/
 
-EXPOSE 8000
+EXPOSE 8001
 
 RUN chmod +x /urbanaut/entrypoint.sh
 

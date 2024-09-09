@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "corsheaders",
     "rest_framework",
+    "django_filters",
     "django_celery_beat",
     "drf_spectacular",
     "src.apps.accounts.apps.AccountsConfig",

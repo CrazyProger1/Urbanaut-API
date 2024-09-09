@@ -7,4 +7,4 @@ then
   python manage.py createsuperuser --no-input
 fi
 
-python manage.py runserver 0.0.0.0:8000
+python manage.py runserver 0.0.0.0:8001

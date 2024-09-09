@@ -27,7 +27,7 @@ services:
     volumes:
       - .:/urbanaut
     ports:
-      - 8000:8000
+      - 8001:8001
     env_file:
       - .env
     networks:

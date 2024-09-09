@@ -12,4 +12,7 @@ REST_FRAMEWORK = {
         "rest_framework.authentication.SessionAuthentication",
         "src.apps.accounts.backends.TMAAuthentication",
     ),
+    "DEFAULT_FILTER_BACKENDS": (
+        "django_filters.rest_framework.DjangoFilterBackend",
+    ),
 }
