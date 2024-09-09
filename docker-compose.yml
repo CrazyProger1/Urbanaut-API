@@ -1,7 +1,7 @@
 services:
   postgres:
     container_name: urbanaut-postgres
-    image: postgres
+    image: postgis/postgis:latest
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: always
