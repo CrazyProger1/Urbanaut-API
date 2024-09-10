@@ -1,5 +1,6 @@
 from rest_framework import viewsets, mixins, permissions
 
+from src.apps.accounts.filters import UserFilter
 from src.apps.accounts.serializers import UserListSerializer, UserRetrieveSerializer
 from src.apps.accounts.services import get_all_users
 
@@ -12,6 +13,7 @@ class UserViewSet(
     queryset = get_all_users()
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = UserListSerializer
+    filterset_class = UserFilter
 
     def get_serializer_class(self):
         match self.action:

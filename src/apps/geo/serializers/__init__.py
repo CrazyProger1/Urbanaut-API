@@ -1,1 +1,1 @@
-from src.apps.geo.serializers.locations import LocationRetrieveSerializer
+from src.apps.geo.serializers.locations import LocationRetrieveSerializer, LocationCreateSerializer

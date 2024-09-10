@@ -65,6 +65,14 @@ class User(AbstractBaseUser, PermissionsMixin):
     joined_at = models.DateTimeField(
         default=timezone.now,
         verbose_name=_("Joined At"),
+        help_text=_(""),
+    )
+    born_at = models.DateField(
+        default=None,
+        null=True,
+        blank=True,
+        verbose_name=_("Birth Date"),
+        help_text=_(""),
     )
     rank = models.CharField(
         choices=UserRank,
