@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "src.apps.abandoned.apps.AbandonedConfig",
     "src.apps.media.apps.MediaConfig",
     "src.apps.docs.apps.DocsConfig",
+    "src.apps.geo.apps.GeoConfig",
 ]
 
 MIDDLEWARE = [

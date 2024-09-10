@@ -3,6 +3,7 @@ from rest_framework import serializers
 from src.apps.abandoned.models import AbandonedObject
 from src.apps.abandoned.serializers.areas import AbandonedAreaRetrieveSerializer
 from src.apps.accounts.serializers import UserRetrieveSerializer
+from src.apps.geo.serializers import LocationRetrieveSerializer
 
 
 class AbandonedObjectListSerializer(serializers.ModelSerializer):
@@ -14,6 +15,7 @@ class AbandonedObjectListSerializer(serializers.ModelSerializer):
 class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer):
     area = AbandonedAreaRetrieveSerializer(read_only=True)
     creator = UserRetrieveSerializer(read_only=True)
+    location = LocationRetrieveSerializer(read_only=True)
 
     class Meta:
         model = AbandonedObject

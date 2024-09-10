@@ -414,6 +414,25 @@ files = [
 django = ">=4.2"
 
 [[package]]
+name = "drf-extra-fields"
+version = "3.7.0"
+description = "Additional fields for Django Rest Framework."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "drf-extra-fields-3.7.0.tar.gz", hash = "sha256:d7e58b8f60432233328b8a64831e50ea5d05932d3cb63ade8fe66c0d3d21ac5b"},
+    {file = "drf_extra_fields-3.7.0-py3-none-any.whl", hash = "sha256:3f3b1a6ec0eea02c9cabd62fe10e1673e1e42c5daa27fa9d4cea758c52c5cc30"},
+]
+
+[package.dependencies]
+Django = ">=2.2"
+djangorestframework = ">=3.9.2"
+filetype = ">=1.2.0"
+
+[package.extras]
+base64imagefield = ["Pillow (>=6.2.1)"]
+
+[[package]]
 name = "drf-spectacular"
 version = "0.27.2"
 description = "Sane and flexible OpenAPI 3 schema generation for Django REST framework"
@@ -459,6 +478,17 @@ uritemplate = ">=3.0.0"
 [package.extras]
 coreapi = ["coreapi (>=2.3.3)", "coreschema (>=0.0.4)"]
 validation = ["swagger-spec-validator (>=2.1.0)"]
+
+[[package]]
+name = "filetype"
+version = "1.2.0"
+description = "Infer file type and MIME type of any file/buffer. No external dependencies."
+optional = false
+python-versions = "*"
+files = [
+    {file = "filetype-1.2.0-py2.py3-none-any.whl", hash = "sha256:7ce71b6880181241cf7ac8697a2f1eb6a8bd9b429f7ad6d27b8db9ba5f1c2d25"},
+    {file = "filetype-1.2.0.tar.gz", hash = "sha256:66b56cd6474bf41d8c54660347d37afcc3f7d1970648de365c102ef77548aadb"},
+]
 
 [[package]]
 name = "flower"
@@ -1136,4 +1166,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "882a4aeda2743adf094f718296c85bfe1de5651884c0af695657483d5ae44d30"
+content-hash = "4f08f19655f92be3a7ff22162c02df888141cdb5520fb7fdf88d5aa12ca6dcdf"

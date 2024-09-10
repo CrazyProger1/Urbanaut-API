@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
+
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
@@ -100,6 +101,15 @@ class AbandonedObject(models.Model):
         null=True,
         verbose_name=_("Creator"),
         help_text=_(""),
+    )
+    location = models.ForeignKey(
+        "geo.Location",
+        on_delete=models.CASCADE,
+        blank=True,
+        null=True,
+        related_name="objects",
+        verbose_name=_("Location"),
+        help_text=_("Location of the object."),
     )
 
     def __str__(self):
