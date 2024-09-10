@@ -1,4 +1,5 @@
 from rest_framework import viewsets, mixins, permissions, serializers
+from django_filters import rest_framework as filters
 
 from src.apps.abandoned.filters import AbandonedObjectFilter
 from src.apps.abandoned.serializers import (
@@ -9,6 +10,7 @@ from src.apps.abandoned.serializers import (
 from src.apps.abandoned.services import get_unhidden_abandoned_objects
 from src.apps.accounts.enums import UserActionType
 from src.apps.accounts.services import create_action
+from src.utils.filters import DistanceOrderingBackend
 
 
 class AbandonedObjectViewSet(
@@ -20,6 +22,11 @@ class AbandonedObjectViewSet(
     queryset = get_unhidden_abandoned_objects()
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = AbandonedObjectListSerializer
+    point_field = "location__point"
+    filter_backends = (
+        filters.DjangoFilterBackend,
+        DistanceOrderingBackend,
+    )
     filterset_class = AbandonedObjectFilter
 
     def get_serializer_class(self):

@@ -1,10 +1,11 @@
 import django_filters as filters
+from rest_framework_gis.filterset import GeoFilterSet
 
 from src.apps.abandoned.models import AbandonedObject
 from src.utils.filters import LocalizedFilter
 
 
-class AbandonedObjectFilter(filters.FilterSet):
+class AbandonedObjectFilter(GeoFilterSet):
     name = LocalizedFilter(
         field_name="name",
         lookup_expr="icontains",

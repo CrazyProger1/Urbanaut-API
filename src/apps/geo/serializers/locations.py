@@ -5,7 +5,7 @@ from src.apps.geo.models import Location
 
 
 class LocationRetrieveSerializer(serializers.ModelSerializer):
-    point = geo.PointField(read_only=True)
+    point = geo.PointField()
 
     class Meta:
         model = Location

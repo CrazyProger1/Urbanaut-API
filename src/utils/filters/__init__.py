@@ -1,1 +1,2 @@
-from .localized import LocalizedFilter
+from .filters import LocalizedFilter
+from .backends import DistanceOrderingBackend
