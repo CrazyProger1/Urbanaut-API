@@ -3,16 +3,16 @@ from django.contrib.gis.db.models import functions
 from rest_framework import filters, exceptions
 
 
-class DistanceOrderingBackend(filters.BaseFilterBackend):
+class DistanceBackend(filters.BaseFilterBackend):
     max_distance_param: str = "max_distance"
     point_param: str = "point"
+    nearest_param: str = "nearest"
     srid: int = 4326
 
     def get_ref_point(self, request, **kwargs):
         point_string = request.query_params.get(self.point_param, None)
         if not point_string:
             return None
-
         try:
             lat, lon = map(float, point_string.split(","))
         except ValueError:
@@ -27,6 +27,7 @@ class DistanceOrderingBackend(filters.BaseFilterBackend):
     def filter_queryset(self, request, queryset, view):
         dest_point_field = getattr(view, "point_field", None)
         max_distance = str(request.query_params.get(self.max_distance_param))
+        nearest = str(request.query_params.get(self.nearest_param))
 
         if not dest_point_field:
             return queryset
@@ -45,9 +46,10 @@ class DistanceOrderingBackend(filters.BaseFilterBackend):
                 }
             )
 
-        queryset.annotate(
-            distance=functions.Distance(dest_point_field, ref_point)
-        ).order_by("distance")
+        if nearest:
+            queryset = queryset.annotate(
+                distance=functions.Distance(dest_point_field, ref_point)
+            ).order_by(f"{'' if nearest == 'true' else '-'}distance")
 
         return queryset
 
@@ -67,16 +69,21 @@ class DistanceOrderingBackend(filters.BaseFilterBackend):
                 "description": "Coordinates (lat, lon).",
                 "schema": {
                     "type": "array",
-                    "items": {
-                        "type": "number",
-                        "format": "float"
-                    },
+                    "items": {"type": "number", "format": "float"},
                     "minItems": 2,
                     "maxItems": 2,
-
-                    "example": [0, 10]
+                    "example": [0, 10],
                 },
                 "style": "form",
                 "explode": False,
+            },
+            {
+                "name": self.nearest_param,
+                "required": False,
+                "in": "query",
+                "schema": {
+                    "type": "boolean",
+                },
+                "description": f"Ordering by distance from closest to farthest point.",
             },
         ]

@@ -1,1 +1,1 @@
-from .distance import DistanceOrderingBackend
+from .distance import DistanceBackend

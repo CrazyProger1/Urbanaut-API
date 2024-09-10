@@ -10,7 +10,7 @@ from src.apps.abandoned.serializers import (
 from src.apps.abandoned.services import get_unhidden_abandoned_objects
 from src.apps.accounts.enums import UserActionType
 from src.apps.accounts.services import create_action
-from src.utils.filters import DistanceOrderingBackend
+from src.utils.filters import DistanceBackend
 
 
 class AbandonedObjectViewSet(
@@ -25,7 +25,7 @@ class AbandonedObjectViewSet(
     point_field = "location__point"
     filter_backends = (
         filters.DjangoFilterBackend,
-        DistanceOrderingBackend,
+        DistanceBackend,
     )
     filterset_class = AbandonedObjectFilter
 
