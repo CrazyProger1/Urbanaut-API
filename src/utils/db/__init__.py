@@ -6,6 +6,7 @@ from .shortcuts import (
     filter_objects,
     create_object,
 )
+from .choices import DynamicTextChoices
 
 __all__ = [
     "get_manager",
@@ -14,4 +15,5 @@ __all__ = [
     "get_all_objects",
     "filter_objects",
     "create_object",
+    "DynamicTextChoices",
 ]

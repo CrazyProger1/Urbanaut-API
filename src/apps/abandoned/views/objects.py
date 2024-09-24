@@ -8,8 +8,6 @@ from src.apps.abandoned.serializers import (
     AbandonedObjectCreateSerializer,
 )
 from src.apps.abandoned.services import get_unhidden_abandoned_objects
-from src.apps.accounts.enums import UserActionType
-from src.apps.accounts.services import create_action
 from src.utils.filters import DistanceBackend
 
 
@@ -39,23 +37,8 @@ class AbandonedObjectViewSet(
                 return AbandonedObjectCreateSerializer
         return self.serializer_class
 
-    def add_action(self, instance, object_updated: bool = False):
-        create_action(
-            type=(
-                UserActionType.UPDATED_ABANDONED_OBJECT
-                if object_updated
-                else UserActionType.CREATED_ABANDONED_OBJECT
-            ),
-            user=self.request.user,
-            data={
-                "object": instance.id,
-                "name": instance.name,
-            },
-        )
-
     def perform_create(self, serializer: serializers.Serializer):
-        instance = serializer.save(
+        serializer.save(
             creator=self.request.user,
             is_hidden=True,
         )
-        self.add_action(instance=instance)

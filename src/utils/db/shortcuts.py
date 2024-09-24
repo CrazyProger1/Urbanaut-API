@@ -2,7 +2,7 @@ import logging
 
 from django.db import models
 
-logger = logging.getLogger("database")
+logger = logging.getLogger(__name__)
 
 
 def get_manager(model: models.Model, manager: str = "objects") -> models.Manager:
@@ -18,7 +18,7 @@ def get_manager(model: models.Model, manager: str = "objects") -> models.Manager
 
 
 def create_object[
-    T: models.Model
+T: models.Model
 ](model: type[T], manager: str = "objects", **data) -> T:
     obj = get_manager(model=model, manager=manager).create(**data)
     logger.debug(f"Object of type {model} inserted with {data}")
@@ -26,7 +26,7 @@ def create_object[
 
 
 def get_all_objects[
-    T: models.Model
+T: models.Model
 ](model: type[T], manager: str = "objects") -> models.QuerySet[T]:
     queryset = get_manager(
         model=model,
@@ -38,7 +38,7 @@ def get_all_objects[
 
 
 def filter_objects[
-    T: models.Model
+T: models.Model
 ](model: type[T], *args, manager: str = "objects", **kwargs) -> models.QuerySet[T]:
     queryset = get_manager(
         model=model,
@@ -50,7 +50,7 @@ def filter_objects[
 
 
 def get_object_or_error[
-    T: models.Model
+T: models.Model
 ](model: type[T], *args, manager: str = "objects", **kwargs) -> T:
     try:
         obj = get_manager(
@@ -65,7 +65,7 @@ def get_object_or_error[
 
 
 def get_object_or_none[
-    T: models.Model
+T: models.Model
 ](model: type[T], *args, manager: str = "objects", **kwargs) -> T | None:
     try:
         return get_object_or_error(
