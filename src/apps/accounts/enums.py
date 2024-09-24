@@ -15,12 +15,3 @@ class UserActionType(models.TextChoices):
     CREATED_ABANDONED_AREA = "CREATED_ABANDONED_AREA", _("CREATED ABANDONED AREA")
     UPDATED_ABANDONED_AREA = "UPDATED_ABANDONED_AREA", _("UPDATED ABANDONED AREA")
 
-
-class NotificationType(models.TextChoices):
-    PERSONAL = "PERSONAL", _("PERSONAL")
-    GROUP = "GROUP", _("GROUP")
-    SYSTEM = "SYSTEM", _("SYSTEM")
-
-
-class NotificationIcon(models.TextChoices):
-    NOTIFICATION = "NOTIFICATION", _("NOTIFICATION")

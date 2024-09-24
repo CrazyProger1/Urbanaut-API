@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     "src.apps.media.apps.MediaConfig",
     "src.apps.docs.apps.DocsConfig",
     "src.apps.geo.apps.GeoConfig",
+    "src.apps.notifications.apps.NotificationsConfig",
 ]
 
 MIDDLEWARE = [
