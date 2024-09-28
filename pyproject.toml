@@ -25,6 +25,7 @@ psycopg2 = "^2.9.9"
 django-cities = "^0.6.2"
 drf-extra-fields = "^3.7.0"
 djangorestframework-gis = "^1.1"
+drf-standardized-errors = {extras = ["openapi"], version = "^0.14.1"}
 
 
 [tool.poetry.group.dev.dependencies]

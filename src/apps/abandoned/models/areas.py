@@ -62,6 +62,13 @@ class AbandonedArea(models.Model):
         verbose_name=_("Security Level"),
         help_text=_("Security level of the area."),
     )
+    is_hidden = models.BooleanField(
+        verbose_name=_("Hidden"),
+        help_text=_("Hidden from general users and available only for admins."),
+        default=False,
+        null=False,
+        blank=False,
+    )
 
     def __str__(self):
-        return f"Area(name={self.name})"
+        return f"{type(self).__name__}(name={self.name})"

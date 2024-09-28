@@ -45,6 +45,21 @@ class File(models.Model):
         blank=False,
         null=False,
     )
+    is_hidden = models.BooleanField(
+        verbose_name=_("Hidden"),
+        help_text=_("Hidden from general users and available only for admins."),
+        default=False,
+        null=False,
+        blank=False,
+    )
+
+    @property
+    def url(self) -> str | None:
+        if self.pk:
+            return reverse(
+                "file-download",
+                args=(self.pk,),
+            )
 
     def __str__(self):
         return f"{type(self).__name__}(id={self.id})"

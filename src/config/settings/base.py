@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "django_filters",
     "django_celery_beat",
     "drf_spectacular",
+    "drf_standardized_errors",
     "src.apps.accounts.apps.AccountsConfig",
     "src.apps.abandoned.apps.AbandonedConfig",
     "src.apps.media.apps.MediaConfig",

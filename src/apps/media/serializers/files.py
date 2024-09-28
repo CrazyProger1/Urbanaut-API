@@ -1,15 +1,19 @@
 from rest_framework import serializers
 
 from src.apps.media.models import File
-from src.apps.media.services.url import get_file_url
 
 
 class FileListSerializer(serializers.ModelSerializer):
-    url = serializers.SerializerMethodField()
+    url = serializers.ReadOnlyField()
 
     class Meta:
         model = File
-        exclude = ("file",)
+        exclude = ("file", "created_at", "updated_at", "creator")
 
-    def get_url(self, obj: File):
-        return get_file_url(file=obj)
+
+class FileRetrieveSerializer(serializers.ModelSerializer):
+    url = serializers.ReadOnlyField()
+
+    class Meta:
+        model = File
+        exclude = ("file", "creator")

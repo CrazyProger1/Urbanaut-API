@@ -11,6 +11,8 @@ class UserListSerializer(serializers.ModelSerializer):
 
 
 class UserRetrieveSerializer(serializers.ModelSerializer):
+    avatar = serializers.SerializerMethodField()
+
     class Meta:
         model = User
         fields = (
@@ -24,4 +26,8 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
             "karma",
             "last_login",
             "joined_at",
+            "avatar",
         )
+
+    def get_avatar(self, obj: User) -> str:
+        return obj.avatar.url
