@@ -10,4 +10,5 @@ include(
     "docs.py",
     "auth.py",
     "rest.py",
+    "media.py",
 )

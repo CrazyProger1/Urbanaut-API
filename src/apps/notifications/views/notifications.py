@@ -28,7 +28,7 @@ class NotificationViewSet(
         return self.serializer_class
 
     def get_queryset(self):
-        return get_user_notifications(user=self.request.user)
+        return get_user_notifications(user=self.request.from_user)
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
@@ -39,13 +39,13 @@ class NotificationViewSet(
             serializer = self.get_serializer(page, many=True)
             mark_read(
                 notifications=page,
-                user=request.user,
+                user=request.from_user,
             )
             return self.get_paginated_response(serializer.data)
 
         serializer = self.get_serializer(queryset, many=True)
         mark_read(
             notifications=queryset,
-            user=request.user,
+            user=request.from_user,
         )
         return response.Response(serializer.data)

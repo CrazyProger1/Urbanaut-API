@@ -39,6 +39,6 @@ class AbandonedObjectViewSet(
 
     def perform_create(self, serializer: serializers.Serializer):
         serializer.save(
-            creator=self.request.user,
+            creator=self.request.from_user,
             is_hidden=True,
         )
