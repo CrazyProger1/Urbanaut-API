@@ -96,6 +96,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name=_("Karma"),
         help_text=_("The karma of the user."),
     )
+    avatar = models.ForeignKey(
+        "media.File",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name=_("Avatar"),
+        help_text=_("The avatar of the user."),
+    )
 
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "id"
