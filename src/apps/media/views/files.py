@@ -11,6 +11,7 @@ from src.apps.media.serializers import (
     FileListSerializer,
     FileCreateSerializer,
 )
+from src.apps.media.filters import FileFilter
 
 
 class FileViewSet(
@@ -28,6 +29,7 @@ class FileViewSet(
         "create": FileCreateSerializer,
         "list": FileListSerializer
     }
+    filterset_class = FileFilter
 
     def get_serializer_class(self):
         if self.action in self.serializer_classes:
