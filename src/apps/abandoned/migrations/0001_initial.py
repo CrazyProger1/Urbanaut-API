@@ -81,7 +81,7 @@ class Migration(migrations.Migration):
                     "is_hidden",
                     models.BooleanField(
                         default=False,
-                        help_text="Hidden from general users and available only for admins.",
+                        help_text="Hidden from general users and available only for admins and creator.",
                         verbose_name="Hidden",
                     ),
                 ),

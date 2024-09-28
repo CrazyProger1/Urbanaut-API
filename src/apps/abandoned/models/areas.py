@@ -64,7 +64,7 @@ class AbandonedArea(models.Model):
     )
     is_hidden = models.BooleanField(
         verbose_name=_("Hidden"),
-        help_text=_("Hidden from general users and available only for admins."),
+        help_text=_("Hidden from general users and available only for admins and creator."),
         default=False,
         null=False,
         blank=False,

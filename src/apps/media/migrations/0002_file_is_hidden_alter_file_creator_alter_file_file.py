@@ -6,7 +6,6 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         ("media", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
@@ -18,7 +17,7 @@ class Migration(migrations.Migration):
             name="is_hidden",
             field=models.BooleanField(
                 default=False,
-                help_text="Hidden from general users and available only for admins.",
+                help_text="Hidden from general users and available only for admins and creator.",
                 verbose_name="Hidden",
             ),
         ),

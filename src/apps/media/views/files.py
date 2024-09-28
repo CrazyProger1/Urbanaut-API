@@ -1,10 +1,16 @@
 from django.http import FileResponse
-from rest_framework import viewsets, mixins, permissions
+from drf_spectacular.utils import extend_schema
+from rest_framework import viewsets, mixins, permissions, parsers, status, serializers
 from rest_framework.decorators import action
+from rest_framework.response import Response
 
 from src.apps.media.permissions import IsFileOwnerOrReadOnly
 from src.apps.media.services.db import get_user_files, get_unhidden_files
-from src.apps.media.serializers import FileRetrieveSerializer, FileListSerializer
+from src.apps.media.serializers import (
+    FileRetrieveSerializer,
+    FileListSerializer,
+    FileCreateSerializer,
+)
 
 
 class FileViewSet(
@@ -15,15 +21,17 @@ class FileViewSet(
 ):
     queryset = get_unhidden_files()
     permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsFileOwnerOrReadOnly)
+    parser_classes = (parsers.MultiPartParser,)
     serializer_class = FileListSerializer
+    serializer_classes = {
+        "retrieve": FileRetrieveSerializer,
+        "create": FileCreateSerializer,
+        "list": FileListSerializer
+    }
 
     def get_serializer_class(self):
-        match self.action:
-            case "retrieve":
-                return FileRetrieveSerializer
-            case "list":
-                return FileListSerializer
-
+        if self.action in self.serializer_classes:
+            return self.serializer_classes[self.action]
         return self.serializer_class
 
     def get_queryset(self):
@@ -32,6 +40,30 @@ class FileViewSet(
 
         return self.queryset
 
+    def perform_create(self, serializer):
+        return serializer.save(creator=self.request.user)
+
+    @extend_schema(
+        request=FileCreateSerializer,
+        responses={
+            201: FileRetrieveSerializer
+        },
+    )
+    def create(self, request, *args, **kwargs):
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        instance = self.perform_create(serializer)
+        response_serializer = FileRetrieveSerializer(instance)
+        return Response(
+            response_serializer.data,
+            status=status.HTTP_201_CREATED,
+        )
+
+    @extend_schema(
+        methods=["GET"],
+        request=serializers.Serializer,
+        responses=None
+    )
     @action(
         detail=True,
         methods=("GET",),

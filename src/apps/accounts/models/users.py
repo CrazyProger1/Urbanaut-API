@@ -23,7 +23,7 @@ class User(AbstractBaseUser, PermissionsMixin):
         null=True,
         validators=[username_validator],
         verbose_name=_("Username"),
-        help_text=_(""),
+        help_text=_("Telegram username."),
     )
     nickname = models.CharField(
         max_length=150,
@@ -36,18 +36,18 @@ class User(AbstractBaseUser, PermissionsMixin):
         max_length=150,
         blank=True,
         verbose_name=_("First Name"),
-        help_text=_(""),
+        help_text=_("First name in telegram."),
     )
     last_name = models.CharField(
         max_length=150,
         blank=True,
         verbose_name=_("Last Name"),
-        help_text=_(""),
+        help_text=_("Last name in telegram."),
     )
     email = models.EmailField(
         blank=True,
         verbose_name=_("Email Address"),
-        help_text=_(""),
+        help_text=_("Email address of the user."),
     )
     is_staff = models.BooleanField(
         default=False,
@@ -65,14 +65,19 @@ class User(AbstractBaseUser, PermissionsMixin):
     joined_at = models.DateTimeField(
         default=timezone.now,
         verbose_name=_("Joined At"),
-        help_text=_(""),
+        help_text=_("User joined at date and time."),
     )
     born_at = models.DateField(
         default=None,
         null=True,
         blank=True,
         verbose_name=_("Birth Date"),
-        help_text=_(""),
+        help_text=_("User born at date and time."),
+    )
+    updated_at = models.DateTimeField(
+        verbose_name=_("Updated At"),
+        help_text=_("User updated date and time."),
+        auto_now=True,
     )
     rank = models.CharField(
         choices=UserRank,
