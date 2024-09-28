@@ -30,4 +30,4 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
         )
 
     def get_avatar(self, obj: User) -> str:
-        return obj.avatar.url
+        return obj.avatar.src

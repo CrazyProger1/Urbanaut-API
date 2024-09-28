@@ -67,9 +67,9 @@ class FileViewSet(
     @action(
         detail=True,
         methods=("GET",),
-        url_path="download",
+        url_path="src",
     )
-    def download(self, request, pk=None):
+    def src(self, request, pk=None):
         file = self.get_object()
         file_handle = file.file
         response = FileResponse(

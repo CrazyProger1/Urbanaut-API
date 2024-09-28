@@ -1,3 +1,5 @@
+from urllib.parse import urljoin
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -54,11 +56,14 @@ class File(models.Model):
     )
 
     @property
-    def url(self) -> str | None:
+    def src(self) -> str | None:
         if self.pk:
-            return reverse(
-                "file-download",
-                args=(self.pk,),
+            return urljoin(
+                settings.BASE_URL,
+                reverse(
+                    "file-src",
+                    args=(self.pk,),
+                ),
             )
 
     def __str__(self):
