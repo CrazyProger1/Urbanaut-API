@@ -18,7 +18,7 @@ class AbandonedAreaViewSet(
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return self.queryset & get_user_abandoned_areas(user=self.request.user)
+            return self.queryset | get_user_abandoned_areas(user=self.request.user)
 
         return self.queryset
 

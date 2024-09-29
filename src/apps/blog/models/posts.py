@@ -1,6 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+
+User = get_user_model()
 
 
 class BlogPost(models.Model):
@@ -37,6 +40,15 @@ class BlogPost(models.Model):
         null=False,
         blank=False,
     )
+    creator = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name="blog_posts",
+        blank=True,
+        null=True,
+        verbose_name=_("Creator"),
+        help_text=_("Creator of the blog post."),
+    )
     created_at = models.DateTimeField(
         verbose_name=_("Created At"),
         help_text=_("Post creation date and time."),
@@ -58,3 +70,6 @@ class BlogPost(models.Model):
         blank=False,
         null=False,
     )
+
+    def __str__(self):
+        return f"{type(self).__name__}(id={self.id})"
