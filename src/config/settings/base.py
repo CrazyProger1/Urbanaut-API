@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     "src.apps.geo.apps.GeoConfig",
     "src.apps.notifications.apps.NotificationsConfig",
     "src.apps.actions.apps.ActionsConfig",
+    "src.apps.blog.apps.BlogConfig",
 ]
 
 MIDDLEWARE = [
