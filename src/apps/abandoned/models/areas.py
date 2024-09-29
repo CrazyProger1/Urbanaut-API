@@ -1,13 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
-from src.apps.abandoned.models.constants import (
-    AREA_NAME_MAX_LENGTH,
-    SECURITY_LEVEL_LENGTH,
-)
-from src.apps.abandoned.models.enums import SecurityLevel
+from src.apps.abandoned.enums import SecurityLevel
 
 User = get_user_model()
 
@@ -37,7 +33,7 @@ class AbandonedArea(models.Model):
         help_text=_("Area that contains current area."),
     )
     name = models.CharField(
-        max_length=AREA_NAME_MAX_LENGTH,
+        max_length=250,
         verbose_name=_("Name"),
         help_text=_("Name of the abandoned area."),
         null=False,
@@ -59,7 +55,6 @@ class AbandonedArea(models.Model):
         help_text=_(""),
     )
     security_level = models.CharField(
-        max_length=SECURITY_LEVEL_LENGTH,
         choices=SecurityLevel,
         default=SecurityLevel.NONE,
         null=False,
@@ -67,6 +62,13 @@ class AbandonedArea(models.Model):
         verbose_name=_("Security Level"),
         help_text=_("Security level of the area."),
     )
+    is_hidden = models.BooleanField(
+        verbose_name=_("Hidden"),
+        help_text=_("Hidden from general users and available only for admins and creator."),
+        default=False,
+        null=False,
+        blank=False,
+    )
 
     def __str__(self):
-        return f"Area(name={self.name})"
+        return f"{type(self).__name__}(name={self.name})"

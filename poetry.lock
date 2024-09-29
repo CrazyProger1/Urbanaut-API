@@ -302,6 +302,22 @@ python-crontab = ">=2.3.4"
 tzdata = "*"
 
 [[package]]
+name = "django-cities"
+version = "0.6.2"
+description = "Place models and worldwide place data for Django"
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "django_cities-0.6.2.tar.gz", hash = "sha256:0f5113cbd9ed156a3e50cc5cdc41e14a3d10ac0942d4c861b77803d93cd336f7"},
+]
+
+[package.dependencies]
+django-model-utils = "*"
+six = "*"
+swapper = "*"
+tqdm = "*"
+
+[[package]]
 name = "django-cors-headers"
 version = "4.4.0"
 description = "django-cors-headers is a Django application for handling the server headers required for Cross-Origin Resource Sharing (CORS)."
@@ -329,6 +345,20 @@ files = [
 
 [package.dependencies]
 Django = ">=4.2"
+
+[[package]]
+name = "django-model-utils"
+version = "5.0.0"
+description = "Django model mixins and utilities"
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "django_model_utils-5.0.0-py3-none-any.whl", hash = "sha256:fec78e6c323d565a221f7c4edc703f4567d7bb1caeafe1acd16a80c5ff82056b"},
+    {file = "django_model_utils-5.0.0.tar.gz", hash = "sha256:041cdd6230d2fbf6cd943e1969318bce762272077f4ecd333ab2263924b4e5eb"},
+]
+
+[package.dependencies]
+Django = ">=3.2"
 
 [[package]]
 name = "django-modeltranslation"
@@ -384,6 +414,40 @@ files = [
 django = ">=4.2"
 
 [[package]]
+name = "djangorestframework-gis"
+version = "1.1"
+description = "Geographic add-ons for Django Rest Framework"
+optional = false
+python-versions = "*"
+files = [
+    {file = "djangorestframework_gis-1.1-py2.py3-none-any.whl", hash = "sha256:fd8631c2c10208df5f05ee297ce333aaa9a794acd654420207f72e8f9acd59ea"},
+    {file = "djangorestframework_gis-1.1.tar.gz", hash = "sha256:84b915503a59263ed9473ecde34b19260c3e9c5c8ebb3aea8d91a67fd39f7215"},
+]
+
+[package.dependencies]
+django-filter = ">=23.5,<25.0"
+djangorestframework = ">=3.12,<3.16"
+
+[[package]]
+name = "drf-extra-fields"
+version = "3.7.0"
+description = "Additional fields for Django Rest Framework."
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "drf-extra-fields-3.7.0.tar.gz", hash = "sha256:d7e58b8f60432233328b8a64831e50ea5d05932d3cb63ade8fe66c0d3d21ac5b"},
+    {file = "drf_extra_fields-3.7.0-py3-none-any.whl", hash = "sha256:3f3b1a6ec0eea02c9cabd62fe10e1673e1e42c5daa27fa9d4cea758c52c5cc30"},
+]
+
+[package.dependencies]
+Django = ">=2.2"
+djangorestframework = ">=3.9.2"
+filetype = ">=1.2.0"
+
+[package.extras]
+base64imagefield = ["Pillow (>=6.2.1)"]
+
+[[package]]
 name = "drf-spectacular"
 version = "0.27.2"
 description = "Sane and flexible OpenAPI 3 schema generation for Django REST framework"
@@ -405,6 +469,30 @@ uritemplate = ">=2.0.0"
 [package.extras]
 offline = ["drf-spectacular-sidecar"]
 sidecar = ["drf-spectacular-sidecar"]
+
+[[package]]
+name = "drf-standardized-errors"
+version = "0.14.1"
+description = "Standardize your API error responses."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "drf_standardized_errors-0.14.1-py3-none-any.whl", hash = "sha256:4941e0f81be94eb0904549999cf221988a5b0f524041c3877530e24f70328ed8"},
+    {file = "drf_standardized_errors-0.14.1.tar.gz", hash = "sha256:0610dcd0096b75365102d276022a22e59a1f8db8825bb0bff05e1b7194ba145d"},
+]
+
+[package.dependencies]
+django = ">=3.2"
+djangorestframework = ">=3.12"
+drf-spectacular = {version = ">=0.27.0", optional = true, markers = "extra == \"openapi\""}
+inflection = {version = "*", optional = true, markers = "extra == \"openapi\""}
+
+[package.extras]
+dev = ["pre-commit"]
+doc = ["myst-parser", "sphinx (!=5.2.0.post0)", "sphinx-autobuild", "sphinx-rtd-theme (>=1.1.0)"]
+openapi = ["drf-spectacular (>=0.27.0)", "inflection"]
+release = ["flit", "keyring", "tbump"]
+test = ["tox", "tox-gh-actions"]
 
 [[package]]
 name = "drf-yasg"
@@ -429,6 +517,17 @@ uritemplate = ">=3.0.0"
 [package.extras]
 coreapi = ["coreapi (>=2.3.3)", "coreschema (>=0.0.4)"]
 validation = ["swagger-spec-validator (>=2.1.0)"]
+
+[[package]]
+name = "filetype"
+version = "1.2.0"
+description = "Infer file type and MIME type of any file/buffer. No external dependencies."
+optional = false
+python-versions = "*"
+files = [
+    {file = "filetype-1.2.0-py2.py3-none-any.whl", hash = "sha256:7ce71b6880181241cf7ac8697a2f1eb6a8bd9b429f7ad6d27b8db9ba5f1c2d25"},
+    {file = "filetype-1.2.0.tar.gz", hash = "sha256:66b56cd6474bf41d8c54660347d37afcc3f7d1970648de365c102ef77548aadb"},
+]
 
 [[package]]
 name = "flower"
@@ -980,6 +1079,17 @@ dev = ["build", "hatch"]
 doc = ["sphinx"]
 
 [[package]]
+name = "swapper"
+version = "1.4.0"
+description = "The unofficial Django swappable models API."
+optional = false
+python-versions = "*"
+files = [
+    {file = "swapper-1.4.0-py2.py3-none-any.whl", hash = "sha256:57b8378aad234242542fe32dc6e8cff0ed24b63493d20b3c88ee01f894b9345e"},
+    {file = "swapper-1.4.0.tar.gz", hash = "sha256:9e083af114ee0593241a7b877e3e0e7d3a580454f5d59016c667a5563306f8fe"},
+]
+
+[[package]]
 name = "tornado"
 version = "6.4.1"
 description = "Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed."
@@ -998,6 +1108,26 @@ files = [
     {file = "tornado-6.4.1-cp38-abi3-win_amd64.whl", hash = "sha256:b24b8982ed444378d7f21d563f4180a2de31ced9d8d84443907a0a64da2072e7"},
     {file = "tornado-6.4.1.tar.gz", hash = "sha256:92d3ab53183d8c50f8204a51e6f91d18a15d5ef261e84d452800d4ff6fc504e9"},
 ]
+
+[[package]]
+name = "tqdm"
+version = "4.66.5"
+description = "Fast, Extensible Progress Meter"
+optional = false
+python-versions = ">=3.7"
+files = [
+    {file = "tqdm-4.66.5-py3-none-any.whl", hash = "sha256:90279a3770753eafc9194a0364852159802111925aa30eb3f9d85b0e805ac7cd"},
+    {file = "tqdm-4.66.5.tar.gz", hash = "sha256:e1020aef2e5096702d8a025ac7d16b1577279c9d63f8375b63083e9a5f0fcbad"},
+]
+
+[package.dependencies]
+colorama = {version = "*", markers = "platform_system == \"Windows\""}
+
+[package.extras]
+dev = ["pytest (>=6)", "pytest-cov", "pytest-timeout", "pytest-xdist"]
+notebook = ["ipywidgets (>=6)"]
+slack = ["slack-sdk"]
+telegram = ["requests"]
 
 [[package]]
 name = "typing-extensions"
@@ -1075,4 +1205,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "5f8789b77b886ead8a4f6deb5aac48dfdff5c2a3137dd17e6dba642c5787af8b"
+content-hash = "1286ceafcea6b0e02ba7ddac5a6be16aab574f39275954b113b0a002d37837f3"

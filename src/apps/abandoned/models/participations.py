@@ -1,8 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
-from src.apps.abandoned.models.enums import ParticipationStatus
+from src.apps.abandoned.enums import ParticipationStatus
 
 User = get_user_model()
 

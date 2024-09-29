@@ -41,6 +41,11 @@ LOGGING = {
             "level": LOG_LEVEL,
             "propagate": True,
         },
+        "database": {
+            "handlers": ["console", "file"],
+            "level": LOG_LEVEL,
+            "propagate": True,
+        },
     },
 }
 logging.config.dictConfig(LOGGING)

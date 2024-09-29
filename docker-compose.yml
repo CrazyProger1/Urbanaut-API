@@ -1,6 +1,7 @@
 services:
-  db:
-    image: postgres
+  postgres:
+    container_name: urbanaut-postgres
+    image: postgis/postgis:latest
     volumes:
       - postgres_data:/var/lib/postgresql/data
     restart: always
@@ -12,27 +13,42 @@ services:
       - postgres
 
   redis:
+    container_name: urbanaut-redis
     image: redis
     ports:
       - 6379:6379
     networks:
       - redis
 
-  web:
-    build:
-      context: .
+  api:
+    build: .
+    container_name: urbanaut-api
     restart: always
+    volumes:
+      - .:/urbanaut
     ports:
-      - 8000:8000
+      - 8001:8001
     env_file:
       - .env
     networks:
       - postgres
       - redis
     depends_on:
-      - db
+      - postgres
       - redis
 
+  celery:
+    build: .
+    container_name: urbanaut-celery
+    command: [ "celery", "-A", "api.web.celery", "worker", "--loglevel=info" ]
+    restart: always
+    volumes:
+      - .:/urbanaut
+    env_file:
+      - .env
+    depends_on:
+      - api
+      - redis
 
 volumes:
   postgres_data:

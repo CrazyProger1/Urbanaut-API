@@ -1,9 +1,8 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.utils.translation import gettext as _
+from django.utils.translation import gettext_lazy as _
 
-from src.apps.abandoned.models.constants import EVENT_NAME_MAX_LENGTH
-from src.apps.abandoned.models.enums import EventStatus
+from src.apps.abandoned.enums import EventStatus
 
 User = get_user_model()
 
@@ -14,7 +13,7 @@ class Event(models.Model):
         verbose_name_plural = _("Events")
 
     name = models.CharField(
-        max_length=EVENT_NAME_MAX_LENGTH,
+        max_length=250,
         verbose_name=_("Name"),
         help_text=_("Name of the event."),
         null=False,
@@ -25,20 +24,19 @@ class Event(models.Model):
         verbose_name=_("Created At"),
         help_text=_("Event creation date and time."),
     )
-    start_datetime = models.DateTimeField(
+    start_at = models.DateTimeField(
         null=False,
         blank=False,
-        verbose_name=_("Start Datetime"),
+        verbose_name=_("Start At"),
         help_text=_("Date and time of start of trip."),
     )
 
-    end_datetime = models.DateTimeField(
+    end_at = models.DateTimeField(
         null=False,
         blank=False,
-        verbose_name=_("End Datetime"),
+        verbose_name=_("End At"),
         help_text=_("Date and time of end of trip."),
     )
-
     participants = models.ManyToManyField(
         User,
         related_name="events",

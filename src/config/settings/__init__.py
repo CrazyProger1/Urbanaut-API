@@ -9,4 +9,6 @@ include(
     "cors.py",
     "docs.py",
     "auth.py",
+    "rest.py",
+    "media.py",
 )

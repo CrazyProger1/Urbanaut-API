@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
+BASE_URL = config("BASE_URL", cast=str, default="http://localhost:8001")
 
 SECRET_KEY = config("SECRET_KEY", cast=str)
 
@@ -24,13 +25,21 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.gis",
     "corsheaders",
+    "cities",
     "rest_framework",
+    "django_filters",
     "django_celery_beat",
+    "drf_spectacular",
+    "drf_standardized_errors",
     "src.apps.accounts.apps.AccountsConfig",
     "src.apps.abandoned.apps.AbandonedConfig",
     "src.apps.media.apps.MediaConfig",
     "src.apps.docs.apps.DocsConfig",
+    "src.apps.geo.apps.GeoConfig",
+    "src.apps.notifications.apps.NotificationsConfig",
+    "src.apps.actions.apps.ActionsConfig",
 ]
 
 MIDDLEWARE = [

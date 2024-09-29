@@ -1,2 +1,2 @@
-from src.apps.abandoned.views.objects import ObjectViewSet
-from src.apps.abandoned.views.areas import AreaViewSet
+from src.apps.abandoned.views.objects import AbandonedObjectViewSet
+from src.apps.abandoned.views.areas import AbandonedAreaViewSet
