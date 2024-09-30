@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser
@@ -108,6 +109,13 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True,
         verbose_name=_("Avatar"),
         help_text=_("The avatar of the user."),
+    )
+    language = models.CharField(
+        max_length=10,
+        choices=settings.LANGUAGES,
+        default="en",
+        verbose_name=_("Language"),
+        help_text=_("Preferred language of the user."),
     )
 
     EMAIL_FIELD = "email"
