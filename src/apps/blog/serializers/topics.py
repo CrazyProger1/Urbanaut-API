@@ -6,6 +6,10 @@ from src.apps.blog.models import BlogTopic
 class BlogTopicRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = BlogTopic
-        exclude = (
-            "is_hidden",
+        fields = (
+            "id",
+            "name",
+            "description",
+            "created_at",
+            "is_closed",
         )

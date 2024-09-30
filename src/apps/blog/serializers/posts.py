@@ -9,10 +9,14 @@ from src.apps.blog.serializers.topics import BlogTopicRetrieveSerializer
 class BlogPostListSerializer(serializers.ModelSerializer):
     class Meta:
         model = BlogPost
-        exclude = (
-            "is_hidden",
-            "content",
-            *get_translation_fields("content"),
+        fields = (
+            "id",
+            "title",
+            "topic",
+            "creator",
+            "created_at",
+            "updated_at",
+            "published_at",
         )
 
 
@@ -22,6 +26,13 @@ class BlogPostRetrieveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BlogPost
-        exclude = (
-            "is_hidden",
+        fields = (
+            "id",
+            "title",
+            "topic",
+            "creator",
+            "created_at",
+            "updated_at",
+            "published_at",
+            "content",
         )

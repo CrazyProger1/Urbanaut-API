@@ -8,11 +8,11 @@ from src.apps.blog.models import BlogPost
 class BlogPostAdmin(TranslationAdmin):
     list_display = (
         "id",
-        "name",
+        "title",
         "is_hidden",
         "created_at",
         "published_at",
         "topic",
     )
     readonly_fields = ("created_at",)
-    list_display_links = ("name",)
+    list_display_links = ("title",)

@@ -26,13 +26,12 @@ class BlogPost(models.Model):
         null=False,
         blank=False,
     )
-    name = models.CharField(
-        verbose_name=_("Name"),
-        help_text=_("Name of the blog post."),
+    title = models.CharField(
+        verbose_name=_("Title"),
+        help_text=_("Title of the blog post."),
         max_length=250,
         null=False,
         blank=False,
-
     )
     content = models.TextField(
         verbose_name=_("Content"),

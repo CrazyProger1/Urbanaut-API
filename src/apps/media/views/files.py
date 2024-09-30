@@ -75,6 +75,6 @@ class FileViewSet(
         response = FileResponse(
             file_handle.open("rb"),
             as_attachment=True,
-            filename=file_handle.name
+            filename=file_handle.title
         )
         return response
