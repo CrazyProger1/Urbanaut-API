@@ -36,3 +36,15 @@ class BlogPostRetrieveSerializer(serializers.ModelSerializer):
             "published_at",
             "content",
         )
+
+
+class BlogPostCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = BlogPost
+        exclude = (
+            "id",
+            "is_hidden",
+            "creator",
+            "created_at",
+            "updated_at",
+        )

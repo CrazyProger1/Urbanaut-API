@@ -46,7 +46,7 @@ class FileViewSet(
     @extend_schema(
         request=FileCreateSerializer,
         responses={
-            201: FileRetrieveSerializer
+            201: FileRetrieveSerializer,
         },
     )
     def create(self, request, *args, **kwargs):
