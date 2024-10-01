@@ -1,6 +1,9 @@
+from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+
+User = get_user_model()
 
 
 class BlogTopic(models.Model):
@@ -40,6 +43,15 @@ class BlogTopic(models.Model):
         default=False,
         null=False,
         blank=False,
+    )
+    creator = models.ForeignKey(
+        User,
+        on_delete=models.SET_NULL,
+        related_name="blog_topics",
+        blank=True,
+        null=True,
+        verbose_name=_("Creator"),
+        help_text=_("Creator of the blog post."),
     )
 
     def __str__(self):
