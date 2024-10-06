@@ -8,7 +8,7 @@ from src.apps.blog.serializers import (
     BlogPostCreateSerializer,
 )
 from src.apps.blog.services.db import get_available_blog_posts
-from src.apps.permissions.permissions import HasActionPermission
+from src.apps.permissions.permissions import HasPermission
 
 
 class BlogPostViewSet(
@@ -18,7 +18,7 @@ class BlogPostViewSet(
     generics.CreateAPIView,
 ):
     queryset = get_available_blog_posts()
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, HasActionPermission)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, HasPermission)
     serializer_class = BlogPostListSerializer
     serializer_classes = {
         "list": BlogPostListSerializer,

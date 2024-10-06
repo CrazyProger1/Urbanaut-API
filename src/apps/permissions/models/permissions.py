@@ -2,6 +2,7 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from django.contrib.contenttypes.models import ContentType
 
 User = get_user_model()
 
@@ -11,8 +12,9 @@ class ModelPermission(models.Model):
         verbose_name = _("Model Permission")
         verbose_name_plural = _("Model Permissions")
 
-    model = models.CharField(
-        choices=settings.PERMISSION_MODELS,
+    model = models.ForeignKey(
+        ContentType,
+        on_delete=models.CASCADE,
         blank=False,
         null=False,
         unique=True,
@@ -44,6 +46,9 @@ class ModelPermission(models.Model):
         help_text=_("Default deletebility level for the model.")
     )
 
+    def __str__(self):
+        return f"{type(self).__name__}(id={self.pk})"
+
 
 class UserModelPermission(models.Model):
     class Meta:
@@ -64,6 +69,9 @@ class UserModelPermission(models.Model):
         related_name="user_permissions",
     )
     has_create_permission = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{type(self).__name__}(id={self.pk})"
 
 
 class ObjectPermission(models.Model):
