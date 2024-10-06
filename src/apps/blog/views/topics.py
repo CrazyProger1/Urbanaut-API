@@ -2,6 +2,7 @@ from rest_framework import viewsets, generics, permissions
 
 from src.apps.blog.serializers import BlogTopicListSerializer, BlogTopicRetrieveSerializer
 from src.apps.blog.services.db import get_available_blog_topics
+from src.apps.permissions.permissions import HasPermission
 
 
 class BlogTopicViewSet(
@@ -10,7 +11,7 @@ class BlogTopicViewSet(
     generics.RetrieveAPIView,
 ):
     queryset = get_available_blog_topics()
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly, HasPermission)
     serializer_class = BlogTopicListSerializer
     serializer_classes = {
         "list": BlogTopicListSerializer,

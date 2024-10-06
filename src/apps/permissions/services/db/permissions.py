@@ -35,8 +35,12 @@ def get_object_permissions(obj: models.Model) -> ObjectPermission:
 
 def has_create_permission(user: User, model: type[models.Model]) -> bool:
     model_permissions = get_model_permissions(model)
-    group = get_user_group(user=user)
-    return model_permissions.createbility_level >= group
+    try:
+        primary_permissions = model_permissions.user_permissions.get(user=user)
+        return primary_permissions.has_create_permission
+    except models.ObjectDoesNotExist:
+        group = get_user_group(user=user)
+        return model_permissions.createbility_level >= group
 
 
 def has_view_permission(user: User, obj: models.Model) -> bool:

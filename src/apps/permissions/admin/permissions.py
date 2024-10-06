@@ -22,7 +22,9 @@ class ObjectPermissionsAdmin(admin.ModelAdmin):
 
 @admin.register(ModelPermission)
 class ModelPermissionsAdmin(admin.ModelAdmin):
-    pass
+    inlines = (
+        UserModelPermissionTabularInline,
+    )
 
 
 @admin.register(UserModelPermission)
