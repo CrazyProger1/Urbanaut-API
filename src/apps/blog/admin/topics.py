@@ -9,7 +9,6 @@ class BlogTopicAdmin(TranslationAdmin):
     list_display = (
         "id",
         "name",
-        "is_hidden",
         "is_closed",
         "created_at",
     )

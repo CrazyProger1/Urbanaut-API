@@ -22,13 +22,6 @@ class BlogPost(BasePermissionModel):
         blank=False,
         null=False,
     )
-    is_hidden = models.BooleanField(
-        verbose_name=_("Hidden"),
-        help_text=_("Hidden from general users and available only for admins and creator."),
-        default=False,
-        null=False,
-        blank=False,
-    )
     title = models.CharField(
         verbose_name=_("Title"),
         help_text=_("Title of the blog post."),

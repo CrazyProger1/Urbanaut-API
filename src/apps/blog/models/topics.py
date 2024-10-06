@@ -32,13 +32,6 @@ class BlogTopic(BasePermissionModel):
         help_text=_("Topic creation date and time."),
         default=timezone.now,
     )
-    is_hidden = models.BooleanField(
-        verbose_name=_("Hidden"),
-        help_text=_("Hidden from general users and available only for admins and creator."),
-        default=False,
-        null=False,
-        blank=False,
-    )
     is_closed = models.BooleanField(
         verbose_name=_("Closed"),
         help_text=_("General user can't post to this topic."),
