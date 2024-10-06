@@ -3,7 +3,7 @@ from rest_framework import viewsets, generics, permissions, status
 from rest_framework.response import Response
 
 from src.apps.blog.serializers import BlogPostListSerializer, BlogPostRetrieveSerializer, BlogPostCreateSerializer
-from src.apps.blog.services.db import get_unhidden_blog_posts, get_user_blog_posts
+from src.apps.blog.services.db import get_available_blog_posts
 
 
 class BlogPostViewSet(
@@ -12,7 +12,7 @@ class BlogPostViewSet(
     generics.RetrieveAPIView,
     generics.CreateAPIView,
 ):
-    queryset = get_unhidden_blog_posts()
+    queryset = get_available_blog_posts()
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = BlogPostListSerializer
     serializer_classes = {
@@ -26,7 +26,7 @@ class BlogPostViewSet(
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return self.queryset | get_user_blog_posts(user=self.request.user)
+            return get_available_blog_posts(user=self.request.user)
         return self.queryset
 
     def perform_create(self, serializer):

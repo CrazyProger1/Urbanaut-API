@@ -4,7 +4,7 @@ from src.apps.abandoned.serializers import (
     AbandonedAreaListSerializer,
     AbandonedAreaRetrieveSerializer,
 )
-from src.apps.abandoned.services import get_user_abandoned_areas, get_unhidden_abandoned_areas
+from src.apps.abandoned.services.db import get_user_abandoned_areas, get_unhidden_abandoned_areas
 
 
 class AbandonedAreaViewSet(

@@ -7,16 +7,12 @@ from src.utils.db import filter_objects
 User = get_user_model()
 
 
-def get_unhidden_blog_posts() -> QuerySet[BlogPost]:
+def get_available_blog_posts(user: User = None) -> QuerySet[BlogPost]:
     return filter_objects(
         BlogPost,
         is_hidden=False,
         topic__is_hidden=False,
-    )
-
-
-def get_user_blog_posts(user: User) -> QuerySet[BlogPost]:
-    return filter_objects(
+    ) | filter_objects(
         BlogPost,
         creator=user,
     )

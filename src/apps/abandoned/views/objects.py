@@ -7,7 +7,7 @@ from src.apps.abandoned.serializers import (
     AbandonedObjectRetrieveSerializer,
     AbandonedObjectCreateSerializer,
 )
-from src.apps.abandoned.services import get_unhidden_abandoned_objects, get_user_abandoned_objects
+from src.apps.abandoned.services.db import get_unhidden_abandoned_objects, get_user_abandoned_objects
 from src.utils.filters import DistanceBackend
 
 

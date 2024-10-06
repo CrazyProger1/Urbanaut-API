@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "src.apps.notifications.apps.NotificationsConfig",
     "src.apps.actions.apps.ActionsConfig",
     "src.apps.blog.apps.BlogConfig",
+    "src.apps.permissions.apps.PermissionsConfig",
 ]
 
 MIDDLEWARE = [
