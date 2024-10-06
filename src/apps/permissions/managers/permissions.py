@@ -1,11 +1,6 @@
-import logging
-
 from django.contrib.auth import get_user_model
 from django.db import models
 from django.db.models import QuerySet
-
-# from src.apps.permissions.utils import get_permissions_field
-# from src.apps.permissions.services.db import get_model_permissions, create_object_permissions
 
 User = get_user_model()
 
@@ -13,10 +8,13 @@ User = get_user_model()
 class PermissionManager(models.Manager):
 
     def visible(self, user: User) -> QuerySet:
-        return self.all()
+        from src.apps.permissions.services.db import get_visible_objects
+        return get_visible_objects(user=user, model=self.model)
 
     def changeble(self, user: User) -> QuerySet:
-        return self.all()
+        from src.apps.permissions.services.db import get_changeble_objects
+        return get_changeble_objects(user=user, model=self.model)
 
     def deleteble(self, user: User) -> QuerySet:
-        return self.all()
+        from src.apps.permissions.services.db import get_deleteble_objects
+        return get_deleteble_objects(user=user, model=self.model)

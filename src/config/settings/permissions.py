@@ -8,3 +8,5 @@ PERMISSION_GROUPS = (
     (400, _("EVERYONE")),
     (500, _("BANNED")),
 )
+
+OWNERS_GROUP = 200

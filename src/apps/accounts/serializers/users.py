@@ -29,5 +29,5 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
             "avatar",
         )
 
-    def get_avatar(self, obj: User) -> str:
-        return obj.avatar.src
+    def get_avatar(self, obj: User) -> str | None:
+        return obj.avatar.src if obj.avatar else None

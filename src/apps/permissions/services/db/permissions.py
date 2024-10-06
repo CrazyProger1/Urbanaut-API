@@ -4,10 +4,10 @@ from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
-from django.db.models import Q
+from django.db.models import Q, QuerySet
 
 from src.apps.permissions.models import ObjectPermission, ModelPermission
-from src.apps.permissions.utils import get_permissions_field, get_user_group
+from src.apps.permissions.utils import get_permissions_field, get_user_group, get_owner_field
 from src.utils.db import filter_objects, create_object
 
 User = get_user_model()
@@ -49,7 +49,7 @@ def has_view_permission(user: User, obj: models.Model) -> bool:
         primary_permissions = object_permissions.user_permissions.get(user=user)
         return primary_permissions.has_view_permission
     except models.ObjectDoesNotExist:
-        group = get_user_group(obj, user)
+        group = get_user_group(obj=obj, user=user)
         return object_permissions.visibility_level >= group
 
 
@@ -59,7 +59,7 @@ def has_change_permission(user: User, obj: models.Model) -> bool:
         primary_permissions = object_permissions.user_permissions.get(user=user)
         return primary_permissions.has_change_permission
     except models.ObjectDoesNotExist:
-        group = get_user_group(obj, user)
+        group = get_user_group(obj=obj, user=user)
         return object_permissions.changebility_level >= group
 
 
@@ -69,5 +69,66 @@ def has_delete_permission(user: User, obj: models.Model) -> bool:
         primary_permissions = object_permissions.user_permissions.get(user=user)
         return primary_permissions.has_delete_permission
     except models.ObjectDoesNotExist:
-        group = get_user_group(obj, user)
+        group = get_user_group(obj=obj, user=user)
         return object_permissions.deletebility_level >= group
+
+
+def get_available_objects(
+        model: type[models.Model],
+        user: User,
+        has_permission_field: str,
+        level_field: str,
+        owner_group: int = settings.OWNERS_GROUP,
+):
+    group = get_user_group(user=user)
+    permissions_field = get_permissions_field(model)
+    owner_field = get_owner_field(model)
+
+    conditions = Q(
+        **{f"{permissions_field}__user_permissions__{has_permission_field}": True},
+        **{f"{permissions_field}__user_permissions__user": user}
+    ) | Q(
+        **{
+            owner_field: user,
+            f"{permissions_field}__{level_field}": owner_group,
+        }
+    ) | Q(
+        **{f"{permissions_field}__{level_field}__gte": group}
+    )
+
+    queryset = model.objects.filter(conditions)
+
+    exclude_conditions = Q(
+        **{f"{permissions_field}__user_permissions__{has_permission_field}": False},
+        **{f"{permissions_field}__user_permissions__user": user}
+    )
+    queryset = queryset.exclude(exclude_conditions)
+
+    return queryset.distinct()
+
+
+def get_visible_objects(user: User, model: type[models.Model]) -> QuerySet[models.Model]:
+    return get_available_objects(
+        model=model,
+        user=user,
+        has_permission_field="has_view_permission",
+        level_field="visibility_level",
+    )
+
+
+def get_changeble_objects(user: User, model: type[models.Model]) -> QuerySet[models.Model]:
+    return get_available_objects(
+        model=model,
+        user=user,
+        has_permission_field="has_change_permission",
+        level_field="changebility_level",
+    )
+
+
+def get_deleteble_objects(user: User, model: type[models.Model]) -> QuerySet[models.Model]:
+    return get_available_objects(
+        model=model,
+        user=user,
+        has_permission_field="has_delete_permission",
+        level_field="deletebility_level",
+    )

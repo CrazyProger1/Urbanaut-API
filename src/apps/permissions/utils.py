@@ -1,3 +1,5 @@
+import logging
+
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -23,6 +25,8 @@ def is_owner(obj: models.Model, user: User) -> bool:
 
 
 def get_user_group(obj: models.Model = None, user: User = None):
+    if user is None:
+        return 400
     if user.is_superuser:
         return 0
     elif user.is_staff:
