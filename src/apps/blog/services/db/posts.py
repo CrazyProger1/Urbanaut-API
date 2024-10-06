@@ -8,11 +8,4 @@ User = get_user_model()
 
 
 def get_available_blog_posts(user: User = None) -> QuerySet[BlogPost]:
-    return filter_objects(
-        BlogPost,
-        is_hidden=False,
-        topic__is_hidden=False,
-    ) | filter_objects(
-        BlogPost,
-        creator=user,
-    )
+    return BlogPost.objects.visible(user=user)

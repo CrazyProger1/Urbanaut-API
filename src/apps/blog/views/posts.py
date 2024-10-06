@@ -2,7 +2,11 @@ from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, generics, permissions, status
 from rest_framework.response import Response
 
-from src.apps.blog.serializers import BlogPostListSerializer, BlogPostRetrieveSerializer, BlogPostCreateSerializer
+from src.apps.blog.serializers import (
+    BlogPostListSerializer,
+    BlogPostRetrieveSerializer,
+    BlogPostCreateSerializer,
+)
 from src.apps.blog.services.db import get_available_blog_posts
 
 

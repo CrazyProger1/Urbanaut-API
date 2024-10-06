@@ -3,6 +3,8 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+from src.apps.permissions.managers import PermissionManager
+
 User = get_user_model()
 
 
@@ -69,6 +71,7 @@ class BlogPost(models.Model):
         blank=False,
         null=False,
     )
+    objects = PermissionManager()
 
     def __str__(self):
         return f"{type(self).__name__}(id={self.id})"
