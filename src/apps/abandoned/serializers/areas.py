@@ -2,6 +2,8 @@ from rest_framework import serializers
 
 from src.apps.abandoned.models import AbandonedArea
 
+from src.apps.permissions.serializers import PermissionSerializerMixin
+
 
 class AbandonedAreaListSerializer(serializers.ModelSerializer):
     class Meta:
@@ -15,11 +17,10 @@ class AbandonedAreaListSerializer(serializers.ModelSerializer):
             "description",
             "creator",
             "security_level",
-            "is_hidden",
         )
 
 
-class AbandonedAreaRetrieveSerializer(serializers.ModelSerializer):
+class AbandonedAreaRetrieveSerializer(serializers.ModelSerializer, PermissionSerializerMixin):
     class Meta:
         model = AbandonedArea
         fields = (
@@ -31,5 +32,4 @@ class AbandonedAreaRetrieveSerializer(serializers.ModelSerializer):
             "description",
             "creator",
             "security_level",
-            "is_hidden",
         )

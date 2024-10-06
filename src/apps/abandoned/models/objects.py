@@ -9,11 +9,12 @@ from src.apps.abandoned.enums import (
     PreservationLevel,
     DifficultyLevel,
 )
+from src.apps.permissions.models import BasePermissionModel
 
 User = get_user_model()
 
 
-class AbandonedObject(models.Model):
+class AbandonedObject(BasePermissionModel):
     class Meta:
         verbose_name = _("Object")
         verbose_name_plural = _("Objects")
@@ -39,13 +40,6 @@ class AbandonedObject(models.Model):
         help_text=_("Description of the abandoned object."),
         null=True,
         blank=True,
-    )
-    is_hidden = models.BooleanField(
-        verbose_name=_("Hidden"),
-        help_text=_("Hidden from general users and available only for admins and creator."),
-        default=False,
-        null=False,
-        blank=False,
     )
     security_level = models.CharField(
         choices=SecurityLevel,

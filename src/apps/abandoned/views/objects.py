@@ -1,4 +1,6 @@
-from rest_framework import viewsets, mixins, permissions, serializers
+import logging
+
+from rest_framework import viewsets, mixins, serializers
 from django_filters import rest_framework as filters
 
 from src.apps.abandoned.filters import AbandonedObjectFilter
@@ -7,7 +9,8 @@ from src.apps.abandoned.serializers import (
     AbandonedObjectRetrieveSerializer,
     AbandonedObjectCreateSerializer,
 )
-from src.apps.abandoned.services.db import get_unhidden_abandoned_objects, get_user_abandoned_objects
+from src.apps.abandoned.services.db import get_available_abandoned_objects
+from src.apps.permissions.permissions import HasPermission
 from src.utils.filters import DistanceBackend
 
 
@@ -17,9 +20,14 @@ class AbandonedObjectViewSet(
     mixins.RetrieveModelMixin,
     mixins.CreateModelMixin,
 ):
-    queryset = get_unhidden_abandoned_objects()
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    queryset = get_available_abandoned_objects()
+    permission_classes = (HasPermission,)
     serializer_class = AbandonedObjectListSerializer
+    serializer_classes = {
+        "list": AbandonedObjectListSerializer,
+        "create": AbandonedObjectCreateSerializer,
+        "retrieve": AbandonedObjectRetrieveSerializer,
+    }
     point_field = "location__point"
     filter_backends = (
         filters.DjangoFilterBackend,
@@ -28,23 +36,15 @@ class AbandonedObjectViewSet(
     filterset_class = AbandonedObjectFilter
 
     def get_serializer_class(self):
-        match self.action:
-            case "list":
-                return AbandonedObjectListSerializer
-            case "retrieve":
-                return AbandonedObjectRetrieveSerializer
-            case "create":
-                return AbandonedObjectCreateSerializer
-        return self.serializer_class
+        return self.serializer_classes.get(self.action, self.serializer_class)
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return self.queryset | get_user_abandoned_objects(user=self.request.user)
+            return get_available_abandoned_objects(user=self.request.user)
 
         return self.queryset
 
     def perform_create(self, serializer: serializers.Serializer):
         serializer.save(
             creator=self.request.from_user,
-            is_hidden=True,
         )

@@ -4,11 +4,12 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.abandoned.enums import SecurityLevel
+from src.apps.permissions.models import BasePermissionModel
 
 User = get_user_model()
 
 
-class AbandonedArea(models.Model):
+class AbandonedArea(BasePermissionModel):
     class Meta:
         verbose_name = _("Area")
         verbose_name_plural = _("Areas")
@@ -61,13 +62,6 @@ class AbandonedArea(models.Model):
         blank=False,
         verbose_name=_("Security Level"),
         help_text=_("Security level of the area."),
-    )
-    is_hidden = models.BooleanField(
-        verbose_name=_("Hidden"),
-        help_text=_("Hidden from general users and available only for admins and creator."),
-        default=False,
-        null=False,
-        blank=False,
     )
 
     def __str__(self):
