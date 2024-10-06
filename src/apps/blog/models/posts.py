@@ -4,11 +4,12 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.permissions.managers import PermissionManager
+from src.apps.permissions.models import BasePermissionModel
 
 User = get_user_model()
 
 
-class BlogPost(models.Model):
+class BlogPost(BasePermissionModel):
     class Meta:
         verbose_name = _("Post")
         verbose_name_plural = _("Posts")
@@ -71,15 +72,6 @@ class BlogPost(models.Model):
         blank=False,
         null=False,
     )
-    permissions = models.OneToOneField(
-        "permissions.ObjectPermission",
-        on_delete=models.CASCADE,
-        null=True,
-        blank=True,
-        verbose_name=_("Permissions"),
-        help_text=_("Blog post permissions."),
-    )
-    objects = PermissionManager()
 
     def __str__(self):
         return f"{type(self).__name__}(id={self.id})"

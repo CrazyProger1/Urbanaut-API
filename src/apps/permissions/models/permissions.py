@@ -4,7 +4,24 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.contrib.contenttypes.models import ContentType
 
+from src.apps.permissions.managers import PermissionManager
+
 User = get_user_model()
+
+
+class BasePermissionModel(models.Model):
+    permissions = models.OneToOneField(
+        "permissions.ObjectPermission",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name=_("Permissions"),
+        help_text=_("Blog post permissions."),
+    )
+    objects = PermissionManager()
+
+    class Meta:
+        abstract = True
 
 
 class ModelPermission(models.Model):

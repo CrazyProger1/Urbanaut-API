@@ -17,6 +17,18 @@ def get_owner(obj: models.Model) -> User:
 
 
 def is_owner(obj: models.Model, user: User) -> bool:
-    if not user:
+    if not user or not obj:
         return False
     return get_owner(obj=obj) == user
+
+
+def get_user_group(obj: models.Model = None, user: User = None):
+    if user.is_superuser:
+        return 0
+    elif user.is_staff:
+        return 100
+    elif is_owner(obj, user):
+        return 200
+    elif user.is_authentificated:
+        return 300
+    return 400

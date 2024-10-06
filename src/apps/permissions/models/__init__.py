@@ -3,4 +3,5 @@ from src.apps.permissions.models.permissions import (
     UserObjectPermission,
     ModelPermission,
     UserModelPermission,
+    BasePermissionModel,
 )

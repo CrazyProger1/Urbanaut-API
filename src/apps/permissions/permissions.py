@@ -1,5 +1,4 @@
 from rest_framework import permissions
-
 from src.apps.permissions.services.db import (
     has_delete_permission,
     has_create_permission,
@@ -12,11 +11,10 @@ class HasPermission(permissions.BasePermission):
     def has_permission(self, request, view):
         match request.method:
             case "POST":
-                return False
-                # return has_create_permission(
-                #     user=request.user,
-                #
-                # )
+                return has_create_permission(
+                    user=request.user,
+                    model=view.queryset.model,
+                )
         return True
 
     def has_object_permission(self, request, view, obj):

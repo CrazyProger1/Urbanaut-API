@@ -2,20 +2,28 @@ import logging
 
 from django.conf import settings
 from django.contrib.auth import get_user_model
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.db.models import Q
 
 from src.apps.permissions.models import ObjectPermission, ModelPermission
-from src.apps.permissions.utils import get_permissions_field, get_owner_field, is_owner
-from src.utils.db import filter_objects
+from src.apps.permissions.utils import get_permissions_field, get_user_group
+from src.utils.db import filter_objects, create_object
 
 User = get_user_model()
 
 logger = logging.getLogger(__name__)
 
 
+def create_object_permissions(**kwargs):
+    return create_object(ObjectPermission, **kwargs)
+
+
 def get_model_permissions(model: type[models.Model]) -> ModelPermission | None:
-    return filter_objects(model, Q(model=model)).first()
+    return filter_objects(
+        ModelPermission,
+        Q(model=ContentType.objects.get_for_model(model)),
+    ).first()
 
 
 def get_object_permissions(obj: models.Model) -> ObjectPermission:
@@ -25,20 +33,10 @@ def get_object_permissions(obj: models.Model) -> ObjectPermission:
     )
 
 
-def get_user_group(obj: models.Model, user: User = None):
-    if user.is_superuser:
-        return 0
-    elif user.is_staff:
-        return 100
-    elif is_owner(obj, user):
-        return 200
-    elif user.is_authentificated:
-        return 300
-    return 400
-
-
 def has_create_permission(user: User, model: type[models.Model]) -> bool:
-    return False
+    model_permissions = get_model_permissions(model)
+    group = get_user_group(user=user)
+    return model_permissions.createbility_level >= group
 
 
 def has_view_permission(user: User, obj: models.Model) -> bool:
