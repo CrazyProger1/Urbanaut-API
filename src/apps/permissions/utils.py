@@ -12,7 +12,11 @@ def get_owner_field(model: type[models.Model]) -> str:
     return getattr(model._meta, "owner_field", "creator")
 
 
+def get_owner(obj: models.Model) -> User:
+    return getattr(obj, get_owner_field(model=type(obj)), None)
+
+
 def is_owner(obj: models.Model, user: User) -> bool:
     if not user:
         return False
-    return getattr(obj, get_owner_field(model=type(obj)), None) == user
+    return get_owner(obj=obj) == user

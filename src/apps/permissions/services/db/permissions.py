@@ -1,3 +1,5 @@
+import logging
+
 from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.db import models
@@ -8,6 +10,8 @@ from src.apps.permissions.utils import get_permissions_field, get_owner_field, i
 from src.utils.db import filter_objects
 
 User = get_user_model()
+
+logger = logging.getLogger(__name__)
 
 
 def get_model_permissions(model: type[models.Model]) -> ModelPermission | None:

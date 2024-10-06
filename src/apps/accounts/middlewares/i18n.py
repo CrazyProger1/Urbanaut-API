@@ -20,7 +20,7 @@ class I18NMiddleware:
 
         request.LANGUAGE_CODE = translation.get_language()
 
-        logger.info(f"Set language: {request.LANGUAGE_CODE}")
+        logger.debug(f"Set language: {request.LANGUAGE_CODE}")
 
         response = self.get_response(request)
 

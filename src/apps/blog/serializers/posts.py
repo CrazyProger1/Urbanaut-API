@@ -1,9 +1,9 @@
-from modeltranslation.utils import get_translation_fields
 from rest_framework import serializers
 
 from src.apps.accounts.serializers import UserRetrieveSerializer
 from src.apps.blog.models import BlogPost
 from src.apps.blog.serializers.topics import BlogTopicRetrieveSerializer
+from src.apps.permissions.serializers import PermissionSerializerMixin
 
 
 class BlogPostListSerializer(serializers.ModelSerializer):
@@ -20,7 +20,7 @@ class BlogPostListSerializer(serializers.ModelSerializer):
         )
 
 
-class BlogPostRetrieveSerializer(serializers.ModelSerializer):
+class BlogPostRetrieveSerializer(serializers.ModelSerializer, PermissionSerializerMixin):
     creator = UserRetrieveSerializer(read_only=True)
     topic = BlogTopicRetrieveSerializer(read_only=True)
 
@@ -35,6 +35,8 @@ class BlogPostRetrieveSerializer(serializers.ModelSerializer):
             "updated_at",
             "published_at",
             "content",
+            "has_delete_permission",
+            "has_change_permission",
         )
 
 
