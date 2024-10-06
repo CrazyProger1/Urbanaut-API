@@ -26,3 +26,4 @@ class UserAdmin(TranslationAdmin):
         "nickname",
         "id",
     )
+

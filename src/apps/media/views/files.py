@@ -32,13 +32,11 @@ class FileViewSet(
     filterset_class = FileFilter
 
     def get_serializer_class(self):
-        if self.action in self.serializer_classes:
-            return self.serializer_classes[self.action]
-        return self.serializer_class
+        return self.serializer_classes.get(self.action, self.serializer_class)
 
     def get_queryset(self):
         if self.request.user.is_authenticated:
-            return self.queryset & get_user_files(user=self.request.user)
+            return self.queryset | get_user_files(user=self.request.user)
 
         return self.queryset
 
@@ -48,7 +46,7 @@ class FileViewSet(
     @extend_schema(
         request=FileCreateSerializer,
         responses={
-            201: FileRetrieveSerializer
+            201: FileRetrieveSerializer,
         },
     )
     def create(self, request, *args, **kwargs):
@@ -77,6 +75,6 @@ class FileViewSet(
         response = FileResponse(
             file_handle.open("rb"),
             as_attachment=True,
-            filename=file_handle.name
+            filename=file_handle.title
         )
         return response

@@ -11,4 +11,5 @@ include(
     "auth.py",
     "rest.py",
     "media.py",
+    "permissions.py",
 )

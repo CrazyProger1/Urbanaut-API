@@ -40,9 +40,12 @@ INSTALLED_APPS = [
     "src.apps.geo.apps.GeoConfig",
     "src.apps.notifications.apps.NotificationsConfig",
     "src.apps.actions.apps.ActionsConfig",
+    "src.apps.blog.apps.BlogConfig",
+    "src.apps.permissions.apps.PermissionsConfig",
 ]
 
 MIDDLEWARE = [
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "corsheaders.middleware.CorsMiddleware",
@@ -51,6 +54,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+
+    "src.apps.accounts.middlewares.I18NMiddleware",
 ]
 
 ROOT_URLCONF = "src.config.urls"

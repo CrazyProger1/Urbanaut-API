@@ -6,10 +6,24 @@ from src.apps.notifications.models import Notification
 class NotificationListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
-        exclude = ("recipients",)
+        fields = (
+            "title",
+            "show_at",
+            "is_shown",
+            "message",
+            "type",
+            "icon",
+        )
 
 
 class NotificationRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification
-        exclude = ("recipients",)
+        fields = (
+            "title",
+            "show_at",
+            "is_shown",
+            "message",
+            "type",
+            "icon",
+        )

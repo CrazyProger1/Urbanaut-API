@@ -12,7 +12,21 @@ from src.apps.geo.serializers import (
 class AbandonedObjectListSerializer(serializers.ModelSerializer):
     class Meta:
         model = AbandonedObject
-        fields = "__all__"
+        fields = (
+            "area",
+            "name",
+            "description",
+            "is_hidden",
+            "security_level",
+            "preservation_level",
+            "difficulty_level",
+            "created_at",
+            "updated_at",
+            "built_at",
+            "abandoned_at",
+            "creator",
+            "location",
+        )
 
 
 class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer):
@@ -22,7 +36,21 @@ class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AbandonedObject
-        fields = "__all__"
+        fields = (
+            "area",
+            "name",
+            "description",
+            "is_hidden",
+            "security_level",
+            "preservation_level",
+            "difficulty_level",
+            "created_at",
+            "updated_at",
+            "built_at",
+            "abandoned_at",
+            "creator",
+            "location",
+        )
 
 
 class AbandonedObjectCreateSerializer(serializers.ModelSerializer):
@@ -30,9 +58,15 @@ class AbandonedObjectCreateSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = AbandonedObject
-        exclude = (
-            "created_at",
-            "updated_at",
-            "is_hidden",
-            "creator",
+        fields = (
+            "id",
+            "area",
+            "name",
+            "description",
+            "security_level",
+            "preservation_level",
+            "difficulty_level",
+            "built_at",
+            "abandoned_at",
+            "location",
         )

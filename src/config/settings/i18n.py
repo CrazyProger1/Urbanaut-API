@@ -9,6 +9,8 @@ TIME_ZONE = config("TIME_ZONE", cast=str, default="UTC")
 
 USE_I18N = True
 
+USE_L10N = True
+
 USE_TZ = True
 
 LANGUAGES = [
