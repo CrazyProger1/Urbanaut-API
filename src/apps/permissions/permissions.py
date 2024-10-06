@@ -6,11 +6,9 @@ class HasActionPermission(permissions.BasePermission):
     def has_object_permission(self, request, view, obj):
         match request.method:
             case "GET":
-                pass
-            case "POST":
-                pass
+                return False
             case "PATCH" | "PUT":
-                pass
+                return False
             case "DELETE":
-                pass
-        return False
+                return False
+        return True

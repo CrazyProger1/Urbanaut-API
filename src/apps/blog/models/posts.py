@@ -71,6 +71,14 @@ class BlogPost(models.Model):
         blank=False,
         null=False,
     )
+    permissions = models.OneToOneField(
+        "permissions.ObjectPermission",
+        on_delete=models.CASCADE,
+        null=True,
+        blank=True,
+        verbose_name=_("Permissions"),
+        help_text=_("Blog post permissions."),
+    )
     objects = PermissionManager()
 
     def __str__(self):

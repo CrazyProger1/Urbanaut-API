@@ -8,3 +8,7 @@ PERMISSION_GROUPS = (
     (400, _("EVERYONE")),
     (500, _("BANNED")),
 )
+
+PERMISSION_MODELS = (
+    ("blog.BlogPost", _("Blog Posts")),
+)
