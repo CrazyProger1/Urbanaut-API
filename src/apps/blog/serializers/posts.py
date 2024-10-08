@@ -45,7 +45,6 @@ class BlogPostCreateSerializer(serializers.ModelSerializer):
         model = BlogPost
         exclude = (
             "id",
-            "is_hidden",
             "creator",
             "created_at",
             "updated_at",

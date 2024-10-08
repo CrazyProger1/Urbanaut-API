@@ -14,6 +14,7 @@ class AbandonedObjectListSerializer(serializers.ModelSerializer):
     class Meta:
         model = AbandonedObject
         fields = (
+            "id",
             "area",
             "name",
             "description",
@@ -37,6 +38,7 @@ class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer, PermissionS
     class Meta:
         model = AbandonedObject
         fields = (
+            "id",
             "area",
             "name",
             "description",
@@ -58,7 +60,6 @@ class AbandonedObjectCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = AbandonedObject
         fields = (
-            "id",
             "area",
             "name",
             "description",
