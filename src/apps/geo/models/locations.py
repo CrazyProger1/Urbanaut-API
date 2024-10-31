@@ -4,8 +4,8 @@ from django.utils.translation import gettext_lazy as _
 
 class Location(models.Model):
     class Meta:
-        verbose_name = _("Location")
-        verbose_name_plural = _("Locations")
+        verbose_name = _("location")
+        verbose_name_plural = _("locations")
 
     point = models.PointField(
         blank=False,

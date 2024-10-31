@@ -15,7 +15,7 @@ class BasePermissionModel(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
-        verbose_name=_("Permissions"),
+        verbose_name=_("permissions"),
         help_text=_("Blog post permissions."),
     )
     objects = PermissionManager()
@@ -35,31 +35,31 @@ class ModelPermission(models.Model):
         blank=False,
         null=False,
         unique=True,
-        verbose_name=_("Model Name"),
+        verbose_name=_("model name"),
         help_text=_("The name of the model you would like to add permissions for.")
     )
     createbility_level = models.PositiveSmallIntegerField(
         default=0,
         choices=settings.PERMISSION_GROUPS,
-        verbose_name=_("Createbility Level"),
+        verbose_name=_("createbility level"),
         help_text=_("Createbility level for the model.")
     )
     visibility_level = models.PositiveSmallIntegerField(
         default=0,
         choices=settings.PERMISSION_GROUPS,
-        verbose_name=_("Visibility Level"),
+        verbose_name=_("visibility level"),
         help_text=_("The default visibility level for the model.")
     )
     changebility_level = models.PositiveSmallIntegerField(
         default=0,
         choices=settings.PERMISSION_GROUPS,
-        verbose_name=_("Changebility Level"),
+        verbose_name=_("changebility level"),
         help_text=_("Default changebility level for the model.")
     )
     deletebility_level = models.PositiveSmallIntegerField(
         default=0,
         choices=settings.PERMISSION_GROUPS,
-        verbose_name=_("Deletebility Level"),
+        verbose_name=_("deletebility level"),
         help_text=_("Default deletebility level for the model.")
     )
 

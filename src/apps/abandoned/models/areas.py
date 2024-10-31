@@ -11,16 +11,16 @@ User = get_user_model()
 
 class AbandonedArea(BasePermissionModel):
     class Meta:
-        verbose_name = _("Area")
-        verbose_name_plural = _("Areas")
+        verbose_name = _("area")
+        verbose_name_plural = _("areas")
 
     created_at = models.DateTimeField(
-        verbose_name=_("Created At"),
+        verbose_name=_("created at"),
         help_text=_("Object creation date and time."),
         default=timezone.now,
     )
     updated_at = models.DateTimeField(
-        verbose_name=_("Updated At"),
+        verbose_name=_("updated at"),
         help_text=_("Object updated date and time."),
         auto_now=True,
     )
@@ -30,18 +30,18 @@ class AbandonedArea(BasePermissionModel):
         related_name="areas",
         null=True,
         blank=True,
-        verbose_name=_("Parent Area"),
+        verbose_name=_("parent area"),
         help_text=_("Area that contains current area."),
     )
     name = models.CharField(
         max_length=250,
-        verbose_name=_("Name"),
+        verbose_name=_("name"),
         help_text=_("Name of the abandoned area."),
         null=False,
         blank=False,
     )
     description = models.TextField(
-        verbose_name=_("Description"),
+        verbose_name=_("description"),
         help_text=_("Description of the abandoned area."),
         null=True,
         blank=True,
@@ -52,7 +52,7 @@ class AbandonedArea(BasePermissionModel):
         related_name="areas",
         blank=True,
         null=True,
-        verbose_name=_("Creator"),
+        verbose_name=_("creator"),
         help_text=_(""),
     )
     security_level = models.CharField(
@@ -60,8 +60,8 @@ class AbandonedArea(BasePermissionModel):
         default=SecurityLevel.NONE,
         null=False,
         blank=False,
-        verbose_name=_("Security Level"),
-        help_text=_("Security level of the area."),
+        verbose_name=_("security level"),
+        help_text=_("security level of the area."),
     )
 
     def __str__(self):

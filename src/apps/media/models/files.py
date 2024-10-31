@@ -14,12 +14,12 @@ User = get_user_model()
 
 class File(models.Model):
     created_at = models.DateTimeField(
-        verbose_name=_("Created At"),
+        verbose_name=_("created at"),
         help_text=_("File creation date and time."),
         default=timezone.now,
     )
     updated_at = models.DateTimeField(
-        verbose_name=_("Updated At"),
+        verbose_name=_("updated at"),
         help_text=_("File updated date and time."),
         auto_now=True,
     )
@@ -29,14 +29,14 @@ class File(models.Model):
         related_name="files",
         blank=True,
         null=True,
-        verbose_name=_("Creator"),
+        verbose_name=_("creator"),
         help_text=_("User who uploaded the file."),
     )
     file = models.FileField(
         upload_to=settings.UPLOAD_DIR,
         blank=False,
         null=False,
-        verbose_name=_("File"),
+        verbose_name=_("file"),
         help_text=_("Uploaded file."),
     )
     type = models.CharField(

@@ -15,14 +15,14 @@ class BlogTopic(BasePermissionModel):
 
     name = models.CharField(
         max_length=250,
-        verbose_name=_("Name"),
+        verbose_name=_("name"),
         help_text=_("Name of the blog topic."),
         null=False,
         blank=False,
     )
 
     description = models.TextField(
-        verbose_name=_("Description"),
+        verbose_name=_("description"),
         help_text=_("Description of the blog topic."),
         null=True,
         blank=True,
@@ -33,7 +33,7 @@ class BlogTopic(BasePermissionModel):
         default=timezone.now,
     )
     is_closed = models.BooleanField(
-        verbose_name=_("Closed"),
+        verbose_name=_("closed"),
         help_text=_("General user can't post to this topic."),
         default=False,
         null=False,
@@ -45,7 +45,7 @@ class BlogTopic(BasePermissionModel):
         related_name="blog_topics",
         blank=True,
         null=True,
-        verbose_name=_("Creator"),
+        verbose_name=_("creator"),
         help_text=_("Creator of the blog post."),
     )
 
