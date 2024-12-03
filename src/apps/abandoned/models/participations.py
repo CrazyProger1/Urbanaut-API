@@ -9,13 +9,13 @@ User = get_user_model()
 
 class Participation(models.Model):
     class Meta:
-        verbose_name = _("Participation")
-        verbose_name_plural = _("Participations")
+        verbose_name = _("participation")
+        verbose_name_plural = _("participations")
 
     event = models.ForeignKey(
         "Event",
         on_delete=models.CASCADE,
-        verbose_name=_("Event"),
+        verbose_name=_("event"),
         help_text=_(""),
     )
     user = models.ForeignKey(
@@ -24,7 +24,7 @@ class Participation(models.Model):
         related_name="participations",
         blank=False,
         null=False,
-        verbose_name=_("User"),
+        verbose_name=_("user"),
         help_text=_(""),
     )
     status = models.CharField(

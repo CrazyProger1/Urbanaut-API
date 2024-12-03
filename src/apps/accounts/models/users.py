@@ -14,8 +14,8 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     id = models.BigIntegerField(
         primary_key=True,
-        verbose_name=_("Telegram ID"),
-        help_text=_("Telegram User ID"),
+        verbose_name=_("telegram ID"),
+        help_text=_("Telegram user ID"),
     )
 
     username = models.CharField(
@@ -23,60 +23,60 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True,
         null=True,
         validators=[username_validator],
-        verbose_name=_("Username"),
+        verbose_name=_("username"),
         help_text=_("Telegram username."),
     )
     nickname = models.CharField(
         max_length=150,
         blank=True,
         null=True,
-        verbose_name=_("Nickname"),
+        verbose_name=_("nickname"),
         help_text=_("Nickname of the user."),
     )
     first_name = models.CharField(
         max_length=150,
         blank=True,
-        verbose_name=_("First Name"),
+        verbose_name=_("first name"),
         help_text=_("First name in telegram."),
     )
     last_name = models.CharField(
         max_length=150,
         blank=True,
-        verbose_name=_("Last Name"),
+        verbose_name=_("last name"),
         help_text=_("Last name in telegram."),
     )
     email = models.EmailField(
         blank=True,
-        verbose_name=_("Email Address"),
+        verbose_name=_("email address"),
         help_text=_("Email address of the user."),
     )
     is_staff = models.BooleanField(
         default=False,
-        verbose_name=_("Staff Status"),
+        verbose_name=_("staff status"),
         help_text=_("Designates whether the user can log into this admin site."),
     )
     is_active = models.BooleanField(
         default=True,
-        verbose_name=_("Active"),
+        verbose_name=_("active"),
         help_text=_(
-            "Designates whether this user should be treated as active. "
+            "designates whether this user should be treated as active. "
             "Unselect this instead of deleting accounts."
         ),
     )
     joined_at = models.DateTimeField(
         default=timezone.now,
-        verbose_name=_("Joined At"),
+        verbose_name=_("joined at"),
         help_text=_("User joined at date and time."),
     )
     born_at = models.DateField(
         default=None,
         null=True,
         blank=True,
-        verbose_name=_("Birth Date"),
+        verbose_name=_("birth Date"),
         help_text=_("User born at date and time."),
     )
     updated_at = models.DateTimeField(
-        verbose_name=_("Updated At"),
+        verbose_name=_("updated at"),
         help_text=_("User updated date and time."),
         auto_now=True,
     )
@@ -85,21 +85,21 @@ class User(AbstractBaseUser, PermissionsMixin):
         default=UserRank.NEWBIE,
         blank=False,
         null=False,
-        verbose_name=_("Rank"),
+        verbose_name=_("rank"),
         help_text=_("The rank of the user."),
     )
     experience = models.PositiveIntegerField(
         default=0,
         blank=False,
         null=False,
-        verbose_name=_("Experience"),
+        verbose_name=_("experience"),
         help_text=_("The experience of the user."),
     )
     karma = models.IntegerField(
         default=0,
         blank=False,
         null=False,
-        verbose_name=_("Karma"),
+        verbose_name=_("karma"),
         help_text=_("The karma of the user."),
     )
     avatar = models.ForeignKey(
@@ -107,14 +107,14 @@ class User(AbstractBaseUser, PermissionsMixin):
         on_delete=models.SET_NULL,
         null=True,
         blank=True,
-        verbose_name=_("Avatar"),
+        verbose_name=_("avatar"),
         help_text=_("The avatar of the user."),
     )
     language = models.CharField(
         max_length=10,
         choices=settings.LANGUAGES,
         default="en",
-        verbose_name=_("Language"),
+        verbose_name=_("language"),
         help_text=_("Preferred language of the user."),
     )
 

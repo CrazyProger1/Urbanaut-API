@@ -9,38 +9,38 @@ User = get_user_model()
 
 class Event(models.Model):
     class Meta:
-        verbose_name = _("Event")
-        verbose_name_plural = _("Events")
+        verbose_name = _("event")
+        verbose_name_plural = _("events")
 
     name = models.CharField(
         max_length=250,
-        verbose_name=_("Name"),
+        verbose_name=_("name"),
         help_text=_("Name of the event."),
         null=False,
         blank=False,
     )
     created_at = models.DateTimeField(
         auto_now_add=True,
-        verbose_name=_("Created At"),
+        verbose_name=_("created at"),
         help_text=_("Event creation date and time."),
     )
     start_at = models.DateTimeField(
         null=False,
         blank=False,
-        verbose_name=_("Start At"),
+        verbose_name=_("start at"),
         help_text=_("Date and time of start of trip."),
     )
 
     end_at = models.DateTimeField(
         null=False,
         blank=False,
-        verbose_name=_("End At"),
+        verbose_name=_("end at"),
         help_text=_("Date and time of end of trip."),
     )
     participants = models.ManyToManyField(
         User,
         related_name="events",
-        verbose_name=_("Participants"),
+        verbose_name=_("participants"),
         help_text=_("Users that participate in this trip."),
         through="Participation",
     )
@@ -50,7 +50,7 @@ class Event(models.Model):
         related_name="my_events",
         blank=False,
         null=False,
-        verbose_name=_("Organizer"),
+        verbose_name=_("organizer"),
         help_text=_(""),
     )
     status = models.CharField(

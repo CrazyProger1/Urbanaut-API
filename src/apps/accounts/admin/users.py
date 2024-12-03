@@ -1,11 +1,12 @@
+from unfold.admin import ModelAdmin
 from django.contrib import admin
-from modeltranslation.admin import TranslationAdmin
+from modeltranslation.admin import TabbedTranslationAdmin
 
 from src.apps.accounts.models import User
 
 
 @admin.register(User)
-class UserAdmin(TranslationAdmin):
+class UserAdmin(ModelAdmin, TabbedTranslationAdmin):
     list_display = (
         "id",
         "username",
@@ -26,4 +27,3 @@ class UserAdmin(TranslationAdmin):
         "nickname",
         "id",
     )
-

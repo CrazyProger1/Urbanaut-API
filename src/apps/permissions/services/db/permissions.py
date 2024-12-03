@@ -19,14 +19,14 @@ def create_object_permissions(**kwargs):
     return create_object(ObjectPermission, **kwargs)
 
 
-def get_model_permissions(model: type[models.Model]) -> ModelPermission | None:
+def get_model_permissions_or_none(model: type[models.Model]) -> ModelPermission | None:
     return filter_objects(
         ModelPermission,
         Q(model=ContentType.objects.get_for_model(model)),
     ).first()
 
 
-def get_object_permissions(obj: models.Model) -> ObjectPermission:
+def get_object_permissions_or_none(obj: models.Model) -> ObjectPermission:
     return getattr(
         obj,
         get_permissions_field(type(obj)),
@@ -34,7 +34,11 @@ def get_object_permissions(obj: models.Model) -> ObjectPermission:
 
 
 def has_create_permission(user: User, model: type[models.Model]) -> bool:
-    model_permissions = get_model_permissions(model)
+    model_permissions = get_model_permissions_or_none(model)
+
+    if not model_permissions:
+        return True
+    
     try:
         primary_permissions = model_permissions.user_permissions.get(user=user)
         return primary_permissions.has_create_permission
@@ -44,7 +48,7 @@ def has_create_permission(user: User, model: type[models.Model]) -> bool:
 
 
 def has_view_permission(user: User, obj: models.Model) -> bool:
-    object_permissions = get_object_permissions(obj=obj)
+    object_permissions = get_object_permissions_or_none(obj=obj)
     try:
         primary_permissions = object_permissions.user_permissions.get(user=user)
         return primary_permissions.has_view_permission
@@ -54,7 +58,7 @@ def has_view_permission(user: User, obj: models.Model) -> bool:
 
 
 def has_change_permission(user: User, obj: models.Model) -> bool:
-    object_permissions = get_object_permissions(obj=obj)
+    object_permissions = get_object_permissions_or_none(obj=obj)
     try:
         primary_permissions = object_permissions.user_permissions.get(user=user)
         return primary_permissions.has_change_permission
@@ -64,7 +68,7 @@ def has_change_permission(user: User, obj: models.Model) -> bool:
 
 
 def has_delete_permission(user: User, obj: models.Model) -> bool:
-    object_permissions = get_object_permissions(obj=obj)
+    object_permissions = get_object_permissions_or_none(obj=obj)
     try:
         primary_permissions = object_permissions.user_permissions.get(user=user)
         return primary_permissions.has_delete_permission

@@ -7,20 +7,20 @@ User = get_user_model()
 
 class ParticipationReport(models.Model):
     class Meta:
-        verbose_name = _("Report")
-        verbose_name_plural = _("Reports")
+        verbose_name = _("report")
+        verbose_name_plural = _("reports")
 
     created_at = models.DateTimeField(
         auto_now_add=True,
         editable=False,
-        verbose_name=_("Created At"),
+        verbose_name=_("created at"),
         help_text=_("Report creation date and time."),
     )
     participation = models.ForeignKey(
         "Participation",
         on_delete=models.CASCADE,
         related_name="reports",
-        verbose_name=_("Participation"),
+        verbose_name=_("participation"),
         help_text=_("Report destination participation."),
     )
 

@@ -16,14 +16,14 @@ class Action(models.Model):
         choices=ActionType,
         null=False,
         blank=False,
-        verbose_name=_("Type"),
+        verbose_name=_("type"),
         help_text=_("Type of an action."),
     )
     data = models.JSONField(
         default=dict,
         blank=True,
         null=True,
-        verbose_name=_("Data"),
+        verbose_name=_("data"),
         help_text=_("Action additional data."),
     )
     user = models.ForeignKey(
@@ -31,7 +31,7 @@ class Action(models.Model):
         on_delete=models.CASCADE,
         blank=False,
         null=False,
-        verbose_name=_("User"),
+        verbose_name=_("user"),
         help_text=_("User who made the action."),
     )
 

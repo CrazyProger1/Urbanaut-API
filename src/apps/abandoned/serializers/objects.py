@@ -7,16 +7,17 @@ from src.apps.geo.serializers import (
     LocationRetrieveSerializer,
     LocationCreateSerializer,
 )
+from src.apps.permissions.serializers import PermissionSerializerMixin
 
 
 class AbandonedObjectListSerializer(serializers.ModelSerializer):
     class Meta:
         model = AbandonedObject
         fields = (
+            "id",
             "area",
             "name",
             "description",
-            "is_hidden",
             "security_level",
             "preservation_level",
             "difficulty_level",
@@ -29,7 +30,7 @@ class AbandonedObjectListSerializer(serializers.ModelSerializer):
         )
 
 
-class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer):
+class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer, PermissionSerializerMixin):
     area = AbandonedAreaRetrieveSerializer(read_only=True)
     creator = UserRetrieveSerializer(read_only=True)
     location = LocationRetrieveSerializer(read_only=True)
@@ -37,10 +38,10 @@ class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = AbandonedObject
         fields = (
+            "id",
             "area",
             "name",
             "description",
-            "is_hidden",
             "security_level",
             "preservation_level",
             "difficulty_level",
@@ -59,7 +60,6 @@ class AbandonedObjectCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = AbandonedObject
         fields = (
-            "id",
             "area",
             "name",
             "description",

@@ -6,13 +6,13 @@ from src.apps.accounts.models.users import User
 
 class Team(models.Model):
     class Meta:
-        verbose_name = _("Team")
-        verbose_name_plural = _("Teams")
+        verbose_name = _("team")
+        verbose_name_plural = _("teams")
 
     name = models.CharField(
         max_length=250,
         unique=True,
-        verbose_name=_("Name"),
+        verbose_name=_("name"),
         help_text=_("Name of the team."),
     )
 
@@ -22,8 +22,8 @@ class Team(models.Model):
 
 class TeamMember(models.Model):
     class Meta:
-        verbose_name = _("Team Member")
-        verbose_name_plural = _("Team Members")
+        verbose_name = _("team member")
+        verbose_name_plural = _("team members")
 
     team = models.ForeignKey(
         Team,
@@ -31,7 +31,7 @@ class TeamMember(models.Model):
         related_name="members",
         blank=False,
         null=False,
-        verbose_name=_("Team"),
+        verbose_name=_("team"),
         help_text=_(""),
     )
     user = models.ForeignKey(
@@ -40,7 +40,7 @@ class TeamMember(models.Model):
         related_name="members",
         blank=False,
         null=False,
-        verbose_name=_("User"),
+        verbose_name=_("user"),
         help_text=_(""),
     )
 
