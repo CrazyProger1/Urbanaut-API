@@ -1,4 +1,3 @@
-from django.conf.urls.static import static
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
@@ -40,5 +39,48 @@ UNFOLD = {
                 "uk": "uk",
             },
         },
+    },
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": True,
+        "navigation": [
+            {
+                "title": _("Accounts"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Users"),
+                        "icon": "person",
+                        "link": reverse_lazy("admin:accounts_user_changelist"),
+                    },
+                    {
+                        "title": _("Teams"),
+                        "icon": "group",
+                        "link": reverse_lazy("admin:accounts_team_changelist"),
+                    },
+                    {
+                        "title": _("Groups"),
+                        "icon": "devices",
+                        "link": reverse_lazy("admin:auth_group_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": _("Abandoned"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Objects"),
+                        "icon": "person",
+                        "link": reverse_lazy("admin:abandoned_abandonedobject_changelist"),
+                    },
+                    {
+                        "title": _("Areas"),
+                        "icon": "group",
+                        "link": reverse_lazy("admin:abandoned_abandonedarea_changelist"),
+                    },
+                ],
+            },
+        ],
     },
 }
