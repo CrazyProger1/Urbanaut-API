@@ -33,6 +33,6 @@ def get_user_group(obj: models.Model = None, user: User = None):
         return 100
     elif is_owner(obj, user):
         return 200
-    elif user.is_authentificated:
+    elif user.is_authenticated:
         return 300
     return 400

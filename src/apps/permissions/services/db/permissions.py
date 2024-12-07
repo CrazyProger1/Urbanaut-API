@@ -38,7 +38,7 @@ def has_create_permission(user: User, model: type[models.Model]) -> bool:
 
     if not model_permissions:
         return True
-    
+
     try:
         primary_permissions = model_permissions.user_permissions.get(user=user)
         return primary_permissions.has_create_permission
@@ -52,7 +52,7 @@ def has_view_permission(user: User, obj: models.Model) -> bool:
     try:
         primary_permissions = object_permissions.user_permissions.get(user=user)
         return primary_permissions.has_view_permission
-    except models.ObjectDoesNotExist:
+    except (models.ObjectDoesNotExist, TypeError):
         group = get_user_group(obj=obj, user=user)
         return object_permissions.visibility_level >= group
 
@@ -62,7 +62,7 @@ def has_change_permission(user: User, obj: models.Model) -> bool:
     try:
         primary_permissions = object_permissions.user_permissions.get(user=user)
         return primary_permissions.has_change_permission
-    except models.ObjectDoesNotExist:
+    except (models.ObjectDoesNotExist, TypeError):
         group = get_user_group(obj=obj, user=user)
         return object_permissions.changebility_level >= group
 
@@ -72,7 +72,7 @@ def has_delete_permission(user: User, obj: models.Model) -> bool:
     try:
         primary_permissions = object_permissions.user_permissions.get(user=user)
         return primary_permissions.has_delete_permission
-    except models.ObjectDoesNotExist:
+    except (models.ObjectDoesNotExist, TypeError):
         group = get_user_group(obj=obj, user=user)
         return object_permissions.deletebility_level >= group
 

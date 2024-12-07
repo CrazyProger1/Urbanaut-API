@@ -3,6 +3,7 @@ from django.db import models
 
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from mdeditor.fields import MDTextField
 
 from src.apps.abandoned.enums import (
     SecurityLevel,
@@ -35,7 +36,11 @@ class AbandonedObject(BasePermissionModel):
         null=False,
         blank=False,
     )
-    description = models.TextField(
+    short_description = models.CharField(
+        verbose_name=_("short description"),
+        help_text=_("Short description of the abandoned object for the objects page.")
+    )
+    description = MDTextField(
         verbose_name=_("description"),
         help_text=_("Description of the abandoned object."),
         null=True,

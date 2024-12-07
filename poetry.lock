@@ -347,6 +347,16 @@ files = [
 Django = ">=4.2"
 
 [[package]]
+name = "django-mdeditor"
+version = "0.1.20"
+description = "A simple Django app to edit markdown text."
+optional = false
+python-versions = "*"
+files = [
+    {file = "django-mdeditor-0.1.20.tar.gz", hash = "sha256:d1f3b735b6202b8820f10e024a5aa28c5b948897ee7a8dbb84558df75339827e"},
+]
+
+[[package]]
 name = "django-model-utils"
 version = "5.0.0"
 description = "Django model mixins and utilities"
@@ -1219,4 +1229,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.12"
-content-hash = "f12b4b9b0d22d68c4d5b6f222f5a3b432d0911116bf5ef506582ee1a7d9e1f4e"
+content-hash = "81bd4547da5cc47379b7859edebaaf31c659460b73565d0593cc2692dbe2a9e6"

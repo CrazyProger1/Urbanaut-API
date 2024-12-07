@@ -1,6 +1,8 @@
+from django.db import models
 from unfold.admin import ModelAdmin
 from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
+from unfold.contrib.forms.widgets import WysiwygWidget
 
 from src.apps.abandoned.models import AbandonedObject
 
