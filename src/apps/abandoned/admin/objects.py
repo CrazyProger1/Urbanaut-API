@@ -1,14 +1,18 @@
-from django.db import models
-from unfold.admin import ModelAdmin
+from unfold.admin import ModelAdmin, StackedInline, TabularInline
 from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
-from unfold.contrib.forms.widgets import WysiwygWidget
 
-from src.apps.abandoned.models import AbandonedObject
+from src.apps.abandoned.models import AbandonedObject, AbandonedObjectFile
+
+
+class AbandonedObjectFileInline(TabularInline):
+    model = AbandonedObjectFile
+    extra = 0
 
 
 @admin.register(AbandonedObject)
 class AbandonedObjectAdmin(ModelAdmin, TabbedTranslationAdmin):
+    inlines = (AbandonedObjectFileInline,)
     list_display = ("id", "name", "area", "created_at")
     readonly_fields = ("created_at",)
     list_display_links = ("name",)

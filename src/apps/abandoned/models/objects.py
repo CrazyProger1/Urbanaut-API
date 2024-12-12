@@ -10,9 +10,28 @@ from src.apps.abandoned.enums import (
     PreservationLevel,
     DifficultyLevel,
 )
+from src.apps.media.enums import FileType
 from src.apps.permissions.models import BasePermissionModel
 
 User = get_user_model()
+
+
+class AbandonedObjectFile(models.Model):
+    class Meta:
+        verbose_name = _("file")
+        verbose_name_plural = _("files")
+
+    file = models.ForeignKey(
+        "media.File",
+        on_delete=models.CASCADE,
+    )
+    object = models.ForeignKey(
+        "AbandonedObject",
+        on_delete=models.CASCADE,
+    )
+    priority = models.IntegerField(
+        default=0,
+    )
 
 
 class AbandonedObject(BasePermissionModel):
@@ -110,6 +129,23 @@ class AbandonedObject(BasePermissionModel):
         verbose_name=_("location"),
         help_text=_("Location of the object."),
     )
+    files = models.ManyToManyField(
+        "media.File",
+        through=AbandonedObjectFile,
+        verbose_name=_("files"),
+        related_name="abandoned_objects",
+        help_text=_("The media files representing this object."),
+    )
+
+    def photos(self):
+        return self.files.filter(
+            type__in=(FileType.PHOTO, FileType.VIDEO)
+        ).order_by("type")
+
+    def photo(self):
+        photo = self.files.filter(type=FileType.PHOTO).first()
+        if photo:
+            return photo.src
 
     def __str__(self):
         return f"Object(name={self.name})"

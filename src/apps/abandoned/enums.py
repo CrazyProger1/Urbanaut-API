@@ -39,4 +39,4 @@ class DifficultyLevel(models.TextChoices):
     NEWBIE = "NEWBIE", _("NEWBIE")
     EASY = "EASY", _("EASY")
     MEDIUM = "MEDIUM", _("MEDIUM")
-    HIGH = "HIGH", _("HIGH")
+    HARD = "HARD", _("HARD")
