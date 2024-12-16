@@ -5,6 +5,7 @@ from src.apps.abandoned.serializers.areas import (
 from src.apps.abandoned.serializers.categories import (
     AbandonedObjectCategoryListSerializer,
     AbandonedObjectCategoryRetrieveSerializer,
+    AbandonedObjectRecursiveCategoryListSerializer,
 )
 from src.apps.abandoned.serializers.objects import (
     AbandonedObjectListSerializer,

@@ -4,10 +4,12 @@ from rest_framework.decorators import action
 from src.apps.abandoned.serializers import (
     AbandonedObjectCategoryListSerializer,
     AbandonedObjectCategoryRetrieveSerializer,
+    AbandonedObjectRecursiveCategoryListSerializer,
 )
 from src.apps.abandoned.services.db import (
     get_available_abandoned_object_categories,
     get_available_abandoned_object_category_children,
+    get_available_toplevel_abandoned_object_categories,
 )
 from src.apps.permissions.permissions import HasPermission
 
@@ -23,6 +25,7 @@ class AbandonedObjectCategoryViewSet(
     serializer_classes = {
         "list": AbandonedObjectCategoryListSerializer,
         "retrieve": AbandonedObjectCategoryRetrieveSerializer,
+        "toplevel": AbandonedObjectRecursiveCategoryListSerializer,
     }
 
     def get_queryset(self):
@@ -44,6 +47,25 @@ class AbandonedObjectCategoryViewSet(
         queryset = self.filter_queryset(
             get_available_abandoned_object_category_children(
                 category=self.get_object(),
+                user=request.user,
+            ))
+
+        page = self.paginate_queryset(queryset)
+        if page is not None:
+            serializer = self.get_serializer(page, many=True)
+            return self.get_paginated_response(serializer.data)
+
+        serializer = self.get_serializer(queryset, many=True)
+        return response.Response(serializer.data)
+
+    @action(
+        detail=False,
+        methods=("GET",),
+        url_name="toplevel",
+    )
+    def toplevel(self, request, *args, **kwargs):
+        queryset = self.filter_queryset(
+            get_available_toplevel_abandoned_object_categories(
                 user=request.user,
             ))
 
