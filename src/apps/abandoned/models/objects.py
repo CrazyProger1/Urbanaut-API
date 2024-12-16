@@ -39,6 +39,15 @@ class AbandonedObject(BasePermissionModel):
         verbose_name = _("object")
         verbose_name_plural = _("objects")
 
+    category = models.ForeignKey(
+        "AbandonedObjectCategory",
+        on_delete=models.SET_NULL,
+        related_name="abandoned_objects",
+        null=True,
+        blank=True,
+        verbose_name=_("category"),
+        help_text=_("Object nearest category."),
+    )
     area = models.ForeignKey(
         "AbandonedArea",
         on_delete=models.CASCADE,

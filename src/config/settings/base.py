@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.gis",
+    "modeltranslation",
     "corsheaders",
     "cities",
     "rest_framework",

@@ -18,5 +18,5 @@ class AbandonedObjectCategoryRetrieveSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "name",
-            "parent",
+            "description",
         )

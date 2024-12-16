@@ -13,8 +13,19 @@ class AbandonedObjectFileInline(TabularInline):
 @admin.register(AbandonedObject)
 class AbandonedObjectAdmin(ModelAdmin, TabbedTranslationAdmin):
     inlines = (AbandonedObjectFileInline,)
-    list_display = ("id", "name", "area", "created_at")
+    list_display = (
+        "id",
+        "name",
+        "area__name",
+        "category__name",
+        "created_at",
+    )
     readonly_fields = ("created_at",)
     list_display_links = ("name",)
 
     search_fields = ("id", "name")
+    raw_id_fields = (
+        "creator",
+        "category",
+        "area",
+    )

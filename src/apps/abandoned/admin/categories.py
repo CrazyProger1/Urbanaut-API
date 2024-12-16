@@ -15,8 +15,20 @@ class AbandonedObjectCategoryAdmin(ModelAdmin, TabbedTranslationAdmin):
     list_display = (
         "id",
         "name",
+        "creator",
     )
     list_display_links = ("name",)
+    raw_id_fields = (
+        "creator",
+        "parent",
+    )
+    list_filter = (
+        "created_at",
+    )
+    search_fields = (
+        "name",
+        "description",
+    )
 
     def save_model(
             self,

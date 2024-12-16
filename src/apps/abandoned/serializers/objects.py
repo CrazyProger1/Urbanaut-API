@@ -1,13 +1,16 @@
 from rest_framework import serializers
 
 from src.apps.abandoned.models import AbandonedObject
-from src.apps.abandoned.serializers.areas import AbandonedAreaRetrieveSerializer
+from src.apps.abandoned.serializers import (
+    AbandonedObjectCategoryRetrieveSerializer,
+    AbandonedAreaRetrieveSerializer,
+)
 from src.apps.accounts.serializers import UserRetrieveSerializer
 from src.apps.geo.serializers import (
     LocationRetrieveSerializer,
     LocationCreateSerializer,
 )
-from src.apps.media.serializers import FileListSerializer, FileRetrieveSerializer
+from src.apps.media.serializers import FileRetrieveSerializer
 from src.apps.permissions.serializers import PermissionSerializerMixin
 
 
@@ -40,6 +43,7 @@ class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer, PermissionS
     creator = UserRetrieveSerializer(read_only=True)
     location = LocationRetrieveSerializer(read_only=True)
     photos = FileRetrieveSerializer(many=True, read_only=True)
+    category = AbandonedObjectCategoryRetrieveSerializer(read_only=True)
 
     class Meta:
         model = AbandonedObject
@@ -59,6 +63,7 @@ class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer, PermissionS
             "creator",
             "location",
             "photos",
+            "category",
         )
 
 
