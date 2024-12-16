@@ -7,3 +7,7 @@ from src.apps.abandoned.serializers.areas import (
     AbandonedAreaListSerializer,
     AbandonedAreaRetrieveSerializer,
 )
+from src.apps.abandoned.serializers.categories import (
+    AbandonedObjectCategoryListSerializer,
+    AbandonedObjectCategoryRetrieveSerializer,
+)

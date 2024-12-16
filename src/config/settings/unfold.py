@@ -70,6 +70,11 @@ UNFOLD = {
                 "collapsible": True,
                 "items": [
                     {
+                        "title": _("Categories"),
+                        "icon": "category",
+                        "link": reverse_lazy("admin:abandoned_abandonedobjectcategory_changelist"),
+                    },
+                    {
                         "title": _("Objects"),
                         "icon": "person",
                         "link": reverse_lazy("admin:abandoned_abandonedobject_changelist"),
