@@ -1,16 +1,22 @@
 from rest_framework import serializers
 
 from src.apps.abandoned.models import AbandonedObject
-from src.apps.abandoned.serializers.areas import AbandonedAreaRetrieveSerializer
+from src.apps.abandoned.serializers import (
+    AbandonedObjectCategoryRetrieveSerializer,
+    AbandonedAreaRetrieveSerializer,
+)
 from src.apps.accounts.serializers import UserRetrieveSerializer
 from src.apps.geo.serializers import (
     LocationRetrieveSerializer,
     LocationCreateSerializer,
 )
+from src.apps.media.serializers import FileRetrieveSerializer
 from src.apps.permissions.serializers import PermissionSerializerMixin
 
 
 class AbandonedObjectListSerializer(serializers.ModelSerializer):
+    photo = serializers.CharField(read_only=True)
+
     class Meta:
         model = AbandonedObject
         fields = (
@@ -18,6 +24,7 @@ class AbandonedObjectListSerializer(serializers.ModelSerializer):
             "area",
             "name",
             "description",
+            "short_description",
             "security_level",
             "preservation_level",
             "difficulty_level",
@@ -27,6 +34,7 @@ class AbandonedObjectListSerializer(serializers.ModelSerializer):
             "abandoned_at",
             "creator",
             "location",
+            "photo",
         )
 
 
@@ -34,6 +42,8 @@ class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer, PermissionS
     area = AbandonedAreaRetrieveSerializer(read_only=True)
     creator = UserRetrieveSerializer(read_only=True)
     location = LocationRetrieveSerializer(read_only=True)
+    photos = FileRetrieveSerializer(many=True, read_only=True)
+    category = AbandonedObjectCategoryRetrieveSerializer(read_only=True)
 
     class Meta:
         model = AbandonedObject
@@ -42,6 +52,7 @@ class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer, PermissionS
             "area",
             "name",
             "description",
+            "short_description",
             "security_level",
             "preservation_level",
             "difficulty_level",
@@ -51,6 +62,8 @@ class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer, PermissionS
             "abandoned_at",
             "creator",
             "location",
+            "photos",
+            "category",
         )
 
 

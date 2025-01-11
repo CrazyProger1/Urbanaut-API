@@ -3,15 +3,35 @@ from django.db import models
 
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+from mdeditor.fields import MDTextField
 
 from src.apps.abandoned.enums import (
     SecurityLevel,
     PreservationLevel,
     DifficultyLevel,
 )
+from src.apps.media.enums import FileType
 from src.apps.permissions.models import BasePermissionModel
 
 User = get_user_model()
+
+
+class AbandonedObjectFile(models.Model):
+    class Meta:
+        verbose_name = _("file")
+        verbose_name_plural = _("files")
+
+    file = models.ForeignKey(
+        "media.File",
+        on_delete=models.CASCADE,
+    )
+    object = models.ForeignKey(
+        "AbandonedObject",
+        on_delete=models.CASCADE,
+    )
+    priority = models.IntegerField(
+        default=0,
+    )
 
 
 class AbandonedObject(BasePermissionModel):
@@ -19,6 +39,15 @@ class AbandonedObject(BasePermissionModel):
         verbose_name = _("object")
         verbose_name_plural = _("objects")
 
+    category = models.ForeignKey(
+        "AbandonedObjectCategory",
+        on_delete=models.SET_NULL,
+        related_name="abandoned_objects",
+        null=True,
+        blank=True,
+        verbose_name=_("category"),
+        help_text=_("Object nearest category."),
+    )
     area = models.ForeignKey(
         "AbandonedArea",
         on_delete=models.CASCADE,
@@ -35,7 +64,11 @@ class AbandonedObject(BasePermissionModel):
         null=False,
         blank=False,
     )
-    description = models.TextField(
+    short_description = models.CharField(
+        verbose_name=_("short description"),
+        help_text=_("Short description of the abandoned object for the objects page.")
+    )
+    description = MDTextField(
         verbose_name=_("description"),
         help_text=_("Description of the abandoned object."),
         null=True,
@@ -105,6 +138,23 @@ class AbandonedObject(BasePermissionModel):
         verbose_name=_("location"),
         help_text=_("Location of the object."),
     )
+    files = models.ManyToManyField(
+        "media.File",
+        through=AbandonedObjectFile,
+        verbose_name=_("files"),
+        related_name="abandoned_objects",
+        help_text=_("The media files representing this object."),
+    )
+
+    def photos(self):
+        return self.files.filter(
+            type__in=(FileType.PHOTO, FileType.VIDEO)
+        ).order_by("type")
+
+    def photo(self):
+        photo = self.files.filter(type=FileType.PHOTO).first()
+        if photo:
+            return photo.src
 
     def __str__(self):
         return f"Object(name={self.name})"

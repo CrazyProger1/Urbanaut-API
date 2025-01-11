@@ -25,16 +25,16 @@ cleancode:
 	black .
 	mypy .
 
-.PHONY: migrations
-migrations:
+.PHONY: db.migrations
+db.migrations:
 	python manage.py makemigrations
 
 
-.PHONY: migrate
-migrate:
+.PHONY: db.migrate
+db.migrate:
 	python manage.py migrate
 
 
-.PHONY: superuser
-superuser:
+.PHONY: db.superuser
+db.superuser:
 	python manage.py createsuperuser --no-input
