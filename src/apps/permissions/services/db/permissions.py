@@ -84,6 +84,8 @@ def get_available_objects[T: models.Model](
         level_field: str,
         owner_group: int = settings.OWNERS_GROUP,
 ) -> models.QuerySet[T]:
+    if user and not user.is_authenticated:
+        user = None
     model = queryset.model
     group = get_user_group(user=user)
     permissions_field = get_permissions_field(model)
