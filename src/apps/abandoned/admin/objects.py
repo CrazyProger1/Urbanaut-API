@@ -16,8 +16,6 @@ class AbandonedObjectAdmin(ModelAdmin, TabbedTranslationAdmin):
     list_display = (
         "id",
         "name",
-        "area__name",
-        "category__name",
         "created_at",
     )
     readonly_fields = ("created_at",)
