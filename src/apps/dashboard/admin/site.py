@@ -2,7 +2,7 @@ from django.shortcuts import redirect, render
 from django.urls import reverse, path
 from unfold.sites import UnfoldAdminSite
 
-from src.utils.telegram import send_message
+# from src.utils.telegram import send_message
 
 
 class AdvancedAdminSite(UnfoldAdminSite):
