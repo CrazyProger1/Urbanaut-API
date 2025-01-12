@@ -66,6 +66,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 
     "src.apps.accounts.middlewares.I18NMiddleware",
+    "src.apps.dashboard.middlewares.Admin2FAMiddleware",
 ]
 
 ROOT_URLCONF = "src.config.urls"
