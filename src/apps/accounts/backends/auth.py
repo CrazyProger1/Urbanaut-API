@@ -8,7 +8,7 @@ from django.conf import settings
 
 from rest_framework import authentication, exceptions
 
-from src.apps.accounts.services import get_user_or_none
+from src.apps.accounts.services.db import get_user_or_none
 
 
 class TMAAuthentication(authentication.BaseAuthentication):

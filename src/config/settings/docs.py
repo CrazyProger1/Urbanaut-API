@@ -1,3 +1,9 @@
+from src.config.settings.base import (
+    TITLE,
+    DESCRIPTION,
+    VERSION,
+)
+
 SWAGGER_SETTINGS = {
     "USE_SESSION_AUTH": False,
     "PERSIST_AUTH": True,
@@ -8,9 +14,9 @@ SWAGGER_SETTINGS = {
     "HEADERS": {"Accept-Language": "ru"},
 }
 SPECTACULAR_SETTINGS = {
-    "TITLE": "Urbanaut-API",
-    "DESCRIPTION": "Urbanaut API",
-    "VERSION": "0.0.1",
+    "TITLE": TITLE,
+    "DESCRIPTION": DESCRIPTION,
+    "VERSION": VERSION,
     "SERVE_INCLUDE_SCHEMA": False,
     "SCHEMA_PATH_PREFIX": r"/api/v[0-9]",
     "COMPONENT_SPLIT_REQUEST": True,

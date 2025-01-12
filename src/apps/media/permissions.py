@@ -7,5 +7,5 @@ class IsFileOwnerOrReadOnly(BasePermission):
     def has_object_permission(self, request, view, obj):
         return (
                 request.method in permissions.SAFE_METHODS or
-                obj.creator == request.user
+                obj.user == request.user
         )

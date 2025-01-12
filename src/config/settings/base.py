@@ -108,3 +108,7 @@ STATIC_URL = "static/"
 STATIC_ROOT = "static/"
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+TITLE = "Urbanaut"
+DESCRIPTION = "Urbanaut API Server"
+VERSION = "0.0.1"

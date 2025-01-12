@@ -1,7 +1,7 @@
 from rest_framework import viewsets, mixins, permissions
 
 from src.apps.accounts.serializers import TeamListSerializer, UserRetrieveSerializer
-from src.apps.accounts.services import get_all_teams
+from src.apps.accounts.services.db import get_all_teams
 
 
 class TeamViewSet(

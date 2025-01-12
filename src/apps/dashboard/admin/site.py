@@ -6,8 +6,8 @@ from unfold.sites import UnfoldAdminSite
 
 
 class AdvancedAdminSite(UnfoldAdminSite):
-    admin_2fa_template = "2fa.html"
-    admin_2fa_route = "2fa/"
+    admin_2fa_template = "otp.html"
+    admin_2fa_route = "otp/"
 
     def login(self, request, extra_context=None):
         response = super().login(request, extra_context)

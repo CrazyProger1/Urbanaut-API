@@ -2,7 +2,7 @@ from rest_framework import viewsets, mixins, permissions
 
 from src.apps.accounts.filters import UserFilter
 from src.apps.accounts.serializers import UserListSerializer, UserRetrieveSerializer
-from src.apps.accounts.services import get_all_users
+from src.apps.accounts.services.db import get_all_users
 
 
 class UserViewSet(
