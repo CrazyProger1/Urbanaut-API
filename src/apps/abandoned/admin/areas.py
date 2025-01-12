@@ -3,9 +3,10 @@ from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
 
 from src.apps.abandoned.models import AbandonedArea
+from src.apps.dashboard.admin.site import site
 
 
-@admin.register(AbandonedArea)
+@admin.register(AbandonedArea, site=site)
 class AbandonedAreaAdmin(ModelAdmin, TabbedTranslationAdmin):
     list_display = (
         "id",

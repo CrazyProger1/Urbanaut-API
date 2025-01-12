@@ -3,9 +3,10 @@ from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
 
 from src.apps.accounts.models import User
+from src.apps.dashboard.admin.site import site
 
 
-@admin.register(User)
+@admin.register(User, site=site)
 class UserAdmin(ModelAdmin, TabbedTranslationAdmin):
     list_display = (
         "id",

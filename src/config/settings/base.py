@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     "src.apps.actions.apps.ActionsConfig",
     "src.apps.blog.apps.BlogConfig",
     "src.apps.permissions.apps.PermissionsConfig",
+    "src.apps.dashboard.apps.DashboardConfig",
 ]
 
 MIDDLEWARE = [

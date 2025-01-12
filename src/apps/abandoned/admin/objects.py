@@ -1,8 +1,9 @@
-from unfold.admin import ModelAdmin, StackedInline, TabularInline
+from unfold.admin import ModelAdmin, TabularInline
 from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
 
 from src.apps.abandoned.models import AbandonedObject, AbandonedObjectFile
+from src.apps.dashboard.admin.site import site
 
 
 class AbandonedObjectFileInline(TabularInline):
@@ -10,7 +11,7 @@ class AbandonedObjectFileInline(TabularInline):
     extra = 0
 
 
-@admin.register(AbandonedObject)
+@admin.register(AbandonedObject, site=site)
 class AbandonedObjectAdmin(ModelAdmin, TabbedTranslationAdmin):
     inlines = (AbandonedObjectFileInline,)
     list_display = (

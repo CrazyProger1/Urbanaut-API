@@ -13,4 +13,5 @@ include(
     "media.py",
     "permissions.py",
     "unfold.py",
+    "telegram.py",
 )
