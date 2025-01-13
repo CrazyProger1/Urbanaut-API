@@ -36,7 +36,7 @@ class TMAAuthentication(authentication.BaseAuthentication):
         )
         secret_key = hmac.new(
             key=b"WebAppData",
-            msg=settings.BOT_TOKEN.encode(),
+            msg=settings.TELEGRAM_BOT_TOKEN.encode(),
             digestmod=hashlib.sha256,
         )
         calculated_hash = hmac.new(
