@@ -60,8 +60,6 @@ class TMAAuthentication(authentication.BaseAuthentication):
             digestmod=hashlib.sha256,
         ).hexdigest()
 
-        logger.warning(f"BOT TOKEN: {settings.TELEGRAM_BOT_TOKEN}", )
-
         if calculated_hash != data_hash:
             raise exceptions.AuthenticationFailed("Hash mismatch")
 
