@@ -60,12 +60,24 @@ class TMAAuthentication(authentication.BaseAuthentication):
             digestmod=hashlib.sha256,
         ).hexdigest()
 
+        logger.warning(f"BOT TOKEN: {settings.TELEGRAM_BOT_TOKEN}", )
+
         if calculated_hash != data_hash:
             raise exceptions.AuthenticationFailed("Hash mismatch")
 
     def get_user(self, parsed_data: dict):
-        pk = json.loads(parsed_data["user"])["id"]
-        return get_user_or_create(id=pk)
+        try:
+            user = json.loads(parsed_data.get("user", "{}"))
+        except json.JSONDecodeError:
+            raise ValueError("Invalid JSON in 'user' field")
+
+        username = user.get("username")
+        pk = user.get("id")
+
+        return get_user_or_create(
+            id=pk,
+            username=username,
+        )
 
     def authenticate(self, request):
         header = authentication.get_authorization_header(request)
@@ -75,7 +87,7 @@ class TMAAuthentication(authentication.BaseAuthentication):
         if not header:
             return None
 
-        logger.debug(f"Authentication header obtained: {header}")
+        logger.debug(f"Authentication header obtained")
 
         parsed_data = self.parse_data(header=header)
 

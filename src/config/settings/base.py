@@ -1,9 +1,7 @@
 from pathlib import Path
 
 from decouple import config
-from dotenv import load_dotenv
 
-load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 BASE_URL = config("BASE_URL", cast=str, default="http://localhost:8001")

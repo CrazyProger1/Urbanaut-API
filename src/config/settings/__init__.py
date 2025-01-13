@@ -1,4 +1,7 @@
 from split_settings.tools import include
+from dotenv import load_dotenv
+
+load_dotenv()
 
 include(
     "base.py",
