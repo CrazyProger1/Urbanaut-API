@@ -63,19 +63,27 @@ class TMAAuthentication(authentication.BaseAuthentication):
         if calculated_hash != data_hash:
             raise exceptions.AuthenticationFailed("Hash mismatch")
 
+    def update_user(self, user, data: dict):
+        user.username = data.get("username", user.username)
+        user.save()
+
     def get_user(self, parsed_data: dict):
         try:
-            user = json.loads(parsed_data.get("user", "{}"))
+            user_data = json.loads(parsed_data.get("user", "{}"))
         except json.JSONDecodeError:
             raise ValueError("Invalid JSON in 'user' field")
 
-        username = user.get("username")
-        pk = user.get("id")
+        pk = user_data.get("id")
 
-        return get_user_or_create(
+        user = get_user_or_create(
             id=pk,
-            username=username,
         )
+        self.update_user(
+            user=user,
+            data=user_data,
+        )
+
+        return user
 
     def authenticate(self, request):
         header = authentication.get_authorization_header(request)
