@@ -97,7 +97,7 @@ class TMAAuthentication(authentication.BaseAuthentication):
 
         parsed_data = self.parse_data(header=header)
 
-        logger.debug(f"Data parsed")
+        logger.debug(f"Data parsed: {parsed_data}")
 
         self.validate_auth_date(parsed_data=parsed_data)
 
