@@ -93,7 +93,7 @@ class TMAAuthentication(authentication.BaseAuthentication):
         if not header:
             return None
 
-        logger.debug(f"Authentication header obtained")
+        logger.debug(f"Authentication header obtained: {header}")
 
         parsed_data = self.parse_data(header=header)
 
