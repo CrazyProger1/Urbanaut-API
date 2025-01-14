@@ -24,7 +24,6 @@ class TMAAuthentication(authentication.BaseAuthentication):
         header = header.decode("utf-8")
 
         try:
-            # First decode the entire URL-encoded header
             header = unquote(header)
             parsed_data = dict(parse_qsl(header))
         except ValueError:
@@ -95,11 +94,11 @@ class TMAAuthentication(authentication.BaseAuthentication):
         if not header:
             return None
 
-        logger.debug(f"Authentication header obtained: {header}")
+        logger.debug(f"Authentication header obtained")
 
         parsed_data = self.parse_data(header=header)
 
-        logger.debug(f"Data parsed: {parsed_data}")
+        logger.debug(f"Data parsed")
 
         self.validate_auth_date(parsed_data=parsed_data)
 
