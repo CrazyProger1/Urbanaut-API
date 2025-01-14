@@ -4,7 +4,7 @@ import json
 import logging
 from datetime import datetime, timezone
 from operator import itemgetter
-from urllib.parse import parse_qsl
+from urllib.parse import unquote, parse_qsl
 
 from django.conf import settings
 
@@ -24,6 +24,8 @@ class TMAAuthentication(authentication.BaseAuthentication):
         header = header.decode("utf-8")
 
         try:
+            # First decode the entire URL-encoded header
+            header = unquote(header)
             parsed_data = dict(parse_qsl(header))
         except ValueError:
             return None
