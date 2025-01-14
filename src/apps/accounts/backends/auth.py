@@ -66,6 +66,8 @@ class TMAAuthentication(authentication.BaseAuthentication):
 
     def update_user(self, user, data: dict):
         user.username = data.get("username", user.username)
+        user.first_name = data.get("first_name", user.first_name)
+        user.last_name = data.get("last_name", user.last_name)
         user.save()
 
     def get_user(self, parsed_data: dict):
