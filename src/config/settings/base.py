@@ -13,7 +13,7 @@ DEBUG = config("DEBUG", cast=bool, default=False)
 ALLOWED_HOSTS = ["*"]
 CSRF_TRUSTED_ORIGINS = [
     "http://localhost:8001",
-    "https://urbanaut.onrender.com",
+    "https://api.urbanaut.club",
 ]
 
 INSTALLED_APPS = [
