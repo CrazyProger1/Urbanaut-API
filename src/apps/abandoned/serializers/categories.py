@@ -1,13 +1,13 @@
 from rest_framework import serializers
 
-from src.apps.abandoned.models import AbandonedObjectCategory
+from src.apps.abandoned.models import Category
 
 
 class AbandonedObjectRecursiveCategoryListSerializer(serializers.ModelSerializer):
     children = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
-        model = AbandonedObjectCategory
+        model = Category
         fields = (
             "id",
             "name",
@@ -23,7 +23,7 @@ class AbandonedObjectRecursiveCategoryListSerializer(serializers.ModelSerializer
 
 class AbandonedObjectCategoryListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = AbandonedObjectCategory
+        model = Category
         fields = (
             "id",
             "name",
@@ -32,7 +32,7 @@ class AbandonedObjectCategoryListSerializer(serializers.ModelSerializer):
 
 class AbandonedObjectCategoryRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
-        model = AbandonedObjectCategory
+        model = Category
         fields = (
             "id",
             "name",

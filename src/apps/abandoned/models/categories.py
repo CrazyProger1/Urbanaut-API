@@ -8,7 +8,7 @@ from src.apps.permissions.models import BasePermissionModel
 User = get_user_model()
 
 
-class AbandonedObjectCategory(BasePermissionModel):
+class Category(BasePermissionModel):
     class Meta:
         verbose_name = _("category")
         verbose_name_plural = _("categories")

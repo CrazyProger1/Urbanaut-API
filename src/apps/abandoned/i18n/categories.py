@@ -1,10 +1,10 @@
 from modeltranslation.translator import TranslationOptions, translator
 
-from src.apps.abandoned.models import AbandonedObjectCategory
+from src.apps.abandoned.models import Category
 
 
-class AbandonedObjectCategoryTranslationOptions(TranslationOptions):
+class CategoryTranslationOptions(TranslationOptions):
     fields = ("name", "description",)
 
 
-translator.register(AbandonedObjectCategory, AbandonedObjectCategoryTranslationOptions)
+translator.register(Category, CategoryTranslationOptions)

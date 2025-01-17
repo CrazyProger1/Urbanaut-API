@@ -7,12 +7,12 @@ from unfold.admin import ModelAdmin
 from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
 
-from src.apps.abandoned.models import AbandonedObjectCategory
+from src.apps.abandoned.models import Category
 from src.apps.dashboard.admin.site import site
 
 
-@admin.register(AbandonedObjectCategory, site=site)
-class AbandonedObjectCategoryAdmin(ModelAdmin, TabbedTranslationAdmin):
+@admin.register(Category, site=site)
+class CategoryAdmin(ModelAdmin, TabbedTranslationAdmin):
     list_display = (
         "id",
         "name",

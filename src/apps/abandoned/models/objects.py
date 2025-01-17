@@ -40,7 +40,7 @@ class AbandonedObject(BasePermissionModel):
         verbose_name_plural = _("objects")
 
     category = models.ForeignKey(
-        "AbandonedObjectCategory",
+        "abandoned.Category",
         on_delete=models.SET_NULL,
         related_name="abandoned_objects",
         null=True,

@@ -5,4 +5,4 @@ from src.apps.abandoned.admin.areas import AbandonedAreaAdmin
 from src.apps.abandoned.admin.reports import ParticipationReportAdmin
 from src.apps.abandoned.admin.events import EventAdmin
 from src.apps.abandoned.admin.participations import ParticipationAdmin
-from src.apps.abandoned.admin.categories import AbandonedObjectCategoryAdmin
+from src.apps.abandoned.admin.categories import CategoryAdmin
