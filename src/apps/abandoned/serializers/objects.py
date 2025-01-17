@@ -43,7 +43,7 @@ class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer, PermissionS
     creator = UserRetrieveSerializer(read_only=True)
     location = LocationRetrieveSerializer(read_only=True)
     photos = FileRetrieveSerializer(many=True, read_only=True)
-    category = AbandonedObjectCategoryRetrieveSerializer(read_only=True)
+    categories = AbandonedObjectCategoryRetrieveSerializer(read_only=True, many=True)
 
     class Meta:
         model = AbandonedObject
@@ -63,7 +63,7 @@ class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer, PermissionS
             "creator",
             "location",
             "photos",
-            "category",
+            "categories",
         )
 
 
