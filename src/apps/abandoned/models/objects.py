@@ -16,6 +16,18 @@ from src.apps.permissions.models import BasePermissionModel
 User = get_user_model()
 
 
+class AbandonedObjectCategory(models.Model):
+    object = models.ForeignKey(
+        "AbandonedObject",
+        on_delete=models.CASCADE,
+    )
+
+    category = models.ForeignKey(
+        "abandoned.Category",
+        on_delete=models.CASCADE,
+    )
+
+
 class AbandonedObjectFile(models.Model):
     class Meta:
         verbose_name = _("file")
@@ -39,14 +51,11 @@ class AbandonedObject(BasePermissionModel):
         verbose_name = _("object")
         verbose_name_plural = _("objects")
 
-    category = models.ForeignKey(
-        "abandoned.Category",
-        on_delete=models.SET_NULL,
-        related_name="abandoned_objects",
-        null=True,
-        blank=True,
-        verbose_name=_("category"),
-        help_text=_("Object nearest category."),
+    categories = models.ManyToManyField(
+        to="abandoned.Category",
+        through=AbandonedObjectCategory,
+        verbose_name=_("categories"),
+        help_text=_("Categories related to current object."),
     )
     area = models.ForeignKey(
         "AbandonedArea",

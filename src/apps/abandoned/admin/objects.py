@@ -2,18 +2,29 @@ from unfold.admin import ModelAdmin, TabularInline
 from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
 
-from src.apps.abandoned.models import AbandonedObject, AbandonedObjectFile
+from src.apps.abandoned.models import AbandonedObject, AbandonedObjectFile, AbandonedObjectCategory
 from src.apps.dashboard.admin.site import site
 
 
-class AbandonedObjectFileInline(TabularInline):
+class AbandonedObjectTabularFileInline(TabularInline):
     model = AbandonedObjectFile
     extra = 0
 
 
+class AbandonedObjectCategoryTabularInline(TabularInline):
+    model = AbandonedObjectCategory
+    extra = 0
+    raw_id_fields = (
+        "category",
+    )
+
+
 @admin.register(AbandonedObject, site=site)
 class AbandonedObjectAdmin(ModelAdmin, TabbedTranslationAdmin):
-    inlines = (AbandonedObjectFileInline,)
+    inlines = (
+        AbandonedObjectTabularFileInline,
+        AbandonedObjectCategoryTabularInline,
+    )
     list_display = (
         "id",
         "name",
@@ -25,6 +36,5 @@ class AbandonedObjectAdmin(ModelAdmin, TabbedTranslationAdmin):
     search_fields = ("id", "name")
     raw_id_fields = (
         "creator",
-        "category",
         "area",
     )
