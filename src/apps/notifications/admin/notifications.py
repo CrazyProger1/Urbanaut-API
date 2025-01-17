@@ -2,11 +2,12 @@ from unfold.admin import ModelAdmin
 from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
 
+from src.apps.dashboard.admin import site
 from src.apps.notifications.models import Notification
 from src.apps.notifications.admin.statuses import NotificationStatusInline
 
 
-@admin.register(Notification)
+@admin.register(Notification, site=site)
 class NotificationAdmin(ModelAdmin, TabbedTranslationAdmin):
     inlines = (NotificationStatusInline,)
     list_display = (

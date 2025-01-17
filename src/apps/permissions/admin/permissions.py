@@ -1,6 +1,7 @@
 from unfold.admin import ModelAdmin, TabularInline
 from django.contrib import admin
 
+from src.apps.dashboard.admin import site
 from src.apps.permissions.models import (
     ObjectPermission,
     UserObjectPermission,
@@ -19,7 +20,7 @@ class UserModelPermissionTabularInline(TabularInline):
     extra = 0
 
 
-@admin.register(ObjectPermission)
+@admin.register(ObjectPermission, site=site)
 class ObjectPermissionsAdmin(ModelAdmin):
     inlines = (
         UserObjectPermissionTabularInline,
@@ -35,7 +36,7 @@ class ObjectPermissionsAdmin(ModelAdmin):
     )
 
 
-@admin.register(ModelPermission)
+@admin.register(ModelPermission, site=site)
 class ModelPermissionsAdmin(ModelAdmin):
     inlines = (
         UserModelPermissionTabularInline,
@@ -53,7 +54,7 @@ class ModelPermissionsAdmin(ModelAdmin):
     )
 
 
-@admin.register(UserModelPermission)
+@admin.register(UserModelPermission, site=site)
 class UserModelPermissionAdmin(ModelAdmin):
     list_display = (
         "id",
@@ -65,7 +66,7 @@ class UserModelPermissionAdmin(ModelAdmin):
     )
 
 
-@admin.register(UserObjectPermission)
+@admin.register(UserObjectPermission, site=site)
 class UserObjectPermissionsAdmin(ModelAdmin):
     list_display = (
         "id",

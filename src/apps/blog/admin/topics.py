@@ -3,9 +3,10 @@ from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
 
 from src.apps.blog.models import BlogTopic
+from src.apps.dashboard.admin import site
 
 
-@admin.register(BlogTopic)
+@admin.register(BlogTopic, site=site)
 class BlogTopicAdmin(ModelAdmin, TabbedTranslationAdmin):
     list_display = (
         "id",

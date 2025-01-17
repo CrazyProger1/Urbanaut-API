@@ -2,10 +2,11 @@ from unfold.admin import ModelAdmin, TabularInline
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
+from src.apps.dashboard.admin import site
 from src.apps.notifications.models import NotificationStatus
 
 
-@admin.register(NotificationStatus)
+@admin.register(NotificationStatus, site=site)
 class NotificationStatusAdmin(ModelAdmin):
     list_display = ("id", "notification", "user", "is_read")
     list_display_links = ("notification",)
