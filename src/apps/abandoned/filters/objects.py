@@ -35,7 +35,7 @@ class AbandonedObjectFilter(GeoFilterSet):
             "difficulty_level",
             "preservation_level",
             "security_level",
-            "query",
+            "search",
         )
 
     def search(self, queryset, name, value):
