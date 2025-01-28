@@ -17,7 +17,7 @@ class AbandonedObjectFilter(GeoFilterSet):
         field_name="description",
         lookup_expr="icontains",
     )
-    query = filters.CharFilter(field_name="search", label="Search")
+    query = filters.CharFilter(method="search", label="Search")
 
     ordering = filters.OrderingFilter(
         fields=(
@@ -35,7 +35,7 @@ class AbandonedObjectFilter(GeoFilterSet):
             "difficulty_level",
             "preservation_level",
             "security_level",
-            "search",
+            "query",
         )
 
     def search(self, queryset, name, value):
