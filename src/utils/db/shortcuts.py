@@ -2,10 +2,12 @@ import logging
 
 from django.db import models
 
+from .types import Source
+
 logger = logging.getLogger(__name__)
 
 
-def get_manager(model: models.Model, manager: str = "objects") -> models.Manager:
+def get_manager(model: type[models.Model], manager: str = "objects") -> models.Manager:
     manager = getattr(model, manager, None)
 
     if not manager:
@@ -17,62 +19,87 @@ def get_manager(model: models.Model, manager: str = "objects") -> models.Manager
     return manager
 
 
+def get_queryset[
+T: models.Model
+](
+        source: Source[T],
+        manager: str = "objects",
+) -> models.QuerySet[T]:
+    if isinstance(source, models.QuerySet):
+        return source
+    elif issubclass(source, models.Manager):
+        return source.get_queryset()
+    else:
+        return get_manager(
+            model=source,
+            manager=manager,
+        ).get_queryset()
+
+
 def create_object[
 T: models.Model
-](model: type[T], manager: str = "objects", **data) -> T:
-    obj = get_manager(model=model, manager=manager).create(**data)
-    logger.debug(f"Object of type {model} inserted with {data}")
+](source: Source[T], manager: str = "objects", **data) -> T:
+    queryset = get_queryset(
+        source=source,
+        manager=manager,
+    )
+    obj = queryset.create(**data)
+    logger.debug(f"Object of type {source} inserted with {data}")
     return obj
 
 
 def get_all_objects[
 T: models.Model
-](model: type[T], manager: str = "objects") -> models.QuerySet[T]:
-    queryset = get_manager(
-        model=model,
+](source: Source[T], manager: str = "objects") -> models.QuerySet[T]:
+    queryset = get_queryset(
+        source=source,
         manager=manager,
-    ).all()
+    )
 
-    logger.debug(f"All objects of type {model} selected")
+    logger.debug(f"All objects of type {source} selected")
     return queryset
 
 
 def filter_objects[
 T: models.Model
-](model: type[T], *args, manager: str = "objects", **kwargs) -> models.QuerySet[T]:
-    queryset = get_manager(
-        model=model,
+](source: Source[T], *args, manager: str = "objects", **kwargs) -> models.QuerySet[T]:
+    queryset = get_queryset(
+        source=source,
         manager=manager,
-    ).filter(*args, **kwargs)
+    )
 
-    logger.debug(f"Many objects of type {model} with {args} {kwargs} selected")
-    return queryset
+    resultset = queryset.filter(*args, **kwargs)
+    logger.debug(f"Many objects of type {source} with {args} {kwargs} selected")
+    return resultset
 
 
 def get_object_or_error[
 T: models.Model
-](model: type[T], *args, manager: str = "objects", **kwargs) -> T:
+](source: Source[T], *args, manager: str = "objects", **kwargs) -> T:
+    queryset = get_queryset(
+        source=source,
+        manager=manager,
+    )
+    model = queryset.model
     try:
-        obj = get_manager(
-            model=model,
-            manager=manager,
-        ).get(*args, **kwargs)
+
+        obj = queryset.get(*args, **kwargs)
         logger.debug(f"Object of type {model} with {args} {kwargs} selected: {obj}")
         return obj
-    except model.DoesNotExist:
+    except queryset.model.DoesNotExist:
         logger.warning(f"Object of type {model} with {args} {kwargs} not found")
         raise
 
 
 def get_object_or_none[
 T: models.Model
-](model: type[T], *args, manager: str = "objects", **kwargs) -> T | None:
+](source: Source[T], *args, manager: str = "objects", **kwargs) -> T | None:
     try:
         return get_object_or_error(
-            model=model,
-            manager=manager,
+            source,
             *args,
+            manager=manager,
             **kwargs,
         )
-    except model.DoesNotExist:
+    except source.DoesNotExist:
         pass

@@ -5,6 +5,7 @@ from modeltranslation.utils import build_localized_fieldname
 from rest_framework_gis.filterset import GeoFilterSet
 
 from src.apps.abandoned.models import AbandonedObject
+from src.apps.abandoned.services.db import search_abandoned_objects
 from src.utils.filters import LocalizedFilter
 
 
@@ -42,10 +43,12 @@ class AbandonedObjectFilter(GeoFilterSet):
         if value in ([], (), {}, "", None):
             return queryset
 
-        query = Q()
-
-        for field_name in ("name", "description"):
-            for lang_code, _ in settings.LANGUAGES:
-                lookup = f"{build_localized_fieldname(field_name, lang_code)}__icontains"
-                query |= Q(**{lookup: value})
-        return queryset.filter(query)
+        return search_abandoned_objects(
+            queryset=queryset,
+            term=value,
+            fields=(
+                "name",
+                "description",
+                "short_description",
+            ),
+        )

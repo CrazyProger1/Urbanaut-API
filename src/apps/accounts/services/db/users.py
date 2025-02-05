@@ -10,7 +10,11 @@ def get_all_users():
 
 
 def get_user_or_none(*args, **kwargs):
-    return get_object_or_none(User, *args, **kwargs)
+    return get_object_or_none(
+        User,
+        *args,
+        **kwargs,
+    )
 
 
 def get_user_or_create(**data) -> User | None:
