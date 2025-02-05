@@ -15,16 +15,14 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout repo
+      - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: Changing directory
+      - name: Change Directory
         run: cd /home/urbanaut/backend
 
-      - name: Updating code
+      - name: Update Code
         run: git pull origin master
 
-      - name: Restarting supervisor task
-        run: echo "$SUDO_PASSWORD" | sudo -S supervisorctl restart backend
-        env:
-          SUDO_PASSWORD: ${{ secrets.SUDO_PASSWORD }}
+      - name: Restart Supervisor
+        run: sudo /usr/bin/supervisorctl restart backend
