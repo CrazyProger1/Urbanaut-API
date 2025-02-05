@@ -25,4 +25,4 @@ jobs:
         run: git pull origin master
 
       - name: Restarting supervisor task
-        run: supervisorctl restart backend
+        run: sudo supervisorctl restart backend
