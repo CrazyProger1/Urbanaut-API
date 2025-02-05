@@ -8,6 +8,7 @@ from src.utils.db.models import TimestampModelMixin
 User = get_user_model()
 
 
+
 class Event(TimestampModelMixin, models.Model):
     class Meta:
         verbose_name = _("event")
