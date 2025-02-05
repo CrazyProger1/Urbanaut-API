@@ -4,12 +4,13 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.permissions.managers import PermissionManager
-from src.apps.permissions.models import BasePermissionModel
+from src.apps.permissions.models import PermissionModelMixin
+from src.utils.db.models import DateModelMixin
 
 User = get_user_model()
 
 
-class BlogPost(BasePermissionModel):
+class BlogPost(PermissionModelMixin, DateModelMixin):
     class Meta:
         verbose_name = _("Post")
         verbose_name_plural = _("Posts")
@@ -43,20 +44,6 @@ class BlogPost(BasePermissionModel):
         null=True,
         verbose_name=_("creator"),
         help_text=_("Creator of the blog post."),
-    )
-    created_at = models.DateTimeField(
-        verbose_name=_("created at"),
-        help_text=_("Post creation date and time."),
-        default=timezone.now,
-        blank=False,
-        null=False,
-    )
-    updated_at = models.DateTimeField(
-        verbose_name=_("updated at"),
-        help_text=_("Post updated date and time."),
-        auto_now=True,
-        blank=False,
-        null=False,
     )
     published_at = models.DateTimeField(
         verbose_name=_("published at"),

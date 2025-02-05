@@ -1,7 +1,6 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 from mdeditor.fields import MDTextField
 
@@ -11,7 +10,8 @@ from src.apps.abandoned.enums import (
     DifficultyLevel,
 )
 from src.apps.media.enums import FileType
-from src.apps.permissions.models import BasePermissionModel
+from src.apps.permissions.models import PermissionModelMixin
+from src.utils.db.models import DateModelMixin
 
 User = get_user_model()
 
@@ -46,7 +46,7 @@ class AbandonedObjectFile(models.Model):
     )
 
 
-class AbandonedObject(BasePermissionModel):
+class AbandonedObject(PermissionModelMixin, DateModelMixin):
     class Meta:
         verbose_name = _("object")
         verbose_name_plural = _("objects")
@@ -106,16 +106,6 @@ class AbandonedObject(BasePermissionModel):
         blank=False,
         verbose_name=_("difficulty level"),
         help_text=_("Difficulty level of the object."),
-    )
-    created_at = models.DateTimeField(
-        verbose_name=_("created at"),
-        help_text=_("Object creation date and time."),
-        default=timezone.now,
-    )
-    updated_at = models.DateTimeField(
-        verbose_name=_("updated at"),
-        help_text=_("Object updated date and time."),
-        auto_now=True,
     )
     built_at = models.DateField(
         verbose_name=_("built at"),

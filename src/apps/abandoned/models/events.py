@@ -3,11 +3,12 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.abandoned.enums import EventStatus
+from src.utils.db.models import DateModelMixin
 
 User = get_user_model()
 
 
-class Event(models.Model):
+class Event(models.Model, DateModelMixin):
     class Meta:
         verbose_name = _("event")
         verbose_name_plural = _("events")
@@ -18,11 +19,6 @@ class Event(models.Model):
         help_text=_("Name of the event."),
         null=False,
         blank=False,
-    )
-    created_at = models.DateTimeField(
-        auto_now_add=True,
-        verbose_name=_("created at"),
-        help_text=_("Event creation date and time."),
     )
     start_at = models.DateTimeField(
         null=False,

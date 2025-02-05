@@ -1,14 +1,14 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from src.apps.permissions.models import BasePermissionModel
+from src.apps.permissions.models import PermissionModelMixin
 from src.apps.permissions.services.db import get_model_permissions_or_none, create_object_permissions
 from src.apps.permissions.utils import get_permissions_field
 
 
 @receiver(post_save)
 def create_permissions(sender, instance, created, **kwargs):
-    if issubclass(sender, BasePermissionModel):
+    if issubclass(sender, PermissionModelMixin):
         field = get_permissions_field(sender)
 
         if created and not getattr(instance, field, None):

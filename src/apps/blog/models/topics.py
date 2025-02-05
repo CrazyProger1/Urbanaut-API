@@ -3,12 +3,12 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from src.apps.permissions.models import BasePermissionModel
+from src.apps.permissions.models import PermissionModelMixin
 
 User = get_user_model()
 
 
-class BlogTopic(BasePermissionModel):
+class BlogTopic(PermissionModelMixin):
     class Meta:
         verbose_name = _("Topic")
         verbose_name_plural = _("Topics")

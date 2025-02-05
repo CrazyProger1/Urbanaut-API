@@ -3,12 +3,13 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from src.apps.permissions.models import BasePermissionModel
+from src.apps.permissions.models import PermissionModelMixin
+from src.utils.db.models import DateModelMixin
 
 User = get_user_model()
 
 
-class Category(BasePermissionModel):
+class Category(PermissionModelMixin, DateModelMixin):
     class Meta:
         verbose_name = _("category")
         verbose_name_plural = _("categories")
@@ -21,16 +22,6 @@ class Category(BasePermissionModel):
         help_text=_("Parent category."),
         null=True,
         blank=True,
-    )
-    created_at = models.DateTimeField(
-        verbose_name=_("created at"),
-        help_text=_("Object creation date and time."),
-        default=timezone.now,
-    )
-    updated_at = models.DateTimeField(
-        verbose_name=_("updated at"),
-        help_text=_("Object updated date and time."),
-        auto_now=True,
     )
     name = models.CharField(
         max_length=250,

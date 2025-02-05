@@ -9,7 +9,7 @@ from src.apps.permissions.managers import PermissionManager
 User = get_user_model()
 
 
-class BasePermissionModel(models.Model):
+class PermissionModelMixin(models.Model):
     permissions = models.OneToOneField(
         "permissions.ObjectPermission",
         on_delete=models.CASCADE,

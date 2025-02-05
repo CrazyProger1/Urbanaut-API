@@ -8,21 +8,12 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.media.enums import FileType
+from src.utils.db.models import DateModelMixin
 
 User = get_user_model()
 
 
-class File(models.Model):
-    created_at = models.DateTimeField(
-        verbose_name=_("created at"),
-        help_text=_("File creation date and time."),
-        default=timezone.now,
-    )
-    updated_at = models.DateTimeField(
-        verbose_name=_("updated at"),
-        help_text=_("File updated date and time."),
-        auto_now=True,
-    )
+class File(models.Model, DateModelMixin):
     creator = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
