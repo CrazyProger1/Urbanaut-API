@@ -8,7 +8,7 @@ from src.utils.db.models import DateModelMixin
 User = get_user_model()
 
 
-class Category(PermissionBaseModel, DateModelMixin):
+class Category( DateModelMixin, PermissionBaseModel):
     class Meta:
         verbose_name = _("category")
         verbose_name_plural = _("categories")
