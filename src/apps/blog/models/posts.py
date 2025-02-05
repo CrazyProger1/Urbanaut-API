@@ -10,7 +10,7 @@ from src.utils.db.models import DateModelMixin
 User = get_user_model()
 
 
-class BlogPost(PermissionModelMixin, DateModelMixin):
+class BlogPost(models.Model, PermissionModelMixin, DateModelMixin):
     class Meta:
         verbose_name = _("Post")
         verbose_name_plural = _("Posts")

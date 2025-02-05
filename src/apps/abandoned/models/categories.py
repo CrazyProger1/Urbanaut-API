@@ -9,7 +9,7 @@ from src.utils.db.models import DateModelMixin
 User = get_user_model()
 
 
-class Category(PermissionModelMixin, DateModelMixin):
+class Category(models.Model, PermissionModelMixin, DateModelMixin):
     class Meta:
         verbose_name = _("category")
         verbose_name_plural = _("categories")

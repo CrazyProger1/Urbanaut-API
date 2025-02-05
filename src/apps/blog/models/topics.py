@@ -8,7 +8,7 @@ from src.apps.permissions.models import PermissionModelMixin
 User = get_user_model()
 
 
-class BlogTopic(PermissionModelMixin):
+class BlogTopic(models.Model, PermissionModelMixin):
     class Meta:
         verbose_name = _("Topic")
         verbose_name_plural = _("Topics")

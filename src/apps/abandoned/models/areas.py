@@ -10,7 +10,7 @@ from src.utils.db.models import DateModelMixin
 User = get_user_model()
 
 
-class AbandonedArea(PermissionModelMixin, DateModelMixin):
+class AbandonedArea(models.Model, PermissionModelMixin, DateModelMixin):
     class Meta:
         verbose_name = _("area")
         verbose_name_plural = _("areas")

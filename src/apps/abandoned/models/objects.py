@@ -46,7 +46,7 @@ class AbandonedObjectFile(models.Model):
     )
 
 
-class AbandonedObject(PermissionModelMixin, DateModelMixin):
+class AbandonedObject(models.Model, PermissionModelMixin, DateModelMixin):
     class Meta:
         verbose_name = _("object")
         verbose_name_plural = _("objects")
