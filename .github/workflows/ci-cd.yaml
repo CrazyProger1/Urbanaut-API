@@ -25,4 +25,6 @@ jobs:
         run: git pull origin master
 
       - name: Restarting supervisor task
-        run: sudo supervisorctl restart backend
+        run: echo "$SUDO_PASSWORD" | sudo -S supervisorctl restart backend
+        env:
+          SUDO_PASSWORD: ${{ secrets.SUDO_PASSWORD }}
