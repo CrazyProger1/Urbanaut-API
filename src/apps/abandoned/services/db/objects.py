@@ -6,6 +6,7 @@ from django.db.models import QuerySet
 
 from src.apps.abandoned.models import AbandonedObject
 from src.utils.db import search_localized
+from src.utils.db.types import Source
 
 User = get_user_model()
 
@@ -15,12 +16,12 @@ def get_available_abandoned_objects(user: User = None) -> models.QuerySet[Abando
 
 
 def search_abandoned_objects(
-        queryset: QuerySet[AbandonedObject],
+        source: Source[AbandonedObject],
         term: str,
         fields: Iterable[str] = ("name", "description"),
 ) -> models.QuerySet[AbandonedObject]:
     return search_localized(
-        queryset=queryset,
+        source=source,
         term=term,
         fields=fields,
     )

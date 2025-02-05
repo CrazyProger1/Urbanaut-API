@@ -44,7 +44,7 @@ class AbandonedObjectFilter(GeoFilterSet):
             return queryset
 
         return search_abandoned_objects(
-            queryset=queryset,
+            source=queryset,
             term=value,
             fields=(
                 "name",
