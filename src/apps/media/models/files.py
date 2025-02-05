@@ -13,7 +13,7 @@ from src.utils.db.models import TimestampModelMixin
 User = get_user_model()
 
 
-class File(models.Model, TimestampModelMixin):
+class File(TimestampModelMixin, models.Model):
     creator = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
