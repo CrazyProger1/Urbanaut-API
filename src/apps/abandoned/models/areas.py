@@ -4,13 +4,13 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.abandoned.enums import SecurityLevel
-from src.apps.permissions.models import PermissionModelMixin
+from src.apps.permissions.models import PermissionBaseModel
 from src.utils.db.models import DateModelMixin
 
 User = get_user_model()
 
 
-class AbandonedArea(models.Model, PermissionModelMixin, DateModelMixin):
+class AbandonedArea(PermissionBaseModel, DateModelMixin):
     class Meta:
         verbose_name = _("area")
         verbose_name_plural = _("areas")

@@ -3,13 +3,13 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from src.apps.permissions.models import PermissionModelMixin
+from src.apps.permissions.models import PermissionBaseModel
 from src.utils.db.models import DateModelMixin
 
 User = get_user_model()
 
 
-class Category(models.Model, PermissionModelMixin, DateModelMixin):
+class Category(PermissionBaseModel, DateModelMixin):
     class Meta:
         verbose_name = _("category")
         verbose_name_plural = _("categories")

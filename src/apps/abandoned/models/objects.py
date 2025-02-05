@@ -10,7 +10,7 @@ from src.apps.abandoned.enums import (
     DifficultyLevel,
 )
 from src.apps.media.enums import FileType
-from src.apps.permissions.models import PermissionModelMixin
+from src.apps.permissions.models import PermissionBaseModel
 from src.utils.db.models import DateModelMixin
 
 User = get_user_model()
@@ -46,7 +46,7 @@ class AbandonedObjectFile(models.Model):
     )
 
 
-class AbandonedObject(models.Model, PermissionModelMixin, DateModelMixin):
+class AbandonedObject(PermissionBaseModel, DateModelMixin):
     class Meta:
         verbose_name = _("object")
         verbose_name_plural = _("objects")
