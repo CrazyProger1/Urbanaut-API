@@ -1,0 +1,28 @@
+name: ci-cd
+
+on:
+  push:
+    branches:
+      - 'master'
+  pull_request:
+    branches:
+      - 'master'
+  workflow_dispatch:
+
+jobs:
+
+  ci-cd:
+    runs-on: self-hosted
+
+  steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Changing directory
+      run: cd /home/urbanaut/backend
+
+    - name: Updating code
+      run: git pull origin master
+
+    - name: Restarting supervisor task
+      run: supervisorctl restart backend
