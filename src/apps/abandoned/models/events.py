@@ -3,12 +3,12 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.abandoned.enums import EventStatus
-from src.utils.db.models import DateModelMixin
+from src.utils.db.models import TimestampModelMixin
 
 User = get_user_model()
 
 
-class Event(models.Model, DateModelMixin):
+class Event(models.Model, TimestampModelMixin):
     class Meta:
         verbose_name = _("event")
         verbose_name_plural = _("events")

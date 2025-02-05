@@ -8,12 +8,12 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.media.enums import FileType
-from src.utils.db.models import DateModelMixin
+from src.utils.db.models import TimestampModelMixin
 
 User = get_user_model()
 
 
-class File(models.Model, DateModelMixin):
+class File(models.Model, TimestampModelMixin):
     creator = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,

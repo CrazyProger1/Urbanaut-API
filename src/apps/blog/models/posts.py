@@ -5,12 +5,12 @@ from django.utils.translation import gettext_lazy as _
 
 from src.apps.permissions.managers import PermissionManager
 from src.apps.permissions.models import PermissionBaseModel
-from src.utils.db.models import DateModelMixin
+from src.utils.db.models import TimestampModelMixin
 
 User = get_user_model()
 
 
-class BlogPost(DateModelMixin, PermissionBaseModel):
+class BlogPost(TimestampModelMixin, PermissionBaseModel):
     class Meta:
         verbose_name = _("Post")
         verbose_name_plural = _("Posts")
