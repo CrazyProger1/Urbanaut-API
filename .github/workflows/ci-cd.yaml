@@ -18,6 +18,9 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
+      - name: Mark Safe Directory for Git
+        run: git config --global --add safe.directory /home/urbanaut/backend
+
       - name: Update Code
         run: git pull origin master
         working-directory: /home/urbanaut/backend
