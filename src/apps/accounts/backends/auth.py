@@ -50,8 +50,8 @@ class TMAAuthentication(authentication.BaseAuthentication):
     def has_keys(self, parsed_data: dict) -> bool:
         return "hash" in parsed_data or "auth_date" in parsed_data
 
-    def is_tginitdata_header(self, header: str):
-        return header.lower().startswith("tginitdata ")
+    def is_tma_header(self, header: str):
+        return header.lower().startswith("tma ")
 
     @safe_authentication()
     def validate_auth_date(self, parsed_data: dict):
