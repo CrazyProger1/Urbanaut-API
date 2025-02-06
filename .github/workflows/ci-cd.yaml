@@ -18,14 +18,9 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
-      - name: Change Directory
-        run: cd /home/urbanaut/backend
-
       - name: Update Code
-        run: |
-          cd /home/urbanaut/backend
-          git config --global --add safe.directory /home/urbanaut/backend
-          git pull origin master
+        run: git pull origin master
+        working-directory: /home/urbanaut/backend
 
       - name: Restart Supervisor
         run: sudo /usr/bin/supervisorctl restart backend
