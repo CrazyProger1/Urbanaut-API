@@ -18,6 +18,9 @@ jobs:
       - name: Checkout Repo
         uses: actions/checkout@v4
 
+      - name: Set HOME environment variable
+        run: echo "HOME=/home/urbanaut" >> $GITHUB_ENV
+
       - name: Mark Safe Directory for Git
         run: git config --global --add safe.directory /home/urbanaut/backend
 
