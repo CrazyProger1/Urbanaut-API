@@ -3,7 +3,9 @@ import hmac
 import json
 import logging
 from datetime import datetime, timezone
+from functools import wraps
 from operator import itemgetter
+from typing import Callable
 from urllib.parse import unquote, parse_qsl
 
 from django.conf import settings
@@ -16,27 +18,46 @@ logger = logging.getLogger(__name__)
 
 
 class TMAAuthentication(authentication.BaseAuthentication):
+    @staticmethod
+    def safe_authentication(message: str = "Authentication failed"):
+        def decorator(target: Callable):
+            assert callable(target)
 
-    def parse_data(self, header: bytes) -> dict | None:
-        if not header:
-            return None
+            @wraps(target)
+            def wrapper(*args, **kwargs):
+                try:
+                    return target(*args, **kwargs)
+                except exceptions.AuthenticationFailed:
+                    raise
+                except Exception as e:
+                    logger.error(f"Authentication failed with error: {e}")
+                    raise exceptions.AuthenticationFailed(message)
 
-        header = header.decode("utf-8")
+            return wrapper
 
-        try:
-            header = unquote(header)
-            parsed_data = dict(parse_qsl(header))
-        except ValueError:
-            return None
+        return decorator
 
+    @safe_authentication("Header is invalid")
+    def decode_header(self, header: bytes) -> str:
+        return header.decode("utf-8")
+
+    @safe_authentication("Header is invalid")
+    def parse_data(self, header: str) -> dict | None:
+        header = unquote(header)
+        parsed_data = dict(parse_qsl(header))
         return parsed_data
 
-    def has_keys(self, parsed_data) -> bool:
+    def has_keys(self, parsed_data: dict) -> bool:
         return "hash" in parsed_data or "auth_date" in parsed_data
 
+    def is_tginitdata_header(self, header: str):
+        return header.lower().startswith("tginitdata ")
+
+    @safe_authentication()
     def validate_auth_date(self, parsed_data: dict):
         auth_date = datetime.fromtimestamp(
-            int(parsed_data["auth_date"]), tz=timezone.utc
+            int(parsed_data["auth_date"]),
+            tz=timezone.utc,
         )
         current_time = datetime.now(timezone.utc)
         time_difference = current_time - auth_date
@@ -44,6 +65,7 @@ class TMAAuthentication(authentication.BaseAuthentication):
         if time_difference > settings.AUTHENTICATION_TMA_INITDATA_LIFETIME:
             raise exceptions.AuthenticationFailed("Authentication data is expired")
 
+    @safe_authentication()
     def validate_hash(self, parsed_data: dict):
         data_hash = parsed_data.pop("hash")
         data_check_string = "\n".join(
@@ -64,12 +86,14 @@ class TMAAuthentication(authentication.BaseAuthentication):
         if calculated_hash != data_hash:
             raise exceptions.AuthenticationFailed("Hash mismatch")
 
+    @safe_authentication()
     def update_user(self, user, data: dict):
         user.username = data.get("username", user.username)
         user.first_name = data.get("first_name", user.first_name)
         user.last_name = data.get("last_name", user.last_name)
         user.save()
 
+    @safe_authentication()
     def get_user(self, parsed_data: dict):
         try:
             user_data = json.loads(parsed_data.get("user", "{}"))
@@ -88,6 +112,7 @@ class TMAAuthentication(authentication.BaseAuthentication):
 
         return user
 
+    @safe_authentication()
     def authenticate(self, request):
         header = authentication.get_authorization_header(request)
 
@@ -98,7 +123,9 @@ class TMAAuthentication(authentication.BaseAuthentication):
 
         logger.debug(f"Authentication header obtained")
 
-        parsed_data = self.parse_data(header=header)
+        decoded_header = self.decode_header(header=header)
+
+        parsed_data = self.parse_data(header=decoded_header)
 
         logger.debug(f"Data parsed")
 

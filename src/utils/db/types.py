@@ -1,3 +1,6 @@
+from typing import TypeVar
+
 from django.db import models
 
-type Source[T: models.Model] = type[T] | models.Manager[T] | models.QuerySet[T]
+Model = TypeVar("Model", bound=models.Model)
+Source = type[Model] | models.Manager[Model] | models.QuerySet[Model]
