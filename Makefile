@@ -39,6 +39,3 @@ db.migrate:
 db.superuser:
 	python manage.py createsuperuser --no-input
 
-
-.PHONY: tests
-tests:
