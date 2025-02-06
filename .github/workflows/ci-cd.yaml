@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Copy Code to Destination
-        run: rsync -av --delete ./ /home/urbanaut/backend/
+        run: cp -r . /home/urbanaut/backend/
 
       - name: Restart Supervisor
         run: sudo /usr/bin/supervisorctl restart backend
