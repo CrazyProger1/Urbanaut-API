@@ -27,7 +27,8 @@ class TMAAuthentication(authentication.BaseAuthentication):
             def wrapper(*args, **kwargs):
                 try:
                     return target(*args, **kwargs)
-                except exceptions.AuthenticationFailed:
+                except exceptions.AuthenticationFailed as e:
+                    logger.error(f"Authentication failed with error: {e}")
                     raise
                 except Exception as e:
                     logger.error(f"Authentication failed with error: {e}")
