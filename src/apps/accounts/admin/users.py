@@ -1,5 +1,6 @@
 from unfold.admin import ModelAdmin
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
 
 from src.apps.accounts.models import User
@@ -16,6 +17,7 @@ class UserAdmin(ModelAdmin, TabbedTranslationAdmin):
         "last_name",
         "email",
         "karma",
+        "rank",
         "experience",
         "is_active",
         "is_staff",
@@ -27,3 +29,9 @@ class UserAdmin(ModelAdmin, TabbedTranslationAdmin):
         "nickname",
         "id",
     )
+    list_select_related = ("rank",)
+
+    def rank(self, obj):
+        return obj.rank.name
+
+    rank.short_description = _("Rank Name")
