@@ -5,9 +5,14 @@ from src.utils.db.models import TimestampModelMixin
 
 
 class Rank(TimestampModelMixin, models.Model):
+    key = models.SlugField(
+        max_length=20,
+        # unique=True,
+        # blank=False,
+        # null=False,
+    )
     name = models.CharField(
-        max_length=255,
-        unique=True,
+        max_length=100,
         blank=False,
         null=False,
         verbose_name=_("name"),
