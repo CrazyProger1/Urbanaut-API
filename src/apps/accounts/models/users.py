@@ -83,8 +83,10 @@ class User(AbstractBaseUser, PermissionsMixin):
         "Rank",
         on_delete=models.CASCADE,
         related_name="users",
-        blank=False,
-        name=False,
+        # blank=False,
+        # null=False,
+        null=True,
+        default=None,
         verbose_name=_("rank"),
         help_text=_("The rank of the user."),
     )
