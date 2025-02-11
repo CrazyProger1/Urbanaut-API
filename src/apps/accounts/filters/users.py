@@ -22,6 +22,6 @@ class UserFilter(filters.FilterSet):
         ),
     )
 
-    # class Meta:
-    #     model = User
-        # fields = ("rank",)
+    class Meta:
+        model = User
+        fields = ("rank",)

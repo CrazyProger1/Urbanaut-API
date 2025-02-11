@@ -79,15 +79,15 @@ class User(AbstractBaseUser, PermissionsMixin):
         help_text=_("User updated date and time."),
         auto_now=True,
     )
-    # rank = models.ForeignKey(
-    #     "Rank",
-    #     on_delete=models.CASCADE,
-    #     related_name="users",
-    #     blank=False,
-    #     null=False,
-    #     verbose_name=_("rank"),
-    #     help_text=_("The rank of the user."),
-    # )
+    rank = models.ForeignKey(
+        "Rank",
+        on_delete=models.CASCADE,
+        related_name="users",
+        blank=False,
+        null=False,
+        verbose_name=_("rank"),
+        help_text=_("The rank of the user."),
+    )
     experience = models.PositiveIntegerField(
         default=0,
         blank=False,
