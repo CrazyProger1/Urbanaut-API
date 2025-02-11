@@ -5,6 +5,8 @@ User = get_user_model()
 
 
 class UserListSerializer(serializers.ModelSerializer):
+    rank = serializers.CharField(source="rank.key")
+
     class Meta:
         model = User
         fields = (
