@@ -9,3 +9,4 @@ ActionType.register("LOGGED_OUT", "LOGGED OUT", _("LOGGED OUT"))
 
 class UserRank(models.TextChoices):
     NEWBIE = "NEWBIE", _("NEWBIE")
+

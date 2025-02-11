@@ -54,6 +54,11 @@ UNFOLD = {
                         "link": reverse_lazy("admin:accounts_user_changelist"),
                     },
                     {
+                        "title": _("Ranks"),
+                        "icon": "star",
+                        "link": reverse_lazy("admin:accounts_rank_changelist"),
+                    },
+                    {
                         "title": _("Teams"),
                         "icon": "group",
                         "link": reverse_lazy("admin:accounts_team_changelist"),
