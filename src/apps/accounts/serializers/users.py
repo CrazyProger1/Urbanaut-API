@@ -17,6 +17,7 @@ class UserListSerializer(serializers.ModelSerializer):
 
 class UserRetrieveSerializer(serializers.ModelSerializer):
     avatar = serializers.SerializerMethodField()
+    rank = serializers.CharField(source="rank.key")
 
     class Meta:
         model = User
