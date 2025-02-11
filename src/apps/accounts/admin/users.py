@@ -17,7 +17,7 @@ class UserAdmin(ModelAdmin, TabbedTranslationAdmin):
         "last_name",
         "email",
         "karma",
-        "rank",
+        "rank_name",
         "experience",
         "is_active",
         "is_staff",
@@ -31,7 +31,7 @@ class UserAdmin(ModelAdmin, TabbedTranslationAdmin):
     )
     list_select_related = ("rank",)
 
-    def rank(self, obj):
+    def rank_name(self, obj):
         return obj.rank.name
 
-    rank.short_description = _("Rank Name")
+    rank_name.short_description = _("Rank Name")
