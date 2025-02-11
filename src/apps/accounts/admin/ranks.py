@@ -11,6 +11,7 @@ class RankAdmin(ModelAdmin, TabbedTranslationAdmin):
     list_display = (
         "id",
         "name",
+        "key",
     )
     list_display_links = (
         "name",
