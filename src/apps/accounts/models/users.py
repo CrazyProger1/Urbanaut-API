@@ -5,8 +5,8 @@ from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from src.apps.accounts.enums import UserRank
 from src.apps.accounts.managers import UserManager
+from src.apps.accounts.models import Rank
 
 
 class User(AbstractBaseUser, PermissionsMixin):
@@ -80,23 +80,23 @@ class User(AbstractBaseUser, PermissionsMixin):
         help_text=_("User updated date and time."),
         auto_now=True,
     )
-    # rank = models.ForeignKey(
-    #     Rank,
-    #     on_delete=models.CASCADE,
-    #     related_name="users",
-    #     blank=False,
-    #     name=False,
-    #     verbose_name=_("rank"),
-    #     help_text=_("The rank of the user."),
-    # )
-    rank = models.CharField(
-        choices=UserRank,
-        default=UserRank.NEWBIE,
+    rank = models.ForeignKey(
+        Rank,
+        on_delete=models.CASCADE,
+        related_name="users",
         blank=False,
-        null=False,
+        name=False,
         verbose_name=_("rank"),
         help_text=_("The rank of the user."),
     )
+    # rank = models.CharField(
+    #     choices=UserRank,
+    #     default=UserRank.NEWBIE,
+    #     blank=False,
+    #     null=False,
+    #     verbose_name=_("rank"),
+    #     help_text=_("The rank of the user."),
+    # )
     experience = models.PositiveIntegerField(
         default=0,
         blank=False,
