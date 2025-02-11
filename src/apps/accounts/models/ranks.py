@@ -7,9 +7,9 @@ from src.utils.db.models import TimestampModelMixin
 class Rank(TimestampModelMixin, models.Model):
     key = models.SlugField(
         max_length=20,
-        # unique=True,
-        # blank=False,
-        # null=False,
+        unique=True,
+        blank=False,
+        null=False,
     )
     name = models.CharField(
         max_length=100,
