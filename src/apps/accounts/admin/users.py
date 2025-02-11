@@ -15,7 +15,7 @@ class UserAdmin(ModelAdmin, TabbedTranslationAdmin):
         "first_name",
         "last_name",
         "email",
-        "rank",
+        "rank__name",
         "karma",
         "experience",
         "is_active",
