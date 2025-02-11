@@ -4,7 +4,7 @@ from src.apps.accounts.models import Rank
 
 
 class RankTranslationOptions(TranslationOptions):
-    pass
+    fields = ("name",)
 
 
 translator.register(Rank, RankTranslationOptions)
