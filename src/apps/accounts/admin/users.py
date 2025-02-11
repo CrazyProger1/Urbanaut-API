@@ -34,4 +34,4 @@ class UserAdmin(ModelAdmin, TabbedTranslationAdmin):
     def rank_name(self, obj):
         return obj.rank.name
 
-    rank_name.short_description = _("Rank Name")
+    rank_name.short_description = _("Rank")
