@@ -4,19 +4,26 @@ from src.apps.notifications.models import Notification
 
 
 class NotificationListSerializer(serializers.ModelSerializer):
+    is_read = serializers.SerializerMethodField()
+
     class Meta:
         model = Notification
         fields = (
             "title",
             "show_at",
-            "is_shown",
             "message",
             "type",
             "icon",
+            "is_read",
         )
+
+    def get_is_read(self, obj: Notification) -> bool:
+        return getattr(obj, "is_read", False)
 
 
 class NotificationRetrieveSerializer(serializers.ModelSerializer):
+    is_read = serializers.SerializerMethodField()
+
     class Meta:
         model = Notification
         fields = (
@@ -26,4 +33,8 @@ class NotificationRetrieveSerializer(serializers.ModelSerializer):
             "message",
             "type",
             "icon",
+            "is_read",
         )
+
+    def get_is_read(self, obj: Notification) -> bool:
+        return getattr(obj, "is_read", False)
