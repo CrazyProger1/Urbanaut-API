@@ -10,3 +10,9 @@ class NotificationType(models.TextChoices):
 
 class NotificationIcon(models.TextChoices):
     NOTIFICATION = "NOTIFICATION", _("NOTIFICATION")
+    GIFT = "GIFT", _("GIFT")
+    WARNING = "WARNING", _("WARNING")
+    CANCEL = "CANCEL", _("CANCEL")
+    CHECKED = "CHECKED", _("CHECKED")
+    CLOCK = "CLOCK", _("CLOCK")
+    SETTINGS = "SETTINGS", _("SETTINGS")

@@ -18,5 +18,5 @@ class NotificationAdmin(ModelAdmin, TabbedTranslationAdmin):
     )
     list_display_links = ("title",)
 
-    def has_change_permission(self, request, obj=None):
+    def has_change_permission(self, request, obj: Notification = None):
         return obj and not obj.is_shown
