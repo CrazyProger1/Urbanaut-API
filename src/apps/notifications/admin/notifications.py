@@ -16,7 +16,6 @@ class NotificationAdmin(ModelAdmin, TabbedTranslationAdmin):
         "type",
         "is_shown",
     )
-    readonly_fields = ("is_shown",)
     list_display_links = ("title",)
 
     def has_change_permission(self, request, obj=None):
