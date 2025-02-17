@@ -13,7 +13,7 @@ class BlogPostListSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "topic",
-            "creator",
+            "created_by",
             "created_at",
             "updated_at",
             "published_at",
@@ -45,7 +45,7 @@ class BlogPostCreateSerializer(serializers.ModelSerializer):
         model = BlogPost
         exclude = (
             "id",
-            "creator",
+            "created_by",
             "created_at",
             "updated_at",
         )

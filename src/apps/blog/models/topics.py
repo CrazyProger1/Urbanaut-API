@@ -39,13 +39,13 @@ class BlogTopic(PermissionBaseModel):
         null=False,
         blank=False,
     )
-    creator = models.ForeignKey(
+    created_by = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
         related_name="blog_topics",
         blank=True,
         null=True,
-        verbose_name=_("creator"),
+        verbose_name=_("created by"),
         help_text=_("Creator of the blog post."),
     )
 
