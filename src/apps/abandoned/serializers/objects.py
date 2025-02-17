@@ -32,7 +32,7 @@ class AbandonedObjectListSerializer(serializers.ModelSerializer):
             "updated_at",
             "built_at",
             "abandoned_at",
-            "creator",
+            "created_by",
             "location",
             "photo",
         )
@@ -40,7 +40,7 @@ class AbandonedObjectListSerializer(serializers.ModelSerializer):
 
 class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer, PermissionSerializerMixin):
     area = AbandonedAreaRetrieveSerializer(read_only=True)
-    creator = UserRetrieveSerializer(read_only=True)
+    created_by = UserRetrieveSerializer(read_only=True)
     location = LocationRetrieveSerializer(read_only=True)
     photos = FileRetrieveSerializer(many=True, read_only=True)
     categories = AbandonedObjectCategoryRetrieveSerializer(read_only=True, many=True)
@@ -60,7 +60,7 @@ class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer, PermissionS
             "updated_at",
             "built_at",
             "abandoned_at",
-            "creator",
+            "created_by",
             "location",
             "photos",
             "categories",

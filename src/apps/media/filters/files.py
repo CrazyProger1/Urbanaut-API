@@ -15,6 +15,6 @@ class FileFilter(filters.FilterSet):
     class Meta:
         model = File
         fields = (
-            "creator",
+            "created_by",
             "type",
         )

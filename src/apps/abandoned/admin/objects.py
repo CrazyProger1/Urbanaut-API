@@ -35,6 +35,6 @@ class AbandonedObjectAdmin(ModelAdmin, TabbedTranslationAdmin):
 
     search_fields = ("id", "name")
     raw_id_fields = (
-        "creator",
+        "created_by",
         "area",
     )

@@ -8,6 +8,6 @@ from src.apps.media.models import File
 
 @admin.register(File, site=site)
 class FileAdmin(ModelAdmin):
-    list_display = ("id", "creator", "type")
-    list_display_links = ("creator",)
+    list_display = ("id", "created_by", "type")
+    list_display_links = ("created_by",)
     form = FileForm

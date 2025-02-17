@@ -16,11 +16,11 @@ class CategoryAdmin(ModelAdmin, TabbedTranslationAdmin):
     list_display = (
         "id",
         "name",
-        "creator",
+        "created_by",
     )
     list_display_links = ("name",)
     raw_id_fields = (
-        "creator",
+        "created_by",
         "parent",
     )
     list_filter = (
@@ -34,10 +34,10 @@ class CategoryAdmin(ModelAdmin, TabbedTranslationAdmin):
     def save_model(
             self,
             request: HttpRequest,
-            obj: Model,
+            obj: Category,
             form: Form,
             change: Any,
     ) -> None:
-        if not obj.creator:
-            obj.creator = request.user
+        if not obj.created_by:
+            obj.created_by = request.user
         return super().save_model(request, obj, form, change)
