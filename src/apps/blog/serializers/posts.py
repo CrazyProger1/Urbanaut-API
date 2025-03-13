@@ -21,7 +21,7 @@ class BlogPostListSerializer(serializers.ModelSerializer):
 
 
 class BlogPostRetrieveSerializer(serializers.ModelSerializer, PermissionSerializerMixin):
-    creator = UserRetrieveSerializer(read_only=True)
+    created_by = UserRetrieveSerializer(read_only=True)
     topic = BlogTopicRetrieveSerializer(read_only=True)
 
     class Meta:
@@ -30,7 +30,7 @@ class BlogPostRetrieveSerializer(serializers.ModelSerializer, PermissionSerializ
             "id",
             "title",
             "topic",
-            "creator",
+            "created_by",
             "created_at",
             "updated_at",
             "published_at",
