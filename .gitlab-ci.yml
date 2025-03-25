@@ -7,3 +7,5 @@ deploy:
     - sudo chmod +x /home/urbanaut/backend/deploy.sh
     - sudo /home/urbanaut/backend/deploy.sh
 
+  tags:
+    - linux
