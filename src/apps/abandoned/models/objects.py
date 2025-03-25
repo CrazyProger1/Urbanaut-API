@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.db import models
 
-from django.utis.translation import gettext_lazy as _
+from django.utils.translation import gettext_lazy as _
 from mdeditor.fields import MDTextField
 
 from src.apps.abandoned.enums import (
