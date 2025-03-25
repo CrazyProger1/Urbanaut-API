@@ -19,7 +19,6 @@ Social network for urban explorers - stalkers, diggers and so on.
 ![Celery](https://img.shields.io/badge/Celery-3789D1?style=for-the-badge&logo=celery&logoColor=white)
 ![Flower](https://img.shields.io/badge/Flower-FFBF00?style=for-the-badge&logo=flower&logoColor=black)
 ![Uvicorn](https://img.shields.io/badge/Uvicorn-5E81F4?style=for-the-badge&logo=uvicorn&logoColor=white)
-![Django CORS Headers](https://img.shields.io/badge/Django%20CORS%20Headers-FF7043?style=for-the-badge&logo=django&logoColor=white)
 ![Django Cities](https://img.shields.io/badge/Django%20Cities-FFC107?style=for-the-badge&logo=django&logoColor=white)
 ![Django Model Translation](https://img.shields.io/badge/Django%20Model%20Translation-28A4D9?style=for-the-badge&logo=django&logoColor=white)
 ![DRF Spectacular](https://img.shields.io/badge/DRF%20Spectacular-93C54B?style=for-the-badge&logo=django&logoColor=white)
