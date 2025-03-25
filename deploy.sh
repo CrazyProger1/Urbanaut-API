@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 cd /home/urbanaut/backend/ || exit
 
 git pull
