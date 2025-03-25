@@ -1,6 +1,7 @@
 #!/bin/bash
 
 cd /home/urbanaut/backend/ || exit
+
 git pull
 
 poetry install --no-root
