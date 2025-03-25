@@ -1,0 +1,11 @@
+stages:
+  - deploy
+
+deploy:
+  stage: deploy
+  script:
+    - sudo /home/urbanaut/backend/deploy.sh
+  tags:
+    - urbanaut
+    - linux
+
