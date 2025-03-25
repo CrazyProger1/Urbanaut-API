@@ -7,7 +7,7 @@ from src.apps.notifications.serializers import (
 from src.apps.notifications.services import (
     get_user_notifications,
     get_all_notifications,
-    mark_read,
+    mark_read, annotate_is_read_notifications,
 )
 
 
@@ -28,7 +28,11 @@ class NotificationViewSet(
         return self.serializer_class
 
     def get_queryset(self):
-        return get_user_notifications(user=self.request.from_user)
+        user = self.request.user
+        return annotate_is_read_notifications(
+            notifications=get_user_notifications(user=user),
+            user=user,
+        )
 
     def list(self, request, *args, **kwargs):
         queryset = self.filter_queryset(self.get_queryset())
@@ -37,15 +41,17 @@ class NotificationViewSet(
 
         if page is not None:
             serializer = self.get_serializer(page, many=True)
+            data = serializer.data
             mark_read(
                 notifications=page,
-                user=request.from_user,
+                user=request.user,
             )
-            return self.get_paginated_response(serializer.data)
+            return self.get_paginated_response(data)
 
         serializer = self.get_serializer(queryset, many=True)
+        data = serializer.data
         mark_read(
             notifications=queryset,
-            user=request.from_user,
+            user=request.user,
         )
-        return response.Response(serializer.data)
+        return response.Response(data)

@@ -15,4 +15,4 @@ def get_unhidden_files():
 
 
 def get_user_files(user: User):
-    return filter_objects(File, creator=user)
+    return filter_objects(File, created_by=user)

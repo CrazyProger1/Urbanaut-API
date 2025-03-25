@@ -6,4 +6,5 @@ from src.apps.notifications.services.notifications import (
     get_all_notifications,
     get_user_notifications,
     mark_read,
+    annotate_is_read_notifications,
 )

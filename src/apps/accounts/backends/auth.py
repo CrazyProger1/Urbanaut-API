@@ -18,6 +18,8 @@ logger = logging.getLogger(__name__)
 
 
 class TMAAuthentication(authentication.BaseAuthentication):
+    TMA_PREFIX = "tma "
+
     @staticmethod
     def safe_authentication(message: str = "Authentication failed"):
         def decorator(target: Callable):
@@ -27,7 +29,8 @@ class TMAAuthentication(authentication.BaseAuthentication):
             def wrapper(*args, **kwargs):
                 try:
                     return target(*args, **kwargs)
-                except exceptions.AuthenticationFailed:
+                except exceptions.AuthenticationFailed as e:
+                    logger.error(f"Authentication failed with error: {e}")
                     raise
                 except Exception as e:
                     logger.error(f"Authentication failed with error: {e}")
@@ -43,6 +46,9 @@ class TMAAuthentication(authentication.BaseAuthentication):
 
     @safe_authentication("Header is invalid")
     def parse_data(self, header: str) -> dict | None:
+        if not self.is_tma_header(header=header):
+            return
+        header = header.removeprefix(self.TMA_PREFIX)
         header = unquote(header)
         parsed_data = dict(parse_qsl(header))
         return parsed_data
@@ -50,8 +56,8 @@ class TMAAuthentication(authentication.BaseAuthentication):
     def has_keys(self, parsed_data: dict) -> bool:
         return "hash" in parsed_data or "auth_date" in parsed_data
 
-    def is_tginitdata_header(self, header: str):
-        return header.lower().startswith("tginitdata ")
+    def is_tma_header(self, header: str):
+        return header.lower().startswith(self.TMA_PREFIX)
 
     @safe_authentication()
     def validate_auth_date(self, parsed_data: dict):
@@ -67,6 +73,7 @@ class TMAAuthentication(authentication.BaseAuthentication):
 
     @safe_authentication()
     def validate_hash(self, parsed_data: dict):
+        logger.critical(f"Parsed data: {parsed_data}")
         data_hash = parsed_data.pop("hash")
         data_check_string = "\n".join(
             f"{key}={value}"
@@ -126,6 +133,9 @@ class TMAAuthentication(authentication.BaseAuthentication):
         decoded_header = self.decode_header(header=header)
 
         parsed_data = self.parse_data(header=decoded_header)
+
+        if not parsed_data:
+            return None
 
         logger.debug(f"Data parsed")
 

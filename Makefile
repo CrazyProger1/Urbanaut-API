@@ -38,3 +38,4 @@ db.migrate:
 .PHONY: db.superuser
 db.superuser:
 	python manage.py createsuperuser --no-input
+

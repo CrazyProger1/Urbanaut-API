@@ -41,7 +41,7 @@ class FileViewSet(
         return self.queryset
 
     def perform_create(self, serializer):
-        return serializer.save(creator=self.request.user)
+        return serializer.save(created_by=self.request.user)
 
     @extend_schema(
         request=FileCreateSerializer,

@@ -35,13 +35,13 @@ class Category(TimestampModelMixin, PermissionBaseModel):
         null=True,
         blank=True,
     )
-    creator = models.ForeignKey(
+    created_by = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
         related_name="categories",
         blank=True,
         null=True,
-        verbose_name=_("creator"),
+        verbose_name=_("created by"),
         help_text=_(""),
     )
 

@@ -15,7 +15,7 @@ class AbandonedAreaListSerializer(serializers.ModelSerializer):
             "area",
             "name",
             "description",
-            "creator",
+            "created_by",
             "security_level",
         )
 
@@ -30,6 +30,6 @@ class AbandonedAreaRetrieveSerializer(serializers.ModelSerializer, PermissionSer
             "area",
             "name",
             "description",
-            "creator",
+            "created_by",
             "security_level",
         )

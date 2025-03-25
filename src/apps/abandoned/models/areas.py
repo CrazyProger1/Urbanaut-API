@@ -1,6 +1,5 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.abandoned.enums import SecurityLevel
@@ -37,13 +36,13 @@ class AbandonedArea(TimestampModelMixin, PermissionBaseModel):
         null=True,
         blank=True,
     )
-    creator = models.ForeignKey(
+    created_by = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
         related_name="areas",
         blank=True,
         null=True,
-        verbose_name=_("creator"),
+        verbose_name=_("created by"),
         help_text=_(""),
     )
     security_level = models.CharField(

@@ -11,7 +11,7 @@ def get_permissions_field(model: type[models.Model]) -> str:
 
 
 def get_owner_field(model: type[models.Model]) -> str:
-    return getattr(model._meta, "owner_field", "creator")
+    return getattr(model._meta, "owner_field", "created_by")
 
 
 def get_owner(obj: models.Model) -> User:

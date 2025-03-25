@@ -14,13 +14,13 @@ User = get_user_model()
 
 
 class File(TimestampModelMixin, models.Model):
-    creator = models.ForeignKey(
+    created_by = models.ForeignKey(
         User,
         on_delete=models.SET_NULL,
         related_name="files",
         blank=True,
         null=True,
-        verbose_name=_("creator"),
+        verbose_name=_("created by"),
         help_text=_("User who uploaded the file."),
     )
     file = models.FileField(

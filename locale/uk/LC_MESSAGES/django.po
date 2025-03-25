@@ -60,7 +60,7 @@ msgid "Description of the abandoned area."
 msgstr "Опис покинутої території."
 
 #: src/apps/abandoned/models.py:54
-msgid "creator"
+msgid "created by"
 msgstr "творець"
 
 #: src/apps/abandoned/models.py:60

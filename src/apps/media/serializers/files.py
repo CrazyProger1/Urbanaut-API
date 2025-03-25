@@ -16,7 +16,7 @@ class FileListSerializer(serializers.ModelSerializer):
 
 class FileRetrieveSerializer(serializers.ModelSerializer):
     src = serializers.ReadOnlyField()
-    creator = UserRetrieveSerializer(read_only=True)
+    created_by = UserRetrieveSerializer(read_only=True)
 
     class Meta:
         model = File
