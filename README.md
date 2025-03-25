@@ -14,18 +14,20 @@ Social network for urban explorers - stalkers, diggers and so on.
 ## Stack
 
 ![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white)
-![Django](https://img.shields.io/badge/Django-092D1F?style=for-the-badge&logo=django&logoColor=white)
-![Django REST Framework](https://img.shields.io/badge/Django%20REST%20Framework-00796B?style=for-the-badge&logo=django&logoColor=white)
-![Celery](https://img.shields.io/badge/Celery-3789D1?style=for-the-badge&logo=celery&logoColor=white)
+![Django](https://img.shields.io/badge/Django-092E20?style=for-the-badge&logo=django&logoColor=white)
+![Django REST framework](https://img.shields.io/badge/Django%20REST%20framework-092E20?style=for-the-badge&logo=django&logoColor=white)
+![Celery](https://img.shields.io/badge/Celery-37814A?style=for-the-badge&logo=celery&logoColor=white)
 ![Flower](https://img.shields.io/badge/Flower-FFBF00?style=for-the-badge&logo=flower&logoColor=black)
-![Uvicorn](https://img.shields.io/badge/Uvicorn-5E81F4?style=for-the-badge&logo=uvicorn&logoColor=white)
-![Django Cities](https://img.shields.io/badge/Django%20Cities-FFC107?style=for-the-badge&logo=django&logoColor=white)
-![Django Model Translation](https://img.shields.io/badge/Django%20Model%20Translation-28A4D9?style=for-the-badge&logo=django&logoColor=white)
-![DRF Spectacular](https://img.shields.io/badge/DRF%20Spectacular-93C54B?style=for-the-badge&logo=django&logoColor=white)
-![Django Unfold](https://img.shields.io/badge/Django%20Unfold-F44336?style=for-the-badge&logo=django&logoColor=white)
-![PyOTP](https://img.shields.io/badge/PyOTP-26A69A?style=for-the-badge&logo=python&logoColor=white)
+![Uvicorn](https://img.shields.io/badge/Uvicorn-5E81AC?style=for-the-badge&logo=uvicorn&logoColor=white)
+![Django Cities](https://img.shields.io/badge/Django%20Cities-003B5C?style=for-the-badge&logo=world&logoColor=white)
+![Django Model Translation](https://img.shields.io/badge/Django%20Model%20Translation-003B5C?style=for-the-badge&logo=translate&logoColor=white)
+![DRF Spectacular](https://img.shields.io/badge/DRF%20Spectacular-6B50FF?style=for-the-badge&logo=django&logoColor=white)
+![Django Unfold](https://img.shields.io/badge/Django%20Unfold-38B2AC?style=for-the-badge&logo=django&logoColor=white)
+![PyOTP](https://img.shields.io/badge/PyOTP-181717?style=for-the-badge&logo=python&logoColor=white)
 ![Black](https://img.shields.io/badge/Black-000000?style=for-the-badge&logo=python&logoColor=white)
-![Mypy](https://img.shields.io/badge/Mypy-000000?style=for-the-badge&logo=mypy&logoColor=white)
+![Mypy](https://img.shields.io/badge/Mypy-2A6DB2?style=for-the-badge&logo=python&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-336791?style=for-the-badge&logo=postgresql&logoColor=white)
+![Redis](https://img.shields.io/badge/Redis-DC382D?style=for-the-badge&logo=redis&logoColor=white)
 
 ## Status
 
