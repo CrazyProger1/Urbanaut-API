@@ -4,7 +4,6 @@ stages:
 deploy:
   stage: deploy
   script:
-    - chmod +x /home/urbanaut/backend/deploy.sh
     - source /home/urbanaut/backend/deploy.sh
 
   tags:
