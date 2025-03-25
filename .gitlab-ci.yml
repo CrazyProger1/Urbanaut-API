@@ -4,7 +4,7 @@ stages:
 deploy:
   stage: deploy
   script:
-    - sudo /home/urbanaut/backend/deploy.sh
+    - sudo source /home/urbanaut/backend/deploy.sh
 
   tags:
     - linux
