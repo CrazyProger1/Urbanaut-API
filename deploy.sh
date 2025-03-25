@@ -3,10 +3,9 @@
 cd /home/urbanaut/backend/ || exit
 git pull
 
-source /home/urbanaut/backend/.venv/bin/activate
+poetry install
 
-python manage.py migrate
-
-python manage.py collectstatic --noinput
+poetry run python manage.py migrate
+poetry run python manage.py collectstatic --noinput
 
 sudo supervisorctl restart backend
