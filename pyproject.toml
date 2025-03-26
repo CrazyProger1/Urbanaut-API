@@ -28,6 +28,7 @@ drf-standardized-errors = {extras = ["openapi"], version = "^0.14.1"}
 django-unfold = "^0.40.0"
 django-mdeditor = "^0.1.20"
 pyotp = "^2.9.0"
+django-simple-history = "^3.8.0"
 
 
 [tool.poetry.group.dev.dependencies]

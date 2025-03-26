@@ -2,7 +2,6 @@ from pathlib import Path
 
 from decouple import config
 
-
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 BASE_URL = config("BASE_URL", cast=str, default="http://localhost:8001")
 
@@ -17,13 +16,13 @@ CSRF_TRUSTED_ORIGINS = [
 ]
 
 INSTALLED_APPS = [
-    "unfold",  # before django.contrib.admin
-    "unfold.contrib.filters",  # optional, if special filters are needed
-    "unfold.contrib.forms",  # optional, if special form elements are needed
-    "unfold.contrib.inlines",  # optional, if special inlines are needed
-    "unfold.contrib.import_export",  # optional, if django-import-export package is used
-    "unfold.contrib.guardian",  # optional, if django-guardian package is used
-    "unfold.contrib.simple_history",  # optional, if django-simple-history package is used
+    "unfold",
+    "unfold.contrib.filters",
+    "unfold.contrib.forms",
+    "unfold.contrib.inlines",
+    "unfold.contrib.import_export",
+    "unfold.contrib.guardian",
+    "unfold.contrib.simple_history",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -36,6 +35,7 @@ INSTALLED_APPS = [
     "cities",
     "rest_framework",
     "django_filters",
+    "simple_history",
     "django_celery_beat",
     "drf_spectacular",
     "drf_standardized_errors",
@@ -62,6 +62,8 @@ MIDDLEWARE = [
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
+
+    "simple_history.middleware.HistoryRequestMiddleware",
 
     "src.apps.accounts.middlewares.I18NMiddleware",
     "src.apps.dashboard.middlewares.Admin2FAMiddleware",

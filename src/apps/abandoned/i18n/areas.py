@@ -1,4 +1,5 @@
 from modeltranslation.translator import TranslationOptions, translator
+from simple_history import register
 
 from src.apps.abandoned.models import AbandonedArea
 
@@ -8,3 +9,4 @@ class AbandonedAreaTranslationOptions(TranslationOptions):
 
 
 translator.register(AbandonedArea, AbandonedAreaTranslationOptions)
+register(AbandonedArea)

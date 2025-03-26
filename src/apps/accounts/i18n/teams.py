@@ -1,4 +1,5 @@
 from modeltranslation.translator import TranslationOptions, translator
+from simple_history import register
 
 from src.apps.accounts.models import Team, TeamMember
 
@@ -13,3 +14,4 @@ class TeamMemberTranslationOptions(TranslationOptions):
 
 translator.register(Team, TeamTranslationOptions)
 translator.register(TeamMember, TeamMemberTranslationOptions)
+register(Team)
