@@ -96,6 +96,22 @@ UNFOLD = {
                     },
                 ],
             },
+            {
+                "title": _("Blog"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Topics"),
+                        "icon": "topic",
+                        "link": reverse_lazy("admin:blog_blogtopic_changelist"),
+                    },
+                    {
+                        "title": _("Posts"),
+                        "icon": "library_books",
+                        "link": reverse_lazy("admin:blog_blogpost_changelist"),
+                    },
+                ],
+            },
         ],
     },
 }
