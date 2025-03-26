@@ -10,6 +10,8 @@ from src.apps.dashboard.admin.site import site
 class AbandonedObjectTabularFileInline(TabularInline):
     model = AbandonedObjectFile
     extra = 0
+    show_change_link = True
+    tab = True
 
 
 class AbandonedObjectCategoryTabularInline(TabularInline):
@@ -18,10 +20,12 @@ class AbandonedObjectCategoryTabularInline(TabularInline):
     raw_id_fields = (
         "category",
     )
+    show_change_link = True
+    tab = True
 
 
 @admin.register(AbandonedObject, site=site)
-class AbandonedObjectAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin ):
+class AbandonedObjectAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
     inlines = (
         AbandonedObjectTabularFileInline,
         AbandonedObjectCategoryTabularInline,

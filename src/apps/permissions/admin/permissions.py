@@ -13,11 +13,15 @@ from src.apps.permissions.models import (
 class UserObjectPermissionTabularInline(TabularInline):
     model = UserObjectPermission
     extra = 0
+    tab = True
+    show_change_link = True
 
 
 class UserModelPermissionTabularInline(TabularInline):
     model = UserModelPermission
     extra = 0
+    tab = True
+    show_change_link = True
 
 
 @admin.register(ObjectPermission, site=site)

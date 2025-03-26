@@ -23,6 +23,8 @@ class NotificationStatusInline(TabularInline):
     can_delete = False
     classes = ("collapse",)
     readonly_fields = ("is_read",)
+    tab = True
+    show_change_link = True
 
     def has_add_permission(self, request, obj):
         return not obj
