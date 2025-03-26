@@ -21,7 +21,7 @@ class AbandonedObjectCategoryTabularInline(TabularInline):
 
 
 @admin.register(AbandonedObject, site=site)
-class AbandonedObjectAdmin(ModelAdmin, TabbedTranslationAdmin, SimpleHistoryAdmin):
+class AbandonedObjectAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin ):
     inlines = (
         AbandonedObjectTabularFileInline,
         AbandonedObjectCategoryTabularInline,

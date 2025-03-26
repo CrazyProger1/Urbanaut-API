@@ -8,7 +8,7 @@ from src.apps.dashboard.admin.site import site
 
 
 @admin.register(Team, site=site)
-class TeamAdmin(ModelAdmin, TabbedTranslationAdmin, SimpleHistoryAdmin):
+class TeamAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
     pass
 
 

@@ -13,7 +13,7 @@ from src.apps.dashboard.admin.site import site
 
 
 @admin.register(Category, site=site)
-class CategoryAdmin(ModelAdmin, TabbedTranslationAdmin, SimpleHistoryAdmin):
+class CategoryAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
     list_display = (
         "id",
         "name",

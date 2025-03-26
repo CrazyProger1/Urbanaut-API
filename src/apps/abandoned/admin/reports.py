@@ -8,5 +8,5 @@ from src.apps.dashboard.admin.site import site
 
 
 @admin.register(ParticipationReport, site=site)
-class ParticipationReportAdmin(ModelAdmin, TabbedTranslationAdmin, SimpleHistoryAdmin):
+class ParticipationReportAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
     readonly_fields = ("created_at",)

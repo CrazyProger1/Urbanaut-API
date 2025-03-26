@@ -8,7 +8,7 @@ from src.apps.dashboard.admin import site
 
 
 @admin.register(BlogPost, site=site)
-class BlogPostAdmin(ModelAdmin, TabbedTranslationAdmin, SimpleHistoryAdmin):
+class BlogPostAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
     list_display = (
         "id",
         "title",

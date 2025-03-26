@@ -8,7 +8,7 @@ from src.apps.dashboard.admin.site import site
 
 
 @admin.register(Rank, site=site)
-class RankAdmin(ModelAdmin, TabbedTranslationAdmin, SimpleHistoryAdmin):
+class RankAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
     list_display = (
         "id",
         "name",

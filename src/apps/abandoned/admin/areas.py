@@ -8,7 +8,7 @@ from src.apps.dashboard.admin.site import site
 
 
 @admin.register(AbandonedArea, site=site)
-class AbandonedAreaAdmin(ModelAdmin, TabbedTranslationAdmin, SimpleHistoryAdmin):
+class AbandonedAreaAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
     list_display = (
         "id",
         "name",

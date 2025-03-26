@@ -9,7 +9,7 @@ from src.apps.dashboard.admin.site import site
 
 
 @admin.register(User, site=site)
-class UserAdmin(ModelAdmin, TabbedTranslationAdmin, SimpleHistoryAdmin):
+class UserAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
     list_display = (
         "id",
         "username",
