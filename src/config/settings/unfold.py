@@ -112,6 +112,32 @@ UNFOLD = {
                     },
                 ],
             },
+            {
+                "title": _("Permissions"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Model Permission"),
+                        "icon": "lock",
+                        "link": reverse_lazy("admin:permissions_modelpermission_changelist"),
+                    },
+                    {
+                        "title": _("User-Model Permission"),
+                        "icon": "lock",
+                        "link": reverse_lazy("admin:permissions_usermodelpermission_changelist"),
+                    },
+                    {
+                        "title": _("Object Permission"),
+                        "icon": "lock",
+                        "link": reverse_lazy("admin:permissions_objectpermission_changelist"),
+                    },
+                    {
+                        "title": _("User-Object Permission"),
+                        "icon": "lock",
+                        "link": reverse_lazy("admin:permissions_userobjectpermission_changelist"),
+                    },
+                ],
+            },
         ],
     },
 }
