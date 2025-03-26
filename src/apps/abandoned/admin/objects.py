@@ -1,6 +1,7 @@
 from simple_history.admin import SimpleHistoryAdmin
 from unfold.admin import ModelAdmin, TabularInline
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
 
 from src.apps.abandoned.models import AbandonedObject, AbandonedObjectFile, AbandonedObjectCategory
@@ -12,6 +13,8 @@ class AbandonedObjectTabularFileInline(TabularInline):
     extra = 0
     show_change_link = True
     tab = True
+    verbose_name = _("File")
+    verbose_name_plural = _("Files")
 
 
 class AbandonedObjectCategoryTabularInline(TabularInline):
@@ -22,6 +25,8 @@ class AbandonedObjectCategoryTabularInline(TabularInline):
     )
     show_change_link = True
     tab = True
+    verbose_name = _("Category")
+    verbose_name_plural = _("Categories")
 
 
 @admin.register(AbandonedObject, site=site)
