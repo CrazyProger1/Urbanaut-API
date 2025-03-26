@@ -3,6 +3,7 @@ from typing import Any
 from django.db.models import Model
 from django.forms import Form
 from django.http import HttpRequest
+from simple_history.admin import SimpleHistoryAdmin
 from unfold.admin import ModelAdmin
 from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
@@ -12,7 +13,7 @@ from src.apps.dashboard.admin.site import site
 
 
 @admin.register(Category, site=site)
-class CategoryAdmin(ModelAdmin, TabbedTranslationAdmin):
+class CategoryAdmin(ModelAdmin, TabbedTranslationAdmin, SimpleHistoryAdmin):
     list_display = (
         "id",
         "name",

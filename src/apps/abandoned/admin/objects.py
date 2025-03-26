@@ -1,3 +1,4 @@
+from simple_history.admin import SimpleHistoryAdmin
 from unfold.admin import ModelAdmin, TabularInline
 from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
@@ -20,7 +21,7 @@ class AbandonedObjectCategoryTabularInline(TabularInline):
 
 
 @admin.register(AbandonedObject, site=site)
-class AbandonedObjectAdmin(ModelAdmin, TabbedTranslationAdmin):
+class AbandonedObjectAdmin(ModelAdmin, TabbedTranslationAdmin, SimpleHistoryAdmin):
     inlines = (
         AbandonedObjectTabularFileInline,
         AbandonedObjectCategoryTabularInline,

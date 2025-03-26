@@ -1,3 +1,4 @@
+from simple_history.admin import SimpleHistoryAdmin
 from unfold.admin import ModelAdmin
 from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
@@ -7,7 +8,7 @@ from src.apps.dashboard.admin.site import site
 
 
 @admin.register(Team, site=site)
-class TeamAdmin(ModelAdmin, TabbedTranslationAdmin):
+class TeamAdmin(ModelAdmin, TabbedTranslationAdmin, SimpleHistoryAdmin):
     pass
 
 

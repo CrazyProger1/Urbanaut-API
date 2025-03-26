@@ -1,3 +1,4 @@
+from simple_history.admin import SimpleHistoryAdmin
 from unfold.admin import ModelAdmin
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
@@ -8,7 +9,7 @@ from src.apps.dashboard.admin.site import site
 
 
 @admin.register(User, site=site)
-class UserAdmin(ModelAdmin, TabbedTranslationAdmin):
+class UserAdmin(ModelAdmin, TabbedTranslationAdmin, SimpleHistoryAdmin):
     list_display = (
         "id",
         "username",
