@@ -68,6 +68,11 @@ UNFOLD = {
                         "icon": "devices",
                         "link": reverse_lazy("admin:auth_group_changelist"),
                     },
+                    {
+                        "title": _("Notifications"),
+                        "icon": "notifications",
+                        "link": reverse_lazy("admin:notifications_notification_changelist"),
+                    },
                 ],
             },
             {
