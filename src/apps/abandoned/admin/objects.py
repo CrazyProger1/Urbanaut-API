@@ -38,8 +38,8 @@ class AbandonedObjectAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmi
     list_display = (
         "id",
         "name",
-        "created_at",
         "rating",
+        "created_at",
     )
     readonly_fields = (
         "created_at",
