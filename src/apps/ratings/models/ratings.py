@@ -1,8 +1,12 @@
+import logging
+
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from src.utils.db import create_object
+
+logger = logging.getLogger(__name__)
 
 
 class Rating(models.Model):
@@ -43,10 +47,11 @@ class RatingMixin(models.Model):
             *args,
             **kwargs,
     ):
-        pk = self.id
+        is_new = self.id is None
         super().save(
             *args,
             **kwargs,
         )
-        if not pk:
+        logger.warning("CALLED %s", is_new)
+        if is_new:
             self.rating = create_object(source=Rating)
