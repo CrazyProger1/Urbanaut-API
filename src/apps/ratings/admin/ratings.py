@@ -20,7 +20,6 @@ class RatingAdmin(ModelAdmin):
     )
 
     def display_value(self, obj: Rating):
-        stars = "⭐" * round(obj.value)
-        return stars or _("No rating")
+        return ("⭐" * round(obj.value)) or _("No rating")
 
     display_value.short_description = _("Rating")
