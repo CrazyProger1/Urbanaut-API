@@ -8,7 +8,7 @@ from src.utils.db import TimestampModelMixin
 
 class RatingVote(TimestampModelMixin, models.Model):
     created_by = models.ForeignKey(
-        settings.USER_AUTH_MODEL,
+        settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
         related_name="rating_votes",
         blank=True,
