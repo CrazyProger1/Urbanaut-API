@@ -22,7 +22,7 @@ class Rating(models.Model):
     )
 
     def __str__(self):
-        return ("⭐" * round(self.value)) or _("No rating")
+        return ("⭐" * round(self.value)) or "No rating"
 
 
 class RatingMixin(models.Model):

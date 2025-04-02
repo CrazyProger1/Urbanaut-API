@@ -32,4 +32,4 @@ class RatingVote(TimestampModelMixin, models.Model):
     )
 
     def __str__(self):
-        return ("⭐" * round(self.value)) or _("No rating")
+        return ("⭐" * round(self.value)) or "No rating"
