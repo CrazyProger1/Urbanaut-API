@@ -1,2 +1,2 @@
 from src.apps.ratings.admin.ratings import RatingAdmin
-from src.apps.ratings.admin.votes import RatingVoteTabularFileInline
+from src.apps.ratings.admin.votes import RatingVoteTabularInline
