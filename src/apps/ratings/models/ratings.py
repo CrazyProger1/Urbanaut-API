@@ -38,16 +38,18 @@ class RatingMixin(models.Model):
     class Meta:
         abstract = True
 
+    def create_rating_if_not_exists(self):
+        if not self.rating_id:
+            self.rating = create_object(source=Rating)
+            self.save(update_fields=["rating"])
+
     def save(
             self,
             *args,
             **kwargs,
     ):
-        is_new = self.id is None
         super().save(
             *args,
             **kwargs,
         )
-        if is_new:
-            self.rating = create_object(source=Rating)
-            self.save(update_fields=["rating"])
+        self.create_rating_if_not_exists()
