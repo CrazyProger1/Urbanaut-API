@@ -18,3 +18,6 @@ class Rating(models.Model):
             MaxValueValidator(limit_value=5),
         ),
     )
+
+    def __str__(self):
+        return f"{self.value}/5"

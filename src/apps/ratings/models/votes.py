@@ -30,3 +30,6 @@ class RatingVote(TimestampModelMixin, models.Model):
         validators=(MaxValueValidator(limit_value=5),),
         verbose_name=_("value"),
     )
+
+    def __str__(self):
+        return f"{self.value}/5"
