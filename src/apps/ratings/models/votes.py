@@ -27,6 +27,6 @@ class RatingVote(TimestampModelMixin, models.Model):
         blank=False,
         null=False,
         default=0,
-        validators=(MaxValueValidator(limit_value=5)),
+        validators=(MaxValueValidator(limit_value=5),),
         verbose_name=_("value"),
     )
