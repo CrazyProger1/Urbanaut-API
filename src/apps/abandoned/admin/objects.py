@@ -40,7 +40,10 @@ class AbandonedObjectAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmi
         "name",
         "created_at",
     )
-    readonly_fields = ("created_at",)
+    readonly_fields = (
+        "created_at",
+        "rating",
+    )
     list_display_links = ("name",)
 
     search_fields = ("id", "name")

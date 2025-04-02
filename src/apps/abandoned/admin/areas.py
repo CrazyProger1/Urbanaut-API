@@ -15,3 +15,6 @@ class AbandonedAreaAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin)
         "area",
     )
     list_display_links = ("name",)
+    readonly_fields = (
+        "rating",
+    )
