@@ -12,10 +12,12 @@ from src.apps.geo.serializers import (
 )
 from src.apps.media.serializers import FileRetrieveSerializer
 from src.apps.permissions.serializers import PermissionSerializerMixin
+from src.apps.ratings.serializers import RatingRetrieveSerializer
 
 
 class AbandonedObjectListSerializer(serializers.ModelSerializer):
     photo = serializers.CharField(read_only=True)
+    rating = RatingRetrieveSerializer(read_only=True)
 
     class Meta:
         model = AbandonedObject
@@ -35,6 +37,7 @@ class AbandonedObjectListSerializer(serializers.ModelSerializer):
             "created_by",
             "location",
             "photo",
+            "rating",
         )
 
 
@@ -44,6 +47,7 @@ class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer, PermissionS
     location = LocationRetrieveSerializer(read_only=True)
     photos = FileRetrieveSerializer(many=True, read_only=True)
     categories = AbandonedObjectCategoryRetrieveSerializer(read_only=True, many=True)
+    rating = RatingRetrieveSerializer(read_only=True)
 
     class Meta:
         model = AbandonedObject
@@ -64,6 +68,7 @@ class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer, PermissionS
             "location",
             "photos",
             "categories",
+            "rating",
         )
 
 
