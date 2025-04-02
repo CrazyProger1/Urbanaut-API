@@ -21,3 +21,17 @@ class Rating(models.Model):
 
     def __str__(self):
         return "⭐" * round(self.value)
+
+
+class RatingMixin(models.Model):
+    rating = models.ForeignKey(
+        to=Rating,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name=_("rating"),
+        related_name="%(class)s_ratings",
+    )
+
+    class Meta:
+        abstract = True
