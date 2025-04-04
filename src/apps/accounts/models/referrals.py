@@ -41,3 +41,10 @@ class ReferralLink(TimestampModelMixin, models.Model):
         blank=True,
         verbose_name=_("Referrals"),
     )
+    code = models.SlugField(
+        unique=True,
+        null=False,
+        blank=False,
+        max_length=50,
+        verbose_name=_("Code"),
+    )
