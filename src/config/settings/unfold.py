@@ -73,6 +73,11 @@ UNFOLD = {
                         "icon": "notifications",
                         "link": reverse_lazy("admin:notifications_notification_changelist"),
                     },
+                    {
+                        "title": _("Referral Links"),
+                        "icon": "link",
+                        "link": reverse_lazy("admin:accounts_referrallink_changelist"),
+                    },
                 ],
             },
             {
