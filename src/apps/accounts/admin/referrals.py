@@ -20,6 +20,7 @@ class ReferralLinkAdmin(ModelAdmin):
     list_display = (
         "id",
         "referrer",
+        "code",
     )
     list_display_links = (
         "referrer",

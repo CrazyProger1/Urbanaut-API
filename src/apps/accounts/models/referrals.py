@@ -48,3 +48,11 @@ class ReferralLink(TimestampModelMixin, models.Model):
         max_length=50,
         verbose_name=_("Code"),
     )
+
+    @property
+    def link(self):
+        # TODO: Make this configurable
+        return f"https://t.me/urbanautbot?start={self.code}"
+
+    def __str__(self):
+        return self.link
