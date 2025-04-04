@@ -1,4 +1,4 @@
-from unfold.admin import ModelAdmin
+from unfold.admin import ModelAdmin, TabularInline
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
@@ -6,7 +6,7 @@ from src.apps.accounts.models import ReferralLink, ReferralLinkUsage
 from src.apps.dashboard.admin.site import site
 
 
-class ReferralLinkUsageInline(admin.TabularInline):
+class ReferralLinkUsageInline(TabularInline):
     model = ReferralLinkUsage
     extra = 0
     verbose_name = _("Usage")
