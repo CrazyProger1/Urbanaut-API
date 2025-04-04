@@ -25,6 +25,9 @@ class ReferralLinkUsage(TimestampModelMixin, models.Model):
         unique=True,
     )
 
+    def __str__(self):
+        return str(self.referral)
+
 
 class ReferralLink(TimestampModelMixin, models.Model):
     referrer = models.ForeignKey(
