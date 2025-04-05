@@ -58,7 +58,7 @@ class Settings(models.Model):
         return "Settings"
 
 
-class SettingsUserMixin(models.Model):
+class SettingsUserModelMixin(models.Model):
     class Meta:
         abstract = True
 

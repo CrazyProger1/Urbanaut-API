@@ -1,0 +1,34 @@
+from django.db import models
+from django.utils import timezone
+from django.utils.translation import gettext_lazy as _
+from src.utils.db import TimestampModelMixin
+
+
+class Trigger(TimestampModelMixin, models.Model):
+    name = models.CharField(
+        max_length=250,
+        verbose_name=_("name"),
+        help_text=_("Name of the trigger."),
+        null=False,
+        blank=False,
+    )
+    description = models.TextField(
+        verbose_name=_("description"),
+        help_text=_("Description of the trigger."),
+        null=True,
+        blank=True,
+    )
+    is_triggered = models.BooleanField(
+        default=False,
+        null=False,
+        blank=False,
+        verbose_name=_("is triggered"),
+        help_text=_("Is the trigger triggered."),
+    )
+    triggered_at = models.DateTimeField(
+        default=timezone.now,
+        null=False,
+        blank=False,
+        verbose_name=_("triggered at"),
+        help_text=_("Date and time of the trigger."),
+    )

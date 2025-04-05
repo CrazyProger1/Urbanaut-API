@@ -45,12 +45,13 @@ INSTALLED_APPS = [
     "src.apps.media.apps.MediaConfig",
     "src.apps.docs.apps.DocsConfig",
     "src.apps.geo.apps.GeoConfig",
-    "src.apps.notifier.apps.NotificationsConfig",
+    "src.apps.notifier.apps.NotifierConfig",
     "src.apps.actions.apps.ActionsConfig",
     "src.apps.blog.apps.BlogConfig",
     "src.apps.permissions.apps.PermissionsConfig",
     "src.apps.dashboard.apps.DashboardConfig",
     "src.apps.ratings.apps.RatingsConfig",
+    "src.apps.triggers.apps.TriggersConfig",
 ]
 
 MIDDLEWARE = [

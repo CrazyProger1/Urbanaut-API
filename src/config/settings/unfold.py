@@ -80,9 +80,29 @@ UNFOLD = {
                 "collapsible": True,
                 "items": [
                     {
+                        "title": _("Events"),
+                        "icon": "event",
+                        "link": reverse_lazy("admin:notifier_event_changelist"),
+                    },
+                    {
+                        "title": _("Categories"),
+                        "icon": "category",
+                        "link": reverse_lazy("admin:notifier_category_changelist"),
+                    },
+                    {
                         "title": _("Notifications"),
                         "icon": "notifications",
                         "link": reverse_lazy("admin:notifier_notification_changelist"),
+                    },
+                    {
+                        "title": _("Newsletters"),
+                        "icon": "mail",
+                        "link": reverse_lazy("admin:notifier_newsletter_changelist"),
+                    },
+                    {
+                        "title": _("Triggers"),
+                        "icon": "flag",
+                        "link": reverse_lazy("admin:triggers_trigger_changelist"),
                     },
                 ],
             },

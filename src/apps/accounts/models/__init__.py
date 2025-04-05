@@ -10,5 +10,5 @@ from src.apps.accounts.models.referrals import (
 )
 from src.apps.accounts.models.settings import (
     Settings,
-    SettingsUserMixin,
+    SettingsUserModelMixin,
 )
