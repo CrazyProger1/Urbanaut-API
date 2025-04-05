@@ -19,4 +19,4 @@ supervisorctl restart celery
 supervisorctl restart celery-beat
 supervisorctl restart celery-flower
 
-mkdir logs
+mkdir -p logs
