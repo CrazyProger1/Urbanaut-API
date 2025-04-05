@@ -15,5 +15,8 @@ poetry run python manage.py migrate
 poetry run python manage.py collectstatic --noinput
 
 supervisorctl restart backend
+supervisorctl restart celery
+supervisorctl restart celery-beat
+supervisorctl restart celery-flower
 
 mkdir logs
