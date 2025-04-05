@@ -12,4 +12,5 @@ from src.apps.accounts.services.db.referrals import (
     get_all_referral_links,
     get_user_referral_links,
     get_non_user_referral_links,
+    apply_referral_link,
 )

@@ -1,9 +1,11 @@
+from django.utils.translation import gettext as _
 from rest_framework import (
     viewsets,
     mixins,
     permissions, response,
 )
 from rest_framework.decorators import action
+from rest_framework.exceptions import PermissionDenied
 
 from src.apps.accounts.serializers import (
     ReferralLinkListSerializer,
@@ -11,7 +13,8 @@ from src.apps.accounts.serializers import (
 )
 from src.apps.accounts.services.db import (
     get_all_referral_links,
-    get_user_referral_links, get_non_user_referral_links,
+    get_user_referral_links,
+    get_non_user_referral_links, apply_referral_link,
 )
 
 
@@ -49,4 +52,16 @@ class ReferralLinkViewSet(
     def apply(self, request, *args, **kwargs):
         link = self.get_object()
         user = request.user
-        return response.Response({"message": f"Referral link applied successfully! {link} by user {user}"})
+        is_applied = apply_referral_link(
+            user=user,
+            link=link,
+        )
+        if not is_applied:
+            raise PermissionDenied(_("You have already applied referral link."))
+
+        return response.Response(
+            status=200,
+            data={
+                "detail": _("Referral link applied successfully."),
+            },
+        )
