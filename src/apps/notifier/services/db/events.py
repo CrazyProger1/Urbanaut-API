@@ -28,3 +28,17 @@ def get_notification_target_users(event: Event) -> models.QuerySet[User]:
             )
 
     return users
+
+
+def get_newsletter_target_users(event: Event) -> models.QuerySet[User]:
+    users = User.objects.none()
+
+    for category in event.categories.all():
+        users |= category.recipients.all()
+        if category.is_for_all:
+            users |= filter_objects(
+                source=User,
+                settings__is_newsletters_enabled=True,
+            )
+
+    return users

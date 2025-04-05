@@ -28,4 +28,6 @@ def send_event_notifications(event_id: int):
     for notification in notifications:
         notification.recipients.set(target_users)
 
+    # TODO: sending notifications via websockets
+
     logger.info("Notifications sent for event №%s...", event_id)
