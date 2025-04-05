@@ -1,17 +1,42 @@
-from rest_framework import viewsets, mixins, permissions
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status, permissions
+from drf_spectacular.utils import extend_schema
 
 from src.apps.accounts.serializers import SettingsUpdateSerializer
-from src.apps.accounts.services.db import get_all_settings, get_user_settings
+from src.apps.accounts.services.db import get_user_settings
 
 
-class SettingsViewSet(
-    viewsets.GenericViewSet,
-    mixins.UpdateModelMixin,
-):
-    queryset = get_all_settings()
+class SettingsAPIView(APIView):
     permission_classes = (permissions.IsAuthenticated,)
-    serializer_class = SettingsUpdateSerializer
-    lookup_field = None
 
     def get_object(self):
-        return get_user_settings(self.request.user)
+        return get_user_settings(user=self.request.user)
+
+    @extend_schema(
+        request=SettingsUpdateSerializer,
+        responses={200: SettingsUpdateSerializer},
+        operation_id='update_user_settings',
+        description="Fully update the authenticated user's settings.",
+    )
+    def put(self, request, *args, **kwargs):
+        user_settings = self.get_object()
+        serializer = SettingsUpdateSerializer(user_settings, data=request.data, partial=False)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @extend_schema(
+        request=SettingsUpdateSerializer,
+        responses={200: SettingsUpdateSerializer},
+        operation_id='partial_update_user_settings',
+        description="Partially update the authenticated user's settings.",
+    )
+    def patch(self, request, *args, **kwargs):
+        user_settings = self.get_object()
+        serializer = SettingsUpdateSerializer(user_settings, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
