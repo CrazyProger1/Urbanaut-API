@@ -36,27 +36,27 @@ class UnfoldPeriodicTaskForm(PeriodicTaskForm):
         self.fields["regtask"].widget = UnfoldTaskSelectWidget()
 
 
-@admin.register(PeriodicTask)
+@admin.register(PeriodicTask, site=site)
 class PeriodicTaskAdmin(BasePeriodicTaskAdmin, ModelAdmin):
     form = UnfoldPeriodicTaskForm
 
 
-@admin.register(IntervalSchedule)
+@admin.register(IntervalSchedule, site=site)
 class IntervalScheduleAdmin(ModelAdmin):
     pass
 
 
-@admin.register(CrontabSchedule)
+@admin.register(CrontabSchedule, site=site)
 class CrontabScheduleAdmin(BaseCrontabScheduleAdmin, ModelAdmin):
     pass
 
 
-@admin.register(SolarSchedule)
+@admin.register(SolarSchedule, site=site)
 class SolarScheduleAdmin(ModelAdmin):
     pass
 
 
-@admin.register(ClockedSchedule)
+@admin.register(ClockedSchedule, site=site)
 class ClockedScheduleAdmin(BaseClockedScheduleAdmin, ModelAdmin):
     pass
 
