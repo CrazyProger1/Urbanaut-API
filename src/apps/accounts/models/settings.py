@@ -43,8 +43,8 @@ class Settings(models.Model):
         default=True,
         null=False,
         blank=False,
-        verbose_name=_("notifications"),
-        help_text=_("Enable notifications."),
+        verbose_name=_("notifier"),
+        help_text=_("Enable notifier."),
     )
     theme = models.CharField(
         max_length=10,

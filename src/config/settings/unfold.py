@@ -69,14 +69,20 @@ UNFOLD = {
                         "link": reverse_lazy("admin:auth_group_changelist"),
                     },
                     {
-                        "title": _("Notifications"),
-                        "icon": "notifications",
-                        "link": reverse_lazy("admin:notifications_notification_changelist"),
-                    },
-                    {
                         "title": _("Referral Links"),
                         "icon": "link",
                         "link": reverse_lazy("admin:accounts_referrallink_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": _("Notifier"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Notifications"),
+                        "icon": "notifications",
+                        "link": reverse_lazy("admin:notifier_notification_changelist"),
                     },
                 ],
             },

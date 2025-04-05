@@ -45,7 +45,7 @@ INSTALLED_APPS = [
     "src.apps.media.apps.MediaConfig",
     "src.apps.docs.apps.DocsConfig",
     "src.apps.geo.apps.GeoConfig",
-    "src.apps.notifications.apps.NotificationsConfig",
+    "src.apps.notifier.apps.NotificationsConfig",
     "src.apps.actions.apps.ActionsConfig",
     "src.apps.blog.apps.BlogConfig",
     "src.apps.permissions.apps.PermissionsConfig",
