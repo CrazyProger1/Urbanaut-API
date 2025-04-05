@@ -6,7 +6,7 @@ from src.config.celery import celery
 logger = logging.getLogger(__name__)
 
 
-@celery.shared_task
+@celery.task
 def trigger_event(event_id: int):
     event = get_event_or_none(pk=event_id)
 
