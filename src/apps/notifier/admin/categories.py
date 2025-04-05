@@ -22,8 +22,6 @@ class CategoryAdmin(ModelAdmin):
     list_display = (
         "id",
         "name",
-        "planned_at",
-        "is_triggered",
     )
     list_display_links = (
         "name",
