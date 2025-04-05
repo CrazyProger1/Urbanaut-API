@@ -8,4 +8,5 @@ class SettingsRetrieveSerializer(serializers.ModelSerializer):
         model = Settings
         fields = (
             "id",
+            "language",
         )

@@ -1,6 +1,8 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
+from src.apps.accounts.serializers.settings import SettingsRetrieveSerializer
+
 User = get_user_model()
 
 
@@ -20,6 +22,7 @@ class UserListSerializer(serializers.ModelSerializer):
 class UserRetrieveSerializer(serializers.ModelSerializer):
     avatar = serializers.SerializerMethodField()
     rank = serializers.CharField(source="rank.key")
+    settings = SettingsRetrieveSerializer(read_only=True)
 
     class Meta:
         model = User
@@ -35,6 +38,7 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
             "last_login",
             "joined_at",
             "avatar",
+            "settings",
         )
 
     def get_avatar(self, obj: User) -> str | None:
