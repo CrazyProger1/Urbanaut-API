@@ -17,7 +17,7 @@ router.register("api/v1/referral_links", ReferralLinkViewSet)
 router.register("api/v1/settings", SettingsViewSet.as_view({
     "put": "update",
     "patch": "partial_update",
-}))
+}), basename="settings")
 
 urlpatterns = [
     path("api/v1/languages", get_languages),
