@@ -1,4 +1,4 @@
-from unfold.admin import ModelAdmin
+from unfold.admin import ModelAdmin, TabularInline
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 
@@ -12,7 +12,7 @@ from src.apps.notifier.models import (
 )
 
 
-class NewsletterEventInline(admin.TabularInline):
+class NewsletterEventInline(TabularInline):
     model = NewsletterEvent
     extra = 0
     verbose_name = _("Newsletter")
@@ -20,7 +20,7 @@ class NewsletterEventInline(admin.TabularInline):
     tab = True
 
 
-class NotificationEventInline(admin.TabularInline):
+class NotificationEventInline(TabularInline):
     model = NotificationEvent
     extra = 0
     verbose_name = _("Notification")
@@ -28,7 +28,7 @@ class NotificationEventInline(admin.TabularInline):
     tab = True
 
 
-class CategoryEventInline(admin.TabularInline):
+class CategoryEventInline(TabularInline):
     model = CategoryEvent
     extra = 0
     verbose_name = _("Category")
@@ -36,7 +36,7 @@ class CategoryEventInline(admin.TabularInline):
     tab = True
 
 
-class TriggerEventInline(admin.StackedInline):
+class TriggerEventInline(TabularInline):
     model = TriggerEvent
     extra = 0
     verbose_name = _("Trigger")
