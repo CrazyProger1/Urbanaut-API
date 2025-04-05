@@ -19,12 +19,13 @@ def send_event_notifications(event_id: int):
         return
 
     target_users = get_notification_target_users(event=event)
-    notifications = event.notifications
+    notifications = event.notifications.all()
 
     notifications.update(
         shown_at=timezone.now(),
         is_shown=True,
-        recipients=target_users,
     )
+    for notification in notifications:
+        notification.recipients.set(target_users)
 
     logger.info("Notifications sent for event №%s...", event_id)
