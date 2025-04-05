@@ -112,7 +112,7 @@ class Event(TimestampModelMixin, models.Model):
         super().save(*args, **kwargs)
         plan_task(
             time=self.triggered_at,
-            task="src.apps.notifier.tasks.trigger_event",
+            task="src.apps.notifier.tasks.events.trigger_event",
             args=(self.id,),
             kwargs={},
             remove_existing=True,
