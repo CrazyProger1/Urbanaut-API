@@ -5,10 +5,10 @@ from django.utils.translation import gettext_lazy as _
 from src.apps.dashboard.admin import site
 from src.apps.notifier.models import (
     Event,
-    NewsletterEvent,
-    CategoryEvent,
-    NotificationEvent,
-    TriggerEvent,
+    # NewsletterEvent,
+    # CategoryEvent,
+    # NotificationEvent,
+    # TriggerEvent,
 )
 
 
