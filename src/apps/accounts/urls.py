@@ -1,7 +1,12 @@
 from django.urls import path
 from rest_framework import routers
 
-from src.apps.accounts.views import UserViewSet, TeamViewSet, get_languages, ReferralLinkViewSet
+from src.apps.accounts.views import (
+    UserViewSet,
+    TeamViewSet,
+    get_languages,
+    ReferralLinkViewSet,
+)
 
 router = routers.SimpleRouter()
 
