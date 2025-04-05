@@ -1,3 +1,4 @@
+from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from src.utils.db import TimestampModelMixin
@@ -5,7 +6,7 @@ from src.utils.db import TimestampModelMixin
 
 class CategoryRecipient(models.Model):
     user = models.ForeignKey(
-        "User",
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         blank=False,
         null=False,
@@ -35,7 +36,7 @@ class Category(TimestampModelMixin, models.Model):
         blank=True,
     )
     recipients = models.ManyToManyField(
-        "User",
+        settings.AUTH_USER_MODEL,
         through=CategoryRecipient,
         verbose_name=_("recipients"),
         help_text=_("Recipients of the category."),
