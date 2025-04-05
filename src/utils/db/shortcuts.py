@@ -126,7 +126,7 @@ def get_or_create_object(
         **kwargs,
 ) -> tuple[Model, bool]:
     queryset = get_queryset(source=source, manager=manager)
-    obj, created = queryset.get_or_create(*args, **kwargs)[0]
+    obj, created = queryset.get_or_create(*args, **kwargs)
     logger.debug(
         f"{'Retrieved' if not created else 'Created'} {queryset.model.__name__} object: "
         f"{obj} with filters: {args}, {kwargs}"
