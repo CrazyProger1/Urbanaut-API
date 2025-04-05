@@ -11,6 +11,7 @@ def plan_task(
         time: datetime.datetime,
         args: tuple = (),
         kwargs: dict = None,
+        remove_existing: bool = True,
 ):
     schedule, created = CrontabSchedule.objects.get_or_create(
         minute=time.minute,
@@ -25,6 +26,9 @@ def plan_task(
         PeriodicTask.objects.get(name=name).delete()
     except PeriodicTask.DoesNotExist:
         pass
+
+    if remove_existing:
+        PeriodicTask.objects.filter(name=name).delete()
 
     PeriodicTask.objects.create(
         crontab=schedule,

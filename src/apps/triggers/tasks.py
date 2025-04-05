@@ -6,6 +6,6 @@ logger = logging.getLogger(__name__)
 
 
 @celery.task
-def trigger():
+def trigger(trigger_id: int):
     logger.critical("TRIGGERED")
     raise RuntimeError("Test error")

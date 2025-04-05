@@ -1,6 +1,8 @@
 from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
+
+from src.utils.celery import plan_task
 from src.utils.db import TimestampModelMixin
 
 
@@ -32,6 +34,20 @@ class Trigger(TimestampModelMixin, models.Model):
         verbose_name=_("triggered at"),
         help_text=_("Date and time of the trigger."),
     )
+
+    def save(
+            self,
+            *args,
+            **kwargs,
+    ):
+        super().save(*args, **kwargs)
+        plan_task(
+            "src.apps.triggers.tasks.trigger",
+            args=(self.id,),
+            time=self.triggered_at,
+            name=f"Trigger {self.id}",
+            remove_existing=True,
+        )
 
     def __str__(self):
         return f"{self.name} - {self.triggered_at}"
