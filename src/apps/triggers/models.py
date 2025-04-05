@@ -32,3 +32,6 @@ class Trigger(TimestampModelMixin, models.Model):
         verbose_name=_("triggered at"),
         help_text=_("Date and time of the trigger."),
     )
+
+    def __str__(self):
+        return f"{self.name} - {self.triggered_at}"

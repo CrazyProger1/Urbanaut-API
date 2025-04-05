@@ -1,10 +1,9 @@
 from django.contrib.auth import get_user_model
 from django.db import models
-from django.db.models import QuerySet, Subquery, Q, OuterRef, Exists
+from django.db.models import QuerySet, Subquery, OuterRef
 
 from src.apps.notifier.models import Notification, NotificationStatus
-from src.utils.db import filter_objects, get_all_objects
-from src.apps.notifier.services.statuses import filter_notification_status
+from src.utils.db import filter_objects, get_all_objects, get_object_or_error
 
 User = get_user_model()
 
@@ -45,3 +44,14 @@ def mark_read(
         is_read=False,
     )
     queryset.update(is_read=True)
+
+
+def get_notification_status_or_error(**data) -> NotificationStatus:
+    return get_object_or_error(
+        NotificationStatus,
+        **data,
+    )
+
+
+def filter_notification_status(**data):
+    return filter_objects(NotificationStatus, **data)

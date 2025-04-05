@@ -48,3 +48,6 @@ class Category(TimestampModelMixin, models.Model):
         verbose_name=_("include all"),
         help_text=_("Include all users in the category."),
     )
+
+    def __str__(self):
+        return self.name
