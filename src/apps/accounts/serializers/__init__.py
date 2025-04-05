@@ -11,3 +11,7 @@ from src.apps.accounts.serializers.referrals import (
     ReferralLinkRetrieveSerializer,
     ReferralLinkApplySerializer,
 )
+from src.apps.accounts.serializers.settings import (
+    SettingsRetrieveSerializer,
+    SettingsUpdateSerializer,
+)
