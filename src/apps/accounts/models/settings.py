@@ -24,6 +24,27 @@ class Settings(models.Model):
         verbose_name=_("user"),
         help_text=_("User settings."),
     )
+    is_animations_enabled = models.BooleanField(
+        default=True,
+        null=False,
+        blank=False,
+        verbose_name=_("animations"),
+        help_text=_("Enable animations."),
+    )
+    is_newsletters_enabled = models.BooleanField(
+        default=True,
+        null=False,
+        blank=False,
+        verbose_name=_("newsletters"),
+        help_text=_("Enable newsletters."),
+    )
+    is_notifications_enabled = models.BooleanField(
+        default=True,
+        null=False,
+        blank=False,
+        verbose_name=_("notifications"),
+        help_text=_("Enable notifications."),
+    )
 
     def __str__(self):
         return "Settings"
