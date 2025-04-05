@@ -47,12 +47,12 @@ class Notification(models.Model):
         verbose_name = _("notification")
         verbose_name_plural = _("notifier")
 
-    show_at = models.DateTimeField(
+    shown_at = models.DateTimeField(
         null=False,
         blank=False,
         default=timezone.now,
-        verbose_name=_("show at"),
-        help_text=_("Planned time to show."),
+        verbose_name=_("shown at"),
+        help_text=_("Time when the notification was shown."),
     )
     is_shown = models.BooleanField(
         default=False,

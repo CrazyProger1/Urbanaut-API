@@ -10,7 +10,7 @@ class NotificationListSerializer(serializers.ModelSerializer):
         model = Notification
         fields = (
             "title",
-            "show_at",
+            "shown_at",
             "message",
             "type",
             "icon",
@@ -28,7 +28,7 @@ class NotificationRetrieveSerializer(serializers.ModelSerializer):
         model = Notification
         fields = (
             "title",
-            "show_at",
+            "shown_at",
             "is_shown",
             "message",
             "type",
