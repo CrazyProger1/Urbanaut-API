@@ -27,7 +27,7 @@ def send_event_newsletter(event_id: int, newsletter_id: int):
     loop = asyncio.get_event_loop()
     loop.run_until_complete(asend_newsletter(
         message=newsletter.message,
-        user_ids=target_users.values_list("id", flat=True),
+        user_ids=set(target_users.values_list("id", flat=True)),
     ))
 
 
