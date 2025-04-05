@@ -63,13 +63,13 @@ class TriggerEvent(models.Model):
         null=False,
         verbose_name=_("event"),
     )
-    trigger = models.ForeignKey(
-        "triggers.Trigger",
-        on_delete=models.CASCADE,
-        blank=False,
-        null=False,
-        verbose_name=_("trigger"),
-    )
+    # trigger = models.ForeignKey(
+    #     "triggers.Trigger",
+    #     on_delete=models.CASCADE,
+    #     blank=False,
+    #     null=False,
+    #     verbose_name=_("trigger"),
+    # )
 
 
 class Event(TimestampModelMixin, models.Model):
@@ -107,13 +107,13 @@ class Event(TimestampModelMixin, models.Model):
         verbose_name=_("categories"),
         help_text=_("Recipient categories.")
     )
-    triggers = models.ManyToManyField(
-        "triggers.Trigger",
-        through=TriggerEvent,
-        blank=True,
-        verbose_name=_("triggers"),
-        help_text=_("Triggers included to this event.")
-    )
+    # triggers = models.ManyToManyField(
+    #     "triggers.Trigger",
+    #     through=TriggerEvent,
+    #     blank=True,
+    #     verbose_name=_("triggers"),
+    #     help_text=_("Triggers included to this event.")
+    # )
 
     def __str__(self):
         return self.name
