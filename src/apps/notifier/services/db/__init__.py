@@ -9,4 +9,5 @@ from src.apps.notifier.services.db.notifications import (
 from src.apps.notifier.services.db.events import (
     mark_event_completed,
     get_event_or_none,
+    get_notification_target_users,
 )

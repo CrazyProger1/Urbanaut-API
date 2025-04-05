@@ -35,7 +35,6 @@ class CategoryEventInline(TabularInline):
     tab = True
 
 
-
 @admin.register(Event, site=site)
 class EventAdmin(ModelAdmin):
     inlines = (
@@ -46,6 +45,7 @@ class EventAdmin(ModelAdmin):
     list_display = (
         "id",
         "name",
+        "is_active",
     )
     list_display_links = (
         "name",
