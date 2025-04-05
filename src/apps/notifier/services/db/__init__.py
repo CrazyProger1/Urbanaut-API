@@ -14,4 +14,5 @@ from src.apps.notifier.services.db.events import (
 )
 from src.apps.notifier.services.db.newsletters import (
     get_newsletter_or_none,
+    mark_newsletter_shown,
 )

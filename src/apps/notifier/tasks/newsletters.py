@@ -4,7 +4,7 @@ import logging
 from src.apps.notifier.services.db import (
     get_event_or_none,
     get_newsletter_target_users,
-    get_newsletter_or_none,
+    get_newsletter_or_none, mark_newsletter_shown,
 )
 from src.apps.notifier.services.newsletters import asend_newsletter
 from src.config.celery import celery
@@ -29,6 +29,7 @@ def send_event_newsletter(event_id: int, newsletter_id: int):
         message=newsletter.message,
         user_ids=set(target_users.values_list("id", flat=True)),
     ))
+    mark_newsletter_shown(newsletter=newsletter)
 
 
 @celery.task
