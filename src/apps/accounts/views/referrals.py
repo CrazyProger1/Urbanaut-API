@@ -22,6 +22,7 @@ class ReferralLinkViewSet(
     queryset = get_all_referral_links()
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = ReferralLinkListSerializer
+    lookup_field = "code"
 
     def get_serializer_class(self):
         match self.action:
