@@ -4,6 +4,7 @@ from asyncio import Semaphore
 from typing import Iterable
 
 from aiogram import Bot
+from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
 from django.conf import settings
 
@@ -17,7 +18,7 @@ async def asend_newsletter(
     user_ids = set(user_ids)
     bot = Bot(
         token=settings.TELEGRAM_BOT_TOKEN,
-        parse_mode=ParseMode.HTML,
+        default=DefaultBotProperties(parse_mode=ParseMode.HTML),
     )
     sent_count = 0
     failed_count = 0
