@@ -20,7 +20,7 @@ class ReferralLinkViewSet(
     mixins.RetrieveModelMixin,
 ):
     queryset = get_all_referral_links()
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
+    permission_classes = (permissions.IsAuthenticated,)
     serializer_class = ReferralLinkListSerializer
 
     def get_serializer_class(self):
