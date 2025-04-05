@@ -7,8 +7,8 @@ class ReferralLinkListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReferralLink
         fields = (
-            "id",
             "link",
+            "code",
         )
 
 
@@ -16,6 +16,10 @@ class ReferralLinkRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReferralLink
         fields = (
-            "id",
             "link",
+            "code",
         )
+
+
+class ReferralLinkApplySerializer(serializers.Serializer):
+    pass

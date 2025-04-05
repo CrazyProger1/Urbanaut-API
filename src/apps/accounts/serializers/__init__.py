@@ -9,4 +9,5 @@ from src.apps.accounts.serializers.teams import (
 from src.apps.accounts.serializers.referrals import (
     ReferralLinkListSerializer,
     ReferralLinkRetrieveSerializer,
+    ReferralLinkApplySerializer,
 )
