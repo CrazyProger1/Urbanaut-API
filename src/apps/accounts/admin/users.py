@@ -6,10 +6,14 @@ from modeltranslation.admin import TabbedTranslationAdmin
 
 from src.apps.accounts.models import User
 from src.apps.dashboard.admin.site import site
+from src.apps.accounts.admin.settings import SettingsInline
 
 
 @admin.register(User, site=site)
 class UserAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
+    inlines = (
+        SettingsInline,
+    )
     list_display = (
         "id",
         "username",

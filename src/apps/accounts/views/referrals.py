@@ -14,7 +14,8 @@ from src.apps.accounts.serializers import (
 from src.apps.accounts.services.db import (
     get_all_referral_links,
     get_user_referral_links,
-    get_non_user_referral_links, apply_referral_link,
+    get_non_user_referral_links,
+    apply_referral_link,
 )
 
 

@@ -1,4 +1,3 @@
-from django.conf import settings
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser
@@ -6,9 +5,10 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.accounts.managers import UserManager
+from src.apps.accounts.models.settings import SettingsUserMixin
 
 
-class User(AbstractBaseUser, PermissionsMixin):
+class User(SettingsUserMixin, PermissionsMixin, AbstractBaseUser):
     username_validator = UnicodeUsernameValidator()
 
     id = models.BigIntegerField(
@@ -109,13 +109,6 @@ class User(AbstractBaseUser, PermissionsMixin):
         blank=True,
         verbose_name=_("avatar"),
         help_text=_("The avatar of the user."),
-    )
-    language = models.CharField(
-        max_length=10,
-        choices=settings.LANGUAGES,
-        default="en",
-        verbose_name=_("language"),
-        help_text=_("Preferred language of the user."),
     )
 
     EMAIL_FIELD = "email"

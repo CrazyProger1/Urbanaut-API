@@ -14,7 +14,7 @@ class I18NMiddleware:
         accept_language = request.headers.get("Accept-Language", settings.LANGUAGE_CODE)
 
         if request.user.is_authenticated and hasattr(request.user, "language"):
-            translation.activate(request.user.language)
+            translation.activate(request.user.settings.language)
         else:
             translation.activate(accept_language)
 
