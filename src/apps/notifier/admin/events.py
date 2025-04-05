@@ -8,7 +8,6 @@ from src.apps.notifier.models import (
     NewsletterEvent,
     CategoryEvent,
     NotificationEvent,
-    TriggerEvent,
 )
 
 
@@ -36,13 +35,6 @@ class CategoryEventInline(TabularInline):
     tab = True
 
 
-class TriggerEventInline(TabularInline):
-    model = TriggerEvent
-    extra = 0
-    verbose_name = _("Trigger")
-    verbose_name_plural = _("Triggers")
-    tab = True
-
 
 @admin.register(Event, site=site)
 class EventAdmin(ModelAdmin):
@@ -50,7 +42,6 @@ class EventAdmin(ModelAdmin):
         NewsletterEventInline,
         NotificationEventInline,
         CategoryEventInline,
-        TriggerEventInline,
     )
     list_display = (
         "id",

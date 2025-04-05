@@ -99,11 +99,6 @@ UNFOLD = {
                         "icon": "mail",
                         "link": reverse_lazy("admin:notifier_newsletter_changelist"),
                     },
-                    {
-                        "title": _("Triggers"),
-                        "icon": "flag",
-                        "link": reverse_lazy("admin:triggers_trigger_changelist"),
-                    },
                 ],
             },
             {

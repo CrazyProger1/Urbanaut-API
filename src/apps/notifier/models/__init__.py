@@ -6,5 +6,4 @@ from src.apps.notifier.models.events import (
     NewsletterEvent,
     NotificationEvent,
     CategoryEvent,
-    TriggerEvent,
 )

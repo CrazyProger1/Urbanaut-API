@@ -4,7 +4,7 @@ from src.apps.notifier.serializers import (
     NotificationListSerializer,
     NotificationRetrieveSerializer,
 )
-from src.apps.notifier.services import (
+from src.apps.notifier.services.db import (
     get_user_notifications,
     get_all_notifications,
     mark_read, annotate_is_read_notifications,

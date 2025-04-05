@@ -51,7 +51,6 @@ INSTALLED_APPS = [
     "src.apps.permissions.apps.PermissionsConfig",
     "src.apps.dashboard.apps.DashboardConfig",
     "src.apps.ratings.apps.RatingsConfig",
-    "src.apps.triggers.apps.TriggersConfig",
 ]
 
 MIDDLEWARE = [

@@ -2,6 +2,7 @@ from django.db import models
 
 from django.utils.translation import gettext_lazy as _
 
+from src.utils.celery import plan_task
 from src.utils.db import TimestampModelMixin
 
 
@@ -56,23 +57,6 @@ class CategoryEvent(models.Model):
     )
 
 
-class TriggerEvent(models.Model):
-    event = models.ForeignKey(
-        "Event",
-        on_delete=models.CASCADE,
-        blank=False,
-        null=False,
-        verbose_name=_("event"),
-    )
-    trigger = models.ForeignKey(
-        "triggers.Trigger",
-        on_delete=models.CASCADE,
-        blank=False,
-        null=False,
-        verbose_name=_("trigger"),
-    )
-
-
 class Event(TimestampModelMixin, models.Model):
     name = models.CharField(
         max_length=250,
@@ -108,14 +92,32 @@ class Event(TimestampModelMixin, models.Model):
         verbose_name=_("categories"),
         help_text=_("Recipient categories.")
     )
-
-    triggers = models.ManyToManyField(
-        "triggers.Trigger",
-        through=TriggerEvent,
+    triggered_at = models.DateTimeField(
+        verbose_name=_("triggered at"),
+        help_text=_("Date and time when the event should be/was triggered."),
+        null=True,
         blank=True,
-        verbose_name=_("triggers"),
-        help_text=_("Triggers included to this event.")
     )
+    is_active = models.BooleanField(
+        default=True,
+        verbose_name=_("is active"),
+        help_text=_("Is the event active?"),
+    )
+
+    def save(
+            self,
+            *args,
+            **kwargs,
+    ):
+        super().save(*args, **kwargs)
+        plan_task(
+            time=self.triggered_at,
+            task="src.apps.notifier.tasks.trigger_event",
+            args=(self.id,),
+            kwargs={},
+            remove_existing=True,
+            name=f"Event №{self.id}"
+        )
 
     def __str__(self):
         return self.name
