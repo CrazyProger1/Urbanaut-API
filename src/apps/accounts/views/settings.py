@@ -11,6 +11,7 @@ class SettingsViewSet(
     queryset = get_all_settings()
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = SettingsUpdateSerializer
+    lookup_field = None
 
     def get_object(self):
         return get_user_settings(self.request.user)
