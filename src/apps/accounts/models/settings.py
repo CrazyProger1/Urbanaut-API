@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from src.apps.accounts.enums import UITheme
 from src.utils.db import get_or_create_object
 
 
@@ -44,6 +45,13 @@ class Settings(models.Model):
         blank=False,
         verbose_name=_("notifications"),
         help_text=_("Enable notifications."),
+    )
+    theme = models.CharField(
+        max_length=10,
+        choices=UITheme,
+        default=UITheme.DARK,
+        verbose_name=_("theme"),
+        help_text=_("Preferred theme of the user."),
     )
 
     def __str__(self):
