@@ -11,7 +11,7 @@ from src.apps.accounts.serializers import (
 )
 from src.apps.accounts.services.db import (
     get_all_referral_links,
-    get_user_referral_links,
+    get_user_referral_links, get_non_user_referral_links,
 )
 
 
@@ -36,7 +36,10 @@ class ReferralLinkViewSet(
         return self.serializer_class
 
     def get_queryset(self):
-        return get_user_referral_links(self.request.user)
+        if self.action == "apply":
+            return get_non_user_referral_links(user=self.request.user)
+
+        return get_user_referral_links(user=self.request.user)
 
     @action(
         methods=("POST",),
