@@ -2,7 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from src.utils.db import create_object
+from src.utils.db import get_or_create_object
 
 
 class Settings(models.Model):
@@ -31,9 +31,10 @@ class SettingsUserMixin(models.Model):
         abstract = True
 
     def create_settings_if_not_exists(self):
-        if not self.settings:
-            self.settings = create_object(source=Settings)
-            self.save(update_fields=["settings"])
+        get_or_create_object(
+            source=Settings,
+            user=self,
+        )
 
     def save(
             self,

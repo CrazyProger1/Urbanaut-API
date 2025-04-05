@@ -6,6 +6,7 @@ from src.utils.db.shortcuts import (
     filter_objects,
     create_object,
     exclude_objects,
+    get_or_create_object,
 )
 from src.utils.db.types import (
     Source,
@@ -35,4 +36,5 @@ __all__ = [
     "CreatedAtModelMixin",
     "UpdatedAtModelMixin",
     "TimestampModelMixin",
+    "get_or_create_object",
 ]

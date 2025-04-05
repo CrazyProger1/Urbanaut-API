@@ -117,3 +117,18 @@ def get_object_or_none(
             f"{source.__name__} object not found with filters: {args}, {kwargs}"
         )
         return None
+
+
+def get_or_create_object(
+        source: Source[Model],
+        *args,
+        manager: str = "objects",
+        **kwargs,
+) -> tuple[Model, bool]:
+    queryset = get_queryset(source=source, manager=manager)
+    obj, created = queryset.get_or_create(*args, **kwargs)[0]
+    logger.debug(
+        f"{'Retrieved' if not created else 'Created'} {queryset.model.__name__} object: "
+        f"{obj} with filters: {args}, {kwargs}"
+    )
+    return obj, created
