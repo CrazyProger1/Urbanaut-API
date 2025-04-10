@@ -10,6 +10,5 @@ class NewsletterAdmin(ModelAdmin):
     list_display = (
         "id",
         "name",
-        "shown_at",
         "is_shown",
     )
