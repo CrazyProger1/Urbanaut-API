@@ -9,4 +9,7 @@ from src.apps.notifier.models import Newsletter
 class NewsletterAdmin(ModelAdmin):
     list_display = (
         "id",
+        "name",
+        "shown_at",
+        "is_shown",
     )
