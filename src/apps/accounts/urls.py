@@ -17,7 +17,7 @@ router.register("api/v1/referral_links", ReferralLinkViewSet)
 
 urlpatterns = [
     path("api/v1/languages", get_languages),
-    path("api/v1/settings", SettingsAPIView.as_view(), name="settings"),
+    path("api/v1/settings/", SettingsAPIView.as_view(), name="settings"),
 ]
 
 urlpatterns += router.urls
