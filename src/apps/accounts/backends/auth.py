@@ -73,7 +73,6 @@ class TMAAuthentication(authentication.BaseAuthentication):
 
     @safe_authentication()
     def validate_hash(self, parsed_data: dict):
-        logger.critical(f"Parsed data: {parsed_data}")
         data_hash = parsed_data.pop("hash")
         data_check_string = "\n".join(
             f"{key}={value}"
