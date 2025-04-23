@@ -42,6 +42,7 @@ class SettingsAPIView(APIView):
     def patch(self, request, *args, **kwargs):
         user = request.user
         user_settings = self.get_object()
+        logger.info("Got data: %s", request.data)
         serializer = SettingsUpdateSerializer(user_settings, data=request.data, partial=True)
         if serializer.is_valid():
             serializer.save()
