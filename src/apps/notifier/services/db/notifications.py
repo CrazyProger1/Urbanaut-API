@@ -19,7 +19,7 @@ def get_user_notifications(user: User) -> models.QuerySet[Notification]:
             recipients=user,
             is_shown=True,
         )
-        .order_by("-show_at")
+        .order_by("-shown_at")
     )
 
 
