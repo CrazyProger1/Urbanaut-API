@@ -12,10 +12,10 @@ from src.apps.accounts.views.referrals import ReferralViewSet
 
 router = routers.SimpleRouter()
 
-router.register("api/v1/users", UserViewSet)
-router.register("api/v1/teams", TeamViewSet)
-router.register("api/v1/referral_links", ReferralLinkViewSet)
-router.register("api/v1/referrals", ReferralViewSet)
+router.register("api/v1/users", UserViewSet, basename="users")
+router.register("api/v1/teams", TeamViewSet, basename="teams")
+router.register("api/v1/referral_links", ReferralLinkViewSet, basename="referral_links")
+router.register("api/v1/referrals", ReferralViewSet, basename="referrals")
 
 urlpatterns = [
     path("api/v1/languages", get_languages),
