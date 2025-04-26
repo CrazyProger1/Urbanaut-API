@@ -16,7 +16,11 @@ class UserListSerializer(serializers.ModelSerializer):
             "username",
             "rank",
             "nickname",
+            "avatar",
         )
+
+    def get_avatar(self, obj: User) -> str | None:
+        return obj.avatar.src if obj.avatar else None
 
 
 class UserRetrieveSerializer(serializers.ModelSerializer):

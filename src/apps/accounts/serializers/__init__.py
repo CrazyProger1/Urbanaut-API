@@ -10,6 +10,7 @@ from src.apps.accounts.serializers.referrals import (
     ReferralLinkListSerializer,
     ReferralLinkRetrieveSerializer,
     ReferralLinkApplySerializer,
+    ReferralUserListSerializer,
 )
 from src.apps.accounts.serializers.settings import (
     SettingsRetrieveSerializer,

@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from src.apps.accounts.models import ReferralLink
+from src.apps.accounts.serializers import UserListSerializer
 
 
 class ReferralLinkListSerializer(serializers.ModelSerializer):
@@ -22,4 +23,8 @@ class ReferralLinkRetrieveSerializer(serializers.ModelSerializer):
 
 
 class ReferralLinkApplySerializer(serializers.Serializer):
+    pass
+
+
+class ReferralUserListSerializer(UserListSerializer):
     pass

@@ -2,20 +2,25 @@ from django.utils.translation import gettext as _
 from rest_framework import (
     viewsets,
     mixins,
-    permissions, response,
+    permissions,
+    response,
 )
 from rest_framework.decorators import action
 from rest_framework.exceptions import PermissionDenied
 
 from src.apps.accounts.serializers import (
     ReferralLinkListSerializer,
-    ReferralLinkRetrieveSerializer, ReferralLinkApplySerializer,
+    ReferralLinkRetrieveSerializer,
+    ReferralLinkApplySerializer,
+    ReferralUserListSerializer,
 )
 from src.apps.accounts.services.db import (
     get_all_referral_links,
     get_user_referral_links,
     get_non_user_referral_links,
     apply_referral_link,
+    get_all_users,
+    get_user_referrals,
 )
 
 
@@ -27,17 +32,15 @@ class ReferralLinkViewSet(
     queryset = get_all_referral_links()
     permission_classes = (permissions.IsAuthenticated,)
     serializer_class = ReferralLinkListSerializer
+    serializer_classes = {
+        "list": ReferralLinkListSerializer,
+        "retrieve": ReferralLinkRetrieveSerializer,
+        "apply": ReferralLinkApplySerializer,
+    }
     lookup_field = "code"
 
     def get_serializer_class(self):
-        match self.action:
-            case "list":
-                return ReferralLinkListSerializer
-            case "retrieve":
-                return ReferralLinkRetrieveSerializer
-            case "apply":
-                return ReferralLinkApplySerializer
-        return self.serializer_class
+        return self.serializer_classes.get(self.action, self.serializer_class)
 
     def get_queryset(self):
         if self.action == "apply":
@@ -66,3 +69,18 @@ class ReferralLinkViewSet(
                 "detail": _("Referral link applied successfully."),
             },
         )
+
+
+class ReferralViewSet(
+    viewsets.GenericViewSet,
+    mixins.ListModelMixin,
+):
+    queryset = get_all_users()
+    serializer_classes = {
+        "list": ReferralUserListSerializer,
+    }
+    serializer_class = ReferralUserListSerializer
+    permission_classes = (permissions.IsAuthenticated,)
+
+    def get_queryset(self):
+        return get_user_referrals(user=self.request.user)

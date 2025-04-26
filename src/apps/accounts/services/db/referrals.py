@@ -1,6 +1,6 @@
 from django.db import models
 
-from src.apps.accounts.models import ReferralLink, ReferralLinkUsage
+from src.apps.accounts.models import ReferralLink, ReferralLinkUsage, User
 from src.utils.db import get_all_objects, filter_objects, get_object_or_none
 
 
@@ -23,3 +23,17 @@ def apply_referral_link(user, link: ReferralLink) -> bool:
 
     link.referrals.add(user)
     return True
+
+
+def get_user_referrals(user) -> models.QuerySet[User]:
+    links = ReferralLink.objects.filter(user=user)
+    return (
+        ReferralLinkUsage.objects
+        .filter(link__in=links)
+        .select_related("user")
+        .values("user")
+    )
+
+
+def get_link_referrals(link: ReferralLink) -> models.QuerySet[User]:
+    return link.referrals.all()
