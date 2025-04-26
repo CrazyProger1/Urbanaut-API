@@ -26,7 +26,7 @@ def apply_referral_link(user, link: ReferralLink) -> bool:
 
 
 def get_user_referrals(user) -> models.QuerySet[User]:
-    links = ReferralLink.objects.filter(user=user)
+    links = ReferralLink.objects.filter(referrer=user)
     return (
         ReferralLinkUsage.objects
         .filter(link__in=links)
