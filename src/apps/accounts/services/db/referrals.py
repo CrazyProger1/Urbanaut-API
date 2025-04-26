@@ -30,8 +30,8 @@ def get_user_referrals(user) -> models.QuerySet[User]:
     return (
         ReferralLinkUsage.objects
         .filter(link__in=links)
-        .select_related("user")
-        .values("user")
+        .select_related("referral")
+        .values("referral")
     )
 
 
