@@ -1,4 +1,5 @@
 from django.db import models
+from django.db.models import Subquery
 
 from src.apps.accounts.models import ReferralLink, ReferralLinkUsage, User
 from src.utils.db import get_all_objects, filter_objects, get_object_or_none
@@ -27,12 +28,12 @@ def apply_referral_link(user, link: ReferralLink) -> bool:
 
 def get_user_referrals(user) -> models.QuerySet[User]:
     links = ReferralLink.objects.filter(referrer=user)
-    return (
+    user_ids = (
         ReferralLinkUsage.objects
         .filter(link__in=links)
-        .select_related("referral")
-        .values("referral")
+        .values("referral_id")
     )
+    return User.objects.filter(id__in=Subquery(user_ids))
 
 
 def get_link_referrals(link: ReferralLink) -> models.QuerySet[User]:
