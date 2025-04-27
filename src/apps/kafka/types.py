@@ -33,12 +33,14 @@ class BaseKafkaConsumer(ABC):
 
 
 class BaseMessageDeserializer(ABC):
+    @classmethod
     @abstractmethod
-    def deserialize(self, value: bytes) -> dict:
+    def deserialize(cls, value: bytes) -> dict:
         ...
 
 
 class BaseMessageSerializer(ABC):
+    @classmethod
     @abstractmethod
-    def serialize(self, value: dict) -> bytes:
+    def serialize(cls, value: dict) -> bytes:
         ...
