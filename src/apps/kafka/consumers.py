@@ -12,7 +12,7 @@ from src.apps.kafka.deserializers import JSONMessageDeserializer
 class KafkaConsumer(BaseKafkaConsumer, ABC):
     topic: str | StrEnum
     group_id: str
-    deserializer: BaseMessageDeserializer = JSONMessageDeserializer
+    deserializer: type[BaseMessageDeserializer] = JSONMessageDeserializer
 
     def __init__(self):
         self._consumer: kafka.KafkaConsumer | None = None
@@ -22,7 +22,7 @@ class KafkaConsumer(BaseKafkaConsumer, ABC):
         ...
 
     def _deserialize(self, value: bytes) -> dict:
-        return json.loads(value.decode("utf-8"))
+        return self.deserializer.deserialize(value=value)
 
     def start(self, servers: Iterable[str] = None):
         if not servers:
