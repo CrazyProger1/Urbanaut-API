@@ -2,18 +2,21 @@ from argparse import ArgumentParser
 
 from django.core.management.base import BaseCommand
 
-from src.apps.kafka.consumers.types import BaseKafkaConsumer
+from src.apps.kafka.utils import BaseKafkaConsumer
 
 
 class Command(BaseCommand):
-    help = "Run Kafka"
+    help = "Run Kafka consumer"
 
     def add_arguments(self, parser: ArgumentParser) -> None:
-        consumers = BaseKafkaConsumer.names
         parser.add_argument(
             "consumer",
-            choices=consumers,
+            choices=tuple(BaseKafkaConsumer.names),
+            required=True,
+            help="Select which Kafka consumer to run.",
         )
 
     def handle(self, *args, **options):
-        pass
+        name = options["consumer"]
+        consumer = BaseKafkaConsumer.get_consumer(name=name)
+        consumer.start()

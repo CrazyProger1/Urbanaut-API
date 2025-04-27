@@ -1,15 +1,16 @@
 import gc
+import inspect
 from typing import Generator
 
 
-def subclasses(cls: type, max_level: int = -1) -> Generator:
+def subclasses(cls: type, max_level: int = -1, ignore_abstract: bool = False) -> Generator:
     if max_level == 0:
         return
 
     for subcls in cls.__subclasses__():
-        yield subcls
-        for subsubcls in subclasses(subcls, max_level - 1):
-            yield subsubcls
+        if not inspect.isabstract(subcls):
+            yield subcls
+            yield from subclasses(subcls, max_level - 1, ignore_abstract=ignore_abstract)
 
 
 def instances(cls: type, precise: bool = True) -> Generator:

@@ -7,7 +7,7 @@ from src.utils.clsutils import subclasses
 class BaseKafkaConsumer(ABC):
 
     @abstractmethod
-    def start(self, servers: Iterable[str] = ()):
+    def start(self, servers: Iterable[str] = None):
         ...
 
     @abstractmethod
@@ -25,7 +25,19 @@ class BaseKafkaConsumer(ABC):
 
     @classmethod
     def get_consumer(cls, name: str) -> "BaseKafkaConsumer":
-        for subcls in subclasses(cls):
+        for subcls in subclasses(cls, ignore_abstract=True):
             if subcls.name == name:
                 return subcls
         raise ValueError(f"Consumer not found: {name}")
+
+
+class BaseMessageDeserializer(ABC):
+    @abstractmethod
+    def deserialize(self, value: bytes) -> dict:
+        ...
+
+
+class BaseMessageSerializer(ABC):
+    @abstractmethod
+    def serialize(self, value: dict) -> bytes:
+        ...
