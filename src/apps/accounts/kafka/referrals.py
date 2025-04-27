@@ -1,3 +1,6 @@
+import logging
+
+from django.conf import settings
 from kafka.consumer.fetcher import ConsumerRecord
 
 from src.apps.accounts.services.db import get_user_or_none
@@ -7,18 +10,33 @@ from src.apps.accounts.services.db.referrals import (
 )
 from src.apps.kafka.consumers import KafkaConsumer
 
+logger = logging.getLogger(__name__)
+
 
 class ReferralKafkaConsumer(KafkaConsumer):
-    topic = "user.referral.apply"
-    group_id = "referral_group"
+    topic = settings.KAFKA_TOPIC_APPLY_REFERRAL
+    group_id = settings.KAFKA_GROUP_REFERRAL
 
     def handle(self, message: ConsumerRecord) -> None:
-        value = message.value
-        user_id = value["user_id"]
-        code = value["code"]
-        user = get_user_or_none(id=user_id)
-        link = get_referral_link_or_none(code=code)
-        apply_referral_link(
-            user=user,
-            link=link,
-        )
+        try:
+            value = message.value
+            user_id = value["user_id"]
+            code = value["code"]
+            user = get_user_or_none(id=user_id)
+
+            if not user:
+                logger.warning("Failed to find user: %s", user_id)
+                return
+
+            link = get_referral_link_or_none(code=code)
+
+            if not link:
+                logger.warning("Failed to find referral link with code: %s", code)
+                return
+
+            apply_referral_link(
+                user=user,
+                link=link,
+            )
+        except Exception as e:
+            logger.warning(f"Failed to handle %s. Got %s. Error: %s", self.topic, message.value, e)

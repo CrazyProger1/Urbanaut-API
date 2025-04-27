@@ -17,4 +17,5 @@ include(
     "permissions.py",
     "unfold.py",
     "telegram.py",
+    "kafka.py",
 )
