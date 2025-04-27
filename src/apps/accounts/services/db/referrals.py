@@ -22,6 +22,9 @@ def apply_referral_link(user, link: ReferralLink) -> bool:
     if applied_link:
         return False
 
+    if link.referrer == user:
+        return False
+
     link.referrals.add(user)
     return True
 

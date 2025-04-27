@@ -34,9 +34,14 @@ class ReferralKafkaConsumer(KafkaConsumer):
                 logger.warning("Failed to find referral link with code: %s", code)
                 return
 
-            apply_referral_link(
+            is_applied = apply_referral_link(
                 user=user,
                 link=link,
             )
+            if not is_applied:
+                logger.warning("Failed to apply referral link: %s", link)
+                return
+
+            logger.info("Successfully applied referral link: %s", link)
         except Exception as e:
-            logger.warning(f"Failed to handle %s. Got %s. Error: %s", self.topic, message.value, e)
+            logger.warning(f"Failed to handle %s. Got %s", self.topic, message.value, exc_info=e)
