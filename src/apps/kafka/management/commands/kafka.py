@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 
 from django.core.management.base import BaseCommand
 
-from src.apps.kafka.utils import BaseKafkaConsumer
+from src.apps.kafka.types import BaseKafkaConsumer
 
 
 class Command(BaseCommand):
