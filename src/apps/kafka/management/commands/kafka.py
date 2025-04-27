@@ -15,7 +15,6 @@ class Command(BaseCommand):
     def add_arguments(self, parser: ArgumentParser) -> None:
         import src.apps.accounts.kafka
 
-        logger.info(str(tuple(*subclasses(BaseKafkaConsumer))))
         names = tuple(BaseKafkaConsumer.names)
 
         logger.info("Available consumers: %s", names)
