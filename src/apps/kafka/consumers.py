@@ -4,6 +4,7 @@ from enum import StrEnum
 from typing import Iterable
 
 import kafka
+from kafka.consumer.fetcher import ConsumerRecord
 
 from src.apps.kafka.types import BaseKafkaConsumer, BaseMessageDeserializer
 from src.apps.kafka.deserializers import JSONMessageDeserializer
@@ -18,7 +19,7 @@ class KafkaConsumer(BaseKafkaConsumer, ABC):
         self._consumer: kafka.KafkaConsumer | None = None
 
     @abstractmethod
-    def handle(self, message) -> None:
+    def handle(self, message: ConsumerRecord) -> None:
         ...
 
     def _deserialize(self, value: bytes) -> dict:

@@ -1,1 +1,1 @@
-from src.apps.accounts.kafka.consumers import ReferralKafkaConsumer
+from src.apps.accounts.kafka.referrals import ReferralKafkaConsumer

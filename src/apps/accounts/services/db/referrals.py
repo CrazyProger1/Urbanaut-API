@@ -38,3 +38,7 @@ def get_user_referrals(user) -> models.QuerySet[User]:
 
 def get_link_referrals(link: ReferralLink) -> models.QuerySet[User]:
     return link.referrals.all()
+
+
+def get_referral_link_or_none(**data) -> ReferralLink:
+    return get_object_or_none(source=ReferralLink, **data)
