@@ -12,7 +12,6 @@ class Command(BaseCommand):
         parser.add_argument(
             "consumer",
             choices=tuple(BaseKafkaConsumer.names),
-            required=True,
             help="Select which Kafka consumer to run.",
         )
 
