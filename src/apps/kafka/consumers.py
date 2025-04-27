@@ -24,6 +24,8 @@ class KafkaConsumer(BaseKafkaConsumer, ABC):
         return json.loads(value.decode("utf-8"))
 
     def start(self, servers: Iterable[str] = None):
+        if not servers:
+            servers = ("localhost:9092",)
         self._consumer = kafka.KafkaConsumer(
             self.topic
             if isinstance(self.topic, str)

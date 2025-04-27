@@ -13,11 +13,7 @@ class Command(BaseCommand):
     help = "Run Kafka consumer"
 
     def add_arguments(self, parser: ArgumentParser) -> None:
-        import src.apps.accounts.kafka
-
         names = tuple(BaseKafkaConsumer.names)
-
-        logger.info("Available consumers: %s", names)
 
         parser.add_argument(
             "consumer",
@@ -28,5 +24,5 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         name = options["consumer"]
-        consumer = BaseKafkaConsumer.get_consumer(name=name)()
-        consumer.start()
+        consumer: BaseKafkaConsumer = BaseKafkaConsumer.get_consumer(name=name)()
+        consumer.start(servers=("localhost:9092",))
