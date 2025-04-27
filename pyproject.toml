@@ -32,6 +32,7 @@ django-simple-history = "^3.8.0"
 drf-nested-routers = "^0.94.1"
 redis = "^5.2.1"
 aiogram = "^3.19.0"
+kafka-python = "^2.1.5"
 
 
 [tool.poetry.group.dev.dependencies]
