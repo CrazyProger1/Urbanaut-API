@@ -49,7 +49,7 @@ class Settings(models.Model):
     theme = models.CharField(
         max_length=10,
         choices=UITheme,
-        default=UITheme.DARK,
+        default=UITheme.LIGHT,
         verbose_name=_("theme"),
         help_text=_("Preferred theme of the user."),
     )
