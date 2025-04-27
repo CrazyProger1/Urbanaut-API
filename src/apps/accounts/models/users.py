@@ -9,7 +9,7 @@ from src.apps.accounts.models.settings import SettingsUserModelMixin
 
 
 class User(SettingsUserModelMixin, PermissionsMixin, AbstractBaseUser):
-    from src.apps.accounts.models import Rank
+    from src.apps.accounts.models.ranks import Rank
     username_validator = UnicodeUsernameValidator()
 
     id = models.BigIntegerField(
