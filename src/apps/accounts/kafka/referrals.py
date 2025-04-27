@@ -3,7 +3,7 @@ import logging
 from django.conf import settings
 from kafka.consumer.fetcher import ConsumerRecord
 
-from src.apps.accounts.services.db import get_user_or_none, get_user_or_create
+from src.apps.accounts.services.db import get_user_or_create
 from src.apps.accounts.services.db.referrals import (
     get_referral_link_or_none,
     apply_referral_link,
@@ -22,7 +22,15 @@ class ReferralKafkaConsumer(KafkaConsumer):
             value = message.value
             user_id = value["user_id"]
             code = value["code"]
+
             user = get_user_or_create(id=user_id)
+
+            user.first_name = value.get("first_name")
+            user.last_name = value.get("last_name")
+            user.username = value.get("username")
+
+            user.save()
+
             link = get_referral_link_or_none(code=code)
 
             if not link:
