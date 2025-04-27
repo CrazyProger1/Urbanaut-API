@@ -5,11 +5,11 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.accounts.managers import UserManager
-from src.apps.accounts.models import Rank
 from src.apps.accounts.models.settings import SettingsUserModelMixin
 
 
 class User(SettingsUserModelMixin, PermissionsMixin, AbstractBaseUser):
+    from src.apps.accounts.models import Rank
     username_validator = UnicodeUsernameValidator()
 
     id = models.BigIntegerField(
