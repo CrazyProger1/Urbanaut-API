@@ -15,11 +15,13 @@ class BaseKafkaConsumer(ABC):
         ...
 
     @classmethod
+    @property
     def name(cls) -> str:
         return cls.__name__.lower()
 
     @classmethod
-    def get_names(cls) -> Iterable[str]:
+    @property
+    def names(cls) -> Iterable[str]:
         return tuple(sub.name for sub in subclasses(cls, ignore_abstract=True))
 
     @classmethod
