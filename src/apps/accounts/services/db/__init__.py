@@ -17,3 +17,4 @@ from src.apps.accounts.services.db.referrals import (
     get_link_referrals,
 )
 from src.apps.accounts.services.db.settings import get_user_settings, get_all_settings
+from src.apps.accounts.services.db.ranks import get_default_rank

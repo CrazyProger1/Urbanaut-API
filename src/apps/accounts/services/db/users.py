@@ -1,5 +1,6 @@
 from django.contrib.auth import get_user_model
 
+from src.apps.accounts.services.db.ranks import get_default_rank
 from src.utils.db import get_all_objects, get_object_or_none
 
 User = get_user_model()
@@ -21,4 +22,6 @@ def get_user_or_create(**data) -> User | None:
     try:
         return User.objects.get(**data)
     except User.DoesNotExist:
+        if not data.get("rank"):
+            data["rank"] = get_default_rank()
         return User.objects.create_user(**data)

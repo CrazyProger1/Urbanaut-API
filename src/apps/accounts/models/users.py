@@ -9,7 +9,6 @@ from src.apps.accounts.models.settings import SettingsUserModelMixin
 
 
 class User(SettingsUserModelMixin, PermissionsMixin, AbstractBaseUser):
-    from src.apps.accounts.models.ranks import Rank
     username_validator = UnicodeUsernameValidator()
 
     id = models.BigIntegerField(
@@ -82,11 +81,10 @@ class User(SettingsUserModelMixin, PermissionsMixin, AbstractBaseUser):
     )
     rank = models.ForeignKey(
         "Rank",
-        on_delete=models.SET_DEFAULT,
+        on_delete=models.CASCADE,
         related_name="users",
         blank=False,
         null=False,
-        default=Rank.objects.first,
         verbose_name=_("rank"),
         help_text=_("The rank of the user."),
     )
