@@ -5,6 +5,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.accounts.managers import UserManager
+from src.apps.accounts.models import Rank
 from src.apps.accounts.models.settings import SettingsUserModelMixin
 
 
@@ -81,10 +82,11 @@ class User(SettingsUserModelMixin, PermissionsMixin, AbstractBaseUser):
     )
     rank = models.ForeignKey(
         "Rank",
-        on_delete=models.CASCADE,
+        on_delete=models.SET_DEFAULT,
         related_name="users",
         blank=False,
         null=False,
+        default=Rank.objects.first,
         verbose_name=_("rank"),
         help_text=_("The rank of the user."),
     )
