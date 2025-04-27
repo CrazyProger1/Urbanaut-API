@@ -8,9 +8,13 @@ def subclasses(cls: type, max_level: int = -1, ignore_abstract: bool = False) ->
         return
 
     for subcls in cls.__subclasses__():
-        if not inspect.isabstract(subcls):
+        if ignore_abstract:
+            if not inspect.isabstract(subcls):
+                yield subcls
+
+        else:
             yield subcls
-            yield from subclasses(subcls, max_level - 1, ignore_abstract=ignore_abstract)
+        yield from subclasses(subcls, max_level - 1, ignore_abstract=ignore_abstract)
 
 
 def instances(cls: type, precise: bool = True) -> Generator:
