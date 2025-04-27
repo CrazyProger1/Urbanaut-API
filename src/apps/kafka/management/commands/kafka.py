@@ -28,5 +28,5 @@ class Command(BaseCommand):
 
     def handle(self, *args, **options):
         name = options["consumer"]
-        consumer = BaseKafkaConsumer.get_consumer(name=name)
+        consumer = BaseKafkaConsumer.get_consumer(name=name)()
         consumer.start()

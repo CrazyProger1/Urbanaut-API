@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Iterable
+from typing import Iterable, Self, Type
 
 from src.utils.clsutils import subclasses
 
@@ -25,7 +25,7 @@ class BaseKafkaConsumer(ABC):
         return tuple(sub.name for sub in subclasses(cls, ignore_abstract=True))
 
     @classmethod
-    def get_consumer(cls, name: str) -> "BaseKafkaConsumer":
+    def get_consumer(cls, name: str) -> Type[Self]:
         for subcls in subclasses(cls, ignore_abstract=True):
             if subcls.name == name:
                 return subcls
