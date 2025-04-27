@@ -35,12 +35,14 @@ class User(SettingsUserModelMixin, PermissionsMixin, AbstractBaseUser):
     first_name = models.CharField(
         max_length=150,
         blank=True,
+        null=True,
         verbose_name=_("first name"),
         help_text=_("First name in telegram."),
     )
     last_name = models.CharField(
         max_length=150,
         blank=True,
+        null=True,
         verbose_name=_("last name"),
         help_text=_("Last name in telegram."),
     )
