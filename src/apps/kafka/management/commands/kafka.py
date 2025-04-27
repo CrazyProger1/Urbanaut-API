@@ -9,12 +9,13 @@ class Command(BaseCommand):
     help = "Run Kafka consumer"
 
     def add_arguments(self, parser: ArgumentParser) -> None:
+        import src.apps.accounts.kafka
         names = tuple(BaseKafkaConsumer.names)
-        print(names)
         parser.add_argument(
             "consumer",
+            type=str,
             choices=names,
-            help="Select which Kafka consumer to run.",
+            help=f"Name of the Kafka consumer to run. Available choices: {', '.join(names)}"
         )
 
     def handle(self, *args, **options):
