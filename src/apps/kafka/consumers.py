@@ -11,6 +11,7 @@ from src.apps.kafka.deserializers import JSONMessageDeserializer
 
 class KafkaConsumer(BaseKafkaConsumer, ABC):
     topic: str | StrEnum
+    group_id: str
     deserializer: BaseMessageDeserializer = JSONMessageDeserializer
 
     def __init__(self):
@@ -31,7 +32,10 @@ class KafkaConsumer(BaseKafkaConsumer, ABC):
             if isinstance(self.topic, str)
             else self.topic.value,
             bootstrap_servers=servers,
-            value_deserializer=self._deserialize
+            value_deserializer=self._deserialize,
+            group_id=self.group_id,
+            auto_offset_reset="earliest",
+            enable_auto_commit=True,
         )
         for message in self._consumer:
             self.handle(message=message)
