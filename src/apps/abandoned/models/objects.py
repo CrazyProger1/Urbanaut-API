@@ -86,7 +86,7 @@ class AbandonedObject(TimestampModelMixin, RatingMixin, PermissionBaseModel):
     )
     security_level = models.CharField(
         choices=SecurityLevel,
-        default=SecurityLevel.NONE,
+        default=SecurityLevel.NO,
         null=False,
         blank=False,
         verbose_name=_("security Level"),

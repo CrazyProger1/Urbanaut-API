@@ -25,8 +25,11 @@ class EventStatus(models.TextChoices):
 
 
 class SecurityLevel(models.TextChoices):
-    NONE = "NONE", _("NONE")
-
+    NO = "NO", _("NO")
+    YES = "YES", _("YES")
+    YES_WITH_DOGS = "YES_WITH_DOGS", _("YES WITH DOGS")
+    YES_WITH_WEAPONS = "YES_WITH_WEAPONS", _("YES WITH WEAPONS")
+    YES_MILITARY = "YES_MILITARY", _("YES_MILITARY")
 
 class PreservationLevel(models.TextChoices):
     LOW = "LOW", _("LOW")
