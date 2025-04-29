@@ -31,6 +31,7 @@ class SecurityLevel(models.TextChoices):
     YES_WITH_WEAPONS = "YES_WITH_WEAPONS", _("YES WITH WEAPONS")
     YES_MILITARY = "YES_MILITARY", _("YES_MILITARY")
 
+
 class PreservationLevel(models.TextChoices):
     LOW = "LOW", _("LOW")
     MEDIUM = "MEDIUM", _("MEDIUM")

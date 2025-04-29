@@ -1,13 +1,14 @@
 from django.contrib.auth import get_user_model
 from rest_framework import serializers
 
+from src.apps.accounts.serializers.ranks import RankListSerializer
 from src.apps.accounts.serializers.settings import SettingsRetrieveSerializer
 
 User = get_user_model()
 
 
 class UserListSerializer(serializers.ModelSerializer):
-    rank = serializers.CharField(source="rank.key")
+    rank = RankListSerializer(read_only=True)
 
     class Meta:
         model = User

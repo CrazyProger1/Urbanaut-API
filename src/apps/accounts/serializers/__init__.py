@@ -16,3 +16,6 @@ from src.apps.accounts.serializers.settings import (
     SettingsRetrieveSerializer,
     SettingsUpdateSerializer,
 )
+from src.apps.accounts.serializers.ranks import (
+    RankListSerializer,
+)
