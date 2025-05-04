@@ -37,6 +37,9 @@ class UserAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
     list_select_related = ("rank",)
 
     def rank_name(self, obj):
-        return obj.rank.name
+        rank = obj.rank
+
+        if rank:
+            return rank.name
 
     rank_name.short_description = _("Rank")
