@@ -12,7 +12,7 @@ class AbandonedAreaAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin)
     list_display = (
         "id",
         "name",
-        "area",
+        "parent",
         "rating",
         "created_at",
     )
