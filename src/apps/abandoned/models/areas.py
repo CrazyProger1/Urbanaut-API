@@ -15,7 +15,7 @@ class AbandonedArea(TimestampModelMixin, RatingMixin, PermissionBaseModel):
         verbose_name = _("area")
         verbose_name_plural = _("areas")
 
-    area = models.ForeignKey(
+    parent = models.ForeignKey(
         "self",
         on_delete=models.CASCADE,
         related_name="areas",

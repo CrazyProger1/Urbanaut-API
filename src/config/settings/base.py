@@ -33,6 +33,7 @@ INSTALLED_APPS = [
     "modeltranslation",
     "corsheaders",
     "cities",
+    "django_extensions",
     "rest_framework",
     "django_filters",
     "simple_history",

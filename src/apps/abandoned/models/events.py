@@ -8,7 +8,6 @@ from src.utils.db.models import TimestampModelMixin
 User = get_user_model()
 
 
-
 class Event(TimestampModelMixin, models.Model):
     class Meta:
         verbose_name = _("event")
@@ -41,7 +40,7 @@ class Event(TimestampModelMixin, models.Model):
         help_text=_("Users that participate in this trip."),
         through="Participation",
     )
-    organizer = models.ForeignKey(
+    created_by = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
         related_name="my_events",
