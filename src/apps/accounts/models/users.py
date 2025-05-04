@@ -86,9 +86,8 @@ class User(SettingsUserModelMixin, PermissionsMixin, AbstractBaseUser):
         "Rank",
         on_delete=models.CASCADE,
         related_name="users",
-        blank=False,
-        null=False,
-        default=Rank.objects.get_or_create(name="Newbie", key="newbie")[0].pk,
+        blank=True,
+        null=True,
         verbose_name=_("rank"),
         help_text=_("The rank of the user."),
     )
