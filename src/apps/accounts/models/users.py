@@ -6,6 +6,7 @@ from django.utils.translation import gettext_lazy as _
 
 from src.apps.accounts.managers import UserManager
 from src.apps.accounts.models.settings import SettingsUserModelMixin
+from src.apps.accounts.models.ranks import Rank
 
 
 class User(SettingsUserModelMixin, PermissionsMixin, AbstractBaseUser):
@@ -87,6 +88,7 @@ class User(SettingsUserModelMixin, PermissionsMixin, AbstractBaseUser):
         related_name="users",
         blank=False,
         null=False,
+        default=Rank.objects.get_or_create(name="Newbie", key="newbie")[0].pk,
         verbose_name=_("rank"),
         help_text=_("The rank of the user."),
     )
