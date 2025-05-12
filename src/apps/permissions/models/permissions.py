@@ -64,7 +64,7 @@ class ModelPermission(models.Model):
     )
 
     def __str__(self):
-        return f"{type(self).__name__}(id={self.pk}, model={self.model})"
+        return f"Per-Model permission for {self.model.__name__}"
 
 
 class UserModelPermission(models.Model):
@@ -88,7 +88,7 @@ class UserModelPermission(models.Model):
     has_create_permission = models.BooleanField(default=True)
 
     def __str__(self):
-        return f"{type(self).__name__}(id={self.pk})"
+        return f"User-Model permission for user №{self.user_id}"
 
 
 class ObjectPermission(models.Model):
@@ -101,7 +101,7 @@ class ObjectPermission(models.Model):
     deletebility_level = models.PositiveSmallIntegerField(default=0, choices=settings.PERMISSION_GROUPS)
 
     def __str__(self):
-        return f"{type(self).__name__}(id={self.pk})"
+        return f"Per-Object permissions"
 
 
 class UserObjectPermission(models.Model):
@@ -128,4 +128,4 @@ class UserObjectPermission(models.Model):
     )
 
     def __str__(self):
-        return f"{type(self).__name__}(id={self.pk})"
+        return f"User-Object permission for user №{self.user_id}"
