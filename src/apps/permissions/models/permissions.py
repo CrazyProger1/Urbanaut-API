@@ -101,7 +101,7 @@ class ObjectPermission(models.Model):
     deletebility_level = models.PositiveSmallIntegerField(default=0, choices=settings.PERMISSION_GROUPS)
 
     def __str__(self):
-        return f"Per-Object permissions"
+        return f"Per-Object permission"
 
 
 class UserObjectPermission(models.Model):
