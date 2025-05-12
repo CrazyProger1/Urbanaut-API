@@ -157,4 +157,4 @@ class AbandonedObject(TimestampModelMixin, RatingMixin, PermissionBaseModel):
             return photo.src
 
     def __str__(self):
-        return f"Object(name={self.name})"
+        return self.name
