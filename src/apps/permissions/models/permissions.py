@@ -64,7 +64,7 @@ class ModelPermission(models.Model):
     )
 
     def __str__(self):
-        return f"Per-Model permission for {self.model.__name__}"
+        return f"Model permission for {self.model}"
 
 
 class UserModelPermission(models.Model):
@@ -101,7 +101,7 @@ class ObjectPermission(models.Model):
     deletebility_level = models.PositiveSmallIntegerField(default=0, choices=settings.PERMISSION_GROUPS)
 
     def __str__(self):
-        return f"Per-Object permission"
+        return f"Object permission"
 
 
 class UserObjectPermission(models.Model):
