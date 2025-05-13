@@ -18,6 +18,7 @@ class BlogPostListSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "topic",
+            "summary",
             "created_by",
             "created_at",
             "updated_at",

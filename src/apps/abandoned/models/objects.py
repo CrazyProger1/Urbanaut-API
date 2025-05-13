@@ -76,7 +76,9 @@ class AbandonedObject(TimestampModelMixin, RatingMixin, PermissionBaseModel):
     )
     short_description = models.CharField(
         verbose_name=_("short description"),
-        help_text=_("Short description of the abandoned object for the objects page.")
+        help_text=_("Short description of the abandoned object for the objects page."),
+        null=False,
+        blank=False,
     )
     description = MDTextField(
         verbose_name=_("description"),

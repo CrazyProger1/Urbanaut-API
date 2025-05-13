@@ -5,7 +5,7 @@ from src.apps.blog.models import BlogPost
 
 
 class BlogPostTranslationOptions(TranslationOptions):
-    fields = ("title", "content")
+    fields = ("title", "content", "summary")
 
 
 translator.register(BlogPost, BlogPostTranslationOptions)

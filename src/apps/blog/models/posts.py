@@ -30,6 +30,12 @@ class BlogPost(TimestampModelMixin, PermissionBaseModel):
         null=False,
         blank=False,
     )
+    summary = models.CharField(
+        verbose_name=_("summary"),
+        help_text=_("Brief summary of the post for the posts page."),
+        null=False,
+        blank=False,
+    )
     content = models.TextField(
         verbose_name=_("content"),
         help_text=_("Content of the blog post."),
