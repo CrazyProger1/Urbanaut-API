@@ -45,6 +45,17 @@ UNFOLD = {
         "show_all_applications": True,
         "navigation": [
             {
+                "title": _("Settings"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Terms"),
+                        "icon": "gavel",
+                        "link": reverse_lazy("admin:accounts_terms_changelist"),
+                    },
+                ],
+            },
+            {
                 "title": _("Accounts"),
                 "collapsible": True,
                 "items": [
