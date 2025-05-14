@@ -5,7 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from src.utils.db import TimestampModelMixin
 
 
-class Terms(models.Model, TimestampModelMixin):
+class Terms(TimestampModelMixin, models.Model):
     class Meta:
         verbose_name = _("Terms of Usage")
         verbose_name_plural = _("Terms of Usage")
