@@ -4,7 +4,10 @@ from src.apps.abandoned.models import Event
 
 
 class EventTranslationOptions(TranslationOptions):
-    fields = ("name",)
+    fields = (
+        "name",
+        "short_description",
+    )
 
 
 translator.register(Event, EventTranslationOptions)
