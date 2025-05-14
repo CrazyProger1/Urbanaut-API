@@ -3,12 +3,13 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.abandoned.enums import EventStatus
+from src.apps.permissions.models import PermissionBaseModel
 from src.utils.db.models import TimestampModelMixin
 
 User = get_user_model()
 
 
-class Event(TimestampModelMixin, models.Model):
+class Event(TimestampModelMixin, PermissionBaseModel):
     class Meta:
         verbose_name = _("event")
         verbose_name_plural = _("events")
@@ -17,6 +18,12 @@ class Event(TimestampModelMixin, models.Model):
         max_length=250,
         verbose_name=_("name"),
         help_text=_("Name of the event."),
+        null=False,
+        blank=False,
+    )
+    short_description = models.CharField(
+        verbose_name=_("short description"),
+        help_text=_("Short description of the event for the events page."),
         null=False,
         blank=False,
     )

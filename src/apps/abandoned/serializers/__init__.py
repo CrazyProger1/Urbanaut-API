@@ -12,3 +12,7 @@ from src.apps.abandoned.serializers.objects import (
     AbandonedObjectRetrieveSerializer,
     AbandonedObjectCreateSerializer,
 )
+from src.apps.abandoned.serializers.events import (
+    EventListSerializer,
+    EventRetrieveSerializer,
+)
