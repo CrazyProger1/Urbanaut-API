@@ -19,3 +19,6 @@ from src.apps.accounts.serializers.settings import (
 from src.apps.accounts.serializers.ranks import (
     RankListSerializer,
 )
+from src.apps.accounts.serializers.terms import (
+    TermsRetrieveSerializer,
+)

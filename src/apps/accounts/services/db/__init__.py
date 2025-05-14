@@ -18,3 +18,7 @@ from src.apps.accounts.services.db.referrals import (
 )
 from src.apps.accounts.services.db.settings import get_user_settings, get_all_settings
 from src.apps.accounts.services.db.ranks import get_default_rank
+from src.apps.accounts.services.db.terms import (
+    get_all_terms,
+    get_current_terms,
+)

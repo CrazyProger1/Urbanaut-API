@@ -6,7 +6,7 @@ from src.apps.accounts.views import (
     TeamViewSet,
     get_languages,
     ReferralLinkViewSet,
-    SettingsAPIView,
+    SettingsAPIView, TermsViewSet,
 )
 from src.apps.accounts.views.referrals import ReferralViewSet
 
@@ -16,6 +16,7 @@ router.register("api/v1/users", UserViewSet, basename="users")
 router.register("api/v1/teams", TeamViewSet, basename="teams")
 router.register("api/v1/referral_links", ReferralLinkViewSet, basename="referral_links")
 router.register("api/v1/referrals", ReferralViewSet, basename="referrals")
+router.register("api/v1/terms", TermsViewSet, basename="terms")
 
 urlpatterns = [
     path("api/v1/languages", get_languages),
