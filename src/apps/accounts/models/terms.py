@@ -26,7 +26,7 @@ class Terms(TimestampModelMixin, models.Model):
         default="0.0.1",
         unique=True,
     )
-    content = models.CharField(
+    content = models.TextField(
         verbose_name=_("content"),
         help_text=_("Content of Terms of Usage."),
         blank=False,
