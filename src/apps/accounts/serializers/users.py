@@ -9,6 +9,7 @@ User = get_user_model()
 
 class UserListSerializer(serializers.ModelSerializer):
     rank = RankListSerializer(read_only=True)
+    avatar = serializers.SerializerMethodField()
 
     class Meta:
         model = User
