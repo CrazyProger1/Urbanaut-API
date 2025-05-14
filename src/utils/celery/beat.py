@@ -6,12 +6,12 @@ from django_celery_beat.models import CrontabSchedule, PeriodicTask
 
 
 def plan_task(
-        task: str,
-        name: str,
-        time: datetime.datetime,
-        args: tuple = (),
-        kwargs: dict = None,
-        remove_existing: bool = True,
+    task: str,
+    name: str,
+    time: datetime.datetime,
+    args: tuple = (),
+    kwargs: dict = None,
+    remove_existing: bool = True,
 ):
     schedule, created = CrontabSchedule.objects.get_or_create(
         minute=time.minute,

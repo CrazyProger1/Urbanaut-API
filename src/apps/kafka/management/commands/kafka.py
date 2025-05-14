@@ -19,7 +19,7 @@ class Command(BaseCommand):
             "consumer",
             type=str,
             choices=names,
-            help=f"Name of the Kafka consumer to run. Available choices: {', '.join(names)}"
+            help=f"Name of the Kafka consumer to run. Available choices: {', '.join(names)}",
         )
 
     def handle(self, *args, **options):

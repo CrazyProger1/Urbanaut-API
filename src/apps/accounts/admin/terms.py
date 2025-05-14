@@ -13,16 +13,12 @@ class TermsAdmin(ModelAdmin, TabbedTranslationAdmin):
         "is_active",
         "created_at",
     )
-    list_display_links = (
-        "version",
-    )
+    list_display_links = ("version",)
     list_filter = (
         "is_active",
         "version",
     )
-    search_fields = (
-        "version",
-    )
+    search_fields = ("version",)
     readonly_fields = (
         "created_at",
         "updated_at",

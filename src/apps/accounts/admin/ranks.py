@@ -14,6 +14,4 @@ class RankAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
         "name",
         "key",
     )
-    list_display_links = (
-        "name",
-    )
+    list_display_links = ("name",)

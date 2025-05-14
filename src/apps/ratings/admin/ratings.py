@@ -15,9 +15,7 @@ class RatingAdmin(ModelAdmin):
     )
     list_display_links = ("display_value",)
     readonly_fields = ("display_value",)
-    inlines = (
-        RatingVoteTabularInline,
-    )
+    inlines = (RatingVoteTabularInline,)
 
     def display_value(self, obj: Rating):
         return ("⭐" * round(obj.value)) or _("No rating")

@@ -19,8 +19,7 @@ class KafkaConsumer(BaseKafkaConsumer, ABC):
         self._consumer: kafka.KafkaConsumer | None = None
 
     @abstractmethod
-    def handle(self, message: ConsumerRecord) -> None:
-        ...
+    def handle(self, message: ConsumerRecord) -> None: ...
 
     def _deserialize(self, value: bytes) -> dict:
         return self.deserializer.deserialize(value=value)
@@ -29,9 +28,7 @@ class KafkaConsumer(BaseKafkaConsumer, ABC):
         if not servers:
             servers = ("localhost:9092",)
         self._consumer = kafka.KafkaConsumer(
-            self.topic
-            if isinstance(self.topic, str)
-            else self.topic.value,
+            self.topic if isinstance(self.topic, str) else self.topic.value,
             bootstrap_servers=servers,
             value_deserializer=self._deserialize,
             group_id=self.group_id,

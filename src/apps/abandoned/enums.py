@@ -3,10 +3,22 @@ from django.utils.translation import gettext_lazy as _
 
 from src.apps.actions.enums import ActionType
 
-ActionType.register("CREATED_ABANDONED_OBJECT", "CREATED ABANDONED OBJECT", _("CREATED ABANDONED OBJECT"))
-ActionType.register("CREATED_ABANDONED_AREA", "CREATED ABANDONED AREA", _("CREATED ABANDONED AREA"))
-ActionType.register("UPDATED_ABANDONED_OBJECT", "UPDATED ABANDONED OBJECT", _("UPDATED ABANDONED OBJECT"))
-ActionType.register("UPDATED_ABANDONED_AREA", "UPDATED ABANDONED AREA", _("UPDATED ABANDONED AREA"))
+ActionType.register(
+    "CREATED_ABANDONED_OBJECT",
+    "CREATED ABANDONED OBJECT",
+    _("CREATED ABANDONED OBJECT"),
+)
+ActionType.register(
+    "CREATED_ABANDONED_AREA", "CREATED ABANDONED AREA", _("CREATED ABANDONED AREA")
+)
+ActionType.register(
+    "UPDATED_ABANDONED_OBJECT",
+    "UPDATED ABANDONED OBJECT",
+    _("UPDATED ABANDONED OBJECT"),
+)
+ActionType.register(
+    "UPDATED_ABANDONED_AREA", "UPDATED ABANDONED AREA", _("UPDATED ABANDONED AREA")
+)
 
 
 class ParticipationStatus(models.TextChoices):

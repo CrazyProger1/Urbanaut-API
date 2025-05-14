@@ -36,31 +36,31 @@ class ModelPermission(models.Model):
         null=False,
         unique=True,
         verbose_name=_("model name"),
-        help_text=_("The name of the model you would like to add permissions for.")
+        help_text=_("The name of the model you would like to add permissions for."),
     )
     createbility_level = models.PositiveSmallIntegerField(
         default=0,
         choices=settings.PERMISSION_GROUPS,
         verbose_name=_("createbility level"),
-        help_text=_("Createbility level for the model.")
+        help_text=_("Createbility level for the model."),
     )
     visibility_level = models.PositiveSmallIntegerField(
         default=0,
         choices=settings.PERMISSION_GROUPS,
         verbose_name=_("visibility level"),
-        help_text=_("The default visibility level for the model.")
+        help_text=_("The default visibility level for the model."),
     )
     changebility_level = models.PositiveSmallIntegerField(
         default=0,
         choices=settings.PERMISSION_GROUPS,
         verbose_name=_("changebility level"),
-        help_text=_("Default changebility level for the model.")
+        help_text=_("Default changebility level for the model."),
     )
     deletebility_level = models.PositiveSmallIntegerField(
         default=0,
         choices=settings.PERMISSION_GROUPS,
         verbose_name=_("deletebility level"),
-        help_text=_("Default deletebility level for the model.")
+        help_text=_("Default deletebility level for the model."),
     )
 
     def __str__(self):
@@ -96,9 +96,15 @@ class ObjectPermission(models.Model):
         verbose_name = _("Object Permission")
         verbose_name_plural = _("Object Permissions")
 
-    visibility_level = models.PositiveSmallIntegerField(default=0, choices=settings.PERMISSION_GROUPS)
-    changebility_level = models.PositiveSmallIntegerField(default=0, choices=settings.PERMISSION_GROUPS)
-    deletebility_level = models.PositiveSmallIntegerField(default=0, choices=settings.PERMISSION_GROUPS)
+    visibility_level = models.PositiveSmallIntegerField(
+        default=0, choices=settings.PERMISSION_GROUPS
+    )
+    changebility_level = models.PositiveSmallIntegerField(
+        default=0, choices=settings.PERMISSION_GROUPS
+    )
+    deletebility_level = models.PositiveSmallIntegerField(
+        default=0, choices=settings.PERMISSION_GROUPS
+    )
 
     def __str__(self):
         return f"Object permission"

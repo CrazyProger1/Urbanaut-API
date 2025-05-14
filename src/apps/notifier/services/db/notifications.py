@@ -13,17 +13,16 @@ def get_all_notifications() -> models.QuerySet[Notification]:
 
 
 def get_user_notifications(user: User) -> models.QuerySet[Notification]:
-    return (
-        filter_objects(
-            source=Notification,
-            recipients=user,
-            is_shown=True,
-        )
-        .order_by("-shown_at")
-    )
+    return filter_objects(
+        source=Notification,
+        recipients=user,
+        is_shown=True,
+    ).order_by("-shown_at")
 
 
-def annotate_is_read_notifications(notifications: QuerySet[Notification], user: User) -> models.QuerySet[Notification]:
+def annotate_is_read_notifications(
+    notifications: QuerySet[Notification], user: User
+) -> models.QuerySet[Notification]:
     statuses = NotificationStatus.objects.filter(
         notification_id=OuterRef("id"),
         user=user,
@@ -35,8 +34,8 @@ def annotate_is_read_notifications(notifications: QuerySet[Notification], user: 
 
 
 def mark_read(
-        notifications: QuerySet[Notification],
-        user: User,
+    notifications: QuerySet[Notification],
+    user: User,
 ) -> None:
     queryset = filter_notification_status(
         notification__in=notifications,

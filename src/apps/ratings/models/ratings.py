@@ -44,9 +44,9 @@ class RatingMixin(models.Model):
             self.save(update_fields=["rating"])
 
     def save(
-            self,
-            *args,
-            **kwargs,
+        self,
+        *args,
+        **kwargs,
     ):
         super().save(
             *args,

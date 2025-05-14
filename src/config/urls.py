@@ -10,5 +10,5 @@ urlpatterns = [
     path("", include("src.apps.media.urls")),
     path("", include("src.apps.blog.urls")),
     path("", include("src.apps.ratings.urls")),
-    path("mdeditor/", include('mdeditor.urls'))
+    path("mdeditor/", include("mdeditor.urls")),
 ]

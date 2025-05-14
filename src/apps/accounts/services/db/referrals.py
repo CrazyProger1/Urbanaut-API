@@ -31,11 +31,7 @@ def apply_referral_link(user, link: ReferralLink) -> bool:
 
 def get_user_referrals(user) -> models.QuerySet[User]:
     links = ReferralLink.objects.filter(referrer=user)
-    user_ids = (
-        ReferralLinkUsage.objects
-        .filter(link__in=links)
-        .values("referral_id")
-    )
+    user_ids = ReferralLinkUsage.objects.filter(link__in=links).values("referral_id")
     return User.objects.filter(id__in=Subquery(user_ids))
 
 

@@ -6,7 +6,6 @@ from django.utils.translation import gettext_lazy as _
 
 from src.apps.accounts.managers import UserManager
 from src.apps.accounts.models.settings import SettingsUserModelMixin
-from src.apps.accounts.models.ranks import Rank
 
 
 class User(SettingsUserModelMixin, PermissionsMixin, AbstractBaseUser):

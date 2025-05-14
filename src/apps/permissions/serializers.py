@@ -1,5 +1,8 @@
 from rest_framework import serializers
-from src.apps.permissions.services.db import has_change_permission, has_delete_permission
+from src.apps.permissions.services.db import (
+    has_change_permission,
+    has_delete_permission,
+)
 
 
 class PermissionSerializerMixin(serializers.Serializer):

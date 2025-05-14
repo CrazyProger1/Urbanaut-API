@@ -7,12 +7,10 @@ from src.utils.clsutils import subclasses
 class BaseKafkaConsumer(ABC):
 
     @abstractmethod
-    def start(self, servers: Iterable[str] = None):
-        ...
+    def start(self, servers: Iterable[str] = None): ...
 
     @abstractmethod
-    def stop(self):
-        ...
+    def stop(self): ...
 
     @classmethod
     @property
@@ -35,12 +33,10 @@ class BaseKafkaConsumer(ABC):
 class BaseMessageDeserializer(ABC):
     @classmethod
     @abstractmethod
-    def deserialize(cls, value: bytes) -> dict:
-        ...
+    def deserialize(cls, value: bytes) -> dict: ...
 
 
 class BaseMessageSerializer(ABC):
     @classmethod
     @abstractmethod
-    def serialize(cls, value: dict) -> bytes:
-        ...
+    def serialize(cls, value: dict) -> bytes: ...

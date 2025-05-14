@@ -24,7 +24,9 @@ class AbandonedAreaListSerializer(serializers.ModelSerializer):
         )
 
 
-class AbandonedAreaRetrieveSerializer(serializers.ModelSerializer, PermissionSerializerMixin):
+class AbandonedAreaRetrieveSerializer(
+    serializers.ModelSerializer, PermissionSerializerMixin
+):
     rating = RatingRetrieveSerializer(read_only=True)
 
     class Meta:

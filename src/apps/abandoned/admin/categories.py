@@ -24,20 +24,18 @@ class CategoryAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
         "created_by",
         "parent",
     )
-    list_filter = (
-        "created_at",
-    )
+    list_filter = ("created_at",)
     search_fields = (
         "name",
         "description",
     )
 
     def save_model(
-            self,
-            request: HttpRequest,
-            obj: Category,
-            form: Form,
-            change: Any,
+        self,
+        request: HttpRequest,
+        obj: Category,
+        form: Form,
+        change: Any,
     ) -> None:
         if not obj.created_by:
             obj.created_by = request.user

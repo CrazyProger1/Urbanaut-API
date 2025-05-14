@@ -4,7 +4,11 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
 
-from src.apps.abandoned.models import AbandonedObject, AbandonedObjectFile, AbandonedObjectCategory
+from src.apps.abandoned.models import (
+    AbandonedObject,
+    AbandonedObjectFile,
+    AbandonedObjectCategory,
+)
 from src.apps.dashboard.admin.site import site
 
 
@@ -20,9 +24,7 @@ class AbandonedObjectTabularFileInline(TabularInline):
 class AbandonedObjectCategoryTabularInline(TabularInline):
     model = AbandonedObjectCategory
     extra = 0
-    raw_id_fields = (
-        "category",
-    )
+    raw_id_fields = ("category",)
     show_change_link = True
     tab = True
     verbose_name = _("Category")

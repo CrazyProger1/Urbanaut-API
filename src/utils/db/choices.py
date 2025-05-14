@@ -13,7 +13,9 @@ class DynamicChoicesType(ChoicesType):
 
     def register(cls, name: str, value: str, label: str = None):
         label = label or name.replace("_", " ").title()
-        logger.info(f"Dynamic choice registered: {cls.__name__}.{name} = {value}, {label}")
+        logger.info(
+            f"Dynamic choice registered: {cls.__name__}.{name} = {value}, {label}"
+        )
         cls.__registered_labels.append(label)
         cls.__registered_values.append(value)
         cls.__registered_names.append(name)
@@ -25,7 +27,9 @@ class DynamicChoicesType(ChoicesType):
 
     @property
     def choices(cls):
-        choices = super().choices + list(zip(cls.__registered_values, cls.__registered_labels))
+        choices = super().choices + list(
+            zip(cls.__registered_values, cls.__registered_labels)
+        )
         logger.info(f"Choices method called: {choices}")
         return choices
 

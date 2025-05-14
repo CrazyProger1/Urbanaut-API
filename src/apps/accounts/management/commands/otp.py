@@ -14,7 +14,9 @@ class Command(BaseCommand):
     help = "Generates a OTP authentication QR code for a specified user"
 
     def add_arguments(self, parser):
-        parser.add_argument("user", type=int, help="ID of the user to generate OTP QR code for")
+        parser.add_argument(
+            "user", type=int, help="ID of the user to generate OTP QR code for"
+        )
 
     def handle(self, *args, **options):
         user_id = options["user"]

@@ -2,7 +2,10 @@ import logging
 
 from django.utils import timezone
 
-from src.apps.notifier.services.db import get_event_or_none, get_notification_target_users
+from src.apps.notifier.services.db import (
+    get_event_or_none,
+    get_notification_target_users,
+)
 from src.config.celery import celery
 
 logger = logging.getLogger(__name__)

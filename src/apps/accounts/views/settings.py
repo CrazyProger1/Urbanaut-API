@@ -20,13 +20,15 @@ class SettingsAPIView(APIView):
     @extend_schema(
         request=SettingsUpdateSerializer,
         responses={200: SettingsUpdateSerializer},
-        operation_id='update_user_settings',
+        operation_id="update_user_settings",
         description="Fully update the authenticated user's settings.",
     )
     def put(self, request, *args, **kwargs):
         user = request.user
         user_settings = self.get_object()
-        serializer = SettingsUpdateSerializer(user_settings, data=request.data, partial=False)
+        serializer = SettingsUpdateSerializer(
+            user_settings, data=request.data, partial=False
+        )
         if serializer.is_valid():
             serializer.save()
             logger.debug("User %s updated settings: %s", user, serializer.data)
@@ -36,13 +38,15 @@ class SettingsAPIView(APIView):
     @extend_schema(
         request=SettingsUpdateSerializer,
         responses={200: SettingsUpdateSerializer},
-        operation_id='partial_update_user_settings',
+        operation_id="partial_update_user_settings",
         description="Partially update the authenticated user's settings.",
     )
     def patch(self, request, *args, **kwargs):
         user = request.user
         user_settings = self.get_object()
-        serializer = SettingsUpdateSerializer(user_settings, data=request.data, partial=True)
+        serializer = SettingsUpdateSerializer(
+            user_settings, data=request.data, partial=True
+        )
         if serializer.is_valid():
             serializer.save()
             logger.debug("User %s updated settings: %s", user, serializer.data)

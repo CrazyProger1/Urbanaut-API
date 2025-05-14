@@ -124,12 +124,16 @@ UNFOLD = {
                     {
                         "title": _("Objects"),
                         "icon": "person",
-                        "link": reverse_lazy("admin:abandoned_abandonedobject_changelist"),
+                        "link": reverse_lazy(
+                            "admin:abandoned_abandonedobject_changelist"
+                        ),
                     },
                     {
                         "title": _("Areas"),
                         "icon": "group",
-                        "link": reverse_lazy("admin:abandoned_abandonedarea_changelist"),
+                        "link": reverse_lazy(
+                            "admin:abandoned_abandonedarea_changelist"
+                        ),
                     },
                 ],
             },
@@ -167,22 +171,30 @@ UNFOLD = {
                     {
                         "title": _("Model Permission"),
                         "icon": "lock",
-                        "link": reverse_lazy("admin:permissions_modelpermission_changelist"),
+                        "link": reverse_lazy(
+                            "admin:permissions_modelpermission_changelist"
+                        ),
                     },
                     {
                         "title": _("User-Model Permission"),
                         "icon": "lock",
-                        "link": reverse_lazy("admin:permissions_usermodelpermission_changelist"),
+                        "link": reverse_lazy(
+                            "admin:permissions_usermodelpermission_changelist"
+                        ),
                     },
                     {
                         "title": _("Object Permission"),
                         "icon": "lock",
-                        "link": reverse_lazy("admin:permissions_objectpermission_changelist"),
+                        "link": reverse_lazy(
+                            "admin:permissions_objectpermission_changelist"
+                        ),
                     },
                     {
                         "title": _("User-Object Permission"),
                         "icon": "lock",
-                        "link": reverse_lazy("admin:permissions_userobjectpermission_changelist"),
+                        "link": reverse_lazy(
+                            "admin:permissions_userobjectpermission_changelist"
+                        ),
                     },
                 ],
             },

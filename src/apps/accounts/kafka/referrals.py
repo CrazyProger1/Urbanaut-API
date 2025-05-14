@@ -47,4 +47,6 @@ class ReferralKafkaConsumer(KafkaConsumer):
 
             logger.info("Successfully applied referral link: %s", link)
         except Exception as e:
-            logger.warning(f"Failed to handle %s. Got %s", self.topic, message.value, exc_info=e)
+            logger.warning(
+                f"Failed to handle %s. Got %s", self.topic, message.value, exc_info=e
+            )

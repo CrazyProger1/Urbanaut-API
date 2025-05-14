@@ -41,7 +41,9 @@ class AbandonedObjectListSerializer(serializers.ModelSerializer):
         )
 
 
-class AbandonedObjectRetrieveSerializer(serializers.ModelSerializer, PermissionSerializerMixin):
+class AbandonedObjectRetrieveSerializer(
+    serializers.ModelSerializer, PermissionSerializerMixin
+):
     area = AbandonedAreaRetrieveSerializer(read_only=True)
     created_by = UserRetrieveSerializer(read_only=True)
     location = LocationRetrieveSerializer(read_only=True)

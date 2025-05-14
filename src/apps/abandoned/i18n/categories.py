@@ -5,7 +5,10 @@ from src.apps.abandoned.models import Category
 
 
 class CategoryTranslationOptions(TranslationOptions):
-    fields = ("name", "description",)
+    fields = (
+        "name",
+        "description",
+    )
 
 
 translator.register(Category, CategoryTranslationOptions)

@@ -1,6 +1,9 @@
 from rest_framework import viewsets, generics, permissions
 
-from src.apps.blog.serializers import BlogTopicListSerializer, BlogTopicRetrieveSerializer
+from src.apps.blog.serializers import (
+    BlogTopicListSerializer,
+    BlogTopicRetrieveSerializer,
+)
 from src.apps.blog.services.db import get_available_blog_topics
 from src.apps.permissions.permissions import HasPermission
 

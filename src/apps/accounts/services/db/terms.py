@@ -7,8 +7,4 @@ def get_all_terms():
 
 
 def get_current_terms() -> Terms:
-    return (
-        filter_objects(source=Terms, is_active=True)
-        .order_by("-created_at")
-        .first()
-    )
+    return filter_objects(source=Terms, is_active=True).order_by("-created_at").first()

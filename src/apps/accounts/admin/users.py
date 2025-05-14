@@ -11,9 +11,7 @@ from src.apps.accounts.admin.settings import SettingsInline
 
 @admin.register(User, site=site)
 class UserAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
-    inlines = (
-        SettingsInline,
-    )
+    inlines = (SettingsInline,)
     list_display = (
         "id",
         "username",

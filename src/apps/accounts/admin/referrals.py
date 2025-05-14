@@ -22,9 +22,5 @@ class ReferralLinkAdmin(ModelAdmin):
         "referrer",
         "code",
     )
-    list_display_links = (
-        "referrer",
-    )
-    inlines = (
-        ReferralLinkUsageInline,
-    )
+    list_display_links = ("referrer",)
+    inlines = (ReferralLinkUsageInline,)

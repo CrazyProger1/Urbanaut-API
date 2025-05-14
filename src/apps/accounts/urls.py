@@ -6,7 +6,8 @@ from src.apps.accounts.views import (
     TeamViewSet,
     get_languages,
     ReferralLinkViewSet,
-    SettingsAPIView, TermsViewSet,
+    SettingsAPIView,
+    TermsViewSet,
 )
 from src.apps.accounts.views.referrals import ReferralViewSet
 

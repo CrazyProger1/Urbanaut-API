@@ -16,13 +16,9 @@ class CategoryRecipientInline(TabularInline):
 
 @admin.register(Category, site=site)
 class CategoryAdmin(ModelAdmin):
-    inlines = (
-        CategoryRecipientInline,
-    )
+    inlines = (CategoryRecipientInline,)
     list_display = (
         "id",
         "name",
     )
-    list_display_links = (
-        "name",
-    )
+    list_display_links = ("name",)

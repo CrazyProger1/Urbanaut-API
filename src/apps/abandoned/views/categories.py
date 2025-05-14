@@ -30,9 +30,7 @@ class AbandonedObjectCategoryViewSet(
 
     def get_queryset(self):
         return get_available_abandoned_object_categories(
-            user=self.request.user
-            if self.request.user.is_authenticated
-            else None
+            user=self.request.user if self.request.user.is_authenticated else None
         )
 
     def get_serializer_class(self):
@@ -48,7 +46,8 @@ class AbandonedObjectCategoryViewSet(
             get_available_abandoned_object_category_children(
                 category=self.get_object(),
                 user=request.user,
-            ))
+            )
+        )
 
         page = self.paginate_queryset(queryset)
         if page is not None:
@@ -67,7 +66,8 @@ class AbandonedObjectCategoryViewSet(
         queryset = self.filter_queryset(
             get_available_toplevel_abandoned_object_categories(
                 user=request.user,
-            ))
+            )
+        )
 
         page = self.paginate_queryset(queryset)
         if page is not None:

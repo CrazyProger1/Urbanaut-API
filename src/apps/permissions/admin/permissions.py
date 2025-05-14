@@ -26,25 +26,19 @@ class UserModelPermissionTabularInline(TabularInline):
 
 @admin.register(ObjectPermission, site=site)
 class ObjectPermissionsAdmin(ModelAdmin):
-    inlines = (
-        UserObjectPermissionTabularInline,
-    )
+    inlines = (UserObjectPermissionTabularInline,)
     list_display = (
         "id",
         "visibility_level",
         "changebility_level",
         "deletebility_level",
     )
-    list_display_links = (
-        "id",
-    )
+    list_display_links = ("id",)
 
 
 @admin.register(ModelPermission, site=site)
 class ModelPermissionsAdmin(ModelAdmin):
-    inlines = (
-        UserModelPermissionTabularInline,
-    )
+    inlines = (UserModelPermissionTabularInline,)
 
     list_display = (
         "id",
@@ -53,9 +47,7 @@ class ModelPermissionsAdmin(ModelAdmin):
         "changebility_level",
         "deletebility_level",
     )
-    list_display_links = (
-        "id",
-    )
+    list_display_links = ("id",)
 
 
 @admin.register(UserModelPermission, site=site)
@@ -65,9 +57,7 @@ class UserModelPermissionAdmin(ModelAdmin):
         "user",
         "has_create_permission",
     )
-    list_display_links = (
-        "id",
-    )
+    list_display_links = ("id",)
 
 
 @admin.register(UserObjectPermission, site=site)
@@ -79,6 +69,4 @@ class UserObjectPermissionsAdmin(ModelAdmin):
         "has_change_permission",
         "has_delete_permission",
     )
-    list_display_links = (
-        "id",
-    )
+    list_display_links = ("id",)

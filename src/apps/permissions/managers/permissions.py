@@ -9,12 +9,15 @@ class PermissionManager(models.Manager):
 
     def visible(self, user: User) -> QuerySet:
         from src.apps.permissions.services.db import get_visible_objects
+
         return get_visible_objects(user=user, queryset=self.get_queryset())
 
     def changeble(self, user: User) -> QuerySet:
         from src.apps.permissions.services.db import get_changeble_objects
+
         return get_changeble_objects(user=user, queryset=self.get_queryset())
 
     def deleteble(self, user: User) -> QuerySet:
         from src.apps.permissions.services.db import get_deleteble_objects
+
         return get_deleteble_objects(user=user, queryset=self.get_queryset())

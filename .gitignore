@@ -165,7 +165,7 @@ cython_debug/
 .sqlite3
 
 # Media
-media/
+./media/
 
 
 static

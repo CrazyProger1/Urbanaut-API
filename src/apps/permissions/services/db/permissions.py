@@ -7,7 +7,11 @@ from django.db import models
 from django.db.models import Q, QuerySet
 
 from src.apps.permissions.models import ObjectPermission, ModelPermission
-from src.apps.permissions.utils import get_permissions_field, get_user_group, get_owner_field
+from src.apps.permissions.utils import (
+    get_permissions_field,
+    get_user_group,
+    get_owner_field,
+)
 from src.utils.db import filter_objects, create_object
 
 User = get_user_model()
@@ -77,12 +81,14 @@ def has_delete_permission(user: User, obj: models.Model) -> bool:
         return object_permissions.deletebility_level >= group
 
 
-def get_available_objects[T: models.Model](
-        queryset: models.QuerySet[T],
-        user: User,
-        has_permission_field: str,
-        level_field: str,
-        owner_group: int = settings.OWNERS_GROUP,
+def get_available_objects[
+    T: models.Model
+](
+    queryset: models.QuerySet[T],
+    user: User,
+    has_permission_field: str,
+    level_field: str,
+    owner_group: int = settings.OWNERS_GROUP,
 ) -> models.QuerySet[T]:
     if user and not user.is_authenticated:
         user = None
@@ -91,30 +97,34 @@ def get_available_objects[T: models.Model](
     permissions_field = get_permissions_field(model)
     owner_field = get_owner_field(model)
 
-    conditions = Q(
-        **{f"{permissions_field}__user_permissions__{has_permission_field}": True},
-        **{f"{permissions_field}__user_permissions__user": user}
-    ) | Q(
-        **{
-            owner_field: user,
-            f"{permissions_field}__{level_field}": owner_group,
-        }
-    ) | Q(
-        **{f"{permissions_field}__{level_field}__gte": group}
+    conditions = (
+        Q(
+            **{f"{permissions_field}__user_permissions__{has_permission_field}": True},
+            **{f"{permissions_field}__user_permissions__user": user},
+        )
+        | Q(
+            **{
+                owner_field: user,
+                f"{permissions_field}__{level_field}": owner_group,
+            }
+        )
+        | Q(**{f"{permissions_field}__{level_field}__gte": group})
     )
 
     queryset = queryset.filter(conditions)
 
     exclude_conditions = Q(
         **{f"{permissions_field}__user_permissions__{has_permission_field}": False},
-        **{f"{permissions_field}__user_permissions__user": user}
+        **{f"{permissions_field}__user_permissions__user": user},
     )
     queryset = queryset.exclude(exclude_conditions)
 
     return queryset.distinct()
 
 
-def get_visible_objects[T: models.Model](user: User, queryset: models.QuerySet[T]) -> QuerySet[T]:
+def get_visible_objects[
+    T: models.Model
+](user: User, queryset: models.QuerySet[T]) -> QuerySet[T]:
     return get_available_objects(
         queryset=queryset,
         user=user,
@@ -123,7 +133,9 @@ def get_visible_objects[T: models.Model](user: User, queryset: models.QuerySet[T
     )
 
 
-def get_changeble_objects[T: models.Model](user: User, queryset: models.QuerySet[T]) -> QuerySet[T]:
+def get_changeble_objects[
+    T: models.Model
+](user: User, queryset: models.QuerySet[T]) -> QuerySet[T]:
     return get_available_objects(
         queryset=queryset,
         user=user,
@@ -132,7 +144,9 @@ def get_changeble_objects[T: models.Model](user: User, queryset: models.QuerySet
     )
 
 
-def get_deleteble_objects[T: models.Model](user: User, queryset: models.QuerySet[T]) -> QuerySet[T]:
+def get_deleteble_objects[
+    T: models.Model
+](user: User, queryset: models.QuerySet[T]) -> QuerySet[T]:
     return get_available_objects(
         queryset=queryset,
         user=user,

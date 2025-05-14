@@ -11,10 +11,7 @@ from django.conf import settings
 logger = logging.getLogger(__name__)
 
 
-async def asend_newsletter(
-        message: str,
-        user_ids: Iterable[int]
-):
+async def asend_newsletter(message: str, user_ids: Iterable[int]):
     user_ids = set(user_ids)
     bot = Bot(
         token=settings.TELEGRAM_BOT_TOKEN,

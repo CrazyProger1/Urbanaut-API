@@ -27,7 +27,9 @@ class BlogPostListSerializer(serializers.ModelSerializer):
         )
 
 
-class BlogPostRetrieveSerializer(serializers.ModelSerializer, PermissionSerializerMixin):
+class BlogPostRetrieveSerializer(
+    serializers.ModelSerializer, PermissionSerializerMixin
+):
     created_by = UserRetrieveSerializer(read_only=True)
     topic = BlogTopicRetrieveSerializer(read_only=True)
 

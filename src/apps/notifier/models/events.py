@@ -76,21 +76,21 @@ class Event(TimestampModelMixin, models.Model):
         through=NewsletterEvent,
         blank=True,
         verbose_name=_("newsletters"),
-        help_text=_("Newsletters included to this event.")
+        help_text=_("Newsletters included to this event."),
     )
     notifications = models.ManyToManyField(
         "Notification",
         through=NotificationEvent,
         blank=True,
         verbose_name=_("notifications"),
-        help_text=_("Notifications included to this event.")
+        help_text=_("Notifications included to this event."),
     )
     categories = models.ManyToManyField(
         "Category",
         through=CategoryEvent,
         blank=True,
         verbose_name=_("categories"),
-        help_text=_("Recipient categories.")
+        help_text=_("Recipient categories."),
     )
     triggered_at = models.DateTimeField(
         verbose_name=_("triggered at"),
@@ -105,9 +105,9 @@ class Event(TimestampModelMixin, models.Model):
     )
 
     def save(
-            self,
-            *args,
-            **kwargs,
+        self,
+        *args,
+        **kwargs,
     ):
         super().save(*args, **kwargs)
         plan_task(
@@ -116,7 +116,7 @@ class Event(TimestampModelMixin, models.Model):
             args=(self.id,),
             kwargs={},
             remove_existing=True,
-            name=f"Event №{self.id}"
+            name=f"Event №{self.id}",
         )
 
     def __str__(self):

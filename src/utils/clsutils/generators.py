@@ -3,7 +3,9 @@ import inspect
 from typing import Generator
 
 
-def subclasses(cls: type, max_level: int = -1, ignore_abstract: bool = False) -> Generator:
+def subclasses(
+    cls: type, max_level: int = -1, ignore_abstract: bool = False
+) -> Generator:
     if max_level == 0:
         return
 

@@ -9,9 +9,7 @@ class FileListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = File
-        exclude = (
-            "file",
-        )
+        exclude = ("file",)
 
 
 class FileRetrieveSerializer(serializers.ModelSerializer):
@@ -20,9 +18,7 @@ class FileRetrieveSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = File
-        exclude = (
-            "file",
-        )
+        exclude = ("file",)
 
 
 class FileCreateSerializer(serializers.ModelSerializer):

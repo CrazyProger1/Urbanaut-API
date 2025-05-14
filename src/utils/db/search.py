@@ -8,7 +8,9 @@ from .types import Source
 from .shortcuts import get_queryset
 
 
-def search_localized(source: Source, term: str, fields: Iterable[str], manager: str = "objects") -> QuerySet:
+def search_localized(
+    source: Source, term: str, fields: Iterable[str], manager: str = "objects"
+) -> QuerySet:
     query = Q()
     queryset = get_queryset(
         source=source,

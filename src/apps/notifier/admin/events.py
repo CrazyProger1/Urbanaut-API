@@ -47,6 +47,4 @@ class EventAdmin(ModelAdmin):
         "name",
         "is_active",
     )
-    list_display_links = (
-        "name",
-    )
+    list_display_links = ("name",)

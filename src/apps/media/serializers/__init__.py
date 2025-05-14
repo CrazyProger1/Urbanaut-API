@@ -1,1 +1,5 @@
-from src.apps.media.serializers.files import FileListSerializer, FileRetrieveSerializer, FileCreateSerializer
+from src.apps.media.serializers.files import (
+    FileListSerializer,
+    FileRetrieveSerializer,
+    FileCreateSerializer,
+)

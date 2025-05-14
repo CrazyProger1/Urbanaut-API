@@ -149,9 +149,9 @@ class AbandonedObject(TimestampModelMixin, RatingMixin, PermissionBaseModel):
     )
 
     def photos(self):
-        return self.files.filter(
-            type__in=(FileType.PHOTO, FileType.VIDEO)
-        ).order_by("type")
+        return self.files.filter(type__in=(FileType.PHOTO, FileType.VIDEO)).order_by(
+            "type"
+        )
 
     def photo(self):
         photo = self.files.filter(type=FileType.PHOTO).first()

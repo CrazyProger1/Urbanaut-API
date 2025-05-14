@@ -27,7 +27,7 @@ class FileViewSet(
     serializer_classes = {
         "retrieve": FileRetrieveSerializer,
         "create": FileCreateSerializer,
-        "list": FileListSerializer
+        "list": FileListSerializer,
     }
     filterset_class = FileFilter
 
@@ -59,11 +59,7 @@ class FileViewSet(
             status=status.HTTP_201_CREATED,
         )
 
-    @extend_schema(
-        methods=["GET"],
-        request=serializers.Serializer,
-        responses=None
-    )
+    @extend_schema(methods=["GET"], request=serializers.Serializer, responses=None)
     @action(
         detail=True,
         methods=("GET",),
@@ -73,8 +69,6 @@ class FileViewSet(
         file = self.get_object()
         file_handle = file.file
         response = FileResponse(
-            file_handle.open("rb"),
-            as_attachment=True,
-            filename=file_handle.name
+            file_handle.open("rb"), as_attachment=True, filename=file_handle.name
         )
         return response

@@ -16,7 +16,9 @@ class AbandonedObjectRecursiveCategoryListSerializer(serializers.ModelSerializer
 
     def get_children(self, obj) -> list | None:
         if obj.children is not None:
-            return AbandonedObjectRecursiveCategoryListSerializer(obj.children, many=True).data
+            return AbandonedObjectRecursiveCategoryListSerializer(
+                obj.children, many=True
+            ).data
 
         return None
 

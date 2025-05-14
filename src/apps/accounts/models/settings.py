@@ -69,9 +69,9 @@ class SettingsUserModelMixin(models.Model):
         )
 
     def save(
-            self,
-            *args,
-            **kwargs,
+        self,
+        *args,
+        **kwargs,
     ):
         super().save(
             *args,
