@@ -7,3 +7,6 @@ from src.apps.accounts.admin.referrals import (
     ReferralLinkAdmin,
     ReferralLinkUsageInline,
 )
+from src.apps.accounts.admin.terms import (
+    TermsAdmin,
+)

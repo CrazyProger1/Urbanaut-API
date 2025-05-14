@@ -12,3 +12,6 @@ from src.apps.accounts.models.settings import (
     Settings,
     SettingsUserModelMixin,
 )
+from src.apps.accounts.models.terms import (
+    Terms,
+)
