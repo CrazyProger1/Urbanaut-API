@@ -1,7 +1,7 @@
 from rest_framework import viewsets, mixins, permissions
 
 from src.apps.accounts.serializers import FriendListSerializer
-from src.apps.accounts.services.db import get_all_friends
+from src.apps.accounts.services.db import get_all_friends, get_user_friends
 
 
 class FriendViewSet(
@@ -17,3 +17,6 @@ class FriendViewSet(
 
     def get_serializer_class(self):
         return self.serializer_classes.get(self.action, self.serializer_class)
+
+    def get_queryset(self):
+        return get_user_friends(user=self.request.user)

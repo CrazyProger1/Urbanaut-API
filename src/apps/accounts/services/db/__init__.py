@@ -29,4 +29,6 @@ from src.apps.accounts.services.db.friends import (
     is_friend,
     get_all_friends,
     get_user_friend,
+    count_friends,
+    get_user_friends,
 )
