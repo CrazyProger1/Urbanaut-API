@@ -22,3 +22,6 @@ from src.apps.accounts.serializers.ranks import (
 from src.apps.accounts.serializers.terms import (
     TermsRetrieveSerializer,
 )
+from src.apps.accounts.serializers.friends import (
+    FriendListSerializer,
+)

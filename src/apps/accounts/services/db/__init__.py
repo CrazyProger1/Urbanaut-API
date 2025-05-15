@@ -16,9 +16,17 @@ from src.apps.accounts.services.db.referrals import (
     get_user_referrals,
     get_link_referrals,
 )
-from src.apps.accounts.services.db.settings import get_user_settings, get_all_settings
+from src.apps.accounts.services.db.settings import (
+    get_user_settings,
+    get_all_settings,
+)
 from src.apps.accounts.services.db.ranks import get_default_rank
 from src.apps.accounts.services.db.terms import (
     get_all_terms,
     get_current_terms,
+)
+from src.apps.accounts.services.db.friends import (
+    is_friend,
+    get_all_friends,
+    get_user_friend,
 )

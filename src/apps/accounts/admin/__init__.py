@@ -10,3 +10,6 @@ from src.apps.accounts.admin.referrals import (
 from src.apps.accounts.admin.terms import (
     TermsAdmin,
 )
+from src.apps.accounts.admin.friends import (
+    FriendAdmin,
+)

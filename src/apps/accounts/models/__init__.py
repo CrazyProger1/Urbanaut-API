@@ -15,3 +15,6 @@ from src.apps.accounts.models.settings import (
 from src.apps.accounts.models.terms import (
     Terms,
 )
+from src.apps.accounts.models.friends import (
+    Friend,
+)
