@@ -14,7 +14,7 @@ def is_friend(user, friend) -> bool:
             recipient_id=user.id,
         ),
         is_approved=True,
-    )
+    ).first() is not None
 
 
 def get_all_friends():
