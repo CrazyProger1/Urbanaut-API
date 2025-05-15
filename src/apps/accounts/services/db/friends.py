@@ -5,13 +5,12 @@ from src.utils.db import get_all_objects, filter_objects, count_objects
 
 
 def get_user_friends(user):
-    return filter_objects(
+    return Friend.objects.filter(
         Q(
             initiator_id=user.id,
         ) | Q(
             recipient_id=user.id,
         ),
-        source=Friend,
         is_approved=True,
     )
 
