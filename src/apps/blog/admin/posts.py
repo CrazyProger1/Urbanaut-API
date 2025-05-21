@@ -1,10 +1,20 @@
 from simple_history.admin import SimpleHistoryAdmin
-from unfold.admin import ModelAdmin
+from unfold.admin import ModelAdmin, TabularInline
 from django.contrib import admin
+from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
 
-from src.apps.blog.models import BlogPost
+from src.apps.blog.models import BlogPost, PostFile
 from src.apps.dashboard.admin import site
+
+
+class PostFileTabularInline(TabularInline):
+    model = PostFile
+    extra = 0
+    show_change_link = True
+    tab = True
+    verbose_name = _("File")
+    verbose_name_plural = _("Files")
 
 
 @admin.register(BlogPost, site=site)
@@ -18,3 +28,4 @@ class BlogPostAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
     )
     readonly_fields = ("created_at",)
     list_display_links = ("title",)
+    inlines = (PostFileTabularInline,)
