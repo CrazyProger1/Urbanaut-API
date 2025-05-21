@@ -3,11 +3,30 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
+from src.apps.media.enums import FileType
 from src.apps.permissions.managers import PermissionManager
 from src.apps.permissions.models import PermissionBaseModel
 from src.utils.db.models import TimestampModelMixin
 
 User = get_user_model()
+
+
+class PostFile(models.Model):
+    class Meta:
+        verbose_name = _("file")
+        verbose_name_plural = _("files")
+
+    file = models.ForeignKey(
+        "media.File",
+        on_delete=models.CASCADE,
+    )
+    post = models.ForeignKey(
+        "BlogPost",
+        on_delete=models.CASCADE,
+    )
+    priority = models.IntegerField(
+        default=0,
+    )
 
 
 class BlogPost(TimestampModelMixin, PermissionBaseModel):
@@ -58,6 +77,18 @@ class BlogPost(TimestampModelMixin, PermissionBaseModel):
         blank=False,
         null=False,
     )
+    files = models.ManyToManyField(
+        "media.File",
+        through=PostFile,
+        verbose_name=_("files"),
+        related_name="posts",
+        help_text=_("The media files attached to this blog post."),
+    )
+
+    def photo(self):
+        photo = self.files.filter(type=FileType.PHOTO).first()
+        if photo:
+            return photo.src
 
     def __str__(self):
         return self.title

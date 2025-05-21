@@ -6,12 +6,14 @@ from src.apps.blog.serializers.topics import (
     BlogTopicRetrieveSerializer,
     BlogTopicListSerializer,
 )
+from src.apps.media.serializers import FileRetrieveSerializer
 from src.apps.permissions.serializers import PermissionSerializerMixin
 
 
 class BlogPostListSerializer(serializers.ModelSerializer):
     topic = BlogTopicListSerializer(read_only=True)
     created_by = UserListSerializer(read_only=True)
+    photo = serializers.CharField(read_only=True)
 
     class Meta:
         model = BlogPost
@@ -24,6 +26,7 @@ class BlogPostListSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
             "published_at",
+            "photo",
         )
 
 
@@ -32,6 +35,8 @@ class BlogPostRetrieveSerializer(
 ):
     created_by = UserRetrieveSerializer(read_only=True)
     topic = BlogTopicRetrieveSerializer(read_only=True)
+    files = FileRetrieveSerializer(read_only=True, many=True)
+    photo = serializers.CharField(read_only=True)
 
     class Meta:
         model = BlogPost
@@ -46,6 +51,8 @@ class BlogPostRetrieveSerializer(
             "content",
             "has_delete_permission",
             "has_change_permission",
+            "files",
+            "photo",
         )
 
 

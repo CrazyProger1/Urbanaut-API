@@ -1,7 +1,7 @@
 from django.db.models import Q
 
 from src.apps.accounts.models import Friend
-from src.utils.db import get_all_objects, filter_objects, count_objects
+from src.utils.db import get_all_objects, count_objects
 
 
 def get_user_friends(user):
