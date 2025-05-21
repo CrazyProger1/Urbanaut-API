@@ -11,7 +11,7 @@ from src.utils.db.models import TimestampModelMixin
 User = get_user_model()
 
 
-class PostFile(models.Model):
+class BlogPostFile(models.Model):
     class Meta:
         verbose_name = _("file")
         verbose_name_plural = _("files")
@@ -79,7 +79,7 @@ class BlogPost(TimestampModelMixin, PermissionBaseModel):
     )
     files = models.ManyToManyField(
         "media.File",
-        through=PostFile,
+        through=BlogPostFile,
         verbose_name=_("files"),
         related_name="posts",
         help_text=_("The media files attached to this blog post."),

@@ -4,12 +4,12 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
 
-from src.apps.blog.models import BlogPost, PostFile
+from src.apps.blog.models import BlogPost, BlogPostFile
 from src.apps.dashboard.admin import site
 
 
-class PostFileTabularInline(TabularInline):
-    model = PostFile
+class BlogPostFileTabularInline(TabularInline):
+    model = BlogPostFile
     extra = 0
     show_change_link = True
     tab = True
@@ -28,4 +28,4 @@ class BlogPostAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
     )
     readonly_fields = ("created_at",)
     list_display_links = ("title",)
-    inlines = (PostFileTabularInline,)
+    inlines = (BlogPostFileTabularInline,)
