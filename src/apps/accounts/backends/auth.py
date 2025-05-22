@@ -164,4 +164,8 @@ class TMAAuthentication(authentication.BaseAuthentication):
 
         logger.info(f"User authenticated: {user}")
 
+        if not user.is_active:
+            logger.warning("User is deactivated: %s", user)
+            return None
+
         return user, header
