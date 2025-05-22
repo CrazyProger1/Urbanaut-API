@@ -7,6 +7,7 @@ from src.apps.accounts.services.db.users import (
     get_all_users,
     get_object_or_none,
     get_user_or_create,
+    get_active_users,
 )
 from src.apps.accounts.services.db.referrals import (
     get_all_referral_links,

@@ -20,7 +20,7 @@ from src.apps.accounts.services.db import (
     get_non_user_referral_links,
     apply_referral_link,
     get_all_users,
-    get_user_referrals,
+    get_user_referrals, get_active_users,
 )
 
 
@@ -75,7 +75,7 @@ class ReferralViewSet(
     viewsets.GenericViewSet,
     mixins.ListModelMixin,
 ):
-    queryset = get_all_users()
+    queryset = get_active_users()
     serializer_classes = {
         "list": ReferralUserListSerializer,
     }

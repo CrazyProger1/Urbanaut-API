@@ -2,7 +2,7 @@ from rest_framework import viewsets, mixins, permissions
 
 from src.apps.accounts.filters import UserFilter
 from src.apps.accounts.serializers import UserListSerializer, UserRetrieveSerializer
-from src.apps.accounts.services.db import get_all_users
+from src.apps.accounts.services.db import get_active_users
 
 
 class UserViewSet(
@@ -10,7 +10,7 @@ class UserViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
 ):
-    queryset = get_all_users()
+    queryset = get_active_users()
     permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = UserListSerializer
     filterset_class = UserFilter
