@@ -33,7 +33,6 @@ class BlogPostAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
         "title",
         "created_at",
         "published_at",
-        "topic",
     )
     readonly_fields = ("created_at",)
     list_display_links = ("title",)

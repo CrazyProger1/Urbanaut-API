@@ -11,7 +11,7 @@ from src.apps.permissions.serializers import PermissionSerializerMixin
 
 
 class BlogPostListSerializer(serializers.ModelSerializer):
-    topic = BlogTopicListSerializer(read_only=True)
+    topics = BlogTopicListSerializer(read_only=True, many=True)
     created_by = UserListSerializer(read_only=True)
     photo = serializers.CharField(read_only=True)
 
@@ -20,7 +20,7 @@ class BlogPostListSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "title",
-            "topic",
+            "topics",
             "summary",
             "created_by",
             "created_at",
@@ -34,7 +34,7 @@ class BlogPostRetrieveSerializer(
     serializers.ModelSerializer, PermissionSerializerMixin
 ):
     created_by = UserRetrieveSerializer(read_only=True)
-    topic = BlogTopicRetrieveSerializer(read_only=True)
+    topics = BlogTopicRetrieveSerializer(read_only=True, many=True)
     files = FileRetrieveSerializer(read_only=True, many=True)
     photo = serializers.CharField(read_only=True)
 
@@ -43,7 +43,7 @@ class BlogPostRetrieveSerializer(
         fields = (
             "id",
             "title",
-            "topic",
+            "topics",
             "created_by",
             "created_at",
             "updated_at",
