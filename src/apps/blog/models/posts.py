@@ -50,7 +50,8 @@ class BlogPost(TimestampModelMixin, PermissionBaseModel):
         verbose_name_plural = _("Posts")
 
     topics = models.ManyToManyField(
-        "BlogPostTopic",
+        "BlogPost",
+        through="BlogPostTopic",
         blank=True,
         verbose_name=_("topics"),
         help_text=_("Topics of the post.")
