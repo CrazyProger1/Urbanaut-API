@@ -4,6 +4,7 @@ from src.apps.abandoned.models import AbandonedObject
 from src.apps.abandoned.serializers import (
     AbandonedObjectCategoryRetrieveSerializer,
     AbandonedAreaRetrieveSerializer,
+    AbandonedObjectCategoryListSerializer,
 )
 from src.apps.accounts.serializers import UserRetrieveSerializer
 from src.apps.geo.serializers import (
@@ -18,6 +19,7 @@ from src.apps.ratings.serializers import RatingRetrieveSerializer
 class AbandonedObjectListSerializer(serializers.ModelSerializer):
     photo = serializers.CharField(read_only=True)
     rating = RatingRetrieveSerializer(read_only=True)
+    categories = AbandonedObjectCategoryListSerializer(read_only=True, many=True)
 
     class Meta:
         model = AbandonedObject
@@ -38,6 +40,7 @@ class AbandonedObjectListSerializer(serializers.ModelSerializer):
             "location",
             "photo",
             "rating",
+            "categories",
         )
 
 
