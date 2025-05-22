@@ -4,7 +4,6 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.media.enums import FileType
-from src.apps.permissions.managers import PermissionManager
 from src.apps.permissions.models import PermissionBaseModel
 from src.utils.db.models import TimestampModelMixin
 

@@ -13,6 +13,7 @@ from django.conf import settings
 from rest_framework import authentication, exceptions
 
 from src.apps.accounts.services.db import get_user_or_create
+from src.apps.media.enums import FileType
 from src.apps.media.services.upload import upload_remote_file
 
 logger = logging.getLogger(__name__)
@@ -104,7 +105,8 @@ class TMAAuthentication(authentication.BaseAuthentication):
             try:
                 user.avatar = upload_remote_file(
                     url=photo_url,
-                    filename=f"avatar-{user.id}.png",
+                    filetype=FileType.PHOTO,
+                    filename=f"avatar-{user.id}",
                 )
             except Exception as e:
                 logger.warning("Failed to update user avatar", exc_info=e)
