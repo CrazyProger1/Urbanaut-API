@@ -29,18 +29,31 @@ class BlogPostFile(models.Model):
     )
 
 
+class BlogPostTopic(models.Model):
+    post = models.ForeignKey(
+        "BlogPost",
+        on_delete=models.CASCADE,
+    )
+
+    topic = models.ForeignKey(
+        "BlogTopic",
+        on_delete=models.CASCADE,
+    )
+
+    class Meta:
+        unique_together = ("post", "topic",)
+
+
 class BlogPost(TimestampModelMixin, PermissionBaseModel):
     class Meta:
         verbose_name = _("Post")
         verbose_name_plural = _("Posts")
 
-    topic = models.ForeignKey(
-        "BlogTopic",
-        on_delete=models.CASCADE,
-        verbose_name=_("topic"),
-        help_text=_("Topic of the post."),
-        blank=False,
-        null=False,
+    topics = models.ManyToManyField(
+        "BlogPostTopic",
+        blank=True,
+        verbose_name=_("topics"),
+        help_text=_("Topics of the post.")
     )
     title = models.CharField(
         verbose_name=_("title"),

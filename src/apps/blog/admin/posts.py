@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
 
-from src.apps.blog.models import BlogPost, BlogPostFile
+from src.apps.blog.models import BlogPost, BlogPostFile, BlogPostTopic
 from src.apps.dashboard.admin import site
 
 
@@ -15,6 +15,15 @@ class BlogPostFileTabularInline(TabularInline):
     tab = True
     verbose_name = _("File")
     verbose_name_plural = _("Files")
+
+
+class BlogPostTopicTabularInline(TabularInline):
+    model = BlogPostTopic
+    extra = 0
+    show_change_link = True
+    tab = True
+    verbose_name = _("Topic")
+    verbose_name_plural = _("Topics")
 
 
 @admin.register(BlogPost, site=site)

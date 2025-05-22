@@ -1,7 +1,7 @@
-from simple_history.admin import SimpleHistoryAdmin
-from unfold.admin import ModelAdmin
 from django.contrib import admin
 from modeltranslation.admin import TabbedTranslationAdmin
+from simple_history.admin import SimpleHistoryAdmin
+from unfold.admin import ModelAdmin
 
 from src.apps.blog.models import BlogTopic
 from src.apps.dashboard.admin import site
