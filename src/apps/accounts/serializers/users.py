@@ -33,7 +33,7 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
     is_friend = serializers.SerializerMethodField(read_only=True)
     friends_count = serializers.SerializerMethodField(read_only=True)
     posts_count = serializers.SerializerMethodField(read_only=True)
-    event_count = serializers.SerializerMethodField(read_only=True)
+    events_count = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
@@ -66,7 +66,7 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
         from src.apps.blog.services.db import count_user_blog_posts
         return count_user_blog_posts(user=obj)
 
-    def get_event_count(self, obj: User) -> int:
+    def get_events_count(self, obj: User) -> int:
         from src.apps.abandoned.services.db import count_user_events
         return count_user_events(user=obj)
 
