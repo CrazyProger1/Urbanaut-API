@@ -1,8 +1,11 @@
+from typing import Iterable
+
 from django.contrib.auth import get_user_model
+from django.db import models
 from django.db.models import QuerySet
 
 from src.apps.blog.models import BlogPost
-from src.utils.db import filter_objects
+from src.utils.db import Source, search_localized
 
 User = get_user_model()
 
@@ -13,3 +16,15 @@ def get_available_blog_posts(user: User = None) -> QuerySet[BlogPost]:
 
 def count_user_blog_posts(user: User = None) -> int:
     return user.blog_posts.count()
+
+
+def search_blog_posts(
+        term: str,
+        source: Source[BlogPost] = BlogPost,
+        fields: Iterable[str] = (),
+) -> models.QuerySet[BlogPost]:
+    return search_localized(
+        source=source,
+        term=term,
+        fields=fields,
+    )

@@ -1,9 +1,9 @@
-import logging
-
+from django_filters import rest_framework as filters
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, generics, permissions, status
 from rest_framework.response import Response
 
+from src.apps.blog.filters import BlogPostFilter
 from src.apps.blog.serializers import (
     BlogPostListSerializer,
     BlogPostRetrieveSerializer,
@@ -27,6 +27,10 @@ class BlogPostViewSet(
         "retrieve": BlogPostRetrieveSerializer,
         "create": BlogPostCreateSerializer,
     }
+    filter_backends = (
+        filters.DjangoFilterBackend,
+    )
+    filterset_class = BlogPostFilter
 
     def get_serializer_class(self):
         return self.serializer_classes.get(self.action, self.serializer_class)
