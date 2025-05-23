@@ -8,3 +8,7 @@ def get_all_events():
 
 def get_available_events(user=None):
     return Event.objects.visible(user=user)
+
+
+def count_user_events(user) -> int:
+    return user.my_events.count()

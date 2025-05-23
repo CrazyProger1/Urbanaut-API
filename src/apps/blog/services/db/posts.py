@@ -9,3 +9,7 @@ User = get_user_model()
 
 def get_available_blog_posts(user: User = None) -> QuerySet[BlogPost]:
     return BlogPost.objects.visible(user=user)
+
+
+def count_user_blog_posts(user: User = None) -> int:
+    return user.blog_posts.count()

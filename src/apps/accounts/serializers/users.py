@@ -32,6 +32,8 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
     settings = SettingsRetrieveSerializer(read_only=True)
     is_friend = serializers.SerializerMethodField(read_only=True)
     friends_count = serializers.SerializerMethodField(read_only=True)
+    posts_count = serializers.SerializerMethodField(read_only=True)
+    event_count = serializers.SerializerMethodField(read_only=True)
 
     class Meta:
         model = User
@@ -50,6 +52,8 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
             "settings",
             "is_friend",
             "friends_count",
+            "posts_count",
+            "events_count",
         )
 
     def get_avatar(self, obj: User) -> str | None:
@@ -57,6 +61,14 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
 
     def get_friends_count(self, obj: User) -> int:
         return count_friends(user=obj)
+
+    def get_posts_count(self, obj: User) -> int:
+        from src.apps.blog.services.db import count_user_blog_posts
+        return count_user_blog_posts(user=obj)
+
+    def get_event_count(self, obj: User) -> int:
+        from src.apps.abandoned.services.db import count_user_events
+        return count_user_events(user=obj)
 
     def get_is_friend(self, obj: User) -> bool | None:
         request = self.context.get("request", None)

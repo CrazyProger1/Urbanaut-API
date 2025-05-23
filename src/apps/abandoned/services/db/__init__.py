@@ -13,4 +13,5 @@ from src.apps.abandoned.services.db.categories import (
 from src.apps.abandoned.services.db.events import (
     get_available_events,
     get_all_events,
+    count_user_events,
 )
