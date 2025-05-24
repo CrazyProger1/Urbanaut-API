@@ -1,3 +1,5 @@
+import logging
+
 from rest_framework import (
     viewsets,
     mixins,
@@ -14,6 +16,8 @@ from src.apps.ratings.services.db import (
     get_rating_vote_or_none,
     update_rating_average,
 )
+
+logger = logging.getLogger(__name__)
 
 
 class RatingVoteViewSet(
@@ -47,6 +51,7 @@ class RatingVoteViewSet(
 
         rating = get_rating_or_none(pk=rating_pk)
         if not rating:
+            logger.warning("Rating not found: %s", rating_pk)
             raise exceptions.NotFound(detail="Rating not found")
 
         return rating
