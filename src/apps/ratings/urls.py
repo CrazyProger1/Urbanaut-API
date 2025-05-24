@@ -3,7 +3,7 @@ from rest_framework_nested.routers import NestedSimpleRouter
 from src.apps.ratings.views import RatingViewSet, RatingVoteViewSet
 
 router = DefaultRouter()
-router.register("ratings", RatingViewSet, basename="ratings")
+router.register("api/v1/ratings", RatingViewSet, basename="ratings")
 
 ratings_router = NestedSimpleRouter(router, "ratings", lookup="rating")
 ratings_router.register("votes", RatingVoteViewSet, basename="rating-votes")
