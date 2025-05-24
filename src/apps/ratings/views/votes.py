@@ -22,11 +22,19 @@ class RatingVoteViewSet(
             raise exceptions.NotFound(detail="Rating not found")
 
         user = self.request.user
-
-        serializer.save(
+        vote = get_rating_vote_or_none(
             created_by=user,
             rating=rating,
         )
+
+        if vote:
+            vote.value = serializer.validated_data["value"]
+            vote.save()
+        else:
+            serializer.save(
+                created_by=user,
+                rating=rating,
+            )
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
