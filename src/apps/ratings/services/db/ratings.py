@@ -13,6 +13,8 @@ def get_rating_or_none(**data) -> Rating:
     return get_object_or_none(source=Rating, **data)
 
 
-def update_rating_average(rating: Rating):
-    rating.value = rating.votes.aggregate(avg=Avg("value"))["avg"]
+def update_rating_average(rating: Rating) -> float:
+    value = rating.votes.aggregate(avg=Avg("value"))["avg"]
+    rating.value = value
     rating.save(update_fields=("value",))
+    return value
