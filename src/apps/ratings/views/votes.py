@@ -1,7 +1,12 @@
 from rest_framework import viewsets, mixins, permissions, response, status, exceptions
 
 from src.apps.ratings.serializers import RatingVoteCreateSerializer
-from src.apps.ratings.services.db import get_all_votes, get_rating_or_none, get_rating_vote_or_none
+from src.apps.ratings.services.db import (
+    get_all_votes,
+    get_rating_or_none,
+    get_rating_vote_or_none,
+    update_rating_average,
+)
 
 
 class RatingVoteViewSet(
@@ -29,12 +34,14 @@ class RatingVoteViewSet(
 
         if vote:
             vote.value = serializer.validated_data["value"]
-            vote.save()
+            vote.save(update_fields=("value",))
         else:
             serializer.save(
                 created_by=user,
                 rating=rating,
             )
+
+        update_rating_average(rating=rating)
 
     def create(self, request, *args, **kwargs):
         serializer = self.get_serializer(data=request.data)
