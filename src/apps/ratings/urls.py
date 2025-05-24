@@ -5,7 +5,7 @@ from src.apps.ratings.views import RatingViewSet, RatingVoteViewSet
 router = DefaultRouter()
 router.register("api/v1/ratings", RatingViewSet, basename="ratings")
 
-ratings_router = NestedSimpleRouter(router, "ratings", lookup="rating")
+ratings_router = NestedSimpleRouter(router, "api/v1/ratings", lookup="rating")
 ratings_router.register("votes", RatingVoteViewSet, basename="rating-votes")
 
 urlpatterns = router.urls + ratings_router.urls
