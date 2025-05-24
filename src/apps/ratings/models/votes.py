@@ -31,5 +31,10 @@ class RatingVote(TimestampModelMixin, models.Model):
         verbose_name=_("value"),
     )
 
+    class Meta:
+        verbose_name = _("vote")
+        verbose_name_plural = _("votes")
+        unique_together = ("created_by", "rating")
+
     def __str__(self):
         return ("⭐" * round(self.value)) or "No rating"
