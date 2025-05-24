@@ -1,5 +1,3 @@
-import logging
-
 from rest_framework import viewsets, mixins, serializers
 from django_filters import rest_framework as filters
 

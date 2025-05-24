@@ -7,7 +7,5 @@ class RatingVoteCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = RatingVote
         fields = (
-            "id",
-            "rating",
             "value",
         )
