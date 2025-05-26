@@ -10,7 +10,6 @@ from src.apps.abandoned.models import (
     AbandonedObjectCategory,
 )
 from src.apps.dashboard.admin.site import site
-from src.apps.ratings.admin import ViewInline
 
 
 class AbandonedObjectTabularFileInline(TabularInline):
@@ -37,7 +36,6 @@ class AbandonedObjectAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmi
     inlines = (
         AbandonedObjectTabularFileInline,
         AbandonedObjectCategoryTabularInline,
-        ViewInline,
     )
     exclude = (
         "viewable",
