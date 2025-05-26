@@ -46,3 +46,10 @@ class AbandonedObjectViewSet(
         serializer.save(
             created_by=self.request.user,
         )
+
+    def get_object(self):
+        obj = super().get_object()
+        user = self.request.user
+        if user.is_authenticated:
+            obj.increase_views(user=user)
+        return obj

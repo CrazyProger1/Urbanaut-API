@@ -74,6 +74,7 @@ class AbandonedObjectRetrieveSerializer(
             "photos",
             "categories",
             "rating",
+            "views",
         )
 
 

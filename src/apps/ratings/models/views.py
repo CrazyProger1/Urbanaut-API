@@ -45,6 +45,10 @@ class ViewedByMixin(models.Model):
         verbose_name=_("views"),
     )
 
+    def increase_views(self, user):
+        if not View.objects.filter(viewed_by=user).exists():
+            self.viewable.viewed_by.add(user)
+
     @property
     def views(self) -> int:
         return self.viewable.views
