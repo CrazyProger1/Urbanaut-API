@@ -2,10 +2,10 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from src.utils.db import TimestampModelMixin, CreatedAtModelMixin
+from src.utils.db import TimestampMixin, CreatedAtMixin
 
 
-class ReferralLinkUsage(CreatedAtModelMixin, models.Model):
+class ReferralLinkUsage(CreatedAtMixin, models.Model):
     class Meta:
         verbose_name = _("Referral Link Usage")
         verbose_name_plural = _("Referral Link Usages")
@@ -29,7 +29,7 @@ class ReferralLinkUsage(CreatedAtModelMixin, models.Model):
         return str(self.referral)
 
 
-class ReferralLink(TimestampModelMixin, models.Model):
+class ReferralLink(TimestampMixin, models.Model):
     referrer = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

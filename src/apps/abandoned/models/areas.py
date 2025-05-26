@@ -5,12 +5,12 @@ from django.utils.translation import gettext_lazy as _
 from src.apps.abandoned.enums import SecurityLevel
 from src.apps.permissions.models import PermissionBaseModel
 from src.apps.ratings.models import RatingMixin
-from src.utils.db.models import TimestampModelMixin
+from src.utils.db.models import TimestampMixin
 
 User = get_user_model()
 
 
-class AbandonedArea(TimestampModelMixin, RatingMixin, PermissionBaseModel):
+class AbandonedArea(TimestampMixin, RatingMixin, PermissionBaseModel):
     class Meta:
         verbose_name = _("area")
         verbose_name_plural = _("areas")

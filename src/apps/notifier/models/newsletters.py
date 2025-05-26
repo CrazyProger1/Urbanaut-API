@@ -2,10 +2,10 @@ from django.db import models
 from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from src.utils.db import TimestampModelMixin
+from src.utils.db import TimestampMixin
 
 
-class Newsletter(TimestampModelMixin, models.Model):
+class Newsletter(TimestampMixin, models.Model):
     name = models.CharField(
         max_length=150,
         blank=False,

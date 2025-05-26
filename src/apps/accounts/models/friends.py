@@ -2,10 +2,10 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from src.utils.db import CreatedAtModelMixin
+from src.utils.db import CreatedAtMixin
 
 
-class Friend(CreatedAtModelMixin, models.Model):
+class Friend(CreatedAtMixin, models.Model):
     initiator = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,

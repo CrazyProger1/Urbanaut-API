@@ -3,7 +3,7 @@ from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 
-class CreatedAtModelMixin(models.Model):
+class CreatedAtMixin(models.Model):
     created_at = models.DateTimeField(
         verbose_name=_("created at"),
         help_text=_("Creation date and time."),
@@ -14,7 +14,7 @@ class CreatedAtModelMixin(models.Model):
         abstract = True
 
 
-class UpdatedAtModelMixin(models.Model):
+class UpdatedAtMixin(models.Model):
     updated_at = models.DateTimeField(
         verbose_name=_("updated at"),
         help_text=_("Update date and time."),
@@ -25,6 +25,6 @@ class UpdatedAtModelMixin(models.Model):
         abstract = True
 
 
-class TimestampModelMixin(CreatedAtModelMixin, UpdatedAtModelMixin):
+class TimestampMixin(CreatedAtMixin, UpdatedAtMixin):
     class Meta:
         abstract = True

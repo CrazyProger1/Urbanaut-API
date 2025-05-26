@@ -1,10 +1,10 @@
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from src.utils.db.models import TimestampModelMixin
+from src.utils.db.models import TimestampMixin
 
 
-class Rank(TimestampModelMixin, models.Model):
+class Rank(TimestampMixin, models.Model):
     key = models.CharField(
         max_length=20,
         unique=True,

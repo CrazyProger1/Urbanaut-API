@@ -3,10 +3,10 @@ from django.core.validators import MaxValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
-from src.utils.db import TimestampModelMixin
+from src.utils.db import TimestampMixin
 
 
-class RatingVote(TimestampModelMixin, models.Model):
+class RatingVote(TimestampMixin, models.Model):
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,

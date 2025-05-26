@@ -12,7 +12,8 @@ from src.apps.abandoned.enums import (
 from src.apps.media.enums import FileType
 from src.apps.permissions.models import PermissionBaseModel
 from src.apps.ratings.models import RatingMixin
-from src.utils.db.models import TimestampModelMixin
+from src.apps.ratings.models.views import ViewedByMixin
+from src.utils.db.models import TimestampMixin
 
 User = get_user_model()
 
@@ -47,7 +48,7 @@ class AbandonedObjectFile(models.Model):
     )
 
 
-class AbandonedObject(TimestampModelMixin, RatingMixin, PermissionBaseModel):
+class AbandonedObject(TimestampMixin, RatingMixin, ViewedByMixin, PermissionBaseModel):
     class Meta:
         verbose_name = _("object")
         verbose_name_plural = _("objects")

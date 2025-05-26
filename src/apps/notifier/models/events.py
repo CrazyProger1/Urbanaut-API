@@ -3,7 +3,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from src.utils.celery import plan_task
-from src.utils.db import TimestampModelMixin
+from src.utils.db import TimestampMixin
 
 
 class NotificationEvent(models.Model):
@@ -57,7 +57,7 @@ class CategoryEvent(models.Model):
     )
 
 
-class Event(TimestampModelMixin, models.Model):
+class Event(TimestampMixin, models.Model):
     name = models.CharField(
         max_length=250,
         verbose_name=_("name"),

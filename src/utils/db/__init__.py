@@ -18,9 +18,9 @@ from src.utils.db.search import (
     search_localized,
 )
 from src.utils.db.models import (
-    TimestampModelMixin,
-    CreatedAtModelMixin,
-    UpdatedAtModelMixin,
+    TimestampMixin,
+    CreatedAtMixin,
+    UpdatedAtMixin,
 )
 
 __all__ = [
@@ -34,9 +34,9 @@ __all__ = [
     "DynamicTextChoices",
     "Source",
     "Model",
-    "CreatedAtModelMixin",
-    "UpdatedAtModelMixin",
-    "TimestampModelMixin",
+    "CreatedAtMixin",
+    "UpdatedAtMixin",
+    "TimestampMixin",
     "get_or_create_object",
     "count_objects",
 ]
