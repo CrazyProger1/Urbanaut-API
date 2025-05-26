@@ -1,3 +1,5 @@
+import logging
+
 from rest_framework import viewsets, mixins, serializers
 from django_filters import rest_framework as filters
 
@@ -10,6 +12,8 @@ from src.apps.abandoned.serializers import (
 from src.apps.abandoned.services.db import get_available_abandoned_objects
 from src.apps.permissions.permissions import HasPermission
 from src.utils.filters import DistanceBackend
+
+logger = logging.getLogger(__name__)
 
 
 class AbandonedObjectViewSet(
@@ -51,5 +55,6 @@ class AbandonedObjectViewSet(
         obj = super().get_object()
         user = self.request.user
         if user.is_authenticated:
+            logger.info("Increased views for: %s", obj)
             obj.increase_views(user=user)
         return obj
