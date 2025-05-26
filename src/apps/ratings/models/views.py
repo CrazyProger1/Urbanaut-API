@@ -48,6 +48,8 @@ class ViewedByMixin(models.Model):
     def increase_views(self, user):
         if not View.objects.filter(viewed_by=user).exists():
             self.viewable.viewed_by.add(user)
+            self.viewable.views += 1
+            self.viewable.save(update_fields=("viewed_by", "views"))
 
     @property
     def views(self) -> int:
