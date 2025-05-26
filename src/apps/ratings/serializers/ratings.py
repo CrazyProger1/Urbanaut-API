@@ -18,5 +18,6 @@ class RatingRetrieveSerializer(serializers.ModelSerializer):
     def get_user_vote(self, obj: Rating):
         if request := self.context.get("request"):
             if user := getattr(request, "user", None):
-                if vote := get_user_vote_or_none(user, obj):
-                    return vote.value
+                if user.is_authenticated:
+                    if vote := get_user_vote_or_none(user, obj):
+                        return vote.value
