@@ -3,6 +3,7 @@ from unfold.admin import ModelAdmin, TabularInline
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
+from unfold.decorators import display
 
 from src.apps.abandoned.models import (
     AbandonedObject,
@@ -37,15 +38,21 @@ class AbandonedObjectAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmi
         AbandonedObjectTabularFileInline,
         AbandonedObjectCategoryTabularInline,
     )
+    exclude = (
+        "viewable",
+    )
     list_display = (
         "id",
         "name",
         "rating",
+        "views",
         "created_at",
+
     )
     readonly_fields = (
         "created_at",
         "rating",
+        "views",
     )
     list_display_links = ("name",)
 

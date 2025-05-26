@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 
 
 class View(models.Model):
@@ -31,6 +32,9 @@ class Viewable(models.Model):
         default=0,
     )
 
+    def __str__(self):
+        return self.views
+
 
 class ViewedByMixin(models.Model):
     viewable = models.OneToOneField(
@@ -38,6 +42,7 @@ class ViewedByMixin(models.Model):
         on_delete=models.CASCADE,
         null=True,
         blank=True,
+        verbose_name=_("views"),
     )
 
     @property
