@@ -36,8 +36,8 @@ class ViewedByMixin(models.Model):
     viewable = models.OneToOneField(
         Viewable,
         on_delete=models.CASCADE,
-        null=False,
-        blank=False,
+        null=True,
+        blank=True,
     )
 
     @property
