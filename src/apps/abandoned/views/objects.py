@@ -55,6 +55,5 @@ class AbandonedObjectViewSet(
         obj = super().get_object()
         user = self.request.user
         if user.is_authenticated:
-            logger.info("Increased views for: %s", obj)
             obj.increase_views(user=user)
         return obj

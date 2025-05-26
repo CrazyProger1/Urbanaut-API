@@ -3,7 +3,6 @@ from unfold.admin import ModelAdmin, TabularInline
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
-from unfold.decorators import display
 
 from src.apps.abandoned.models import (
     AbandonedObject,
@@ -11,6 +10,7 @@ from src.apps.abandoned.models import (
     AbandonedObjectCategory,
 )
 from src.apps.dashboard.admin.site import site
+from src.apps.ratings.admin import ViewInline
 
 
 class AbandonedObjectTabularFileInline(TabularInline):
@@ -37,6 +37,7 @@ class AbandonedObjectAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmi
     inlines = (
         AbandonedObjectTabularFileInline,
         AbandonedObjectCategoryTabularInline,
+        ViewInline,
     )
     exclude = (
         "viewable",
