@@ -32,6 +32,13 @@ class BlogPostViewSet(
     )
     filterset_class = BlogPostFilter
 
+    def get_object(self):
+        obj = super().get_object()
+        user = self.request.user
+        if user.is_authenticated:
+            obj.increase_views(user=user)
+        return obj
+
     def get_serializer_class(self):
         return self.serializer_classes.get(self.action, self.serializer_class)
 
