@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     "src.apps.dashboard.apps.DashboardConfig",
     "src.apps.ratings.apps.RatingsConfig",
     "src.apps.kafka.apps.KafkaConfig",
+    "src.apps.metrics.apps.MetricsConfig",
 ]
 
 MIDDLEWARE = [

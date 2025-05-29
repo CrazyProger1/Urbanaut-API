@@ -33,7 +33,7 @@ class Viewable(models.Model):
     )
 
     def __str__(self):
-        return self.views
+        return str(self.views)
 
 
 class ViewedByMixin(models.Model):
