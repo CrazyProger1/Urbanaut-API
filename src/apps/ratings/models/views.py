@@ -47,7 +47,7 @@ class ViewedByMixin(models.Model):
 
     def increase_views(self, user):
         if not View.objects.filter(viewed_by=user).exists():
-            View.objects.create(viewed_by=user, viewable=self)
+            View.objects.create(viewed_by=user, viewable=self.viewable)
             self.viewable.views += 1
             self.viewable.save(update_fields=("viewed_by", "views"))
 
