@@ -1,3 +1,5 @@
+import logging
+
 from django_filters import rest_framework as filters
 from drf_spectacular.utils import extend_schema
 from rest_framework import viewsets, generics, permissions, status
@@ -11,6 +13,8 @@ from src.apps.blog.serializers import (
 )
 from src.apps.blog.services.db import get_available_blog_posts
 from src.apps.permissions.permissions import HasPermission
+
+logger = logging.getLogger(__name__)
 
 
 class BlogPostViewSet(
@@ -36,6 +40,7 @@ class BlogPostViewSet(
         obj = super().get_object()
         user = self.request.user
         if user.is_authenticated:
+            logger.info(f"Increasing views for {obj}")
             obj.increase_views(user=user)
         return obj
 
