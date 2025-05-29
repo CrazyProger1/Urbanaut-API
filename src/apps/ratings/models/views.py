@@ -16,11 +16,8 @@ class View(models.Model):
         on_delete=models.CASCADE,
     )
 
-    class Meta:
-        unique_together = (
-            "viewed_by",
-            "viewable",
-        )
+    def __str__(self):
+        return f"User №{self.viewed_by_id} view"
 
 
 class Viewable(models.Model):
@@ -49,10 +46,9 @@ class ViewedByMixin(models.Model):
         if not self.viewable_id:
             self.save()
 
-        if not View.objects.filter(viewed_by=user).exists():
-            View.objects.create(viewed_by=user, viewable=self.viewable)
-            self.viewable.views += 1
-            self.viewable.save(update_fields=("views",))
+        View.objects.create(viewed_by=user, viewable=self.viewable)
+        self.viewable.views += 1
+        self.viewable.save(update_fields=("views",))
 
     @property
     def views(self) -> int:
