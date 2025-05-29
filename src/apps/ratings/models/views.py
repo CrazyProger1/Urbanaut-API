@@ -39,13 +39,16 @@ class Viewable(models.Model):
 class ViewedByMixin(models.Model):
     viewable = models.OneToOneField(
         Viewable,
-        on_delete=models.CASCADE,
+        on_delete=models.SET_NULL,
         null=True,
         blank=True,
         verbose_name=_("views"),
     )
 
     def increase_views(self, user):
+        if not self.viewable_id:
+            self.save()
+
         if not View.objects.filter(viewed_by=user).exists():
             View.objects.create(viewed_by=user, viewable=self.viewable)
             self.viewable.views += 1
