@@ -53,6 +53,7 @@ class BlogPostRetrieveSerializer(
             "has_change_permission",
             "files",
             "photo",
+            "views",
         )
 
 

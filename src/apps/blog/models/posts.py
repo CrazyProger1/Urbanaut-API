@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 
 from src.apps.media.enums import FileType
 from src.apps.permissions.models import PermissionBaseModel
+from src.apps.ratings.models import ViewedByMixin
 from src.utils.db.models import TimestampMixin
 
 User = get_user_model()
@@ -43,7 +44,7 @@ class BlogPostTopic(models.Model):
         unique_together = ("post", "topic",)
 
 
-class BlogPost(TimestampMixin, PermissionBaseModel):
+class BlogPost(TimestampMixin, ViewedByMixin, PermissionBaseModel):
     class Meta:
         verbose_name = _("Post")
         verbose_name_plural = _("Posts")
