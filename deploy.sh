@@ -2,7 +2,7 @@
 
 set -e
 
-cd /home/urbanaut/backend/ || exit
+cd /home/admin/urbanaut/backend/ || exit
 
 git checkout -- deploy.sh
 
