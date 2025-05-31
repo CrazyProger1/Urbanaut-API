@@ -140,6 +140,11 @@ UNFOLD = {
                             "admin:abandoned_abandonedarea_changelist"
                         ),
                     },
+                    {
+                        "title": _("Events"),
+                        "icon": "event",
+                        "link": reverse_lazy("admin:abandoned_event_changelist"),
+                    },
                 ],
             },
             {
