@@ -1,5 +1,8 @@
+from datetime import timedelta
+
 from django.conf import settings
 from django.db import models
+from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 
@@ -46,9 +49,16 @@ class ViewedByMixin(models.Model):
         if not self.viewable_id:
             self.save()
 
-        View.objects.create(viewed_by=user, viewable=self.viewable)
-        self.viewable.views += 1
-        self.viewable.save(update_fields=("views",))
+        threshold = timezone.now() - settings.VIEWS_INCREASE_PERIOD_PER_USER
+
+        if not View.objects.filter(
+                viewed_by=user,
+                viewable=self.viewable,
+                viewed_at__gte=threshold,
+        ).exists():
+            View.objects.create(viewed_by=user, viewable=self.viewable)
+            self.viewable.views += 1
+            self.viewable.save(update_fields=("views",))
 
     @property
     def views(self) -> int:

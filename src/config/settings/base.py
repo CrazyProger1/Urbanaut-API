@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 
 from decouple import config
@@ -115,3 +116,5 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 TITLE = "Urbanaut"
 DESCRIPTION = "Urbanaut API Server"
 VERSION = "0.0.1"
+
+VIEWS_INCREASE_PERIOD_PER_USER = timedelta(hours=1)
