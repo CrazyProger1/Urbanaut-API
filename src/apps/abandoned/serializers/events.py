@@ -12,6 +12,7 @@ class EventListSerializer(serializers.ModelSerializer):
             "short_description",
             "start_at",
             "end_at",
+            "status",
         )
 
 
@@ -24,4 +25,5 @@ class EventRetrieveSerializer(serializers.ModelSerializer):
             "short_description",
             "start_at",
             "end_at",
+            "status",
         )
