@@ -36,6 +36,13 @@ class BlogPostAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
     )
     readonly_fields = ("created_at",)
     list_display_links = ("title",)
+    search_fields = (
+        "title",
+    )
+    list_filter = (
+        "published_at",
+        "created_at",
+    )
     inlines = (
         BlogPostFileTabularInline,
         BlogPostTopicTabularInline,
