@@ -8,8 +8,8 @@ git checkout -- deploy.sh
 
 git pull
 
-uv run python manage.py migrate
-uv run python manage.py collectstatic --noinput
+/home/admin/.local/bin/uv run python manage.py migrate
+/home/admin/.local/bin/uv run python manage.py collectstatic --noinput
 
 supervisorctl restart backend
 
