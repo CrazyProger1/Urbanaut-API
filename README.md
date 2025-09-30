@@ -1,7 +1,7 @@
 # Urbanaut-Backend-API
 
 <div align="center">
-  <img src="docs/images/logo.png" alt="User Icon" width="200" height="200" style="border-radius: 10%;">
+  <img src="assets/web-app-manifest-512x512.png" alt="User Icon" width="200" height="200" style="border-radius: 10%;">
 </div>
 
 ---
@@ -31,7 +31,7 @@ Social network for urban explorers - stalkers, diggers and so on.
 
 ## Status
 
-**V0.0.1 - Active Development 🟢**
+**V0.0.2 - Active Development 🟢**
 
 ## License
 

@@ -1,25 +1,14 @@
+from src.config.settings.base import INSTALLED_APPS
 from src.config.settings.base import (
-    TITLE,
+    APPLICATION,
     DESCRIPTION,
     VERSION,
 )
 
-SWAGGER_SETTINGS = {
-    "USE_SESSION_AUTH": False,
-    "PERSIST_AUTH": True,
-    "DEFAULT_MODEL_RENDERING": "example",
-    "DISPLAY_OPERATION_ID": True,
-    "DOC_EXPANSION": "none",
-    "SUPPORTED_SUBMIT_METHODS": ["get", "post", "put", "delete", "patch"],
-    "HEADERS": {"Accept-Language": "ru"},
-}
+INSTALLED_APPS += ["drf_spectacular"]
 SPECTACULAR_SETTINGS = {
-    "TITLE": TITLE,
+    "TITLE": APPLICATION,
     "DESCRIPTION": DESCRIPTION,
     "VERSION": VERSION,
-    "SERVE_INCLUDE_SCHEMA": True,
-    "SCHEMA_PATH_PREFIX": r"/api/v[0-9]",
-    "COMPONENT_SPLIT_REQUEST": True,
-    "AUTHENTICATION_WHITELIST": ["src.apps.accounts.backends.TMAAuthentication"],
-    "SECURITY": [{"Telegram Mini Apps": []}],
+    "SERVE_INCLUDE_SCHEMA": False,
 }
