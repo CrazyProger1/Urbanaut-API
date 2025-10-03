@@ -11,3 +11,7 @@ class GoogleOauthCallbackResponseSerializer(serializers.Serializer):
     last_name = serializers.CharField(source="family_name")
     email = serializers.EmailField()
     picture = serializers.URLField()
+
+
+class GoogleOauthRedirectURIResponseSerializer(serializers.Serializer):
+    redirect_uri = serializers.URLField()

@@ -11,6 +11,7 @@ from rest_framework.views import APIView
 from src.apps.accounts.serializers.oauth import (
     GoogleOauthCallbackRequestSerializer,
     GoogleOauthCallbackResponseSerializer,
+    GoogleOauthRedirectURIResponseSerializer,
 )
 from src.apps.accounts.services.oauth import (
     generate_google_oauth_redirect_uri,
@@ -22,6 +23,9 @@ logger = logging.getLogger(__name__)
 
 
 class GoogleOauthRedirectURIView(APIView):
+    @extend_schema(
+        responses=GoogleOauthRedirectURIResponseSerializer,
+    )
     def get(self, request, **kwargs):
         return Response({"redirect_uri": generate_google_oauth_redirect_uri(state=secrets.token_urlsafe(16))})
 
