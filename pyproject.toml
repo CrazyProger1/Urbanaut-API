@@ -16,5 +16,6 @@ dependencies = [
     "drf-spectacular>=0.28.0",
     "drf-standardized-errors>=0.15.0",
     "python-decouple>=3.8",
+    "requests>=2.32.5",
     "uvicorn>=0.37.0",
 ]
