@@ -1,4 +1,3 @@
-
 from pathlib import Path
 from decouple import config, Csv
 
@@ -8,6 +7,7 @@ VERSION = "0.0.2"
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
 BASE_URL = config("BASE_URL", cast=str, default="http://localhost:8000")
+BASE_FRONTEND_URL = config("BASE_FRONTEND_URL", cast=str, default="http://localhost:3000")
 SECRET_KEY = config("SECRET_KEY", cast=str)
 DEBUG = config("DEBUG", cast=bool, default=False)
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv(), default=["*"])
@@ -21,8 +21,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_filters",
-    'src.apps.docs',
-    'src.apps.accounts',
+    "src.apps.docs",
+    "src.apps.accounts",
 ]
 
 MIDDLEWARE = [

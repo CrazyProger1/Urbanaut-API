@@ -13,8 +13,8 @@ include(
     "i18n.py",
     "logging.py",
     "security.py",
+    "auth.py",
     optional("rest.py"),
     optional("docs.py"),
-    optional("cors.py"),
     optional("unfold.py"),
 )
