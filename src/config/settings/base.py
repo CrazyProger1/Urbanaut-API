@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django_filters",
+    "djoser",
     "src.apps.docs",
     "src.apps.accounts",
 ]
