@@ -29,7 +29,9 @@ class GoogleOauthRedirectURIView(APIView):
     def get(self, request, **kwargs):
         state = secrets.token_urlsafe(16)
         logger.debug("Generating Google Oauth redirect URI: %s", state)
-        return Response({"redirect_uri": generate_google_oauth_redirect_uri(state=state)})
+        return Response(
+            {"redirect_uri": generate_google_oauth_redirect_uri(state=state)}
+        )
 
 
 class GoogleOauthCallbackView(APIView):
@@ -51,6 +53,8 @@ class GoogleOauthCallbackView(APIView):
                 detail="Failed to authenticate the provided code or state.",
             )
         google_user = decode_id_token(tokens["id_token"])
-        response_serializer = GoogleOauthCallbackResponseSerializer(instance=google_user)
+        response_serializer = GoogleOauthCallbackResponseSerializer(
+            instance=google_user
+        )
         logger.info("User authenticated via Google Oauth: %s", google_user)
         return Response(response_serializer.data, status=status.HTTP_200_OK)

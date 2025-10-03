@@ -17,7 +17,8 @@ class DefaultSettings(LazySettings):
             logger.error("Can't find settings %s value or default value", item)
             raise AttributeError(
                 f"Django settings doesn't contain {item} value or default value, "
-                f"make sure you specify it in settings.py")
+                f"make sure you specify it in settings.py"
+            )
 
 
 default_settings = DefaultSettings()

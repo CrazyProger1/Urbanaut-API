@@ -8,12 +8,22 @@ class AccountsConfig(AppConfig):
     name = "src.apps.accounts"
 
     def ready(self):
-        default_settings.setdefault("GOOGLE_OAUTH_URL", "https://accounts.google.com/o/oauth2/v2/auth")
+        default_settings.setdefault(
+            "GOOGLE_OAUTH_URL", "https://accounts.google.com/o/oauth2/v2/auth"
+        )
         default_settings.setdefault("GOOGLE_OAUTH_ACCESS_TYPE", "offline")
-        default_settings.setdefault("GOOGLE_OAUTH_SCOPES", (
-            "openid",
-            "profile",
-            "email",
-        ))
-        default_settings.setdefault("GOOGLE_OAUTH_TOKEN_URL", "https://oauth2.googleapis.com/token")
-        default_settings.setdefault("GOOGLE_OAUTH_REDIRECT_BASE_URL", "https://accounts.google.com/o/oauth2/v2/auth")
+        default_settings.setdefault(
+            "GOOGLE_OAUTH_SCOPES",
+            (
+                "openid",
+                "profile",
+                "email",
+            ),
+        )
+        default_settings.setdefault(
+            "GOOGLE_OAUTH_TOKEN_URL", "https://oauth2.googleapis.com/token"
+        )
+        default_settings.setdefault(
+            "GOOGLE_OAUTH_REDIRECT_BASE_URL",
+            "https://accounts.google.com/o/oauth2/v2/auth",
+        )

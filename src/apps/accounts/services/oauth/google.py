@@ -24,7 +24,9 @@ class UserData(TypedDict):
 def generate_google_oauth_redirect_uri(state: str):
     params = {
         "client_id": default_settings.GOOGLE_OAUTH_CLIENT_ID,
-        "redirect_uri": urljoin(default_settings.BASE_URL, str(default_settings.GOOGLE_OAUTH_CALLBACK_URL)),
+        "redirect_uri": urljoin(
+            default_settings.BASE_URL, str(default_settings.GOOGLE_OAUTH_CALLBACK_URL)
+        ),
         "response_type": "code",
         "scope": " ".join(default_settings.GOOGLE_OAUTH_SCOPES),
         "access_type": default_settings.GOOGLE_OAUTH_ACCESS_TYPE,
@@ -42,7 +44,10 @@ def authenticate_google_oauth_code(code: str) -> UserTokens:
             "client_id": default_settings.GOOGLE_OAUTH_CLIENT_ID,
             "client_secret": default_settings.GOOGLE_OAUTH_CLIENT_SECRET,
             "grant_type": "authorization_code",
-            "redirect_uri": urljoin(default_settings.BASE_URL, str(default_settings.GOOGLE_OAUTH_CALLBACK_URL)),
+            "redirect_uri": urljoin(
+                default_settings.BASE_URL,
+                str(default_settings.GOOGLE_OAUTH_CALLBACK_URL),
+            ),
             "code": code,
         },
     )
