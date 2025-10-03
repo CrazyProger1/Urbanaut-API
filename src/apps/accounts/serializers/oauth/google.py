@@ -7,8 +7,19 @@ class GoogleOauthCallbackRequestSerializer(serializers.Serializer):
 
 
 class GoogleOauthCallbackResponseSerializer(serializers.Serializer):
-    first_name = serializers.CharField(source="given_name")
-    last_name = serializers.CharField(source="family_name")
+    first_name = serializers.CharField(
+        source="given_name",
+        required=False,
+        allow_null=True,
+        default=None,
+    )
+    last_name = serializers.CharField(
+        source="family_name",
+        required=False,
+        allow_null=True,
+        default=None,
+    )
+    name = serializers.CharField()
     email = serializers.EmailField()
     picture = serializers.URLField()
 
