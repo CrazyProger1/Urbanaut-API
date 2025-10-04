@@ -10,12 +10,12 @@ from src.apps.accounts.views import (
 urlpatterns = [
     path("admin/", site.urls),
     path(
-        "api/v1/google/oauth/uri",
+        "api/v1/google/oauth/uri/",
         GoogleOauthRedirectURIView.as_view(),
         name="google-oauth-redirect-uri",
     ),
     path(
-        "api/v1/google/oauth/callback",
+        "api/v1/google/oauth/callback/",
         GoogleOauthCallbackView.as_view(),
         name="google-oauth-callback",
     ),
