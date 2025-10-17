@@ -1,0 +1,56 @@
+from django.db import models
+from django.utils.translation import gettext_lazy as _
+from django.conf import settings
+
+from src.utils.django.db import TimestampMixin
+
+
+class Place(TimestampMixin, models.Model):
+    name = models.CharField(
+        max_length=250,
+        verbose_name=_("name"),
+        help_text=_("Name of the place."),
+        null=False,
+        blank=False,
+    )
+    description = models.TextField(
+        verbose_name=_("description"),
+        help_text=_("Description of the abandoned object."),
+        null=True,
+        blank=True,
+    )
+
+    created_by = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="places",
+    )
+    area = models.ForeignKey(
+        "Area",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name=_("area"),
+        help_text=_("Area which contains this place (eg Chernobyl Exclusion Zone)."),
+    )
+    built_at = models.DateField(
+        verbose_name=_("built at"),
+        help_text=_("Place built date and time."),
+        null=True,
+        blank=True,
+    )
+    abandoned_at = models.DateField(
+        verbose_name=_("abandoned at"),
+        help_text=_("When place became abandoned date and time."),
+        null=True,
+        blank=True,
+    )
+
+    class Meta:
+        verbose_name = _("Place")
+        verbose_name_plural = _("Places")
+
+    def __str__(self):
+        return self.name

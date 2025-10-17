@@ -54,7 +54,7 @@ class GoogleOauthCallbackView(APIView):
             )
         google_user = decode_id_token(tokens["id_token"])
         response_serializer = GoogleOauthCallbackResponseSerializer(
-            instance=google_user
+            instance=google_user,
         )
         logger.info("User authenticated via Google Oauth: %s", google_user)
         return Response(response_serializer.data, status=status.HTTP_200_OK)

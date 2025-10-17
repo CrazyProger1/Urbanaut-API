@@ -26,6 +26,7 @@ INSTALLED_APPS = [
     "djoser",
     "src.apps.docs",
     "src.apps.accounts",
+    "src.apps.abandoned",
 ]
 
 MIDDLEWARE = [

@@ -9,11 +9,11 @@ except ImportError:
 
 include(
     "base.py",
+    "auth.py",
     "databases.py",
     "i18n.py",
     "logging.py",
     "security.py",
-    "auth.py",
     optional("rest.py"),
     optional("docs.py"),
     optional("unfold.py"),
