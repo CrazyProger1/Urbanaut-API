@@ -5,11 +5,12 @@ from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.accounts.managers import UserManager
+from src.apps.accounts.models.settings import SettingsMixin
 
 from src.utils.django.db import TimestampMixin
 
 
-class User(TimestampMixin, PermissionsMixin, AbstractBaseUser):
+class User(SettingsMixin, TimestampMixin, PermissionsMixin, AbstractBaseUser):
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,
@@ -66,7 +67,7 @@ class User(TimestampMixin, PermissionsMixin, AbstractBaseUser):
 
     def __str__(self):
         return (
-            f"{self.first_name} {self.last_name} ({self.email})"
+            f"{self.first_name or ''} {self.last_name or ''} ({self.email})"
             if self.first_name or self.last_name
             else self.email
         )

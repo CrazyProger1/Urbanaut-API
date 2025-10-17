@@ -47,7 +47,9 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
     def display_area(self, obj: Place):
         if obj.area_id:
             area_link = reverse("admin:abandoned_place_changelist")
-            return mark_safe(f"<a class='underline text-blue-500' href='{area_link}?area__id__exact={obj.area_id}'>{str(obj.area)}</a>")
+            return mark_safe(
+                f"<a class='underline text-blue-500' href='{area_link}?area__id__exact={obj.area_id}'>{str(obj.area)}</a>"
+            )
         return None
 
     display_area.short_description = _("area")

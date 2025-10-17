@@ -22,13 +22,9 @@ class AreaAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
         created_by_field,
         "created_at",
     )
-    autocomplete_fields = (
-        created_by_field,
-    )
+    autocomplete_fields = (created_by_field,)
     search_fields = (
         "name",
         "description",
     )
-    list_filter = (
-        "created_at",
-    )
+    list_filter = ("created_at",)

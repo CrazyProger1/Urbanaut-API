@@ -14,3 +14,9 @@ GOOGLE_OAUTH_SCOPES = (
 GOOGLE_OAUTH_CALLBACK_URL = urljoin(BASE_FRONTEND_URL, "api/google/oauth/callback")
 
 AUTH_USER_MODEL = "accounts.User"
+
+DJOSER = {
+    "SERIALIZERS": {
+        "current_user": "src.apps.accounts.serializers.CurrentUserSerializer",
+    },
+}

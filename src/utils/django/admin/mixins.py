@@ -7,7 +7,10 @@ class CreatedByAdminMixin(admin.ModelAdmin):
     def get_readonly_fields(self, request, obj=...):
         readonly_fields = super().get_readonly_fields(request, obj) or []
 
-        if not request.user.is_superuser and self.created_by_field not in readonly_fields:
+        if (
+            not request.user.is_superuser
+            and self.created_by_field not in readonly_fields
+        ):
             return [
                 self.created_by_field,
                 *readonly_fields,

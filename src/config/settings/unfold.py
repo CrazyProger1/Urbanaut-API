@@ -49,19 +49,15 @@ UNFOLD = {
                     {
                         "title": _("Places"),
                         "icon": "location_on",
-                        "link": reverse_lazy(
-                            "admin:abandoned_place_changelist"
-                        ),
+                        "link": reverse_lazy("admin:abandoned_place_changelist"),
                     },
                     {
                         "title": _("Areas"),
                         "icon": "explore_nearby",
-                        "link": reverse_lazy(
-                            "admin:abandoned_area_changelist"
-                        ),
+                        "link": reverse_lazy("admin:abandoned_area_changelist"),
                     },
                 ],
             },
-        ]
-    }
+        ],
+    },
 }
