@@ -3,7 +3,7 @@ from rest_framework import serializers
 from src.apps.accounts.models import Settings
 
 
-class SettingsSerializer(serializers.ModelSerializer):
+class SettingsRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
         model = Settings
         fields = (
@@ -12,3 +12,12 @@ class SettingsSerializer(serializers.ModelSerializer):
             "theme",
         )
 
+
+class SettingsUpdateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Settings
+        fields = (
+            "language",
+            "is_notifications_enabled",
+            "theme",
+        )

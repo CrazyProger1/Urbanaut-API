@@ -5,6 +5,7 @@ from src.apps.accounts.sites import site
 from src.apps.accounts.views import (
     GoogleOauthRedirectURIView,
     GoogleOauthCallbackView,
+    SettingsViewSet,
 )
 
 urlpatterns = [
@@ -25,22 +26,14 @@ urlpatterns = [
         "api/v1/users/", UserViewSet.as_view({"post": "create"}), name="user-register"
     ),
     path(
-        "api/v1/users/<int:pk>/",
-        UserViewSet.as_view(
-            {
-                "get": "retrieve",
-                "put": "update",
-                "patch": "partial_update",
-                "delete": "destroy",
-            }
-        ),
-        name="user-detail",
-    ),
-    path(
         "api/v1/users/me/",
         UserViewSet.as_view({"get": "me", "put": "me", "patch": "me", "delete": "me"}),
         name="user-me",
     ),
+    path(
+        "api/v1/settings/",
+        SettingsViewSet.as_view({"put": "update", "patch": "partial_update", "get": "retrieve"}),
+    )
     # path("api/v1/users/activate/", UserViewSet.as_view({"post": "activation"}), name="user-activate"),
     # path("api/v1/users/resend-activation/", UserViewSet.as_view({"post": "resend_activation"}),
     #      name="user-resend-activation"),

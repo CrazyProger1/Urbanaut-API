@@ -7,7 +7,7 @@ from django.utils.translation import gettext_lazy as _
 from unfold.forms import AdminPasswordChangeForm, UserChangeForm, UserCreationForm
 from unfold.admin import ModelAdmin, StackedInline
 
-from src.apps.accounts.models import User, Settings
+from src.apps.accounts.models import User, Settings, Username
 from src.apps.accounts.sites import site
 
 admin.site.unregister(Group)
@@ -15,6 +15,11 @@ admin.site.unregister(Group)
 
 @admin.register(Settings)
 class SettingsAdmin(ModelAdmin):
+    pass
+
+
+@admin.register(Username)
+class UsernameAdmin(ModelAdmin):
     pass
 
 
@@ -26,16 +31,24 @@ class SettingsInline(StackedInline):
     verbose_name = _("Settings")
     verbose_name_plural = _("Settings")
 
+
     def has_add_permission(self, request, obj):
         return False
 
+
+class UsernameInline(StackedInline):
+    model = Username
+    extra = 0
+    tab = True
+    verbose_name = _("Username")
+    verbose_name_plural = _("Usernames")
 
 @admin.register(User, site=site)
 class UserAdmin(BaseUserAdmin, ModelAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
     change_password_form = AdminPasswordChangeForm
-    inlines = (SettingsInline,)
+    inlines = (SettingsInline, UsernameInline,)
     fieldsets = (
         (None, {"fields": ("email", "password")}),
         (_("Personal info"), {"fields": ("first_name", "last_name")}),

@@ -1,11 +1,16 @@
 from rest_framework import serializers
 
 from src.apps.accounts.models import User
-from src.apps.accounts.serializers.settings import SettingsSerializer
+from src.apps.accounts.serializers.settings import SettingsRetrieveSerializer
 
 
 class CurrentUserSerializer(serializers.ModelSerializer):
-    settings = SettingsSerializer(read_only=True)
+    settings = SettingsRetrieveSerializer(read_only=True)
+    usernames = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field="username",
+    )
 
     class Meta:
         model = User
@@ -13,4 +18,5 @@ class CurrentUserSerializer(serializers.ModelSerializer):
             "id",
             "email",
             "settings",
+            "usernames",
         )
