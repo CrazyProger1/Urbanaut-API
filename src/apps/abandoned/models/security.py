@@ -20,6 +20,10 @@ class PlaceSecurity(models.Model):
     level = models.CharField(
         max_length=10,
         choices=SecurityLevel,
+        default=SecurityLevel.NONE,
         verbose_name=_("level"),
         help_text=_("Current security level based on community feedbacks."),
     )
+
+    def __str__(self):
+        return self.place.name

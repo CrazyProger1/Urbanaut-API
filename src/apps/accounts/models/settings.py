@@ -41,13 +41,12 @@ class Settings(models.Model):
 
 class SettingsMixin(models.Model):
     def save(self, *args, **kwargs):
-        if not self.pk or not hasattr(self, "settings"):
-            Settings.objects.create(user=self)
-
         super().save(
             *args,
             **kwargs,
         )
+        if not self.pk or not hasattr(self, "settings"):
+            Settings.objects.create(user=self)
 
     class Meta:
         abstract = True

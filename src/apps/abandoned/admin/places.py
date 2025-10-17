@@ -7,6 +7,7 @@ from rest_framework.reverse import reverse
 from unfold.admin import ModelAdmin
 from unfold.contrib.forms.widgets import WysiwygWidget
 
+from src.apps.abandoned.admin.security import PlaceSecurityInline
 from src.apps.abandoned.models import Place
 from src.apps.accounts.sites import site
 from src.utils.django.admin import CreatedByAdminMixin
@@ -14,6 +15,7 @@ from src.utils.django.admin import CreatedByAdminMixin
 
 @admin.register(Place, site=site)
 class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
+    inlines = (PlaceSecurityInline,)
     created_by_field = "created_by"
     formfield_overrides = {
         models.TextField: {

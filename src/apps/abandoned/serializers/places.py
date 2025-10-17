@@ -13,6 +13,11 @@ class PlaceListSerializer(serializers.ModelSerializer):
 
 
 class PlaceRetrieveSerializer(serializers.ModelSerializer):
+    security = serializers.SlugRelatedField(
+        slug_field="level",
+        read_only=True,
+    )
+
     class Meta:
         model = Place
         fields = "__all__"

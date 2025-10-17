@@ -2,6 +2,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
+from src.apps.abandoned.models.security import PlaceSecurity
 from src.utils.django.db import TimestampMixin
 
 
@@ -54,3 +55,15 @@ class Place(TimestampMixin, models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(
+            self,
+            *args,
+            **kwargs
+    ):
+        super().save(
+            *args,
+            **kwargs,
+        )
+        if not self.pk or not hasattr(self, "security"):
+            PlaceSecurity.objects.create(place=self)
