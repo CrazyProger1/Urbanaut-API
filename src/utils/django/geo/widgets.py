@@ -18,8 +18,7 @@ class ManualGeometryFieldWidget(UnfoldAdminTextareaWidget):
             try:
                 # Assume EWKT (with optional SRID=4326 prefix); strip whitespace
                 geom = Polygon.from_ewkt(wkt.strip())
-                if geom.geom_type == 'Polygon':
-                    return geom
+                return geom
             except Exception:
                 pass
         return None
