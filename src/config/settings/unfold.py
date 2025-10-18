@@ -27,6 +27,14 @@ UNFOLD = {
         "light": lambda request: static("favicon.svg"),
         "dark": lambda request: static("favicon.svg"),
     },
+    "SITE_FAVICONS": [
+        {
+            "rel": "icon",
+            "sizes": "32x32",
+            "type": "image/svg+xml",
+            "href": lambda request: static("favicon.svg"),
+        },
+    ],
     "SIDEBAR": {
         "show_search": True,
         "show_all_applications": True,
