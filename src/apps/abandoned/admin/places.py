@@ -22,7 +22,7 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
         models.TextField: {
             "widget": WysiwygWidget,
         },
-        models.GeometryField: {
+        models.PointField: {
             "widget": OSMWidget,
         },
     }

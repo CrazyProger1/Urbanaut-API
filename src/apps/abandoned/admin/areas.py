@@ -17,7 +17,7 @@ class AreaAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
         models.TextField: {
             "widget": WysiwygWidget,
         },
-        models.GeometryField: {
+        models.PolygonField: {
             "widget": OSMWidget,
         },
     }
