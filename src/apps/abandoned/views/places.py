@@ -5,8 +5,7 @@ from src.apps.abandoned.services.db import get_all_places
 from src.apps.abandoned.serializers import (
     PlaceRetrieveSerializer,
     PlaceListSerializer,
-    PlaceCreateSerializer
-
+    PlaceCreateSerializer,
 )
 from src.utils.django.views import MultipleSerializerViewsetMixin
 

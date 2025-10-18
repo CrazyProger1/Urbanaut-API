@@ -31,7 +31,6 @@ class SettingsInline(StackedInline):
     verbose_name = _("Settings")
     verbose_name_plural = _("Settings")
 
-
     def has_add_permission(self, request, obj):
         return False
 
@@ -43,12 +42,16 @@ class UsernameInline(StackedInline):
     verbose_name = _("Username")
     verbose_name_plural = _("Usernames")
 
+
 @admin.register(User, site=site)
 class UserAdmin(BaseUserAdmin, ModelAdmin):
     form = UserChangeForm
     add_form = UserCreationForm
     change_password_form = AdminPasswordChangeForm
-    inlines = (SettingsInline, UsernameInline,)
+    inlines = (
+        SettingsInline,
+        UsernameInline,
+    )
     fieldsets = (
         (None, {"fields": ("email", "password")}),
         (_("Personal info"), {"fields": ("first_name", "last_name")}),

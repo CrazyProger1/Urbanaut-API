@@ -1,7 +1,10 @@
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticated
 
-from src.apps.accounts.serializers import SettingsUpdateSerializer, SettingsRetrieveSerializer
+from src.apps.accounts.serializers import (
+    SettingsUpdateSerializer,
+    SettingsRetrieveSerializer,
+)
 from src.apps.accounts.services.db import get_all_settings
 
 

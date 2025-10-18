@@ -26,6 +26,15 @@ class Area(TimestampMixin, models.Model):
         blank=True,
         related_name="areas",
     )
+    parent = models.ForeignKey(
+        "self",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="children",
+        verbose_name=_("parent"),
+        help_text=_("Parent area."),
+    )
 
     class Meta:
         verbose_name = _("Area")

@@ -16,7 +16,12 @@ GOOGLE_OAUTH_CALLBACK_URL = urljoin(BASE_FRONTEND_URL, "api/google/oauth/callbac
 AUTH_USER_MODEL = "accounts.User"
 
 DJOSER = {
+    "TOKEN_MODEL": None,
     "SERIALIZERS": {
         "current_user": "src.apps.accounts.serializers.CurrentUserSerializer",
     },
+}
+
+SIMPLE_JWT = {
+    "AUTH_HEADER_TYPES": ("Bearer",),
 }

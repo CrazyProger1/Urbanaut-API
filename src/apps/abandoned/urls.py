@@ -6,6 +6,4 @@ router = routers.DefaultRouter()
 
 router.register("api/v1/places", PlaceViewSet)
 
-urlpatterns = [
-    *router.urls
-]
+urlpatterns = [*router.urls]

@@ -56,11 +56,7 @@ class Place(TimestampMixin, models.Model):
     def __str__(self):
         return self.name
 
-    def save(
-            self,
-            *args,
-            **kwargs
-    ):
+    def save(self, *args, **kwargs):
         super().save(
             *args,
             **kwargs,

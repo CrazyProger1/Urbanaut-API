@@ -1,5 +1,6 @@
 from django.urls import path
-from djoser.views import TokenCreateView, TokenDestroyView, UserViewSet
+from djoser.views import UserViewSet
+from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from src.apps.accounts.sites import site
 from src.apps.accounts.views import (
@@ -20,8 +21,8 @@ urlpatterns = [
         GoogleOauthCallbackView.as_view(),
         name="google-oauth-callback",
     ),
-    path("api/v1/tokens/", TokenCreateView.as_view(), name="jwt-create"),
-    path("api/v1/tokens/", TokenDestroyView.as_view(), name="jwt-destroy"),
+    path("api/v1/tokens/", TokenObtainPairView.as_view(), name="jwt-create"),
+    path("api/v1/tokens/refresh/", TokenRefreshView.as_view(), name="jwt-refresh"),
     path(
         "api/v1/users/", UserViewSet.as_view({"post": "create"}), name="user-register"
     ),
@@ -32,8 +33,10 @@ urlpatterns = [
     ),
     path(
         "api/v1/settings/",
-        SettingsViewSet.as_view({"put": "update", "patch": "partial_update", "get": "retrieve"}),
-    )
+        SettingsViewSet.as_view(
+            {"put": "update", "patch": "partial_update", "get": "retrieve"}
+        ),
+    ),
     # path("api/v1/users/activate/", UserViewSet.as_view({"post": "activation"}), name="user-activate"),
     # path("api/v1/users/resend-activation/", UserViewSet.as_view({"post": "resend_activation"}),
     #      name="user-resend-activation"),
