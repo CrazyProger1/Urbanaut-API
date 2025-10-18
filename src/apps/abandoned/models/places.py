@@ -1,4 +1,4 @@
-from django.db import models
+from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
@@ -20,7 +20,6 @@ class Place(TimestampMixin, models.Model):
         null=True,
         blank=True,
     )
-
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
@@ -47,6 +46,12 @@ class Place(TimestampMixin, models.Model):
         help_text=_("When place became abandoned date and time."),
         null=True,
         blank=True,
+    )
+    point = models.PointField(
+        verbose_name=_("point"),
+        help_text=_("Point of the abandoned place."),
+        null=False,
+        blank=False,
     )
 
     class Meta:

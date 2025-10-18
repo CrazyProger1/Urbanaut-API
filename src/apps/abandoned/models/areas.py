@@ -1,4 +1,4 @@
-from django.db import models
+from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
@@ -34,6 +34,12 @@ class Area(TimestampMixin, models.Model):
         related_name="children",
         verbose_name=_("parent"),
         help_text=_("Parent area."),
+    )
+    polygon = models.PolygonField(
+        verbose_name=_("points"),
+        help_text=_("Polygon of the abandoned area."),
+        null=False,
+        blank=False,
     )
 
     class Meta:
