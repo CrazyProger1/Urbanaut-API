@@ -3,6 +3,7 @@ from django.contrib.gis.db import models
 from modeltranslation.admin import TabbedTranslationAdmin
 from unfold.admin import ModelAdmin
 from unfold.contrib.forms.widgets import WysiwygWidget
+from unfold.widgets import UnfoldAdminTextareaWidget
 
 from src.apps.abandoned.models import Area
 from src.apps.accounts.sites import site
@@ -13,7 +14,7 @@ from django.contrib.gis.geos import Polygon
 from django.utils.safestring import mark_safe
 
 
-class ManualPolygonWidget(forms.Textarea):
+class ManualPolygonWidget(UnfoldAdminTextareaWidget):
     def __init__(self, attrs=None):
         default_attrs = {
             'rows': 6,
