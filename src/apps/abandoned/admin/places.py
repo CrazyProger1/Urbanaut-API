@@ -16,6 +16,16 @@ from src.utils.django.admin import CreatedByAdminMixin
 
 @admin.register(Place, site=site)
 class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
+    class Media:
+        js = (
+            "https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js",
+        )
+        css = {
+            "all": (
+                "https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css",
+            )
+        }
+
     inlines = (PlaceSecurityInline,)
     created_by_field = "created_by"
     formfield_overrides = {
