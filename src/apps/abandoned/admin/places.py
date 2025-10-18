@@ -1,6 +1,7 @@
+from django import forms
 from django.contrib import admin
 from django.contrib.gis.db import models
-from django.contrib.gis.forms import OSMWidget
+from django.contrib.gis.geos import Point
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
@@ -14,25 +15,73 @@ from src.apps.accounts.sites import site
 from src.utils.django.admin import CreatedByAdminMixin
 
 
-class UnfoldOSMWidget(OSMWidget):
-    template_name = "gis/unfold_openlayers_osm.html"  # Points to our custom template
+class ManualPointWidget(forms.MultiWidget):
+    template_name = 'django/forms/widgets/multiwidget.html'  # Uses Django's default multi-widget template
 
     def __init__(self, attrs=None):
-        super().__init__(attrs)
-        # Enforce base attrs for Unfold compatibility (height, z-index to avoid overlaps)
-        default_attrs = {
-            'class': 'rounded-lg border border-gray-300 shadow-sm w-full',  # Tailwind classes
-            'style': 'height: 400px; z-index: 1000; position: relative;',   # Fix blank sizing/layering
+        # Child widgets: lat (y) first, then lon (x) for intuitive order
+        children = [
+            forms.NumberInput(
+                attrs={
+                    'placeholder': 'Latitude (e.g., 40.7128)',
+                    'step': 'any',
+                    'min': '-90',
+                    'max': '90',
+                    'class': 'form-control rounded border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500',  # Tailwind for Unfold
+                }
+            ),
+            forms.NumberInput(
+                attrs={
+                    'placeholder': 'Longitude (e.g., -74.0060)',
+                    'step': 'any',
+                    'min': '-180',
+                    'max': '180',
+                    'class': 'form-control rounded border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500',  # Tailwind
+                }
+            ),
+        ]
+        # Wrapper attrs for the whole widget (Unfold-friendly)
+        wrapper_attrs = {
+            'class': 'grid grid-cols-2 gap-4 mb-4',  # Side-by-side layout
         }
         if attrs:
-            default_attrs.update(attrs)
-        self.attrs = default_attrs
+            wrapper_attrs.update(attrs)
+        super().__init__(children, attrs=wrapper_attrs)
 
-    def render(self, name, value, attrs=None, renderer=None):
-        # Ensure JS initializes after DOM (common blank fix)
-        attrs = self.build_attrs(attrs, name=name)
-        attrs['data-init-delay'] = 'true'  # Optional: Hook for custom JS if needed
-        return super().render(name, value, attrs, renderer)
+    def decompress(self, value):
+        """Split Point into [lat, lon] for rendering."""
+        if isinstance(value, Point):
+            return [value.y, value.x]  # GeoDjango: y=lat, x=lon
+        if value:
+            try:
+                p = Point(value)
+                return [p.y, p.x]
+            except:
+                pass
+        return [None, None]
+
+    def value_from_datadict(self, data, files, name):
+        """Combine lat/lon inputs into a Point."""
+        lat, lon = super().value_from_datadict(data, files, name)
+        if lat is not None and lon is not None:
+            try:
+                # Validate ranges
+                lat_f = float(lat)
+                lon_f = float(lon)
+                if -90 <= lat_f <= 90 and -180 <= lon_f <= 180:
+                    return Point(lon_f, lat_f)  # Point(x=lon, y=lat)
+            except (ValueError, TypeError):
+                pass
+        return None
+
+    def format_output(self, rendered_widgets):
+        """Wrap with labels for clarity (optional, but UX-friendly)."""
+        lat_html, lon_html = rendered_widgets
+        return forms.utils.format_html(
+            '<label class="block text-sm font-medium text-gray-700 mb-1">Latitude</label>{}<br>'
+            '<label class="block text-sm font-medium text-gray-700 mb-1">Longitude</label>{}',
+            lat_html, lon_html
+        )
 
 @admin.register(Place, site=site)
 class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
@@ -43,7 +92,7 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
             "widget": WysiwygWidget,
         },
         models.PointField: {
-            "widget": UnfoldOSMWidget,
+            "widget": ManualPointWidget,
         },
     }
     list_display = (
