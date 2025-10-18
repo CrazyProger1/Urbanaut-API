@@ -23,8 +23,8 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.gis",
+    "unfold.contrib.location_field",
     "django_filters",
-    "leaflet",
     "djoser",
     "src.apps.docs",
     "src.apps.accounts",
@@ -64,3 +64,9 @@ ASGI_APPLICATION = "src.config.web.asgi.application"
 STATIC_URL = config("STATIC_URL", default="static/")
 STATIC_ROOT = config("STATIC_ROOT", default="static/")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+LOCATION_FIELD = {
+    "default_zoom": 12,
+    "provider.openstreetmap": True,
+    "search_by_default": True,
+}
