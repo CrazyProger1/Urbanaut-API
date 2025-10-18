@@ -24,4 +24,5 @@ DJOSER = {
 
 SIMPLE_JWT = {
     "AUTH_HEADER_TYPES": ("Bearer",),
+    "TOKEN_OBTAIN_SERIALIZER": "src.apps.accounts.serializers.TokenObtainPairWithUserSerializer",
 }
