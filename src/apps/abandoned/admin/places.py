@@ -1,5 +1,6 @@
 from django.contrib import admin
-from django.db import models
+from django.contrib.gis.db import models
+from django.contrib.gis.forms import OSMWidget
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
@@ -20,7 +21,10 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
     formfield_overrides = {
         models.TextField: {
             "widget": WysiwygWidget,
-        }
+        },
+        models.GeometryField: {
+            "widget": OSMWidget,
+        },
     }
     list_display = (
         "name",

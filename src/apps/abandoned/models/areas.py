@@ -36,7 +36,7 @@ class Area(TimestampMixin, models.Model):
         help_text=_("Parent area."),
     )
     polygon = models.PolygonField(
-        verbose_name=_("points"),
+        verbose_name=_("polygon"),
         help_text=_("Polygon of the abandoned area."),
         null=False,
         blank=False,

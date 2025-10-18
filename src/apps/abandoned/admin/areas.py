@@ -1,5 +1,6 @@
 from django.contrib import admin
-from django.db import models
+from django.contrib.gis.forms import OSMWidget
+from django.contrib.gis.db import models
 from modeltranslation.admin import TabbedTranslationAdmin
 from unfold.admin import ModelAdmin
 from unfold.contrib.forms.widgets import WysiwygWidget
@@ -15,7 +16,10 @@ class AreaAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
     formfield_overrides = {
         models.TextField: {
             "widget": WysiwygWidget,
-        }
+        },
+        models.GeometryField: {
+            "widget": OSMWidget,
+        },
     }
     list_display = (
         "name",
