@@ -2,6 +2,11 @@ from django.contrib.auth.base_user import BaseUserManager
 
 
 class UserManager(BaseUserManager):
+    def create_oauth_user(self, email: str, **extra_fields):
+        user = self.model(email=email, **extra_fields)
+        user.save()
+        return user
+
     def create_user(self, password: str = None, **extra_fields):
         user = self.model(**extra_fields)
         user.set_password(password)
