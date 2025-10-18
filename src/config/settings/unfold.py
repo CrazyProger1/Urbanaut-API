@@ -1,3 +1,4 @@
+from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
@@ -22,6 +23,10 @@ UNFOLD = {
     "SHOW_HISTORY": True,
     "SHOW_VIEW_ON_SITE": True,
     "THEME": "dark",
+    "SITE_LOGO": {
+        "light": lambda request: static("favicon.svg"),
+        "dark": lambda request: static("favicon.svg"),
+    },
     "SIDEBAR": {
         "show_search": True,
         "show_all_applications": True,

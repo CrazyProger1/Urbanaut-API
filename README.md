@@ -1,7 +1,7 @@
 # Urbanaut-Backend-API
 
 <div align="center">
-  <img src="assets/web-app-manifest-512x512.png" alt="User Icon" width="200" height="200" style="border-radius: 10%;">
+  <img src="static/web-app-manifest-512x512.png" alt="User Icon" width="200" height="200" style="border-radius: 10%;">
 </div>
 
 ---
