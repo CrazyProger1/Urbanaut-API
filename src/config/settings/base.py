@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.gis",
     "django_filters",
+    "leaflet",
     "djoser",
     "src.apps.docs",
     "src.apps.accounts",

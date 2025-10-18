@@ -1,8 +1,8 @@
 from django.contrib import admin
 from django.contrib.gis.db import models
-from django.contrib.gis.forms import OSMWidget
 from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
+from leaflet.forms.widgets import LeafletWidget
 from modeltranslation.admin import TabbedTranslationAdmin
 from rest_framework.reverse import reverse
 from unfold.admin import ModelAdmin
@@ -16,16 +16,6 @@ from src.utils.django.admin import CreatedByAdminMixin
 
 @admin.register(Place, site=site)
 class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
-    class Media:
-        js = (
-            "https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js",
-        )
-        css = {
-            "all": (
-                "https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css",
-            )
-        }
-
     inlines = (PlaceSecurityInline,)
     created_by_field = "created_by"
     formfield_overrides = {
@@ -33,7 +23,7 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
             "widget": WysiwygWidget,
         },
         models.PointField: {
-            "widget": OSMWidget,
+            "widget": LeafletWidget,
         },
     }
     list_display = (
