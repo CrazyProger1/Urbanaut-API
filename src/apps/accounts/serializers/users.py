@@ -19,4 +19,6 @@ class CurrentUserSerializer(serializers.ModelSerializer):
             "email",
             "settings",
             "usernames",
+            "first_name",
+            "last_name",
         )
