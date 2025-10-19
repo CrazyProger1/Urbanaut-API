@@ -3,3 +3,7 @@ from src.apps.abandoned.serializers.places import (
     PlaceListSerializer,
     PlaceCreateSerializer,
 )
+from src.apps.abandoned.serializers.areas import (
+    AreaRetrieveSerializer,
+    AreaListSerializer,
+)
