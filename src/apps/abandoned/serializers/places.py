@@ -1,14 +1,17 @@
 from rest_framework import serializers
+from rest_framework_gis.serializers import GeoFeatureModelSerializer
 
 from src.apps.abandoned.models import Place
 
 
-class PlaceListSerializer(serializers.ModelSerializer):
+class PlaceListSerializer(GeoFeatureModelSerializer):
     class Meta:
+        geo_field = "point"
         model = Place
         fields = (
             "id",
             "name",
+            "point",
         )
 
 

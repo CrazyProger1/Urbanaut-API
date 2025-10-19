@@ -3,6 +3,7 @@ from src.config.settings.base import INSTALLED_APPS, DEBUG
 INSTALLED_APPS += [
     "rest_framework",
     "drf_standardized_errors",
+    "rest_framework_gis",
 ]
 
 AUTHENTICATION_CLASSES = [
