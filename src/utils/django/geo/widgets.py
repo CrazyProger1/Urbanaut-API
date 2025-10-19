@@ -5,8 +5,8 @@ from unfold.widgets import UnfoldAdminTextareaWidget
 class ManualGeometryFieldWidget(UnfoldAdminTextareaWidget):
     def __init__(self, attrs=None):
         default_attrs = {
-            'rows': 6,
-            'placeholder': 'EWKT Format\nPOLYGON((lon1 lat1, lon2 lat2, lon3 lat3, lon1 lat1))\nPOINT (-74.41 40.71)',
+            "rows": 6,
+            "placeholder": "EWKT Format\nPOLYGON((lon1 lat1, lon2 lat2, lon3 lat3, lon1 lat1))\nPOINT (-74.41 40.71)",
         }
         if attrs:
             default_attrs.update(attrs)

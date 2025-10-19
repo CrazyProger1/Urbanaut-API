@@ -1,12 +1,13 @@
 from rest_framework import serializers
-from rest_framework_gis.serializers import GeoFeatureModelSerializer
 
 from src.apps.abandoned.models import Place
+from src.utils.django.geo import PointField
 
 
-class PlaceListSerializer(GeoFeatureModelSerializer):
+class PlaceListSerializer(serializers.ModelSerializer):
+    point = PointField()
+
     class Meta:
-        geo_field = "point"
         model = Place
         fields = (
             "id",
@@ -20,6 +21,7 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
         slug_field="level",
         read_only=True,
     )
+    point = PointField()
 
     class Meta:
         model = Place
@@ -27,6 +29,8 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
 
 
 class PlaceCreateSerializer(serializers.ModelSerializer):
+    point = PointField()
+
     class Meta:
         model = Place
         fields = "__all__"
