@@ -152,10 +152,7 @@ class PolygonField(serializers.Field):
             if value.geom_type != "Polygon":
                 self.fail("invalid")
 
-            for point in value:
-                x = point.x
-                y = point.y
-
+            for (x, y) in zip(value.x, value.y):
                 if self.str_points:
                     x = smart_str(x)
                     y = smart_str(y)
@@ -165,7 +162,7 @@ class PolygonField(serializers.Field):
                     "longitude": x,
                     "type": "Point",
                 })
-            logger.info("RESULT:", result)
+
             return result
 
         self.fail("invalid")
