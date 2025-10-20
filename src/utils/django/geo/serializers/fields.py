@@ -13,17 +13,15 @@ logger = logging.getLogger(__name__)
 
 class PointField(serializers.Field):
     """
-    A field for handling GeoDjango Point fields as a json format.
+    A field for handling GeoDjango Point fields as JSON.
     Expected input format:
-    {
-        "latitude": 49.8782482189424,
-        "longitude": 24.452545489
-    }
+    [longitude, latitude]
+    Example:
+    [24.452545489, 49.8782482189424]
     """
 
     type_name = "PointField"
     type_label = "point"
-    representation_type = "Point"
 
     default_error_messages = {
         "invalid": _("Enter a valid location."),
@@ -31,13 +29,10 @@ class PointField(serializers.Field):
 
     def __init__(self, *args, **kwargs):
         self.str_points = kwargs.pop("str_points", False)
-        self.srid = kwargs.pop("srid", None)
+        self.srid = kwargs.pop("srid", 4326)
         super().__init__(*args, **kwargs)
 
     def to_internal_value(self, value):
-        """
-        Parse json data and return a point object
-        """
         if value in EMPTY_VALUES and not self.required:
             return None
 
@@ -48,123 +43,102 @@ class PointField(serializers.Field):
             except ValueError:
                 self.fail("invalid")
 
-        if value and isinstance(value, dict):
+        if value and isinstance(value, (list, tuple)) and len(value) == 2:
+            lon, lat = value
             try:
-                latitude = value.get("latitude")
-                longitude = value.get("longitude")
-
-                return GEOSGeometry(f"POINT({longitude} {latitude})", srid=self.srid)
-
+                return GEOSGeometry(f"POINT({lon} {lat})", srid=self.srid)
             except (GEOSException, ValueError):
                 self.fail("invalid")
 
         self.fail("invalid")
 
     def to_representation(self, value):
-        """
-        Transform POINT object to json.
-        """
         if value is None:
             return value
 
         if isinstance(value, GEOSGeometry):
-            value = {
-                "latitude": value.y,
-                "longitude": value.x,
-                "type": self.representation_type,
-            }
+            lon, lat = value.x, value.y
 
-        if self.str_points:
-            value["longitude"] = smart_str(value.pop("longitude"))
-            value["latitude"] = smart_str(value.pop("latitude"))
+            if self.str_points:
+                lon = smart_str(lon)
+                lat = smart_str(lat)
+
+            return [lon, lat]
 
         return value
 
 
 class PolygonField(serializers.Field):
     """
-    A field for handling GeoDjango Polygon fields as a json format.
-    Expected input format:
+    A field for handling GeoDjango Polygon fields as JSON.
+    Expected input format (GeoJSON-style):
     [
-        {
-            "latitude": 49.8782482189424,
-            "longitude": 24.452545489,
-        },
-        {
-            "latitude": 49.8782482189424,
-            "longitude": 24.452545489,
-        },
+        [longitude, latitude],
+        [longitude, latitude],
+        ...
+    ]
+    Example:
+    [
+        [24.452545489, 49.8782482189424],
+        [24.453, 49.879],
+        [24.452, 49.879],
+        [24.452545489, 49.8782482189424]
     ]
     """
 
     type_name = "PolygonField"
-    type_label = "point"
+    type_label = "polygon"
 
     default_error_messages = {
-        "invalid": _("Enter a valid polygon points."),
+        "invalid": _("Enter a valid polygon."),
     }
 
     def __init__(self, *args, **kwargs):
         self.str_points = kwargs.pop("str_points", False)
-        self.srid = kwargs.pop("srid", None)
+        self.srid = kwargs.pop("srid", 4326)
         super().__init__(*args, **kwargs)
 
     def to_internal_value(self, value):
-        """
-        Parse json data and return a point object
-        """
+        """Parse JSON data and return a GEOSGeometry Polygon object."""
         if value in EMPTY_VALUES and not self.required:
             return None
 
+        # Parse stringified JSON
         if isinstance(value, str):
             try:
-                value = value.replace("'", '"')
-                value = json.loads(value)
+                value = json.loads(value.replace("'", '"'))
             except ValueError:
                 self.fail("invalid")
 
-        if value and isinstance(value, list):
-            points = []
+        # Validate list of coordinates
+        if not (isinstance(value, list) and all(isinstance(p, (list, tuple)) and len(p) == 2 for p in value)):
+            self.fail("invalid")
 
-            for point in value:
-                latitude = point.get("latitude")
-                longitude = point.get("longitude")
+        # Ensure polygon is closed
+        if value[0] != value[-1]:
+            value.append(value[0])
 
-                points.append(f"{longitude} {latitude}")
-
-            try:
-                return GEOSGeometry(f"POLYGON({','.join(points)})", srid=self.srid)
-            except (GEOSException, ValueError):
-                return self.fail("invalid")
-
-        self.fail("invalid")
+        # Construct WKT polygon string
+        try:
+            points_str = ", ".join(f"{lon} {lat}" for lon, lat in value)
+            wkt = f"POLYGON(({points_str}))"
+            return GEOSGeometry(wkt, srid=self.srid)
+        except (GEOSException, ValueError):
+            self.fail("invalid")
 
     def to_representation(self, value):
-        """
-        Transform POLYGON object to json.
-        """
+        """Transform GEOSGeometry Polygon object to JSON."""
         if value is None:
             return value
 
-        result = []
+        if not isinstance(value, GEOSGeometry) or value.geom_type != "Polygon":
+            self.fail("invalid")
 
-        if isinstance(value, GEOSGeometry):
-            if value.geom_type != "Polygon":
-                self.fail("invalid")
+        # Extract the outer ring (first linear ring)
+        ring = value[0]
+        coords = []
+        for x, y in zip(ring.x, ring.y):
+            lon, lat = (smart_str(x), smart_str(y)) if self.str_points else (x, y)
+            coords.append([lon, lat])
 
-            points = next(iter(value))
-
-            for (x, y) in zip(points.x, points.y):
-                if self.str_points:
-                    x = smart_str(x)
-                    y = smart_str(y)
-
-                result.append({
-                    "latitude": y,
-                    "longitude": x,
-                    "type": "Point",
-                })
-
-            return result
-
-        self.fail("invalid")
+        return coords
