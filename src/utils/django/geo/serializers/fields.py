@@ -15,9 +15,9 @@ class PointField(serializers.Field):
     """
     A field for handling GeoDjango Point fields as JSON.
     Expected input format:
-    [longitude, latitude]
+    [latitude, longitude]
     Example:
-    [24.452545489, 49.8782482189424]
+    [49.8782482189424, 24.452545489]
     """
 
     type_name = "PointField"
@@ -44,7 +44,7 @@ class PointField(serializers.Field):
                 self.fail("invalid")
 
         if value and isinstance(value, (list, tuple)) and len(value) == 2:
-            lon, lat = value
+            lat, lon = value
             try:
                 return GEOSGeometry(f"POINT({lon} {lat})", srid=self.srid)
             except (GEOSException, ValueError):
@@ -63,7 +63,7 @@ class PointField(serializers.Field):
                 lon = smart_str(lon)
                 lat = smart_str(lat)
 
-            return [lon, lat]
+            return [lat, lon]
 
         return value
 
@@ -73,16 +73,14 @@ class PolygonField(serializers.Field):
     A field for handling GeoDjango Polygon fields as JSON.
     Expected input format (GeoJSON-style):
     [
-        [longitude, latitude],
-        [longitude, latitude],
+        [latitude, longitude],
+        [latitude, longitude],
         ...
     ]
     Example:
     [
-        [24.452545489, 49.8782482189424],
-        [24.453, 49.879],
-        [24.452, 49.879],
-        [24.452545489, 49.8782482189424]
+        [49.8782482189424, 24.452545489],
+        [49.879, 24.453],
     ]
     """
 
@@ -120,7 +118,7 @@ class PolygonField(serializers.Field):
 
         # Construct WKT polygon string
         try:
-            points_str = ", ".join(f"{lon} {lat}" for lon, lat in value)
+            points_str = ", ".join(f"{lon} {lat}" for lat, lon in value)
             wkt = f"POLYGON(({points_str}))"
             return GEOSGeometry(wkt, srid=self.srid)
         except (GEOSException, ValueError):
@@ -139,6 +137,6 @@ class PolygonField(serializers.Field):
         coords = []
         for x, y in zip(ring.x, ring.y):
             lon, lat = (smart_str(x), smart_str(y)) if self.str_points else (x, y)
-            coords.append([lon, lat])
+            coords.append([lat, lon])
 
         return coords
