@@ -1,3 +1,4 @@
+import logging
 from typing import Any
 
 from django.contrib.auth.models import update_last_login
@@ -6,6 +7,8 @@ from rest_framework_simplejwt.tokens import RefreshToken, AuthUser
 
 from src.apps.accounts.serializers import CurrentUserSerializer
 
+
+logger = logging.getLogger(__name__)
 
 class GoogleOauthCallbackRequestSerializer(serializers.Serializer):
     code = serializers.CharField(required=True)
@@ -27,6 +30,7 @@ class GoogleOauthCallbackResponseSerializer(serializers.Serializer):
         data["user"] = CurrentUserSerializer(instance=user).data
         data["refresh"] = str(refresh)
         data["access"] = str(refresh.access_token)
+        logger.info("User authenticated: %s", data)
         update_last_login(user, user)
         return data
 
