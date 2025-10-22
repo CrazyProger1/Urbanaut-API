@@ -30,7 +30,6 @@ class GoogleOauthCallbackResponseSerializer(serializers.Serializer):
         data["user"] = CurrentUserSerializer(instance=user).data
         data["refresh"] = str(refresh)
         data["access"] = str(refresh.access_token)
-        logger.info("User authenticated: %s", data)
         update_last_login(user, user)
         return data
 
