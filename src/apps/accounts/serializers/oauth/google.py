@@ -13,8 +13,8 @@ class GoogleOauthCallbackRequestSerializer(serializers.Serializer):
 
 
 class GoogleOauthCallbackResponseSerializer(serializers.Serializer):
-    access_token = serializers.CharField(read_only=True)
-    refresh_token = serializers.CharField(read_only=True)
+    access = serializers.CharField(read_only=True)
+    refresh = serializers.CharField(read_only=True)
     user = CurrentUserSerializer(read_only=True)
 
     token_class = RefreshToken
