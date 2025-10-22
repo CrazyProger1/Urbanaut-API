@@ -60,5 +60,5 @@ class GoogleOauthCallbackView(APIView):
                 "user": internal_user,
             },
         )
-        logger.info("User authenticated via Google Oauth: %s", response_serializer.data)
+        logger.info("User authenticated via Google Oauth: %s", google_user)
         return Response(response_serializer.data, status=status.HTTP_200_OK)
