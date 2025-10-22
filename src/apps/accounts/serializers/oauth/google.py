@@ -22,7 +22,7 @@ class GoogleOauthCallbackResponseSerializer(serializers.Serializer):
 
     token_class = RefreshToken
 
-    def validate(self, attrs: dict[str, Any]) -> dict[str, str]:
+    def to_representation(self, attrs: dict[str, Any]) -> dict[str, str]:
         # TODO: refactor
         data = {}
         user = attrs["user"]
