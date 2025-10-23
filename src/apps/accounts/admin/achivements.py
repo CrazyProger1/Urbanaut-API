@@ -3,7 +3,7 @@ from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
 from unfold.admin import ModelAdmin
 
-from src.apps.accounts.models import Achievement
+from src.apps.accounts.models import Achievement, UserAchievement
 from src.apps.accounts.sites import site
 
 
@@ -14,7 +14,7 @@ class AchievementAdmin(ModelAdmin, TabbedTranslationAdmin):
 
 
 class AchievementInline(admin.TabularInline):
-    model = Achievement
+    model = UserAchievement
     extra = 1
     verbose_name_plural = _("Achievements")
     verbose_name = _("achievement")
