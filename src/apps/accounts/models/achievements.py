@@ -49,7 +49,6 @@ class Achievement(CreatedAtMixin, models.Model):
         settings.AUTH_USER_MODEL,
         related_name="achievements",
         through=UserAchievement,
-        null=False,
         blank=False,
     )
 
