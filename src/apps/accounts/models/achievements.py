@@ -9,14 +9,12 @@ class UserAchievement(CreatedAtMixin, models.Model):
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
-        related_name="achievements",
         null=False,
         blank=False,
     )
     achievement = models.ForeignKey(
         "Achievement",
         on_delete=models.CASCADE,
-        related_name="achievements",
         null=False,
         blank=False,
     )
