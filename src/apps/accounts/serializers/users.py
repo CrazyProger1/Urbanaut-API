@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from src.apps.accounts.models import User
-from src.apps.accounts.serializers import AchievementListSerializer
+from src.apps.accounts.serializers.achievements import AchievementListSerializer
 from src.apps.accounts.serializers.settings import SettingsRetrieveSerializer
 
 
