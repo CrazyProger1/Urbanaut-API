@@ -9,6 +9,8 @@ from unfold.admin import ModelAdmin, StackedInline
 
 from src.apps.accounts.models import User, Settings, Username
 from src.apps.accounts.sites import site
+from src.apps.accounts.admin.achivements import AchievementAdmin, AchievementInline
+import src.apps.accounts.i18n
 
 admin.site.unregister(Group)
 
@@ -51,6 +53,7 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
     inlines = (
         SettingsInline,
         UsernameInline,
+        AchievementInline,
     )
     fieldsets = (
         (None, {"fields": ("email", "password")}),

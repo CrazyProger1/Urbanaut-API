@@ -16,7 +16,7 @@ class Place(TimestampMixin, models.Model):
     )
     description = models.TextField(
         verbose_name=_("description"),
-        help_text=_("Description of the abandoned object."),
+        help_text=_("Description of the place."),
         null=True,
         blank=True,
     )

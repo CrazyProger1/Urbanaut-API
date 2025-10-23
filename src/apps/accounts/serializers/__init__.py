@@ -6,3 +6,6 @@ from src.apps.accounts.serializers.settings import (
 from src.apps.accounts.serializers.tokens import (
     TokenObtainPairWithUserSerializer,
 )
+from src.apps.accounts.serializers.achievements import (
+    AchievementListSerializer,
+)
