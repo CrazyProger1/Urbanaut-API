@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
-from unfold.admin import ModelAdmin
+from unfold.admin import ModelAdmin, TabularInline
 
 from src.apps.accounts.models import Achievement, UserAchievement
 from src.apps.accounts.sites import site
@@ -13,8 +13,9 @@ class AchievementAdmin(ModelAdmin, TabbedTranslationAdmin):
     search_fields = ("name",)
 
 
-class AchievementInline(admin.TabularInline):
+class AchievementInline(TabularInline):
     model = UserAchievement
     extra = 1
     verbose_name_plural = _("Achievements")
     verbose_name = _("achievement")
+    tab = True
