@@ -7,4 +7,4 @@ class AchievementTranslationOptions(TranslationOptions):
     fields = ("name", "description")
 
 
-translator.register(Achievement, Achievement)
+translator.register(Achievement, AchievementTranslationOptions)
