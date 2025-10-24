@@ -1,7 +1,8 @@
 from rest_framework import serializers
 
 from src.apps.accounts.models import User
-from src.apps.accounts.serializers.achievements import AchievementListSerializer
+from src.apps.accounts.serializers.achievements import AchievementRetrieveSerializer
+from src.apps.accounts.serializers.metrics import MetricsRetrieveSerializer
 from src.apps.accounts.serializers.settings import SettingsRetrieveSerializer
 
 
@@ -12,7 +13,8 @@ class CurrentUserSerializer(serializers.ModelSerializer):
         read_only=True,
         slug_field="username",
     )
-    achievements = AchievementListSerializer(many=True, read_only=True)
+    achievements = AchievementRetrieveSerializer(many=True, read_only=True)
+    metrics = MetricsRetrieveSerializer()
 
     class Meta:
         model = User
@@ -24,4 +26,5 @@ class CurrentUserSerializer(serializers.ModelSerializer):
             "first_name",
             "last_name",
             "achievements",
+            "metrics",
         )

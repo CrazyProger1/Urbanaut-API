@@ -52,5 +52,10 @@ class Achievement(CreatedAtMixin, models.Model):
         blank=False,
     )
 
+    class Meta:
+        verbose_name = _("Achievement")
+        verbose_name_plural = _("Achievements")
+        ordering = ("weight",)
+
     def __str__(self):
         return self.name

@@ -7,5 +7,5 @@ from src.apps.accounts.serializers.tokens import (
     TokenObtainPairWithUserSerializer,
 )
 from src.apps.accounts.serializers.achievements import (
-    AchievementListSerializer,
+    AchievementRetrieveSerializer,
 )
