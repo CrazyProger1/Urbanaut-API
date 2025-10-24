@@ -6,6 +6,9 @@ from src.utils.django.db import CreatedAtMixin
 
 
 class UserAchievement(CreatedAtMixin, models.Model):
+    class Meta:
+        unique_together = ("user", "achievement")
+
     user = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -25,7 +28,7 @@ class UserAchievement(CreatedAtMixin, models.Model):
 
 class Achievement(CreatedAtMixin, models.Model):
     """
-    TODO: add icon & color / level (something like this)
+    TODO: color / level (something like this)
     """
 
     name = models.CharField(
@@ -45,6 +48,13 @@ class Achievement(CreatedAtMixin, models.Model):
         verbose_name=_("weight"),
         help_text=_("Weight of the achievement (affects the position in the profile)"),
         default=0,
+        null=False,
+        blank=False,
+    )
+    icon = models.CharField(
+        max_length=100,
+        verbose_name=_("icon"),
+        help_text=_("Lucide icon of the achievement."),
         null=False,
         blank=False,
     )

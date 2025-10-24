@@ -10,6 +10,7 @@ class AchievementRetrieveSerializer(serializers.ModelSerializer):
             "id",
             "name",
             "weight",
+            "icon",
         )
 
 

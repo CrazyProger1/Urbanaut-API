@@ -109,7 +109,10 @@ class PolygonField(serializers.Field):
                 self.fail("invalid")
 
         # Validate list of coordinates
-        if not (isinstance(value, list) and all(isinstance(p, (list, tuple)) and len(p) == 2 for p in value)):
+        if not (
+            isinstance(value, list)
+            and all(isinstance(p, (list, tuple)) and len(p) == 2 for p in value)
+        ):
             self.fail("invalid")
 
         # Ensure polygon is closed

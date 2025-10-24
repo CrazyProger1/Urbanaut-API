@@ -10,6 +10,7 @@ from src.apps.accounts.serializers import CurrentUserSerializer
 
 logger = logging.getLogger(__name__)
 
+
 class GoogleOauthCallbackRequestSerializer(serializers.Serializer):
     code = serializers.CharField(required=True)
     state = serializers.CharField(required=True)
