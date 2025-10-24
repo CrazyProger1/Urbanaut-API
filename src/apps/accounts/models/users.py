@@ -55,6 +55,13 @@ class User(SettingsMixin, TimestampMixin, PermissionsMixin, AbstractBaseUser):
         verbose_name=_("birth Date"),
         help_text=_("User born at date and time."),
     )
+    bio = models.CharField(
+        max_length=250,
+        verbose_name=_("bio"),
+        help_text=_("User short biography."),
+        null=True,
+        blank=True,
+    )
 
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "email"
