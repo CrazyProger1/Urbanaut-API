@@ -19,6 +19,9 @@ class UserAchievement(CreatedAtMixin, models.Model):
         blank=False,
     )
 
+    def __str__(self):
+        return self.achievement.name
+
 
 class Achievement(CreatedAtMixin, models.Model):
     """
