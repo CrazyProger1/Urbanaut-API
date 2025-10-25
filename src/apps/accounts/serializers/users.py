@@ -1,3 +1,4 @@
+from drf_spectacular.utils import extend_schema_field
 from rest_framework import serializers
 
 from src.apps.accounts.models import User
@@ -13,7 +14,7 @@ class CurrentUserSerializer(serializers.ModelSerializer):
         read_only=True,
         slug_field="username",
     )
-    achievements = AchievementRetrieveSerializer(many=True, read_only=True)
+    achievements = serializers.SerializerMethodField()
     metrics = MetricRetrieveSerializer(many=True, read_only=True)
 
     class Meta:
@@ -30,6 +31,11 @@ class CurrentUserSerializer(serializers.ModelSerializer):
             "bio",
             "created_at",
         )
+
+    @extend_schema_field(AchievementRetrieveSerializer(many=True))
+    def get_achievements(self, instance):
+        achievements = instance.achievements.all().order_by("-weight")
+        return AchievementRetrieveSerializer(achievements, many=True).data
 
     def to_representation(self, instance):
         data = super().to_representation(instance=instance)
