@@ -28,6 +28,7 @@ class CurrentUserSerializer(serializers.ModelSerializer):
             "achievements",
             "metrics",
             "bio",
+            "created_at",
         )
 
     def to_representation(self, instance):
