@@ -42,6 +42,14 @@ class CurrentUserSerializer(serializers.ModelSerializer):
         # TODO: remove mock
         data["metrics"] = [
             {
+                "name": "Karma",
+                "value": 3000,
+            },
+            {
+                "name": "Experience",
+                "value": 100000,
+            },
+            {
                 "name": "Reports",
                 "value": 50,
             },
