@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from src.apps.accounts.enums import AchievementSignificance
 from src.utils.django.db import CreatedAtMixin
 
 
@@ -62,6 +63,15 @@ class Achievement(CreatedAtMixin, models.Model):
         settings.AUTH_USER_MODEL,
         related_name="achievements",
         through=UserAchievement,
+        blank=False,
+    )
+    significance = models.CharField(
+        max_length=30,
+        verbose_name=_("significance"),
+        choices=AchievementSignificance,
+        default=AchievementSignificance.INITIATION,
+        help_text=_("Significance of the achievement."),
+        null=False,
         blank=False,
     )
 

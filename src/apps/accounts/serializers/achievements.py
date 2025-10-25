@@ -11,6 +11,7 @@ class AchievementRetrieveSerializer(serializers.ModelSerializer):
             "name",
             "weight",
             "icon",
+            "significance",
         )
 
 
