@@ -14,7 +14,7 @@ class PlaceTag(models.Model):
         )
 
     tag = models.ForeignKey(
-        "Tag",
+        "tags.Tag",
         on_delete=models.CASCADE,
     )
     place = models.ForeignKey(
