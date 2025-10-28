@@ -12,7 +12,13 @@ EMPTY_VALUES = (None, "", [], (), {})
 
 logger = logging.getLogger(__name__)
 
-
+@extend_schema_field(
+    {
+        "type": "array",
+        "items": {"type": "number", "format": "float"},
+        "minItems": 2,
+    }
+)
 class PointField(serializers.Field):
     """
     A field for handling GeoDjango Point fields as JSON.
