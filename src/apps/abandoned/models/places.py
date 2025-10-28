@@ -71,7 +71,7 @@ class Place(TimestampMixin, models.Model):
         blank=False,
     )
     tags = models.ManyToManyField(
-        "Tag",
+        "tags.Tag",
         blank=True,
         verbose_name=_("tags"),
         related_name="places",
