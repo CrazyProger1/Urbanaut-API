@@ -4,6 +4,19 @@ from src.apps.abandoned.models import Area
 from src.utils.django.geo import PolygonField
 
 
+class AreaCreateSerializer(serializers.ModelSerializer):
+    polygon = PolygonField()
+
+    class Meta:
+        model = Area
+        fields = (
+            "name",
+            "description",
+            "polygon",
+            "parent",
+        )
+
+
 class AreaListSerializer(serializers.ModelSerializer):
     polygon = PolygonField()
 
