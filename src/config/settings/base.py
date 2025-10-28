@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "src.apps.docs",
     "src.apps.accounts",
     "src.apps.abandoned",
+    "src.apps.tags",
 ]
 
 MIDDLEWARE = [

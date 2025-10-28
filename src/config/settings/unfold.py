@@ -76,6 +76,17 @@ UNFOLD = {
                     },
                 ],
             },
+            {
+                "title": _("Tags"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Tags"),
+                        "icon": "tag",
+                        "link": reverse_lazy("admin:tags_tag_changelist"),
+                    },
+                ],
+            },
         ],
     },
 }
