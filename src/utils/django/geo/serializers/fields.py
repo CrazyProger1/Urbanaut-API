@@ -68,7 +68,7 @@ class PointField(serializers.Field):
         return value
 
 
-class PolygonField(serializers.Field):
+class PolygonField(serializers.ListSerializer):
     """
     A field for handling GeoDjango Polygon fields as JSON.
     Expected input format (GeoJSON-style):
@@ -94,7 +94,7 @@ class PolygonField(serializers.Field):
     def __init__(self, *args, **kwargs):
         self.str_points = kwargs.pop("str_points", False)
         self.srid = kwargs.pop("srid", 4326)
-        super().__init__(*args, **kwargs)
+        super().__init__(*args, child=serializers.FloatField(), **kwargs)
 
     def to_internal_value(self, value):
         """Parse JSON data and return a GEOSGeometry Polygon object."""
@@ -110,8 +110,8 @@ class PolygonField(serializers.Field):
 
         # Validate list of coordinates
         if not (
-            isinstance(value, list)
-            and all(isinstance(p, (list, tuple)) and len(p) == 2 for p in value)
+                isinstance(value, list)
+                and all(isinstance(p, (list, tuple)) and len(p) == 2 for p in value)
         ):
             self.fail("invalid")
 
