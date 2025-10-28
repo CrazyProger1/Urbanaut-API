@@ -3,6 +3,8 @@ import logging
 
 from django.contrib.gis.geos import GEOSGeometry, GEOSException
 from django.utils.encoding import smart_str
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import extend_schema_field
 from rest_framework import serializers
 from django.utils.translation import gettext_lazy as _
 
@@ -68,6 +70,16 @@ class PointField(serializers.Field):
         return value
 
 
+@extend_schema_field(
+    {
+        "type": "array",
+        "items": {
+            "type": "array",
+            "items": {"type": "number", "format": "float"},
+            "minItems": 2,
+        },
+    }
+)
 class PolygonField(serializers.ListSerializer):
     """
     A field for handling GeoDjango Polygon fields as JSON.
@@ -110,8 +122,8 @@ class PolygonField(serializers.ListSerializer):
 
         # Validate list of coordinates
         if not (
-                isinstance(value, list)
-                and all(isinstance(p, (list, tuple)) and len(p) == 2 for p in value)
+            isinstance(value, list)
+            and all(isinstance(p, (list, tuple)) and len(p) == 2 for p in value)
         ):
             self.fail("invalid")
 

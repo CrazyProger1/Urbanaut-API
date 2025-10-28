@@ -4,7 +4,8 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from src.apps.abandoned.services.db import get_all_areas
 from src.apps.abandoned.serializers import (
     AreaRetrieveSerializer,
-    AreaListSerializer, AreaCreateSerializer,
+    AreaListSerializer,
+    AreaCreateSerializer,
 )
 from src.utils.django.views import MultipleSerializerViewsetMixin
 
