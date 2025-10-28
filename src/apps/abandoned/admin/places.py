@@ -18,6 +18,8 @@ class PlaceTagInline(StackedInline):
     tab = True
     model = PlaceTag
     extra = 1
+    verbose_name = _("Tag")
+    verbose_name_plural = _("Tags")
 
 
 @admin.register(Place, site=site)

@@ -13,3 +13,6 @@ class Tag(TimestampMixin, models.Model):
         db_index=True,
         unique=True,
     )
+
+    def __str__(self):
+        return self.tag
