@@ -6,6 +6,23 @@ from src.apps.abandoned.models.security import PlaceSecurity
 from src.utils.django.db import TimestampMixin
 
 
+class PlaceTag(models.Model):
+    class Meta:
+        unique_together = (
+            "tag",
+            "place",
+        )
+
+    tag = models.ForeignKey(
+        "Tag",
+        on_delete=models.CASCADE,
+    )
+    place = models.ForeignKey(
+        "Place",
+        on_delete=models.CASCADE,
+    )
+
+
 class Place(TimestampMixin, models.Model):
     name = models.CharField(
         max_length=250,
@@ -52,6 +69,13 @@ class Place(TimestampMixin, models.Model):
         help_text=_("Point of the abandoned place."),
         null=False,
         blank=False,
+    )
+    tags = models.ManyToManyField(
+        "Tag",
+        blank=True,
+        verbose_name=_("tags"),
+        related_name="places",
+        through=PlaceTag,
     )
 
     class Meta:
