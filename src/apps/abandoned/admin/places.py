@@ -4,19 +4,25 @@ from django.utils.safestring import mark_safe
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
 from rest_framework.reverse import reverse
-from unfold.admin import ModelAdmin
+from unfold.admin import ModelAdmin, StackedInline
 from unfold.contrib.forms.widgets import WysiwygWidget
 
 from src.apps.abandoned.admin.security import PlaceSecurityInline
-from src.apps.abandoned.models import Place
+from src.apps.abandoned.models import Place, PlaceTag
 from src.apps.accounts.sites import site
 from src.utils.django.admin import CreatedByAdminMixin
 from src.utils.django.geo import ManualGeometryFieldWidget
 
 
+class PlaceTagInline(StackedInline):
+    tab = True
+    model = PlaceTag
+    extra = 1
+
+
 @admin.register(Place, site=site)
 class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
-    inlines = (PlaceSecurityInline,)
+    inlines = (PlaceSecurityInline, PlaceTagInline,)
     created_by_field = "created_by"
     formfield_overrides = {
         models.TextField: {
