@@ -24,18 +24,25 @@ def get_parent_area_or_none(area: Area, source: Source[Area] = Area) -> Area | N
         return candidate
 
 
-def get_place_area_or_none(place: Place) -> Area | None:
+def get_place_area_or_none(place: Place, areas: Source[Area] = Area) -> Area | None:
+    queryset = get_queryset(source=areas)
     point = place.point
 
-    areas = Area.objects.filter(polygon__contains=point)
+    areas = queryset.filter(polygon__contains=point)
 
     logger.info("Potential parent areas: %s", areas)
 
-    if len(areas) > 1:
-        for area in areas:
-            if not area.children.exists():
-                logger.info("No children for area: %s", area)
-                return area
+    if areas.count() > 1:
+        for candidate in areas:
+            candidate_children = candidate.children.filter(polygon__contains=point)
+
+            if candidate_children.exists():
+                return get_place_area_or_none(
+                    place=place,
+                    areas=candidate_children
+                )
+
+            return candidate
 
     # TODO: improve logic (can be top-level parent area)
     return areas.first()
