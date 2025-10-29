@@ -9,5 +9,4 @@ from src.utils.django.db.shortcuts import (
 )
 from src.utils.django.db.types import (
     Source,
-    Model,
 )
