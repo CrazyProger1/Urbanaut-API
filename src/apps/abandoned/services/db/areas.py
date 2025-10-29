@@ -34,6 +34,7 @@ def get_place_area_or_none(place: Place) -> Area | None:
     if len(areas) > 1:
         for area in areas:
             if not area.children.exists():
+                logger.info("No children for area: %s", area)
                 return area
 
     # TODO: improve logic (can be top-level parent area)
