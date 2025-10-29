@@ -32,17 +32,13 @@ def get_place_area_or_none(place: Place, areas: Source[Area] = Area) -> Area | N
 
     logger.info("Potential parent areas: %s", areas)
 
-    if areas.count() > 1:
-        for candidate in areas:
-            candidate_children = candidate.children.filter(polygon__contains=point)
+    for candidate in areas:
+        candidate_children = candidate.children.filter(polygon__contains=point)
+        logger.info("CANDIDATES: %s", candidate_children)
+        if candidate_children.exists():
+            return get_place_area_or_none(
+                place=place,
+                areas=candidate_children
+            )
 
-            if candidate_children.exists():
-                return get_place_area_or_none(
-                    place=place,
-                    areas=candidate_children
-                )
-
-            return candidate
-
-    # TODO: improve logic (can be top-level parent area)
-    return areas.first()
+        return candidate
