@@ -35,7 +35,7 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
 
 class PlaceCreateSerializer(serializers.ModelSerializer):
     point = PointField()
-    tags = serializers.CharField(many=True)
+    tags = serializers.CharField(many=True, required=False)
 
     class Meta:
         model = Place
