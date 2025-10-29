@@ -7,7 +7,7 @@ def get_all_areas():
 
 
 def get_parent_area_or_none(area: Area, source: Source[Area] = Area) -> Area | None:
-    queryset = get_queryset(source=source)
+    queryset = get_queryset(source=source).exclude(area=area)
     areas = queryset.filter(polygon__contains=area.polygon)
 
     for candidate in areas:
