@@ -16,8 +16,7 @@ def get_parent_area_or_none(area: Area, source: Source[Area] = Area) -> Area | N
     logger.info("Potential parent areas: %s", areas)
 
     for candidate in areas:
-        children_ids = candidate.children.values_list("id", flat=True)
-        children = areas.filter(id__in=children_ids)
+        children = candidate.children.filter(polygon__contains=area.polygon)
         if children.exists():
             return get_parent_area_or_none(
                 area=area,
