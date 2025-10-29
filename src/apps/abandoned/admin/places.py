@@ -24,7 +24,10 @@ class PlaceTagInline(StackedInline):
 
 @admin.register(Place, site=site)
 class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
-    inlines = (PlaceSecurityInline, PlaceTagInline,)
+    inlines = (
+        PlaceSecurityInline,
+        PlaceTagInline,
+    )
     created_by_field = "created_by"
     formfield_overrides = {
         models.TextField: {

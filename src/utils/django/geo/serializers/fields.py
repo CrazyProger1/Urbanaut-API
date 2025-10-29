@@ -12,6 +12,7 @@ EMPTY_VALUES = (None, "", [], (), {})
 
 logger = logging.getLogger(__name__)
 
+
 @extend_schema_field(
     {
         "type": "array",
