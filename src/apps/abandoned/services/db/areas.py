@@ -20,7 +20,7 @@ def get_parent_area_or_none(area: Area, source: Source[Area] = Area) -> Area | N
         children = areas.filter(id__in=children_ids)
         if children.exists():
             return get_parent_area_or_none(
-                area=candidate,
+                area=area,
                 source=children,
             )
         return candidate
