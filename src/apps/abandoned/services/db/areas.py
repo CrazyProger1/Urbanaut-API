@@ -8,17 +8,17 @@ def get_all_areas():
 
 def get_parent_area_or_none(area: Area, source: Source[Area] = Area) -> Area | None:
     queryset = get_queryset(source=source).exclude(area=area)
-    areas = queryset.filter(polygon__contains=area.polygon)
+    areas = queryset.filter(polygon__within=area.polygon)
 
     for candidate in areas:
-        child_ids = candidate.children.values_list("id", flat=True)
-        children = areas.filter(id__in=child_ids)
+        children_ids = candidate.children.values_list("id", flat=True)
+        children = areas.filter(id__in=children_ids)
         if children.exists():
             return get_parent_area_or_none(
                 area=candidate,
                 source=children,
             )
-        return area
+        return candidate
 
 
 def get_place_area_or_none(place: Place) -> Area | None:
