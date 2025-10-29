@@ -13,7 +13,6 @@ def get_all_areas():
 def get_parent_area_or_none(area: Area, source: Source[Area] = Area) -> Area | None:
     queryset = get_queryset(source=source).exclude(id=area.id)
     areas = queryset.filter(polygon__contains=area.polygon)
-    logger.info("Potential parent areas: %s", areas)
 
     for candidate in areas:
         children = candidate.children.filter(polygon__contains=area.polygon)
@@ -29,6 +28,8 @@ def get_place_area_or_none(place: Place) -> Area | None:
     point = place.point
 
     areas = Area.objects.filter(polygon__contains=point)
+
+    logger.info("Potential parent areas: %s", areas)
 
     if len(areas) > 1:
         for area in areas:
