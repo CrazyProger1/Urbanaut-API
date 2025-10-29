@@ -1,7 +1,7 @@
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-from src.apps.abandoned.services.db import get_all_areas
+from src.apps.abandoned.services.db import get_all_areas, get_parent_area_or_none
 from src.apps.abandoned.serializers import (
     AreaRetrieveSerializer,
     AreaListSerializer,
@@ -27,4 +27,10 @@ class AreaViewSet(
     }
 
     def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
+        instance = serializer.save(created_by=self.request.user)
+
+        parent = get_parent_area_or_none(area=instance)
+
+        if parent:
+            instance.parent = parent
+            instance.save(update_fields=("parent",))
