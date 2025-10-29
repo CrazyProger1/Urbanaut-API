@@ -13,3 +13,9 @@ class TagListSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
         fields = "__all__"
+
+
+class TagCreateSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = ("tag",)
