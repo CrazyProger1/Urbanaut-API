@@ -3,7 +3,6 @@ import logging
 from django.db import models
 
 from src.utils.django.db.types import (
-    Model,
     Source,
 )
 
@@ -27,7 +26,7 @@ def get_manager(
     return manager_instance
 
 
-def get_queryset(
+def get_queryset[Model](
         source: Source[Model],
         manager: str = "objects",
 ) -> models.QuerySet[Model]:
