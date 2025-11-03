@@ -1,3 +1,4 @@
+from django_filters import rest_framework as filters
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
@@ -27,6 +28,7 @@ class PlaceViewSet(
         "create": PlaceCreateSerializer,
     }
     filterset_class = PlaceFilter
+    filter_backends = (filters.DjangoFilterBackend,)
 
     def perform_create(self, serializer):
         instance = serializer.save(created_by=self.request.user)
