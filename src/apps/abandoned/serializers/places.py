@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from src.apps.abandoned.models import Place
+from src.apps.tags.serializers.tags import TagCreateSerializer
 from src.utils.django.geo import PointField
 
 

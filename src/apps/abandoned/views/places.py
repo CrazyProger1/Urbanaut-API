@@ -1,6 +1,7 @@
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
+from src.apps.abandoned.filters import PlaceFilter
 from src.apps.abandoned.services.db import get_all_places, get_place_area_or_none
 from src.apps.abandoned.serializers import (
     PlaceRetrieveSerializer,
@@ -25,6 +26,7 @@ class PlaceViewSet(
         "retrieve": PlaceRetrieveSerializer,
         "create": PlaceCreateSerializer,
     }
+    filterset_class = PlaceFilter
 
     def perform_create(self, serializer):
         instance = serializer.save(created_by=self.request.user)
