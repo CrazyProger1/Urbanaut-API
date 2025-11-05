@@ -2,6 +2,7 @@ from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
 from django.conf import settings
 
+from src.apps.abandoned.models.preservation import PlacePreservation
 from src.apps.abandoned.models.security import PlaceSecurity
 from src.utils.django.db import TimestampMixin
 
@@ -92,3 +93,6 @@ class Place(TimestampMixin, models.Model):
         )
         if not self.pk or not hasattr(self, "security"):
             PlaceSecurity.objects.create(place=self)
+
+        if not self.pk or not hasattr(self, "preservation"):
+            PlacePreservation.objects.create(place=self)

@@ -22,6 +22,10 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
         slug_field="level",
         read_only=True,
     )
+    preservation = serializers.SlugRelatedField(
+        slug_field="level",
+        read_only=True,
+    )
     tags = serializers.SlugRelatedField(
         slug_field="tag",
         many=True,

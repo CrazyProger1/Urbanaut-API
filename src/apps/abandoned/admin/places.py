@@ -8,6 +8,7 @@ from unfold.admin import ModelAdmin, StackedInline
 from unfold.contrib.forms.widgets import WysiwygWidget
 
 from src.apps.abandoned.admin.security import PlaceSecurityInline
+from src.apps.abandoned.admin.preservation import PlacePreservationInline
 from src.apps.abandoned.models import Place, PlaceTag
 from src.apps.accounts.sites import site
 from src.utils.django.admin import CreatedByAdminMixin
@@ -26,6 +27,7 @@ class PlaceTagInline(StackedInline):
 class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
     inlines = (
         PlaceSecurityInline,
+        PlacePreservationInline,
         PlaceTagInline,
     )
     created_by_field = "created_by"
