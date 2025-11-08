@@ -173,5 +173,3 @@ cython_debug/
 # PyPI configuration file
 .pypirc
 
-# migrations (Server-only migrations)
-migrations
