@@ -5,7 +5,7 @@ cleancode:
 
 .PHONY: run
 run:
-	uv run python manage.py runserver
+	uv run python manage.py runserver 8001
 
 
 .PHONY: db.migrations

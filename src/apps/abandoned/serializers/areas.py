@@ -1,11 +1,17 @@
 from rest_framework import serializers
 
 from src.apps.abandoned.models import Area
+from src.apps.tags.services.db import get_all_tags
 from src.utils.django.geo import PolygonField
 
 
 class AreaCreateSerializer(serializers.ModelSerializer):
     polygon = PolygonField()
+    tags = serializers.SlugRelatedField(
+        slug_field="tag",
+        many=True,
+        queryset=get_all_tags(),
+    )
 
     class Meta:
         model = Area
@@ -14,6 +20,7 @@ class AreaCreateSerializer(serializers.ModelSerializer):
             "description",
             "polygon",
             "parent",
+            "tags",
         )
 
 

@@ -1,7 +1,7 @@
 from rest_framework import serializers
 
 from src.apps.abandoned.models import Place
-from src.apps.tags.serializers.tags import TagCreateSerializer
+from src.apps.tags.services.db import get_all_tags
 from src.utils.django.geo import PointField
 
 
@@ -40,7 +40,11 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
 
 class PlaceCreateSerializer(serializers.ModelSerializer):
     point = PointField()
-    tags = serializers.ListField(child=serializers.CharField(required=False), required=False)
+    tags = serializers.SlugRelatedField(
+        slug_field="tag",
+        many=True,
+        queryset=get_all_tags(),
+    )
 
     class Meta:
         model = Place
