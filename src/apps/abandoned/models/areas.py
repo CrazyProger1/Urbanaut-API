@@ -5,6 +5,23 @@ from django.conf import settings
 from src.utils.django.db import TimestampMixin
 
 
+class AreaTag(models.Model):
+    class Meta:
+        unique_together = (
+            "tag",
+            "area",
+        )
+
+    tag = models.ForeignKey(
+        "tags.Tag",
+        on_delete=models.CASCADE,
+    )
+    area = models.ForeignKey(
+        "Area",
+        on_delete=models.CASCADE,
+    )
+
+
 class Area(TimestampMixin, models.Model):
     name = models.CharField(
         max_length=250,
@@ -40,6 +57,13 @@ class Area(TimestampMixin, models.Model):
         help_text=_("Polygon of the abandoned area."),
         null=False,
         blank=False,
+    )
+    tags = models.ManyToManyField(
+        "tags.Tag",
+        blank=True,
+        verbose_name=_("tags"),
+        related_name="areas",
+        through=AreaTag,
     )
 
     class Meta:
