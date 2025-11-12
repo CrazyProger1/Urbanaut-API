@@ -35,6 +35,7 @@ class AreaAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
         "name",
         created_by_field,
         "created_at",
+        "is_private",
     )
     autocomplete_fields = (created_by_field,)
     search_fields = (

@@ -65,6 +65,11 @@ class Area(TimestampMixin, models.Model):
         related_name="areas",
         through=AreaTag,
     )
+    is_private = models.BooleanField(
+        default=False,
+        verbose_name=_("is private"),
+        help_text=_("Whether this area is private."),
+    )
 
     class Meta:
         verbose_name = _("Area")

@@ -12,7 +12,6 @@ class PlaceListSerializer(serializers.ModelSerializer):
         model = Place
         fields = (
             "id",
-            "name",
             "point",
         )
 
@@ -54,4 +53,5 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
             "created_by",
             "created_at",
             "updated_at",
+            "is_private",
         )

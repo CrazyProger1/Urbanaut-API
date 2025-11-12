@@ -78,6 +78,11 @@ class Place(TimestampMixin, models.Model):
         related_name="places",
         through=PlaceTag,
     )
+    is_private = models.BooleanField(
+        default=False,
+        verbose_name=_("is private"),
+        help_text=_("Whether this place is private."),
+    )
 
     class Meta:
         verbose_name = _("Place")

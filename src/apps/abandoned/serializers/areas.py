@@ -21,6 +21,7 @@ class AreaCreateSerializer(serializers.ModelSerializer):
             "polygon",
             "parent",
             "tags",
+            "is_private",
         )
 
 
@@ -31,7 +32,6 @@ class AreaListSerializer(serializers.ModelSerializer):
         model = Area
         fields = (
             "id",
-            "name",
             "polygon",
         )
 
@@ -42,6 +42,11 @@ class AreaRetrieveSerializer(serializers.ModelSerializer):
         read_only=True,
     )
     polygon = PolygonField()
+    tags = serializers.SlugRelatedField(
+        slug_field="tag",
+        many=True,
+        read_only=True,
+    )
 
     class Meta:
         model = Area

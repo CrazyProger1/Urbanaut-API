@@ -44,6 +44,7 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
         created_by_field,
         "display_area",
         "created_at",
+        "is_private",
     )
     autocomplete_fields = (
         created_by_field,
