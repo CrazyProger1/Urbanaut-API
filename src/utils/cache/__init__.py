@@ -1,1 +1,1 @@
-from src.utils.cache.decorators import redcache
+from src.utils.cache.decorators import func_cache

@@ -5,11 +5,11 @@ from google import genai
 from google.genai import types
 
 from src.utils.ai.types import BaseAIAssistant, BaseAISearchSearchEngine
-from src.utils.cache import redcache
+from src.utils.cache import func_cache
 from src.utils.django.settings import default_settings
 
 default_settings.setdefault("GOOGLE_GEMINI_ENABLE_CACHE", True)
-default_settings.setdefault("GOOGLE_GEMINI_CACHE_EXPIRATION", 10000)
+default_settings.setdefault("GOOGLE_GEMINI_CACHE_EXPIRATION", None)
 default_settings.setdefault("GOOGLE_GEMINI_CACHE_PREFIX", "gemini_cache")
 default_settings.setdefault("GOOGLE_GEMINI_MODEL", "gemini-2.5-flash-lite")
 default_settings.setdefault(
@@ -51,7 +51,7 @@ class GoogleGeminiAIAssistant(BaseAIAssistant):
 
     def execute(self, query: str, instructions: str = None) -> str:
         if self._cache_enabled:
-            return redcache(
+            return func_cache(
                 prefix=self._cache_prefix,
                 exp=self._cache_exp
             )(

@@ -10,6 +10,6 @@ class GoogleGeminiAbandonedAISearchEngine(GoogleGeminiSearchEngine):
     instructions = settings.ABANDONED_AI_SEARCH_ENGINE_INSTRUCTIONS
 
     def _execute(self, query: str, instructions: str) -> str:
-        slugs = get_all_tags().values_list("tag", flat=True)
+        slugs = list(get_all_tags().values_list("tag", flat=True).distinct())
         instructions = instructions.format(tags=json.dumps(slugs))
         return super()._execute(query=query, instructions=instructions)
