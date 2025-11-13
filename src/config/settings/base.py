@@ -24,6 +24,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.gis",
     "unfold.contrib.location_field",
+    "django.contrib.postgres",
     "django_filters",
     "djoser",
     "src.apps.docs",

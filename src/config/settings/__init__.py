@@ -14,6 +14,8 @@ include(
     "i18n.py",
     "logging.py",
     "security.py",
+    "ai.py",
+    "cache.py",
     optional("rest.py"),
     optional("docs.py"),
     optional("unfold.py"),

@@ -45,4 +45,7 @@ def get_place_area_or_none(place: Place, areas: Source[Area] = Area) -> Area | N
 
 
 def get_user_or_public_areas(user) -> models.QuerySet[Area]:
-    return Area.objects.filter(Q(is_private=False) | Q(created_by=user)).distinct()
+    query = Q(is_private=False)
+    if user.is_authenticated:
+        query |= Q(created_by=user)
+    return Area.objects.filter(query).distinct()

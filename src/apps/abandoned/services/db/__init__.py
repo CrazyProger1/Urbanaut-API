@@ -1,4 +1,4 @@
-from src.apps.abandoned.services.db.places import get_all_places, get_user_or_public_places
+from src.apps.abandoned.services.db.places import get_all_places, get_user_or_public_places, search_places
 from src.apps.abandoned.services.db.areas import (
     get_all_areas,
     get_place_area_or_none,
