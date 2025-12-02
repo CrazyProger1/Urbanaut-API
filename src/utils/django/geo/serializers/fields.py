@@ -46,11 +46,18 @@ class PointField(serializers.Field):
             return None
 
         if isinstance(value, str):
-            try:
-                value = value.replace("'", '"')
-                value = json.loads(value)
-            except ValueError:
-                self.fail("invalid")
+            if "," in value:
+                try:
+                    value = value.split(",")
+                    value = list(map(float, value))
+                except ValueError:
+                    self.fail("invalid")
+            else:
+                try:
+                    value = value.replace("'", '"')
+                    value = json.loads(value)
+                except ValueError:
+                    self.fail("invalid")
 
         if value and isinstance(value, (list, tuple)) and len(value) == 2:
             lat, lon = value
@@ -129,8 +136,8 @@ class PolygonField(serializers.ListSerializer):
 
         # Validate list of coordinates
         if not (
-            isinstance(value, list)
-            and all(isinstance(p, (list, tuple)) and len(p) == 2 for p in value)
+                isinstance(value, list)
+                and all(isinstance(p, (list, tuple)) and len(p) == 2 for p in value)
         ):
             self.fail("invalid")
 
