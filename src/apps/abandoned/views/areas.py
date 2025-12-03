@@ -1,7 +1,11 @@
 from rest_framework import viewsets, mixins
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-from src.apps.abandoned.services.db import get_all_areas, get_parent_area_or_none, get_user_or_public_areas
+from src.apps.abandoned.services.db import (
+    get_all_areas,
+    get_parent_area_or_none,
+    get_user_or_public_areas,
+)
 from src.apps.abandoned.serializers import (
     AreaRetrieveSerializer,
     AreaListSerializer,

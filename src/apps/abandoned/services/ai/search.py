@@ -10,9 +10,9 @@ from src.utils.django.db import Source, get_queryset
 
 
 def search_places_ai(
-        term: str,
-        source: Source[Place],
-        engine: BaseAISearchSearchEngine | str = settings.ABANDONED_AI_SEARCH_ENGINE,
+    term: str,
+    source: Source[Place],
+    engine: BaseAISearchSearchEngine | str = settings.ABANDONED_AI_SEARCH_ENGINE,
 ) -> models.QuerySet[Place]:
     if isinstance(engine, str):
         engine_class: type[BaseAISearchSearchEngine] = import_string(engine)
@@ -26,9 +26,9 @@ def search_places_ai(
 
 
 def search_areas_ai(
-        term: str,
-        source: Source[Area],
-        engine: BaseAISearchSearchEngine | str = settings.ABANDONED_AI_SEARCH_ENGINE,
+    term: str,
+    source: Source[Area],
+    engine: BaseAISearchSearchEngine | str = settings.ABANDONED_AI_SEARCH_ENGINE,
 ):
     if isinstance(engine, str):
         engine_class: type[BaseAISearchSearchEngine] = import_string(engine)

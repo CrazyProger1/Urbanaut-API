@@ -136,8 +136,8 @@ class PolygonField(serializers.ListSerializer):
 
         # Validate list of coordinates
         if not (
-                isinstance(value, list)
-                and all(isinstance(p, (list, tuple)) and len(p) == 2 for p in value)
+            isinstance(value, list)
+            and all(isinstance(p, (list, tuple)) and len(p) == 2 for p in value)
         ):
             self.fail("invalid")
 

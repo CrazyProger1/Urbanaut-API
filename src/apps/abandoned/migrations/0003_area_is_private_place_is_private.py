@@ -6,18 +6,26 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('abandoned', '0002_areatag_area_tags'),
+        ("abandoned", "0002_areatag_area_tags"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='area',
-            name='is_private',
-            field=models.BooleanField(default=False, help_text='Whether this area is private.', verbose_name='is private'),
+            model_name="area",
+            name="is_private",
+            field=models.BooleanField(
+                default=False,
+                help_text="Whether this area is private.",
+                verbose_name="is private",
+            ),
         ),
         migrations.AddField(
-            model_name='place',
-            name='is_private',
-            field=models.BooleanField(default=False, help_text='Whether this place is private.', verbose_name='is private'),
+            model_name="place",
+            name="is_private",
+            field=models.BooleanField(
+                default=False,
+                help_text="Whether this place is private.",
+                verbose_name="is private",
+            ),
         ),
     ]

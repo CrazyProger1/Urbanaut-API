@@ -15,4 +15,6 @@ Input: some underground staff
 Output: {{"tags":["underground","industrial","cave","metro","bunker","mine"]}}
 """
 
-ABANDONED_AI_SEARCH_ENGINE = "src.apps.abandoned.services.ai.gemini.GoogleGeminiAbandonedAISearchEngine"
+ABANDONED_AI_SEARCH_ENGINE = (
+    "src.apps.abandoned.services.ai.gemini.GoogleGeminiAbandonedAISearchEngine"
+)

@@ -10,8 +10,8 @@ logger = logging.getLogger(__name__)
 
 
 def get_manager(
-        model: type[models.Model],
-        manager: str = "objects",
+    model: type[models.Model],
+    manager: str = "objects",
 ) -> models.Manager:
     manager_instance = getattr(model, manager, None)
 
@@ -27,8 +27,8 @@ def get_manager(
 
 
 def get_queryset[Model](
-        source: Source[Model],
-        manager: str = "objects",
+    source: Source[Model],
+    manager: str = "objects",
 ) -> models.QuerySet[Model]:
     if isinstance(source, models.QuerySet):
         return source

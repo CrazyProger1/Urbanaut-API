@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "src.apps.accounts",
     "src.apps.abandoned",
     "src.apps.tags",
+    "src.apps.feedbacks",
 ]
 
 MIDDLEWARE = [

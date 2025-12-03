@@ -7,20 +7,44 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Tag',
+            name="Tag",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True, help_text='Creation date and time.', verbose_name='created at')),
-                ('updated_at', models.DateTimeField(auto_now=True, help_text='Update date and time.', verbose_name='updated at')),
-                ('tag', models.SlugField(max_length=100, unique=True, verbose_name='tag')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "created_at",
+                    models.DateTimeField(
+                        auto_now_add=True,
+                        help_text="Creation date and time.",
+                        verbose_name="created at",
+                    ),
+                ),
+                (
+                    "updated_at",
+                    models.DateTimeField(
+                        auto_now=True,
+                        help_text="Update date and time.",
+                        verbose_name="updated at",
+                    ),
+                ),
+                (
+                    "tag",
+                    models.SlugField(max_length=100, unique=True, verbose_name="tag"),
+                ),
             ],
             options={
-                'abstract': False,
+                "abstract": False,
             },
         ),
     ]

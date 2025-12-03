@@ -87,6 +87,18 @@ UNFOLD = {
                     },
                 ],
             },
+            {
+
+                "title": _("Feedbacks"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Feedbacks"),
+                        "icon": "feedback",
+                        "link": reverse_lazy("admin:feedbacks_feedback_changelist"),
+                    },
+                ],
+            },
         ],
     },
 }

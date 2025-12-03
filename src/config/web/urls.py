@@ -5,4 +5,5 @@ urlpatterns = [
     path("", include("src.apps.docs.urls")),
     path("", include("src.apps.abandoned.urls")),
     path("", include("src.apps.tags.urls")),
+    path("", include("src.apps.feedbacks.urls")),
 ]

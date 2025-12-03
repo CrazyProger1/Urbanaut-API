@@ -7,25 +7,49 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('abandoned', '0001_initial'),
-        ('tags', '0001_initial'),
+        ("abandoned", "0001_initial"),
+        ("tags", "0001_initial"),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='AreaTag',
+            name="AreaTag",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('area', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='abandoned.area')),
-                ('tag', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='tags.tag')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "area",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="abandoned.area"
+                    ),
+                ),
+                (
+                    "tag",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE, to="tags.tag"
+                    ),
+                ),
             ],
             options={
-                'unique_together': {('tag', 'area')},
+                "unique_together": {("tag", "area")},
             },
         ),
         migrations.AddField(
-            model_name='area',
-            name='tags',
-            field=models.ManyToManyField(blank=True, related_name='areas', through='abandoned.AreaTag', to='tags.tag', verbose_name='tags'),
+            model_name="area",
+            name="tags",
+            field=models.ManyToManyField(
+                blank=True,
+                related_name="areas",
+                through="abandoned.AreaTag",
+                to="tags.tag",
+                verbose_name="tags",
+            ),
         ),
     ]

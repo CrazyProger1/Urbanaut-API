@@ -22,8 +22,7 @@ def get_user_or_public_places(user) -> models.QuerySet[Place]:
 
 
 def search_places(
-        term: str = None,
-        source: Source[Place] = Place
+    term: str = None, source: Source[Place] = Place
 ) -> models.QuerySet[Place]:
     queryset = get_queryset(source=source)
     query = Q()

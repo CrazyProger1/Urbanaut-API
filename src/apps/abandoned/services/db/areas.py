@@ -36,10 +36,7 @@ def get_place_area_or_none(place: Place, areas: Source[Area] = Area) -> Area | N
     for candidate in areas:
         candidate_children = candidate.children.filter(polygon__contains=point)
         if candidate_children.exists():
-            return get_place_area_or_none(
-                place=place,
-                areas=candidate_children
-            )
+            return get_place_area_or_none(place=place, areas=candidate_children)
 
         return candidate
 

@@ -3,7 +3,11 @@ from rest_framework import viewsets, mixins, response, status
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from src.apps.abandoned.filters import PlaceFilter
-from src.apps.abandoned.services.db import get_all_places, get_place_area_or_none, get_user_or_public_places
+from src.apps.abandoned.services.db import (
+    get_all_places,
+    get_place_area_or_none,
+    get_user_or_public_places,
+)
 from src.apps.abandoned.serializers import (
     PlaceRetrieveSerializer,
     PlaceListSerializer,

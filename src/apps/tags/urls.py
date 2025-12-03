@@ -5,6 +5,4 @@ from src.apps.tags.views import TagViewSet
 router = DefaultRouter()
 router.register("api/v1/tags", TagViewSet)
 
-urlpatterns = [
-    *router.urls
-]
+urlpatterns = [*router.urls]
