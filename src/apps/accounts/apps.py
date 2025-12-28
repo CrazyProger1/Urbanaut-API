@@ -31,5 +31,5 @@ class AccountsConfig(AppConfig):
             "https://accounts.google.com/o/oauth2/v2/auth",
         )
 
-        # for defaults in settings.DEFAULT_ACHIEVEMENTS:
-        #     Achievement.objects.get_or_create(**defaults)
+        for defaults in settings.DEFAULT_ACHIEVEMENTS:
+            Achievement.objects.get_or_create(**defaults)
