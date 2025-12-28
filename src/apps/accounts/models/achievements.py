@@ -28,16 +28,20 @@ class UserAchievement(CreatedAtMixin, models.Model):
 
 
 class Achievement(CreatedAtMixin, models.Model):
-    """
-    TODO: color / level (something like this)
-    """
-
     name = models.CharField(
         max_length=250,
         verbose_name=_("name"),
         help_text=_("Name of the achievement."),
         null=False,
         blank=False,
+    )
+    slug = models.SlugField(
+        max_length=250,
+        verbose_name=_("slug"),
+        help_text=_("Slug of the achievement."),
+        null=False,
+        blank=False,
+        unique=True,
     )
     description = models.TextField(
         verbose_name=_("description"),

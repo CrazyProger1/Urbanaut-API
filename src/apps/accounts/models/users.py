@@ -52,7 +52,7 @@ class User(SettingsMixin, TimestampMixin, PermissionsMixin, AbstractBaseUser):
         default=None,
         null=True,
         blank=True,
-        verbose_name=_("birth Date"),
+        verbose_name=_("birth date"),
         help_text=_("User born at date and time."),
     )
     bio = models.CharField(

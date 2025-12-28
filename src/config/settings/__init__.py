@@ -16,6 +16,7 @@ include(
     "security.py",
     "ai.py",
     "cache.py",
+    "defaults.py",
     optional("rest.py"),
     optional("docs.py"),
     optional("unfold.py"),

@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from django.conf import settings
 
 from src.utils.django.settings import default_settings
 
@@ -8,6 +9,8 @@ class AccountsConfig(AppConfig):
     name = "src.apps.accounts"
 
     def ready(self):
+        from src.apps.accounts.models import Achievement
+
         default_settings.setdefault(
             "GOOGLE_OAUTH_URL", "https://accounts.google.com/o/oauth2/v2/auth"
         )
@@ -27,3 +30,6 @@ class AccountsConfig(AppConfig):
             "GOOGLE_OAUTH_REDIRECT_BASE_URL",
             "https://accounts.google.com/o/oauth2/v2/auth",
         )
+
+        for defaults in settings.DEFAULT_ACHIEVEMENTS:
+            Achievement.objects.get_or_create(**defaults)
