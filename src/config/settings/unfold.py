@@ -54,6 +54,11 @@ UNFOLD = {
                         "link": reverse_lazy("admin:accounts_achievement_changelist"),
                     },
                     {
+                        "title": _("Referral Codes"),
+                        "icon": "link",
+                        "link": reverse_lazy("admin:accounts_referralcode_changelist"),
+                    },
+                    {
                         "title": _("Groups"),
                         "icon": "devices",
                         "link": reverse_lazy("admin:auth_group_changelist"),

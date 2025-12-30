@@ -11,6 +11,7 @@ from unfold.admin import ModelAdmin, StackedInline
 from src.apps.accounts.models import User, Settings, Username
 from src.apps.accounts.sites import site
 from src.apps.accounts.admin.achivements import AchievementAdmin, AchievementInline
+from src.apps.accounts.admin.referrals import ReferralInline, ReferralCodeAdmin, ReferralAdmin
 
 admin.site.unregister(Group)
 
