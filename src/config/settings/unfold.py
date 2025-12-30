@@ -93,7 +93,6 @@ UNFOLD = {
                 ],
             },
             {
-
                 "title": _("Feedbacks"),
                 "collapsible": True,
                 "items": [

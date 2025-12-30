@@ -3,3 +3,4 @@ from src.apps.accounts.views.oauth import (
     GoogleOauthCallbackView,
 )
 from src.apps.accounts.views.settings import SettingsViewSet
+from src.apps.accounts.views.referrals import ReferralCodeViewSet

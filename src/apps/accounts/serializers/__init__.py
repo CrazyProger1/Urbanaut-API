@@ -9,3 +9,8 @@ from src.apps.accounts.serializers.tokens import (
 from src.apps.accounts.serializers.achievements import (
     AchievementRetrieveSerializer,
 )
+from src.apps.accounts.serializers.referrals import (
+    ReferralCodeRetrieveSerializer,
+    ReferralCodeListSerializer,
+    ReferralCodeApplySerializer,
+)

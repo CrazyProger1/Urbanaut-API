@@ -1,5 +1,6 @@
 from django.urls import path
 from djoser.views import UserViewSet
+from rest_framework.routers import SimpleRouter
 from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 from src.apps.accounts.sites import site
@@ -7,7 +8,12 @@ from src.apps.accounts.views import (
     GoogleOauthRedirectURIView,
     GoogleOauthCallbackView,
     SettingsViewSet,
+    ReferralCodeViewSet,
 )
+
+router = SimpleRouter()
+
+router.register("api/v1/referrals", ReferralCodeViewSet, basename="referrals")
 
 urlpatterns = [
     path("admin/", site.urls),
@@ -37,6 +43,7 @@ urlpatterns = [
             {"put": "update", "patch": "partial_update", "get": "retrieve"}
         ),
     ),
+    *router.urls,
     # path("api/v1/users/activate/", UserViewSet.as_view({"post": "activation"}), name="user-activate"),
     # path("api/v1/users/resend-activation/", UserViewSet.as_view({"post": "resend_activation"}),
     #      name="user-resend-activation"),
