@@ -8,6 +8,10 @@ from src.utils.django.db import CreatedAtMixin
 
 
 class Referral(CreatedAtMixin, models.Model):
+    class Meta:
+        verbose_name = _("Referral")
+        verbose_name_plural = _("Referrals")
+
     code = models.ForeignKey(
         to="ReferralCode",
         on_delete=models.CASCADE,
@@ -24,8 +28,15 @@ class Referral(CreatedAtMixin, models.Model):
         blank=False,
     )
 
+    def __str__(self):
+        return f"{self.user} referred by {self.code}"
+
 
 class ReferralCode(CreatedAtMixin, models.Model):
+    class Meta:
+        verbose_name = _("Referral Code")
+        verbose_name_plural = _("Referral Codes")
+
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -47,3 +58,6 @@ class ReferralCode(CreatedAtMixin, models.Model):
         through=Referral,
         related_name="referred_by_code",
     )
+
+    def __str__(self):
+        return self.code
