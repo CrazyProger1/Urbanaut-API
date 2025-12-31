@@ -1,10 +1,45 @@
+from django.db import transaction
+from djoser.conf import settings
 from drf_spectacular.utils import extend_schema_field
+from djoser.serializers import UserCreateSerializer as DjoserUserCreateSerializer
 from rest_framework import serializers
 
 from src.apps.accounts.models import User
 from src.apps.accounts.serializers.achievements import AchievementRetrieveSerializer
 from src.apps.accounts.serializers.metrics import MetricRetrieveSerializer
 from src.apps.accounts.serializers.settings import SettingsRetrieveSerializer
+from src.apps.accounts.services.db import apply_referral_code, get_referral_code_or_none
+
+
+class UserCreateSerializer(DjoserUserCreateSerializer):
+    code = serializers.SlugField(write_only=True, required=False)
+
+    class Meta:
+        model = User
+        fields = tuple(User.REQUIRED_FIELDS) + (
+            settings.LOGIN_FIELD,
+            settings.USER_ID_FIELD,
+            "password",
+            "code",
+        )
+
+    def validate(self, attrs):
+        code = attrs.pop("code", None)
+        data = super().validate(attrs=attrs)
+        data["code"] = code
+        return data
+
+    @transaction.atomic
+    def create(self, validated_data):
+        code = get_referral_code_or_none(code=validated_data.pop("code", None))
+        user = super().create(validated_data)
+
+        if code:
+            apply_referral_code(
+                code=code,
+                user=user,
+            )
+        return user
 
 
 class CurrentUserSerializer(serializers.ModelSerializer):

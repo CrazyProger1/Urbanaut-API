@@ -1,4 +1,7 @@
-from src.apps.accounts.serializers.users import CurrentUserSerializer
+from src.apps.accounts.serializers.users import (
+    CurrentUserSerializer,
+    UserCreateSerializer,
+)
 from src.apps.accounts.serializers.settings import (
     SettingsRetrieveSerializer,
     SettingsUpdateSerializer,
@@ -12,5 +15,4 @@ from src.apps.accounts.serializers.achievements import (
 from src.apps.accounts.serializers.referrals import (
     ReferralCodeRetrieveSerializer,
     ReferralCodeListSerializer,
-    ReferralCodeApplySerializer,
 )

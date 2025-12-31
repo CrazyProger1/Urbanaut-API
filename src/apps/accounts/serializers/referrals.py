@@ -14,6 +14,3 @@ class ReferralCodeListSerializer(serializers.ModelSerializer):
         model = ReferralCode
         fields = ("code",)
 
-
-class ReferralCodeApplySerializer(serializers.Serializer):
-    pass
