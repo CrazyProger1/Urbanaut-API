@@ -23,3 +23,11 @@ class ReferralInline(TabularInline):
 class ReferralCodeAdmin(ModelAdmin):
     list_display = ("code", "created_by", "created_at")
     inlines = (ReferralInline,)
+
+
+class ReferralCodeInline(TabularInline):
+    tab = True
+    model = ReferralCode
+    verbose_name = _("Referral Code")
+    verbose_name_plural = _("Referral Codes")
+    extra = 0

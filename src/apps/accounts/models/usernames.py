@@ -1,15 +1,16 @@
+
+
+from django.conf import settings
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
-from django.utils.text import slugify
 from django.utils.translation import gettext_lazy as _
 
-from src.apps.accounts.models import User
 from src.utils.django.db import CreatedAtMixin
 
 
 class Username(CreatedAtMixin, models.Model):
     owned_by = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="usernames",
     )
@@ -24,3 +25,25 @@ class Username(CreatedAtMixin, models.Model):
 
     def __str__(self):
         return self.username
+
+
+class UsernameMixin(models.Model):
+    class Meta:
+        abstract = True
+
+    def _give_initial_username(self):
+        from src.apps.accounts.services.db import (
+            give_initial_username,
+            has_username,
+        )
+
+        if not has_username(user=self):
+            give_initial_username(user=self)
+
+    def save(
+        self,
+        *args,
+        **kwargs,
+    ):
+        super().save(*args, **kwargs)
+        self._give_initial_username()

@@ -61,3 +61,24 @@ class ReferralCode(CreatedAtMixin, models.Model):
 
     def __str__(self):
         return self.code
+
+
+class ReferralMixin(models.Model):
+    class Meta:
+        abstract = True
+
+    def _give_initial_referral_code(self):
+        from src.apps.accounts.services.db import (
+            has_referral_code,
+            give_initial_referral_code,
+        )
+        if not has_referral_code(user=self):
+            give_initial_referral_code(user=self)
+
+    def save(
+            self,
+            *args,
+            **kwargs,
+    ):
+        super().save(*args, **kwargs)
+        self._give_initial_referral_code()

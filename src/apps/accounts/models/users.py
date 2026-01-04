@@ -5,12 +5,21 @@ from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.accounts.managers import UserManager
+from src.apps.accounts.models.referrals import ReferralMixin
 from src.apps.accounts.models.settings import SettingsMixin
+from src.apps.accounts.models.usernames import UsernameMixin
 
 from src.utils.django.db import TimestampMixin
 
 
-class User(SettingsMixin, TimestampMixin, PermissionsMixin, AbstractBaseUser):
+class User(
+    SettingsMixin,
+    ReferralMixin,
+    UsernameMixin,
+    TimestampMixin,
+    PermissionsMixin,
+    AbstractBaseUser,
+):
     id = models.UUIDField(
         primary_key=True,
         default=uuid.uuid4,

@@ -1,5 +1,8 @@
 from src.apps.accounts.services.db.settings import get_all_settings
-from src.apps.accounts.services.db.users import get_or_create_user
+from src.apps.accounts.services.db.users import (
+    get_or_create_user,
+    count_users,
+)
 from src.apps.accounts.services.db.referrals import (
     get_all_referral_codes,
     get_user_referral_codes,
@@ -9,4 +12,14 @@ from src.apps.accounts.services.db.referrals import (
 from src.apps.accounts.services.db.achievements import (
     get_achievement_or_none_by_slug,
     give_achievement,
+)
+from src.apps.accounts.services.db.usernames import (
+    has_username,
+    get_username_or_none,
+    give_username,
+    give_initial_username,
+)
+from src.apps.accounts.services.db.referrals import (
+    has_referral_code,
+    give_initial_referral_code,
 )

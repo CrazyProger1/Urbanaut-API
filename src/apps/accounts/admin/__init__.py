@@ -14,7 +14,7 @@ from src.apps.accounts.admin.achivements import AchievementAdmin, AchievementInl
 from src.apps.accounts.admin.referrals import (
     ReferralInline,
     ReferralCodeAdmin,
-    ReferralAdmin,
+    ReferralAdmin, ReferralCodeInline,
 )
 
 admin.site.unregister(Group)
@@ -59,6 +59,7 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
         SettingsInline,
         UsernameInline,
         AchievementInline,
+        ReferralCodeInline,
     )
     fieldsets = (
         (None, {"fields": ("email", "password")}),
