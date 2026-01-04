@@ -17,6 +17,7 @@ include(
     "ai.py",
     "cache.py",
     "achievements.py",
+    "geo.py",
     optional("rest.py"),
     optional("docs.py"),
     optional("unfold.py"),

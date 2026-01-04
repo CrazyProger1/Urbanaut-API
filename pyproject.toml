@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "django>=5.2.6",
+    "django-cities-light>=3.10.2",
     "django-cors-headers>=4.9.0",
     "django-filter>=25.1",
     "django-leaflet>=0.32.0",
@@ -19,6 +20,7 @@ dependencies = [
     "drf-extra-fields>=3.7.0",
     "drf-spectacular>=0.28.0",
     "drf-standardized-errors>=0.15.0",
+    "geopy>=2.4.1",
     "google-genai>=1.50.0",
     "psycopg2-binary>=2.9.11",
     "python-decouple>=3.8",
