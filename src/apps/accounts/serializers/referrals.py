@@ -13,4 +13,3 @@ class ReferralCodeListSerializer(serializers.ModelSerializer):
     class Meta:
         model = ReferralCode
         fields = ("code",)
-

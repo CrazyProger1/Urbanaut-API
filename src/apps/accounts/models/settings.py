@@ -1,8 +1,12 @@
+import logging
+
 from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.accounts.enums import UITheme
+
+logger = logging.getLogger(__name__)
 
 
 class Settings(models.Model):
@@ -40,13 +44,17 @@ class Settings(models.Model):
 
 
 class SettingsMixin(models.Model):
+    def _update_settings(self):
+        if not self.pk or not hasattr(self, "settings"):
+            Settings.objects.create(user=self)
+            logger.info("Created settings instance for new user")
+
     def save(self, *args, **kwargs):
         super().save(
             *args,
             **kwargs,
         )
-        if not self.pk or not hasattr(self, "settings"):
-            Settings.objects.create(user=self)
+        self._update_settings()
 
     class Meta:
         abstract = True

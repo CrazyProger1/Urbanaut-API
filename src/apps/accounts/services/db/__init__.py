@@ -6,3 +6,7 @@ from src.apps.accounts.services.db.referrals import (
     apply_referral_code,
     get_referral_code_or_none,
 )
+from src.apps.accounts.services.db.achievements import (
+    get_achievement_or_none_by_slug,
+    give_achievement,
+)
