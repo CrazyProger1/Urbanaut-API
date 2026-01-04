@@ -1,5 +1,3 @@
-
-
 from django.conf import settings
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
@@ -21,6 +19,13 @@ class Username(CreatedAtMixin, models.Model):
         validators=(UnicodeUsernameValidator(),),
         verbose_name=_("username"),
         help_text=_("Unique user username."),
+    )
+    is_initial = models.BooleanField(
+        default=False,
+        null=False,
+        blank=False,
+        verbose_name=_("is initial"),
+        help_text=_("User's initial username (given when user was created)"),
     )
 
     def __str__(self):

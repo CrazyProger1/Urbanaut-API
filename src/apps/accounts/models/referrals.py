@@ -58,6 +58,13 @@ class ReferralCode(CreatedAtMixin, models.Model):
         through=Referral,
         related_name="referred_by_code",
     )
+    is_initial = models.BooleanField(
+        default=False,
+        null=False,
+        blank=False,
+        verbose_name=_("is initial"),
+        help_text=_("User's initial referral code (given when user was created)"),
+    )
 
     def __str__(self):
         return self.code
@@ -72,13 +79,14 @@ class ReferralMixin(models.Model):
             has_referral_code,
             give_initial_referral_code,
         )
+
         if not has_referral_code(user=self):
             give_initial_referral_code(user=self)
 
     def save(
-            self,
-            *args,
-            **kwargs,
+        self,
+        *args,
+        **kwargs,
     ):
         super().save(*args, **kwargs)
         self._give_initial_referral_code()

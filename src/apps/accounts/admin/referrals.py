@@ -21,7 +21,7 @@ class ReferralInline(TabularInline):
 
 @admin.register(ReferralCode, site=site)
 class ReferralCodeAdmin(ModelAdmin):
-    list_display = ("code", "created_by", "created_at")
+    list_display = ("code", "created_by", "is_initial", "created_at")
     inlines = (ReferralInline,)
 
 

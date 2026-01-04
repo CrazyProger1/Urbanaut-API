@@ -22,10 +22,18 @@ def has_referral_code(user: User) -> bool:
     return user.referral_codes.exists()
 
 
-def give_referral_code(user: User, code: str) -> ReferralCode:
-    return ReferralCode.objects.create(code=code, created_by=user)
+def give_referral_code(user: User, code: str, initial: bool = False) -> ReferralCode:
+    return ReferralCode.objects.create(
+        code=code,
+        created_by=user,
+        is_initial=initial,
+    )
 
 
 def give_initial_referral_code(user: User) -> ReferralCode:
     username = get_initial_username(user=user)
-    return give_referral_code(user=user, code=username.username)
+    return give_referral_code(
+        user=user,
+        code=username.username,
+        initial=True,
+    )

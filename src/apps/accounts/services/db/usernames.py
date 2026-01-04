@@ -13,8 +13,12 @@ def get_username_or_none(username: str) -> Username | None:
     return Username.objects.filter(username=username).first()
 
 
-def give_username(user, username: str) -> Username:
-    return Username.objects.create(username=username, owned_by=user)
+def give_username(user, username: str, initial: bool = False) -> Username:
+    return Username.objects.create(
+        username=username,
+        owned_by=user,
+        is_initial=initial,
+    )
 
 
 def get_initial_username(user: User) -> Username:
@@ -28,4 +32,8 @@ def give_initial_username(user: User) -> Username:
     while get_username_or_none(username=username):
         username += random.choice(string.ascii_letters + string.digits)
 
-    return give_username(user=user, username=username)
+    return give_username(
+        user=user,
+        username=username,
+        initial=True,
+    )

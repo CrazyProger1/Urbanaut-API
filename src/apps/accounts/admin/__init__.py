@@ -14,7 +14,8 @@ from src.apps.accounts.admin.achivements import AchievementAdmin, AchievementInl
 from src.apps.accounts.admin.referrals import (
     ReferralInline,
     ReferralCodeAdmin,
-    ReferralAdmin, ReferralCodeInline,
+    ReferralAdmin,
+    ReferralCodeInline,
 )
 
 admin.site.unregister(Group)
