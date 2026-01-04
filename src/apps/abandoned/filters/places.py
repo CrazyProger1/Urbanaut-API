@@ -15,6 +15,7 @@ class PlaceFilter(filters.FilterSet):
     )
     query = filters.CharFilter(method="search")
     ai_query = filters.CharFilter(method="ai_search")
+    preservation = filters.CharFilter(field_name="preservation__level")
 
     class Meta:
         model = Place
