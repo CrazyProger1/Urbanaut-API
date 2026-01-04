@@ -1,6 +1,8 @@
 from rest_framework import serializers
 
+from src.apps.abandoned.enums import PreservationLevel
 from src.apps.abandoned.models import Place
+from src.apps.abandoned.services.db import set_preservation_level
 from src.apps.tags.services.db import get_all_tags
 from src.utils.django.geo import PointField
 
@@ -44,6 +46,10 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
         many=True,
         queryset=get_all_tags(),
     )
+    preservation = serializers.ChoiceField(
+        choices=PreservationLevel,
+        write_only=True,
+    )
 
     class Meta:
         model = Place
@@ -54,4 +60,14 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
             "is_private",
+            "preservation",
         )
+
+    def create(self, validated_data):
+        preservation = validated_data.pop("preservation", None)
+        place = super().create(validated_data=validated_data)
+        set_preservation_level(
+            place=place,
+            level=preservation,
+        )
+        return place

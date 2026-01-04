@@ -5,7 +5,8 @@ from django.db import models
 from django.db.models import Q
 from modeltranslation.utils import build_localized_fieldname
 
-from src.apps.abandoned.models import Place
+from src.apps.abandoned.enums import PreservationLevel
+from src.apps.abandoned.models import Place, PlacePreservation
 from src.utils.django.db import Source, get_queryset
 
 
@@ -22,7 +23,7 @@ def get_user_or_public_places(user) -> models.QuerySet[Place]:
 
 
 def search_places(
-    term: str = None, source: Source[Place] = Place
+        term: str = None, source: Source[Place] = Place
 ) -> models.QuerySet[Place]:
     queryset = get_queryset(source=source)
     query = Q()
@@ -35,3 +36,12 @@ def search_places(
             query |= Q(**{f"{field}__icontains": term})
 
     return queryset.filter(query).distinct()
+
+
+def get_all_preservation_levels() -> models.QuerySet[PlacePreservation]:
+    return PlacePreservation.objects.all()
+
+
+def set_preservation_level(place: Place, level: PreservationLevel):
+    place.preservation.level = level
+    place.preservation.save()
