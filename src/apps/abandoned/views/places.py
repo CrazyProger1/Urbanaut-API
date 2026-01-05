@@ -14,6 +14,7 @@ from src.apps.abandoned.serializers import (
     PlaceListSerializer,
     PlaceCreateSerializer,
 )
+from src.apps.geo.services.db import get_country_or_none
 from src.utils.django.views import MultipleSerializerViewsetMixin
 from src.utils.geo import reverse_geocode
 
@@ -48,7 +49,9 @@ class PlaceViewSet(
         point = serializer.validated_data["point"]
         address = reverse_geocode((point.y, point.x))
 
-        if address.get("country_code") not in settings.SUPPORTED_COUNTRIES:
+        country = get_country_or_none(tld=address.get("country_code"))
+
+        if country and not country.is_active:
             raise exceptions.PermissionDenied(detail="Country not supported")
 
         instance = serializer.save(created_by=self.request.user)
