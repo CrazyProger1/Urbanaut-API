@@ -17,5 +17,4 @@ def reverse_geocode(point: tuple[float, float]) -> Address:
     )
     address = location.raw["address"]
 
-
     return Address(country_code=address.get("country_code"))

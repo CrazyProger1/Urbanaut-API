@@ -27,11 +27,13 @@ INSTALLED_APPS = [
     "django.contrib.postgres",
     "django_filters",
     "djoser",
+    "cities_light",
     "src.apps.docs",
     "src.apps.accounts",
     "src.apps.abandoned",
     "src.apps.tags",
     "src.apps.feedbacks",
+    "src.apps.geo",
 ]
 
 MIDDLEWARE = [

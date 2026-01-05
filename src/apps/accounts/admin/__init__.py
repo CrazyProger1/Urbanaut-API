@@ -23,7 +23,7 @@ admin.site.unregister(Group)
 
 @admin.register(Settings)
 class SettingsAdmin(ModelAdmin):
-    pass
+    autocomplete_fields = ("country",)
 
 
 @admin.register(Username)
@@ -38,6 +38,7 @@ class SettingsInline(StackedInline):
     tab = True
     verbose_name = _("Settings")
     verbose_name_plural = _("Settings")
+    autocomplete_fields = ("country",)
 
     def has_add_permission(self, request, obj):
         return False

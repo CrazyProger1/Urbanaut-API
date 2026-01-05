@@ -5,6 +5,7 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.accounts.enums import UITheme
+from src.apps.geo.models import Country
 
 logger = logging.getLogger(__name__)
 
@@ -23,6 +24,14 @@ class Settings(models.Model):
         default="en",
         verbose_name=_("language"),
         help_text=_("Preferred language of the user."),
+    )
+    country = models.ForeignKey(
+        to=Country,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name=_("country"),
+        help_text=_("User country."),
     )
     is_notifications_enabled = models.BooleanField(
         default=True,

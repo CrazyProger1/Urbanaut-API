@@ -1,6 +1,6 @@
 from django.conf import settings
 from django_filters import rest_framework as filters
-from rest_framework import viewsets, mixins, response, status, exceptions
+from rest_framework import viewsets, mixins, exceptions
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from src.apps.abandoned.filters import PlaceFilter
@@ -37,6 +37,9 @@ class PlaceViewSet(
     filter_backends = (filters.DjangoFilterBackend,)
 
     def get_queryset(self):
+        user = self.request.user
+        if user.is_authenticated and user.is_superuser:
+            return self.queryset
         return get_user_or_public_places(user=self.request.user)
 
     def perform_create(self, serializer):

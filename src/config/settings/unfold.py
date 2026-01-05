@@ -103,6 +103,32 @@ UNFOLD = {
                     },
                 ],
             },
+            {
+                "title": _("Geo"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Countries"),
+                        "icon": "flag",
+                        "link": reverse_lazy("admin:geo_country_changelist"),
+                    },
+                    {
+                        "title": _("Regions"),
+                        "icon": "extension",
+                        "link": reverse_lazy("admin:geo_region_changelist"),
+                    },
+                    {
+                        "title": _("Sub Regions"),
+                        "icon": "extension",
+                        "link": reverse_lazy("admin:geo_subregion_changelist"),
+                    },
+                    {
+                        "title": _("Cities"),
+                        "icon": "location_city",
+                        "link": reverse_lazy("admin:geo_city_changelist"),
+                    },
+                ],
+            },
         ],
     },
 }
