@@ -9,10 +9,17 @@ from src.apps.accounts.serializers.achievements import AchievementRetrieveSerial
 from src.apps.accounts.serializers.metrics import MetricRetrieveSerializer
 from src.apps.accounts.serializers.settings import SettingsRetrieveSerializer
 from src.apps.accounts.services.db import apply_referral_code, get_referral_code_or_none
+from src.apps.accounts.services.db.users import update_user_country
+from src.apps.geo.services.db import get_country_or_none
 
 
 class UserCreateSerializer(DjoserUserCreateSerializer):
     code = serializers.SlugField(write_only=True, required=False)
+    country = serializers.CharField(
+        max_length=2,
+        allow_null=True,
+        required=False,
+    )
 
     class Meta:
         model = User
@@ -21,23 +28,36 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
             settings.USER_ID_FIELD,
             "password",
             "code",
+            "country",
         )
 
     def validate(self, attrs):
         code = attrs.pop("code", None)
+        country = attrs.pop("country", None)
+
         data = super().validate(attrs=attrs)
+
         data["code"] = code
+        data["country"] = country
+
         return data
 
     @transaction.atomic
     def create(self, validated_data):
         code = get_referral_code_or_none(code=validated_data.pop("code", None))
+        country = get_country_or_none(tld=validated_data.pop("country", None))
         user = super().create(validated_data)
 
         if code:
             apply_referral_code(
                 code=code,
                 user=user,
+            )
+
+        if country:
+            update_user_country(
+                user=user,
+                country=country,
             )
         return user
 

@@ -1,4 +1,5 @@
 from src.apps.accounts.models import User
+from src.apps.geo.models import Country
 
 
 def get_or_create_user(email: str) -> User:
@@ -10,3 +11,8 @@ def get_or_create_user(email: str) -> User:
 
 def count_users() -> int:
     return User.objects.count()
+
+
+def update_user_country(user: User, country: Country):
+    user.settings.country = country
+    user.settings.save()
