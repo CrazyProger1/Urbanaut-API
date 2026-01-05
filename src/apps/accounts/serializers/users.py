@@ -19,6 +19,7 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
         max_length=2,
         allow_null=True,
         required=False,
+        allow_blank=True,
     )
 
     class Meta:
@@ -29,6 +30,9 @@ class UserCreateSerializer(DjoserUserCreateSerializer):
             "password",
             "code",
             "country",
+            "first_name",
+            "last_name",
+            "born_at",
         )
 
     def validate(self, attrs):
