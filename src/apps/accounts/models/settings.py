@@ -40,6 +40,13 @@ class Settings(models.Model):
         verbose_name=_("notifications"),
         help_text=_("Notifications enabled."),
     )
+    is_country_visible = models.BooleanField(
+        default=True,
+        null=False,
+        blank=False,
+        verbose_name=_("is country visible"),
+        help_text=_("User country is visible in profile."),
+    )
     theme = models.CharField(
         max_length=10,
         choices=UITheme,
