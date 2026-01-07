@@ -62,7 +62,7 @@ class User(
         null=True,
         blank=True,
         verbose_name=_("birth date"),
-        help_text=_("User born at date and time."),
+        help_text=_("User birth date."),
     )
     bio = models.CharField(
         max_length=250,

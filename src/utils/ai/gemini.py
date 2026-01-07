@@ -22,12 +22,12 @@ logger = logging.getLogger(__name__)
 
 class GoogleGeminiAIAssistant(BaseAIAssistant):
     def __init__(
-        self,
-        api_key: str = default_settings.GOOGLE_GEMINI_API_KEY,
-        model: str = default_settings.GOOGLE_GEMINI_MODEL,
-        cache_enabled: bool = default_settings.GOOGLE_GEMINI_ENABLE_CACHE,
-        cache_expiration: int = default_settings.GOOGLE_GEMINI_CACHE_EXPIRATION,
-        cache_prefix: str = default_settings.GOOGLE_GEMINI_CACHE_PREFIX,
+            self,
+            api_key: str = default_settings.GOOGLE_GEMINI_API_KEY,
+            model: str = default_settings.GOOGLE_GEMINI_MODEL,
+            cache_enabled: bool = default_settings.GOOGLE_GEMINI_ENABLE_CACHE,
+            cache_expiration: int = default_settings.GOOGLE_GEMINI_CACHE_EXPIRATION,
+            cache_prefix: str = default_settings.GOOGLE_GEMINI_CACHE_PREFIX,
     ):
         self._api_key = api_key
         self._client = genai.Client(api_key=api_key)
@@ -37,7 +37,7 @@ class GoogleGeminiAIAssistant(BaseAIAssistant):
         self._cache_prefix = cache_prefix
 
     def _execute(self, query: str, instructions: str) -> str:
-        logger.debug("Executing query %s with instructions %s", query, instructions)
+        logger.info("Executing query %s with instructions %s", query, instructions)
         response = self._client.models.generate_content(
             model=self._model,
             contents=query,
@@ -46,8 +46,9 @@ class GoogleGeminiAIAssistant(BaseAIAssistant):
                 system_instruction=instructions,
             ),
         )
-        logger.debug("Query result: %s", response)
-        return response.text
+        text = response.text
+        logger.info("Query result: %s", text)
+        return text
 
     def execute(self, query: str, instructions: str = None) -> str:
         if self._cache_enabled:
@@ -72,4 +73,7 @@ class GoogleGeminiSearchEngine(GoogleGeminiAIAssistant, BaseAISearchSearchEngine
             query=query,
             instructions=self._search_instructions,
         )
-        return json.loads(response)
+        try:
+            return json.loads(response)
+        except json.decoder.JSONDecodeError:
+            return {}

@@ -20,7 +20,7 @@ def search_places_ai(
 
     filters = engine.search(query=term)
     queryset = get_queryset(source=source)
-    tags = get_tags_from_slugs(slugs=filters["tags"])
+    tags = get_tags_from_slugs(slugs=filters.get("tags", []))
 
     return queryset.filter(tags__in=tags)
 
@@ -36,6 +36,6 @@ def search_areas_ai(
 
     filters = engine.search(query=term)
     queryset = get_queryset(source=source)
-    tags = get_tags_from_slugs(slugs=filters["tags"])
+    tags = get_tags_from_slugs(slugs=filters.get("tags", []))
 
     return queryset.filter(tags__in=tags)
