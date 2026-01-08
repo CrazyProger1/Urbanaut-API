@@ -4,7 +4,7 @@ from src.apps.accounts.models import User
 from src.apps.geo.models import Country
 
 
-def get_or_create_user(email: str) -> User:
+def get_or_create_user_by_email(email: str) -> User:
     try:
         return User.objects.get(email=email)
     except User.DoesNotExist:
@@ -22,3 +22,7 @@ def set_user_country(user: User, country: Country):
 
 def get_all_users() -> models.QuerySet[User]:
     return User.objects.all()
+
+
+def get_user_by_username_or_none(username: str) -> User | None:
+    return User.objects.filter(usernames__username=username).first()

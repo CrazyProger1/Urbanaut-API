@@ -10,13 +10,14 @@ from src.apps.accounts.views import (
     SettingsViewSet,
     ReferralCodeViewSet,
     UserViewSet,
+    UserByUsernameViewSet,
 )
 
 router = DefaultRouter()
 
 router.register("api/v1/referrals", ReferralCodeViewSet, basename="referrals")
 router.register("api/v1/users", UserViewSet, basename="users")
-
+router.register("api/v1/users/by_username", UserByUsernameViewSet, basename="users-by-username")
 urlpatterns = [
     path("admin/", site.urls),
     path(

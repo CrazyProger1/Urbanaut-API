@@ -13,7 +13,7 @@ from src.apps.accounts.serializers.oauth import (
     GoogleOauthCallbackResponseSerializer,
     GoogleOauthRedirectURIResponseSerializer,
 )
-from src.apps.accounts.services.db import get_or_create_user
+from src.apps.accounts.services.db import get_or_create_user_by_email
 from src.apps.accounts.services.oauth import (
     generate_google_oauth_redirect_uri,
     authenticate_google_oauth_code,
@@ -54,7 +54,7 @@ class GoogleOauthCallbackView(APIView):
                 detail="Failed to authenticate the provided code or state.",
             )
         google_user = decode_id_token(tokens["id_token"])
-        internal_user = get_or_create_user(email=google_user["email"])
+        internal_user = get_or_create_user_by_email(email=google_user["email"])
         response_serializer = GoogleOauthCallbackResponseSerializer(
             instance={
                 "user": internal_user,

@@ -1,9 +1,10 @@
 from src.apps.accounts.services.db.settings import get_all_settings
 from src.apps.accounts.services.db.users import (
-    get_or_create_user,
+    get_or_create_user_by_email,
     count_users,
     get_all_users,
     set_user_country,
+    get_user_by_username_or_none,
 )
 from src.apps.accounts.services.db.referrals import (
     get_all_referral_codes,

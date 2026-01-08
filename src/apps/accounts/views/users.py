@@ -1,3 +1,4 @@
+from django.http import Http404
 from djoser import signals as djoser_signals
 from djoser.compat import get_user_email
 from djoser.conf import settings as djoser_settings
@@ -9,14 +10,11 @@ from src.apps.accounts.serializers import (
     UserRetrieveSerializer,
     UserCreateSerializer,
 )
-from src.apps.accounts.services.db import get_all_users
+from src.apps.accounts.services.db import get_all_users, get_user_by_username_or_none
 
 
-class UserViewSet(
+class UserBaseViewSet(
     viewsets.GenericViewSet,
-    mixins.CreateModelMixin,
-    mixins.ListModelMixin,
-    mixins.RetrieveModelMixin,
 ):
     queryset = get_all_users()
     permission_classes = (IsAuthenticated,)
@@ -26,6 +24,17 @@ class UserViewSet(
         "retrieve": UserRetrieveSerializer,
         "create": UserCreateSerializer,
     }
+
+    def get_serializer_class(self):
+        return self.serializer_classes.get(self.action, self.serializer_class)
+
+
+class UserViewSet(
+    UserBaseViewSet,
+    mixins.CreateModelMixin,
+    mixins.ListModelMixin,
+    mixins.RetrieveModelMixin,
+):
 
     def get_permissions(self):
         if self.action == "create":
@@ -47,5 +56,17 @@ class UserViewSet(
         elif djoser_settings.SEND_CONFIRMATION_EMAIL:
             djoser_settings.EMAIL.confirmation(self.request, context).send(to)
 
-    def get_serializer_class(self):
-        return self.serializer_classes.get(self.action, self.serializer_class)
+
+class UserByUsernameViewSet(
+    UserBaseViewSet,
+    mixins.RetrieveModelMixin,
+):
+    lookup_field = "username"
+
+    def get_object(self):
+        username = self.kwargs.get(self.lookup_field)
+        user = get_user_by_username_or_none(username=username)
+        if not user:
+            raise Http404
+
+        return user
