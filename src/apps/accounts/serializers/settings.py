@@ -11,6 +11,17 @@ class SettingsRetrieveSerializer(serializers.ModelSerializer):
         model = Settings
         fields = (
             "language",
+            "country",
+        )
+
+
+class CurrentSettingsRetrieveSerializer(serializers.ModelSerializer):
+    country = CountryRetrieveSerializer(read_only=True)
+
+    class Meta:
+        model = Settings
+        fields = (
+            "language",
             "is_notifications_enabled",
             "theme",
             "country",

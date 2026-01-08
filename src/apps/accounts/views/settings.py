@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated
 
 from src.apps.accounts.serializers import (
     SettingsUpdateSerializer,
-    SettingsRetrieveSerializer,
+    CurrentSettingsRetrieveSerializer,
 )
 from src.apps.accounts.services.db import get_all_settings
 
@@ -15,11 +15,11 @@ class SettingsViewSet(
 ):
     queryset = get_all_settings()
     permission_classes = (IsAuthenticated,)
-    serializer_class = SettingsRetrieveSerializer
+    serializer_class = CurrentSettingsRetrieveSerializer
     serializer_classes = {
         "update": SettingsUpdateSerializer,
         "partial_update": SettingsUpdateSerializer,
-        "retrieve": SettingsRetrieveSerializer,
+        "retrieve": CurrentSettingsRetrieveSerializer,
     }
 
     def get_serializer_class(self):

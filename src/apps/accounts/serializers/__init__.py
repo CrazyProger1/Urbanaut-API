@@ -1,8 +1,11 @@
 from src.apps.accounts.serializers.users import (
     CurrentUserSerializer,
     UserCreateSerializer,
+    UserRetrieveSerializer,
+    UserListSerializer,
 )
 from src.apps.accounts.serializers.settings import (
+    CurrentSettingsRetrieveSerializer,
     SettingsRetrieveSerializer,
     SettingsUpdateSerializer,
 )
