@@ -1,43 +1,39 @@
-from django.db import models
-from django.db.models import Subquery
-
-from src.apps.accounts.models import ReferralLink, ReferralLinkUsage, User
-from src.utils.db import get_all_objects, filter_objects, get_object_or_none
+from src.apps.accounts.models import ReferralCode, Referral, User
+from src.apps.accounts.services.db.usernames import get_initial_username
 
 
-def get_all_referral_links() -> models.QuerySet[ReferralLink]:
-    return get_all_objects(source=ReferralLink)
+def get_all_referral_codes():
+    return ReferralCode.objects.all()
 
 
-def get_user_referral_links(user) -> models.QuerySet[ReferralLink]:
-    return filter_objects(source=ReferralLink, referrer=user)
+def get_user_referral_codes(user):
+    return user.referral_codes.all()
 
 
-def get_non_user_referral_links(user) -> models.QuerySet[ReferralLink]:
-    return get_all_referral_links().exclude(referrer=user)
+def get_referral_code_or_none(**data):
+    return ReferralCode.objects.filter(**data).first()
 
 
-def apply_referral_link(user, link: ReferralLink) -> bool:
-    applied_link = get_object_or_none(source=ReferralLinkUsage, referral=user)
-    if applied_link:
-        return False
-
-    if link.referrer == user:
-        return False
-
-    link.referrals.add(user)
-    return True
+def apply_referral_code(code: ReferralCode, user) -> Referral:
+    return Referral.objects.create(code=code, user=user)
 
 
-def get_user_referrals(user) -> models.QuerySet[User]:
-    links = ReferralLink.objects.filter(referrer=user)
-    user_ids = ReferralLinkUsage.objects.filter(link__in=links).values("referral_id")
-    return User.objects.filter(id__in=Subquery(user_ids))
+def has_referral_code(user: User) -> bool:
+    return user.referral_codes.exists()
 
 
-def get_link_referrals(link: ReferralLink) -> models.QuerySet[User]:
-    return link.referrals.all()
+def give_referral_code(user: User, code: str, initial: bool = False) -> ReferralCode:
+    return ReferralCode.objects.create(
+        code=code,
+        created_by=user,
+        is_initial=initial,
+    )
 
 
-def get_referral_link_or_none(**data) -> ReferralLink:
-    return get_object_or_none(source=ReferralLink, **data)
+def give_initial_referral_code(user: User) -> ReferralCode:
+    username = get_initial_username(user=user)
+    return give_referral_code(
+        user=user,
+        code=username.username,
+        initial=True,
+    )

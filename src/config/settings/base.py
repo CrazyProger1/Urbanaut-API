@@ -1,28 +1,21 @@
 from pathlib import Path
+from decouple import config, Csv
 
-from decouple import config
+APPLICATION = "Urbanaut"
+DESCRIPTION = "Urbanaut-Club — a social platform for urban explorers, diggers, and extreme tourism enthusiasts."
+VERSION = "0.0.2"
 
 BASE_DIR = Path(__file__).resolve().parent.parent.parent.parent
-BASE_URL = config("BASE_URL", cast=str, default="http://localhost:8001")
-
+BASE_URL = config("BASE_URL", cast=str, default="http://localhost:8000")
+BASE_FRONTEND_URL = config(
+    "BASE_FRONTEND_URL", cast=str, default="http://localhost:3000"
+)
 SECRET_KEY = config("SECRET_KEY", cast=str)
-
 DEBUG = config("DEBUG", cast=bool, default=False)
-
-ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = [
-    "http://localhost:8001",
-    "https://api.urbanaut.club",
-]
+ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv(), default=["*"])
 
 INSTALLED_APPS = [
-    "unfold",
-    "unfold.contrib.filters",
-    "unfold.contrib.forms",
-    "unfold.contrib.inlines",
-    "unfold.contrib.import_export",
-    "unfold.contrib.guardian",
-    "unfold.contrib.simple_history",
+    "modeltranslation",
     "django.contrib.admin",
     "django.contrib.auth",
     "django.contrib.contenttypes",
@@ -30,53 +23,35 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "django.contrib.gis",
-    "modeltranslation",
-    "corsheaders",
-    "cities",
-    "django_extensions",
-    "rest_framework",
+    "unfold.contrib.location_field",
+    "django.contrib.postgres",
     "django_filters",
-    "simple_history",
-    "django_celery_beat",
-    "drf_spectacular",
-    "drf_standardized_errors",
-    "mdeditor",
-    "src.apps.accounts.apps.AccountsConfig",
-    "src.apps.abandoned.apps.AbandonedConfig",
-    "src.apps.media.apps.MediaConfig",
-    "src.apps.docs.apps.DocsConfig",
-    "src.apps.geo.apps.GeoConfig",
-    "src.apps.notifier.apps.NotifierConfig",
-    "src.apps.actions.apps.ActionsConfig",
-    "src.apps.blog.apps.BlogConfig",
-    "src.apps.permissions.apps.PermissionsConfig",
-    "src.apps.dashboard.apps.DashboardConfig",
-    "src.apps.ratings.apps.RatingsConfig",
-    "src.apps.kafka.apps.KafkaConfig",
-    "src.apps.metrics.apps.MetricsConfig",
+    "djoser",
+    "cities_light",
+    "src.apps.docs",
+    "src.apps.accounts",
+    "src.apps.abandoned",
+    "src.apps.tags",
+    "src.apps.feedbacks",
+    "src.apps.geo",
 ]
 
 MIDDLEWARE = [
-    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
-    "corsheaders.middleware.CorsMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
-    "simple_history.middleware.HistoryRequestMiddleware",
-    "src.apps.accounts.middlewares.I18NMiddleware",
-    "src.apps.dashboard.middlewares.Admin2FAMiddleware",
 ]
 
-ROOT_URLCONF = "src.config.urls"
+ROOT_URLCONF = "src.config.web.urls"
 
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -89,29 +64,14 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = "src.config.wsgi.application"
-ASGI_APPLICATION = "src.config.asgi.application"
-
-AUTH_PASSWORD_VALIDATORS = [
-    {
-        "NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.MinimumLengthValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.CommonPasswordValidator",
-    },
-    {
-        "NAME": "django.contrib.auth.password_validation.NumericPasswordValidator",
-    },
-]
-
-STATIC_URL = "static/"
-STATIC_ROOT = "static/"
-
+WSGI_APPLICATION = "src.config.web.wsgi.application"
+ASGI_APPLICATION = "src.config.web.asgi.application"
+STATIC_URL = config("STATIC_URL", default="static/")
+STATIC_ROOT = config("STATIC_ROOT", default="static/")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-TITLE = "Urbanaut"
-DESCRIPTION = "Urbanaut API Server"
-VERSION = "0.0.1"
+LOCATION_FIELD = {
+    "default_zoom": 12,
+    "provider.openstreetmap": True,
+    "search_by_default": True,
+}

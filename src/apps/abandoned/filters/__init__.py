@@ -1,1 +1,1 @@
-from src.apps.abandoned.filters.objects import AbandonedObjectFilter
+from src.apps.abandoned.filters.places import PlaceFilter

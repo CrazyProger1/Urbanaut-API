@@ -1,0 +1,41 @@
+{% load l10n static %}
+<div class="ol-control-bar">
+    {% if widget.map_srid != widget.map_srid_display %}
+        <button class="btn btn-sm btn-outline-secondary me-2" type="button" title="{% trans 'Toggle fullscreen' %}" onclick="ol_map_{{ name }}_toggle_fullscreen();">
+            {% trans "Toggle fullscreen" %}
+        </button>
+    {% endif %}
+    <button class="btn btn-sm btn-outline-secondary me-2" type="button" title="{% trans 'Zoom to all features' %}" onclick="ol_map_{{ name }}_zoom_to_all();">
+        {% trans "Zoom to all features" %}
+    </button>
+</div>
+<div id="{{ name }}_target" class="olMap"></div>  {# Main map div #}
+<div class="d-none">
+    <textarea name="{{ name }}" id="{{ name }}" cols="40" rows="10">{{ value }}</textarea>  {# Hidden geom input #}
+</div>
+
+<script type="text/javascript">
+    // Custom init to delay for Unfold's JS load
+    document.addEventListener('DOMContentLoaded', function() {
+        setTimeout(function() {
+            ol_map_{{ name }}_init();
+        }, 500);  // Delay to let Tailwind/ Unfold settle
+    });
+</script>
+
+{# Inline CSS override for stubborn blanks (add to <head> via admin template if needed) #}
+<style>
+    #{{ name }}_target .ol-viewport {
+        height: 100% !important;
+        z-index: 1 !important;
+    }
+    #{{ name }}_target {
+        background: #f8f9fa;  {# Fallback bg for loading #}
+    }
+</style>
+
+{# Load OpenLayers if not already (Unfold might defer static) #}
+{% if not OPENLAYERS_HELPER %}
+    {% openlayers_js 'DEFAULT' %}
+{% endif %}
+{% openlayers_css 'DEFAULT' %}

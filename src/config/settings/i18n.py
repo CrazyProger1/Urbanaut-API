@@ -15,9 +15,8 @@ USE_TZ = True
 
 LANGUAGES = [
     ("en", _("English")),
-    ("uk", _("Ukrainian")),
 ]
 
 LOCALE_PATHS = [
-    BASE_DIR.joinpath("locale"),
+    BASE_DIR.joinpath("locales"),
 ]

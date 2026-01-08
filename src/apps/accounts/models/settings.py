@@ -1,16 +1,23 @@
+import logging
+
 from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.accounts.enums import UITheme
-from src.utils.db import get_or_create_object
+from src.apps.geo.models import Country
+
+logger = logging.getLogger(__name__)
 
 
 class Settings(models.Model):
-    class Meta:
-        verbose_name = _("Settings")
-        verbose_name_plural = _("Settings")
-
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="settings",
+        verbose_name=_("user"),
+        primary_key=True,
+    )
     language = models.CharField(
         max_length=10,
         choices=settings.LANGUAGES,
@@ -18,63 +25,52 @@ class Settings(models.Model):
         verbose_name=_("language"),
         help_text=_("Preferred language of the user."),
     )
-    user = models.OneToOneField(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-        related_name="settings",
-        verbose_name=_("user"),
-        help_text=_("User settings."),
-    )
-    is_animations_enabled = models.BooleanField(
-        default=True,
-        null=False,
-        blank=False,
-        verbose_name=_("animations"),
-        help_text=_("Enable animations."),
-    )
-    is_newsletters_enabled = models.BooleanField(
-        default=True,
-        null=False,
-        blank=False,
-        verbose_name=_("newsletters"),
-        help_text=_("Enable newsletters."),
+    country = models.ForeignKey(
+        to=Country,
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name=_("country"),
+        help_text=_("User country."),
     )
     is_notifications_enabled = models.BooleanField(
         default=True,
         null=False,
         blank=False,
-        verbose_name=_("notifier"),
-        help_text=_("Enable notifier."),
+        verbose_name=_("notifications"),
+        help_text=_("Notifications enabled."),
+    )
+    is_country_visible = models.BooleanField(
+        default=True,
+        null=False,
+        blank=False,
+        verbose_name=_("is country visible"),
+        help_text=_("User country is visible in profile."),
     )
     theme = models.CharField(
         max_length=10,
         choices=UITheme,
-        default=UITheme.LIGHT,
+        default=UITheme.DARK,
         verbose_name=_("theme"),
         help_text=_("Preferred theme of the user."),
     )
 
     def __str__(self):
-        return "Settings"
+        return str(self.user)
 
 
-class SettingsUserModelMixin(models.Model):
-    class Meta:
-        abstract = True
+class SettingsMixin(models.Model):
+    def _update_settings(self):
+        if not self.pk or not hasattr(self, "settings"):
+            Settings.objects.create(user=self)
+            logger.info("Created settings instance for new user")
 
-    def create_settings_if_not_exists(self):
-        get_or_create_object(
-            source=Settings,
-            user=self,
-        )
-
-    def save(
-        self,
-        *args,
-        **kwargs,
-    ):
+    def save(self, *args, **kwargs):
         super().save(
             *args,
             **kwargs,
         )
-        self.create_settings_if_not_exists()
+        self._update_settings()
+
+    class Meta:
+        abstract = True

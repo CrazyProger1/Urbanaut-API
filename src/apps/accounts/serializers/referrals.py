@@ -1,30 +1,15 @@
 from rest_framework import serializers
 
-from src.apps.accounts.models import ReferralLink
-from src.apps.accounts.serializers import UserListSerializer
+from src.apps.accounts.models import ReferralCode
 
 
-class ReferralLinkListSerializer(serializers.ModelSerializer):
+class ReferralCodeRetrieveSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ReferralLink
-        fields = (
-            "link",
-            "code",
-        )
+        model = ReferralCode
+        fields = ("code",)
 
 
-class ReferralLinkRetrieveSerializer(serializers.ModelSerializer):
+class ReferralCodeListSerializer(serializers.ModelSerializer):
     class Meta:
-        model = ReferralLink
-        fields = (
-            "link",
-            "code",
-        )
-
-
-class ReferralLinkApplySerializer(serializers.Serializer):
-    pass
-
-
-class ReferralUserListSerializer(UserListSerializer):
-    pass
+        model = ReferralCode
+        fields = ("code",)

@@ -26,7 +26,7 @@ LOGGING = {
         "file": {
             "level": "INFO",
             "class": "logging.FileHandler",
-            "filename": ".log",
+            "filename": "django.log",
             "formatter": "verbose",
         },
     },
@@ -37,11 +37,6 @@ LOGGING = {
             "propagate": True,
         },
         "django": {
-            "handlers": ["console", "file"],
-            "level": LOG_LEVEL,
-            "propagate": True,
-        },
-        "database": {
             "handlers": ["console", "file"],
             "level": LOG_LEVEL,
             "propagate": True,

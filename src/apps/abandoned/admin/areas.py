@@ -1,20 +1,45 @@
-from simple_history.admin import SimpleHistoryAdmin
-from unfold.admin import ModelAdmin
 from django.contrib import admin
+from django.contrib.gis.db import models
+from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
+from unfold.admin import ModelAdmin, StackedInline
+from unfold.contrib.forms.widgets import WysiwygWidget
 
-from src.apps.abandoned.models import AbandonedArea
-from src.apps.dashboard.admin.site import site
+from src.apps.abandoned.models import Area, AreaTag
+from src.apps.accounts.sites import site
+from src.utils.django.admin import CreatedByAdminMixin
+from src.utils.django.geo import ManualGeometryFieldWidget
 
 
-@admin.register(AbandonedArea, site=site)
-class AbandonedAreaAdmin(SimpleHistoryAdmin, ModelAdmin, TabbedTranslationAdmin):
+class AreaTagInline(StackedInline):
+    tab = True
+    model = AreaTag
+    extra = 1
+    verbose_name = _("Tag")
+    verbose_name_plural = _("Tags")
+
+
+@admin.register(Area, site=site)
+class AreaAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
+    inlines = (AreaTagInline,)
+    created_by_field = "created_by"
+    formfield_overrides = {
+        models.TextField: {
+            "widget": WysiwygWidget,
+        },
+        models.PolygonField: {
+            "widget": ManualGeometryFieldWidget,
+        },
+    }
     list_display = (
-        "id",
         "name",
-        "parent",
-        "rating",
+        created_by_field,
         "created_at",
+        "is_private",
     )
-    list_display_links = ("name",)
-    readonly_fields = ("rating",)
+    autocomplete_fields = (created_by_field,)
+    search_fields = (
+        "name",
+        "description",
+    )
+    list_filter = ("created_at",)

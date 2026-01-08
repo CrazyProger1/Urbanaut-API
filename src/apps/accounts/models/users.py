@@ -1,53 +1,46 @@
-from django.contrib.auth.validators import UnicodeUsernameValidator
+import uuid
+
 from django.db import models
 from django.contrib.auth.models import PermissionsMixin, AbstractBaseUser
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
 from src.apps.accounts.managers import UserManager
-from src.apps.accounts.models.settings import SettingsUserModelMixin
+from src.apps.accounts.models.referrals import ReferralMixin
+from src.apps.accounts.models.settings import SettingsMixin
+from src.apps.accounts.models.usernames import UsernameMixin
+
+from src.utils.django.db import TimestampMixin
 
 
-class User(SettingsUserModelMixin, PermissionsMixin, AbstractBaseUser):
-    username_validator = UnicodeUsernameValidator()
-
-    id = models.BigIntegerField(
+class User(
+    SettingsMixin,
+    ReferralMixin,
+    UsernameMixin,
+    TimestampMixin,
+    PermissionsMixin,
+    AbstractBaseUser,
+):
+    id = models.UUIDField(
         primary_key=True,
-        verbose_name=_("telegram ID"),
-        help_text=_("Telegram user ID"),
-    )
-
-    username = models.CharField(
-        max_length=150,
-        blank=True,
-        null=True,
-        validators=[username_validator],
-        verbose_name=_("username"),
-        help_text=_("Telegram username."),
-    )
-    nickname = models.CharField(
-        max_length=150,
-        blank=True,
-        null=True,
-        verbose_name=_("nickname"),
-        help_text=_("Nickname of the user."),
+        default=uuid.uuid4,
+        editable=False,
     )
     first_name = models.CharField(
         max_length=150,
         blank=True,
         null=True,
         verbose_name=_("first name"),
-        help_text=_("First name in telegram."),
     )
     last_name = models.CharField(
         max_length=150,
         blank=True,
         null=True,
         verbose_name=_("last name"),
-        help_text=_("Last name in telegram."),
     )
     email = models.EmailField(
+        unique=True,
         blank=True,
+        null=True,
         verbose_name=_("email address"),
         help_text=_("Email address of the user."),
     )
@@ -64,57 +57,23 @@ class User(SettingsUserModelMixin, PermissionsMixin, AbstractBaseUser):
             "Unselect this instead of deleting accounts."
         ),
     )
-    joined_at = models.DateTimeField(
-        default=timezone.now,
-        verbose_name=_("joined at"),
-        help_text=_("User joined at date and time."),
-    )
     born_at = models.DateField(
         default=None,
         null=True,
         blank=True,
-        verbose_name=_("birth Date"),
-        help_text=_("User born at date and time."),
+        verbose_name=_("birth date"),
+        help_text=_("User birth date."),
     )
-    updated_at = models.DateTimeField(
-        verbose_name=_("updated at"),
-        help_text=_("User updated date and time."),
-        auto_now=True,
-    )
-    rank = models.ForeignKey(
-        "Rank",
-        on_delete=models.CASCADE,
-        related_name="users",
-        blank=True,
-        null=True,
-        verbose_name=_("rank"),
-        help_text=_("The rank of the user."),
-    )
-    experience = models.PositiveIntegerField(
-        default=0,
-        blank=False,
-        null=False,
-        verbose_name=_("experience"),
-        help_text=_("The experience of the user."),
-    )
-    karma = models.IntegerField(
-        default=0,
-        blank=False,
-        null=False,
-        verbose_name=_("karma"),
-        help_text=_("The karma of the user."),
-    )
-    avatar = models.ForeignKey(
-        "media.File",
-        on_delete=models.SET_NULL,
+    bio = models.CharField(
+        max_length=250,
+        verbose_name=_("bio"),
+        help_text=_("User short biography."),
         null=True,
         blank=True,
-        verbose_name=_("avatar"),
-        help_text=_("The avatar of the user."),
     )
 
     EMAIL_FIELD = "email"
-    USERNAME_FIELD = "id"
+    USERNAME_FIELD = "email"
 
     objects = UserManager()
 
@@ -123,4 +82,8 @@ class User(SettingsUserModelMixin, PermissionsMixin, AbstractBaseUser):
         verbose_name_plural = _("Users")
 
     def __str__(self):
-        return f"{type(self).__name__}(id={self.id})"
+        return (
+            f"{self.first_name or ''} {self.last_name or ''} ({self.email})"
+            if self.first_name or self.last_name
+            else self.email
+        )

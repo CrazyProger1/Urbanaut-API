@@ -1,12 +1,10 @@
 from modeltranslation.translator import TranslationOptions, translator
-from simple_history import register
 
-from src.apps.abandoned.models import AbandonedArea
+from src.apps.abandoned.models import Area
 
 
-class AbandonedAreaTranslationOptions(TranslationOptions):
+class AreaTranslationOptions(TranslationOptions):
     fields = ("name", "description")
 
 
-translator.register(AbandonedArea, AbandonedAreaTranslationOptions)
-register(AbandonedArea)
+translator.register(Area, AreaTranslationOptions)

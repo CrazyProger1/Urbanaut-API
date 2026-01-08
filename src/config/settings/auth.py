@@ -1,4 +1,29 @@
-from datetime import timedelta
+from urllib.parse import urljoin
+
+from decouple import config
+
+from src.config.settings.base import BASE_FRONTEND_URL
+
+GOOGLE_OAUTH_CLIENT_ID = config("GOOGLE_OAUTH_CLIENT_ID", cast=str)
+GOOGLE_OAUTH_CLIENT_SECRET = config("GOOGLE_OAUTH_CLIENT_SECRET", cast=str)
+GOOGLE_OAUTH_SCOPES = (
+    "openid",
+    "profile",
+    "email",
+)
+GOOGLE_OAUTH_CALLBACK_URL = urljoin(BASE_FRONTEND_URL, "api/google/oauth/callback")
 
 AUTH_USER_MODEL = "accounts.User"
-AUTHENTICATION_TMA_INITDATA_LIFETIME = timedelta(days=1)
+
+DJOSER = {
+    "TOKEN_MODEL": None,
+    "SERIALIZERS": {
+        "current_user": "src.apps.accounts.serializers.CurrentUserSerializer",
+        "user_create": "src.apps.accounts.serializers.UserCreateSerializer",
+    },
+}
+
+SIMPLE_JWT = {
+    "AUTH_HEADER_TYPES": ("Bearer",),
+    "TOKEN_OBTAIN_SERIALIZER": "src.apps.accounts.serializers.TokenObtainPairWithUserSerializer",
+}

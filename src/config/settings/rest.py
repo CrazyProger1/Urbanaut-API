@@ -1,16 +1,25 @@
+from src.config.settings.base import INSTALLED_APPS, DEBUG
+
+INSTALLED_APPS += [
+    "rest_framework",
+    "drf_standardized_errors",
+    "rest_framework_gis",
+]
+
+AUTHENTICATION_CLASSES = [
+    "rest_framework_simplejwt.authentication.JWTAuthentication",
+]
+
+if DEBUG:
+    AUTHENTICATION_CLASSES += [
+        "rest_framework.authentication.SessionAuthentication",
+        "rest_framework.authentication.BasicAuthentication",
+    ]
+
 REST_FRAMEWORK = {
-    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
     "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
     "PAGE_SIZE": 100,
-    "DEFAULT_PERMISSION_CLASSES": ("rest_framework.permissions.AllowAny",),
-    "DEFAULT_RENDERER_CLASSES": (
-        "rest_framework.renderers.JSONRenderer",
-        "rest_framework.renderers.BrowsableAPIRenderer",
-    ),
-    "DEFAULT_AUTHENTICATION_CLASSES": (
-        "src.apps.accounts.backends.TMAAuthentication",
-        # "rest_framework.authentication.SessionAuthentication",
-    ),
-    "DEFAULT_FILTER_BACKENDS": ("django_filters.rest_framework.DjangoFilterBackend",),
-    "EXCEPTION_HANDLER": "drf_standardized_errors.handler.exception_handler",
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
+    "DEFAULT_AUTHENTICATION_CLASSES": AUTHENTICATION_CLASSES,
 }

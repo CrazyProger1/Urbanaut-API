@@ -1,21 +1,24 @@
-from split_settings.tools import include
-from dotenv import load_dotenv
+from split_settings.tools import include, optional
 
-load_dotenv()
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv()
+except ImportError:
+    pass
 
 include(
     "base.py",
+    "auth.py",
     "databases.py",
     "i18n.py",
-    "celery.py",
     "logging.py",
-    "cors.py",
-    "docs.py",
-    "auth.py",
-    "rest.py",
-    "media.py",
-    "permissions.py",
-    "unfold.py",
-    "telegram.py",
-    "kafka.py",
+    "security.py",
+    "ai.py",
+    "cache.py",
+    "achievements.py",
+    "geo.py",
+    optional("rest.py"),
+    optional("docs.py"),
+    optional("unfold.py"),
 )

@@ -1,31 +1,28 @@
-from django.contrib.auth import get_user_model
+from django.db import models
 
-from src.apps.accounts.services.db.ranks import get_default_rank
-from src.utils.db import get_all_objects, get_object_or_none, Source, filter_objects
-
-User = get_user_model()
+from src.apps.accounts.models import User
+from src.apps.geo.models import Country
 
 
-def get_all_users():
-    return get_all_objects(User)
-
-
-def get_active_users(source: Source[User] = User):
-    return filter_objects(source=source, is_active=True)
-
-
-def get_user_or_none(*args, **kwargs):
-    return get_object_or_none(
-        User,
-        *args,
-        **kwargs,
-    )
-
-
-def get_user_or_create(**data) -> User | None:
+def get_or_create_user_by_email(email: str) -> User:
     try:
-        return User.objects.get(**data)
+        return User.objects.get(email=email)
     except User.DoesNotExist:
-        if not data.get("rank"):
-            data["rank"] = get_default_rank()
-        return User.objects.create_user(**data)
+        return User.objects.create_oauth_user(email=email)[0]
+
+
+def count_users() -> int:
+    return User.objects.count()
+
+
+def set_user_country(user: User, country: Country):
+    user.settings.country = country
+    user.settings.save()
+
+
+def get_all_users() -> models.QuerySet[User]:
+    return User.objects.all()
+
+
+def get_user_by_username_or_none(username: str) -> User | None:
+    return User.objects.filter(usernames__username=username).first()

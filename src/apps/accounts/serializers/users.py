@@ -1,87 +1,215 @@
-from django.contrib.auth import get_user_model
+from django.db import transaction
+from djoser.conf import settings
+from drf_spectacular.utils import extend_schema_field
+from djoser.serializers import UserCreateSerializer as DjoserUserCreateSerializer
 from rest_framework import serializers
 
-from src.apps.accounts.serializers.ranks import RankListSerializer
-from src.apps.accounts.serializers.settings import SettingsRetrieveSerializer
-from src.apps.accounts.services.db import is_friend, count_friends
+from src.apps.accounts.models import User
+from src.apps.accounts.serializers.achievements import AchievementRetrieveSerializer
+from src.apps.accounts.serializers.metrics import MetricRetrieveSerializer
+from src.apps.accounts.serializers.settings import CurrentSettingsRetrieveSerializer, SettingsRetrieveSerializer
+from src.apps.accounts.services.db import apply_referral_code, get_referral_code_or_none, set_user_country
+from src.apps.geo.services.db import get_country_or_none
 
-User = get_user_model()
+
+class UserCreateSerializer(DjoserUserCreateSerializer):
+    code = serializers.SlugField(write_only=True, required=False)
+    country = serializers.CharField(
+        max_length=2,
+        allow_null=True,
+        required=False,
+        allow_blank=True,
+    )
+
+    class Meta:
+        model = User
+        fields = tuple(User.REQUIRED_FIELDS) + (
+            settings.LOGIN_FIELD,
+            settings.USER_ID_FIELD,
+            "password",
+            "code",
+            "country",
+            "first_name",
+            "last_name",
+            "born_at",
+        )
+
+    def validate(self, attrs):
+        code = attrs.pop("code", None)
+        country = attrs.pop("country", None)
+
+        data = super().validate(attrs=attrs)
+
+        data["code"] = code
+        data["country"] = country
+
+        return data
+
+    @transaction.atomic
+    def create(self, validated_data):
+        code = get_referral_code_or_none(code=validated_data.pop("code", None))
+        country = get_country_or_none(tld=validated_data.pop("country", None))
+        user = super().create(validated_data)
+
+        if code:
+            apply_referral_code(
+                code=code,
+                user=user,
+            )
+
+        if country:
+            set_user_country(
+                user=user,
+                country=country,
+            )
+        return user
 
 
-class UserListSerializer(serializers.ModelSerializer):
-    rank = RankListSerializer(read_only=True)
-    avatar = serializers.SerializerMethodField()
+class CurrentUserSerializer(serializers.ModelSerializer):
+    settings = CurrentSettingsRetrieveSerializer(read_only=True)
+    usernames = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field="username",
+    )
+    achievements = serializers.SerializerMethodField()
+    metrics = MetricRetrieveSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
         fields = (
             "id",
-            "username",
-            "rank",
-            "nickname",
-            "avatar",
+            "email",
+            "settings",
+            "usernames",
+            "first_name",
+            "last_name",
+            "achievements",
+            "metrics",
+            "bio",
+            "created_at",
         )
 
-    def get_avatar(self, obj: User) -> str | None:
-        return obj.avatar.src if obj.avatar else None
+    @extend_schema_field(AchievementRetrieveSerializer(many=True))
+    def get_achievements(self, instance):
+        achievements = instance.achievements.all().order_by("-weight")
+        return AchievementRetrieveSerializer(achievements, many=True).data
+
+    def to_representation(self, instance):
+        data = super().to_representation(instance=instance)
+        # TODO: remove mock
+        data["metrics"] = [
+            {
+                "name": "Karma",
+                "value": 3000,
+            },
+            {
+                "name": "Experience",
+                "value": 100000,
+            },
+            {
+                "name": "Reports",
+                "value": 50,
+            },
+            {
+                "name": "Friends",
+                "value": 30,
+            },
+            {
+                "name": "Teams",
+                "value": 1,
+            },
+            {
+                "name": "Followers",
+                "value": 500,
+            },
+            {
+                "name": "Places",
+                "value": 300,
+            },
+        ]
+        return data
 
 
 class UserRetrieveSerializer(serializers.ModelSerializer):
-    avatar = serializers.SerializerMethodField()
-    rank = RankListSerializer(read_only=True)
     settings = SettingsRetrieveSerializer(read_only=True)
-    is_friend = serializers.SerializerMethodField(read_only=True)
-    friends_count = serializers.SerializerMethodField(read_only=True)
-    posts_count = serializers.SerializerMethodField(read_only=True)
-    events_count = serializers.SerializerMethodField(read_only=True)
+
+    usernames = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field="username",
+    )
+    achievements = serializers.SerializerMethodField()
+    metrics = MetricRetrieveSerializer(many=True, read_only=True)
 
     class Meta:
         model = User
         fields = (
             "id",
-            "username",
-            "nickname",
+            "settings",
+            "usernames",
             "first_name",
             "last_name",
-            "rank",
-            "experience",
-            "karma",
-            "last_login",
-            "joined_at",
-            "avatar",
-            "settings",
-            "is_friend",
-            "friends_count",
-            "posts_count",
-            "events_count",
+            "achievements",
+            "metrics",
+            "bio",
+            "created_at",
         )
 
-    def get_avatar(self, obj: User) -> str | None:
-        return obj.avatar.src if obj.avatar else None
+    @extend_schema_field(AchievementRetrieveSerializer(many=True))
+    def get_achievements(self, instance):
+        achievements = instance.achievements.all().order_by("-weight")
+        return AchievementRetrieveSerializer(achievements, many=True).data
 
-    def get_friends_count(self, obj: User) -> int:
-        return count_friends(user=obj)
+    def to_representation(self, instance):
+        data = super().to_representation(instance=instance)
+        # TODO: remove mock
+        data["metrics"] = [
+            {
+                "name": "Karma",
+                "value": 3000,
+            },
+            {
+                "name": "Experience",
+                "value": 100000,
+            },
+            {
+                "name": "Reports",
+                "value": 50,
+            },
+            {
+                "name": "Friends",
+                "value": 30,
+            },
+            {
+                "name": "Teams",
+                "value": 1,
+            },
+            {
+                "name": "Followers",
+                "value": 500,
+            },
+            {
+                "name": "Places",
+                "value": 300,
+            },
+        ]
+        return data
 
-    def get_posts_count(self, obj: User) -> int:
-        from src.apps.blog.services.db import count_user_blog_posts
-        return count_user_blog_posts(user=obj)
 
-    def get_events_count(self, obj: User) -> int:
-        from src.apps.abandoned.services.db import count_user_events
-        return count_user_events(user=obj)
+class UserListSerializer(serializers.ModelSerializer):
+    usernames = serializers.SlugRelatedField(
+        many=True,
+        read_only=True,
+        slug_field="username",
+    )
 
-    def get_is_friend(self, obj: User) -> bool | None:
-        request = self.context.get("request", None)
-
-        if request and request.user.is_authenticated:
-            user = request.user
-
-            if user == obj:
-                return False
-
-            return is_friend(
-                user=user,
-                friend=obj,
-            )
-
-        return False
+    class Meta:
+        model = User
+        fields = (
+            "id",
+            "usernames",
+            "first_name",
+            "last_name",
+            "created_at",
+        )

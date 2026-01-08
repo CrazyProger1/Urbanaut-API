@@ -1,31 +1,43 @@
 from rest_framework import viewsets, mixins
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
-from src.apps.abandoned.serializers import (
-    AbandonedAreaListSerializer,
-    AbandonedAreaRetrieveSerializer,
+from src.apps.abandoned.services.db import (
+    get_all_areas,
+    get_parent_area_or_none,
+    get_user_or_public_areas,
 )
-from src.apps.abandoned.services.db import get_available_abandoned_areas
-from src.apps.permissions.permissions import HasPermission
+from src.apps.abandoned.serializers import (
+    AreaRetrieveSerializer,
+    AreaListSerializer,
+    AreaCreateSerializer,
+)
+from src.utils.django.views import MultipleSerializerViewsetMixin
 
 
-class AbandonedAreaViewSet(
+class AreaViewSet(
+    MultipleSerializerViewsetMixin,
     viewsets.GenericViewSet,
+    mixins.CreateModelMixin,
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
 ):
-    queryset = get_available_abandoned_areas()
-    permission_classes = (HasPermission,)
-    serializer_class = AbandonedAreaListSerializer
+    queryset = get_all_areas()
+    permission_classes = (IsAuthenticatedOrReadOnly,)
+    serializer_class = AreaRetrieveSerializer
     serializer_classes = {
-        "list": AbandonedAreaListSerializer,
-        "retrieve": AbandonedAreaRetrieveSerializer,
+        "list": AreaListSerializer,
+        "retrieve": AreaRetrieveSerializer,
+        "create": AreaCreateSerializer,
     }
 
     def get_queryset(self):
-        if self.request.user.is_authenticated:
-            return get_available_abandoned_areas(user=self.request.user)
+        return get_user_or_public_areas(user=self.request.user)
 
-        return self.queryset
+    def perform_create(self, serializer):
+        instance = serializer.save(created_by=self.request.user)
 
-    def get_serializer_class(self):
-        return self.serializer_classes.get(self.action, self.serializer_class)
+        parent = get_parent_area_or_none(area=instance)
+
+        if parent:
+            instance.parent = parent
+            instance.save(update_fields=("parent",))

@@ -1,26 +1,33 @@
-from unfold.admin import ModelAdmin, TabularInline
 from django.contrib import admin
+from unfold.admin import ModelAdmin, TabularInline
 from django.utils.translation import gettext_lazy as _
 
-from src.apps.accounts.models import ReferralLink, ReferralLinkUsage
-from src.apps.dashboard.admin.site import site
+from src.apps.accounts.models import ReferralCode, Referral
+from src.apps.accounts.sites import site
 
 
-class ReferralLinkUsageInline(TabularInline):
-    model = ReferralLinkUsage
-    extra = 0
-    verbose_name = _("Usage")
-    verbose_name_plural = _("Usages")
+@admin.register(Referral, site=site)
+class ReferralAdmin(ModelAdmin):
+    list_display = ("code", "created_at")
+
+
+class ReferralInline(TabularInline):
     tab = True
-    show_change_link = True
+    model = Referral
+    verbose_name = _("Referral")
+    verbose_name_plural = _("Referrals")
+    extra = 0
 
 
-@admin.register(ReferralLink, site=site)
-class ReferralLinkAdmin(ModelAdmin):
-    list_display = (
-        "id",
-        "referrer",
-        "code",
-    )
-    list_display_links = ("referrer",)
-    inlines = (ReferralLinkUsageInline,)
+@admin.register(ReferralCode, site=site)
+class ReferralCodeAdmin(ModelAdmin):
+    list_display = ("code", "created_by", "is_initial", "created_at")
+    inlines = (ReferralInline,)
+
+
+class ReferralCodeInline(TabularInline):
+    tab = True
+    model = ReferralCode
+    verbose_name = _("Referral Code")
+    verbose_name_plural = _("Referral Codes")
+    extra = 0

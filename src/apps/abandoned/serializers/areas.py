@@ -1,44 +1,53 @@
 from rest_framework import serializers
 
-from src.apps.abandoned.models import AbandonedArea
+from src.apps.abandoned.models import Area
+from src.apps.tags.services.db import get_all_tags
+from src.utils.django.geo import PolygonField
 
-from src.apps.permissions.serializers import PermissionSerializerMixin
-from src.apps.ratings.serializers import RatingRetrieveSerializer
 
-
-class AbandonedAreaListSerializer(serializers.ModelSerializer):
-    rating = RatingRetrieveSerializer(read_only=True)
+class AreaCreateSerializer(serializers.ModelSerializer):
+    polygon = PolygonField()
+    tags = serializers.SlugRelatedField(
+        slug_field="tag",
+        many=True,
+        queryset=get_all_tags(),
+    )
 
     class Meta:
-        model = AbandonedArea
+        model = Area
         fields = (
-            "id",
-            "created_at",
-            "updated_at",
-            "parent",
             "name",
             "description",
-            "created_by",
-            "security_level",
-            "rating",
+            "polygon",
+            "parent",
+            "tags",
+            "is_private",
         )
 
 
-class AbandonedAreaRetrieveSerializer(
-    serializers.ModelSerializer, PermissionSerializerMixin
-):
-    rating = RatingRetrieveSerializer(read_only=True)
+class AreaListSerializer(serializers.ModelSerializer):
+    polygon = PolygonField()
 
     class Meta:
-        model = AbandonedArea
+        model = Area
         fields = (
             "id",
-            "created_at",
-            "updated_at",
-            "parent",
-            "name",
-            "description",
-            "created_by",
-            "security_level",
-            "rating",
+            "polygon",
         )
+
+
+class AreaRetrieveSerializer(serializers.ModelSerializer):
+    security = serializers.SlugRelatedField(
+        slug_field="level",
+        read_only=True,
+    )
+    polygon = PolygonField()
+    tags = serializers.SlugRelatedField(
+        slug_field="tag",
+        many=True,
+        read_only=True,
+    )
+
+    class Meta:
+        model = Area
+        fields = "__all__"

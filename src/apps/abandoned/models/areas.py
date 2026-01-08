@@ -1,59 +1,79 @@
-from django.contrib.auth import get_user_model
-from django.db import models
+from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
+from django.conf import settings
 
-from src.apps.abandoned.enums import SecurityLevel
-from src.apps.permissions.models import PermissionBaseModel
-from src.apps.ratings.models import RatingMixin
-from src.utils.db.models import TimestampMixin
-
-User = get_user_model()
+from src.utils.django.db import TimestampMixin
 
 
-class AbandonedArea(TimestampMixin, RatingMixin, PermissionBaseModel):
+class AreaTag(models.Model):
     class Meta:
-        verbose_name = _("area")
-        verbose_name_plural = _("areas")
+        unique_together = (
+            "tag",
+            "area",
+        )
 
-    parent = models.ForeignKey(
-        "self",
+    tag = models.ForeignKey(
+        "tags.Tag",
         on_delete=models.CASCADE,
-        related_name="areas",
-        null=True,
-        blank=True,
-        verbose_name=_("parent area"),
-        help_text=_("Area that contains current area."),
     )
+    area = models.ForeignKey(
+        "Area",
+        on_delete=models.CASCADE,
+    )
+
+
+class Area(TimestampMixin, models.Model):
     name = models.CharField(
         max_length=250,
         verbose_name=_("name"),
-        help_text=_("Name of the abandoned area."),
+        help_text=_("Name of the place."),
         null=False,
         blank=False,
     )
     description = models.TextField(
         verbose_name=_("description"),
-        help_text=_("Description of the abandoned area."),
+        help_text=_("Description of the abandoned object."),
         null=True,
         blank=True,
     )
     created_by = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
-        related_name="areas",
-        blank=True,
         null=True,
-        verbose_name=_("created by"),
-        help_text=_(""),
+        blank=True,
+        related_name="areas",
     )
-    security_level = models.CharField(
-        choices=SecurityLevel,
-        default=SecurityLevel.NO,
+    parent = models.ForeignKey(
+        "self",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        related_name="children",
+        verbose_name=_("parent"),
+        help_text=_("Parent area."),
+    )
+    polygon = models.PolygonField(
+        verbose_name=_("polygon"),
+        help_text=_("Polygon of the abandoned area."),
         null=False,
         blank=False,
-        verbose_name=_("security level"),
-        help_text=_("security level of the area."),
+    )
+    tags = models.ManyToManyField(
+        "tags.Tag",
+        blank=True,
+        verbose_name=_("tags"),
+        related_name="areas",
+        through=AreaTag,
+    )
+    is_private = models.BooleanField(
+        default=False,
+        verbose_name=_("is private"),
+        help_text=_("Whether this area is private."),
     )
 
+    class Meta:
+        verbose_name = _("Area")
+        verbose_name_plural = _("Areas")
+
     def __str__(self):
-        return f"{type(self).__name__}(name={self.name})"
+        return self.name

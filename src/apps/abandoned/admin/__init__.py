@@ -1,8 +1,6 @@
 import src.apps.abandoned.i18n
 
-from src.apps.abandoned.admin.objects import AbandonedObjectAdmin
-from src.apps.abandoned.admin.areas import AbandonedAreaAdmin
-from src.apps.abandoned.admin.reports import ParticipationReportAdmin
-from src.apps.abandoned.admin.events import EventAdmin
-from src.apps.abandoned.admin.participations import ParticipationAdmin
-from src.apps.abandoned.admin.categories import CategoryAdmin
+from src.apps.abandoned.admin.places import PlaceAdmin
+from src.apps.abandoned.admin.areas import AreaAdmin
+from src.apps.abandoned.admin.security import PlaceSecurityAdmin
+from src.apps.abandoned.admin.preservation import PlacePreservationAdmin

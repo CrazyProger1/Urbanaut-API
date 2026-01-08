@@ -1,27 +1,21 @@
 from src.apps.accounts.serializers.users import (
-    UserListSerializer,
+    CurrentUserSerializer,
+    UserCreateSerializer,
     UserRetrieveSerializer,
-)
-from src.apps.accounts.serializers.teams import (
-    TeamListSerializer,
-    TeamRetrieveSerializer,
-)
-from src.apps.accounts.serializers.referrals import (
-    ReferralLinkListSerializer,
-    ReferralLinkRetrieveSerializer,
-    ReferralLinkApplySerializer,
-    ReferralUserListSerializer,
+    UserListSerializer,
 )
 from src.apps.accounts.serializers.settings import (
+    CurrentSettingsRetrieveSerializer,
     SettingsRetrieveSerializer,
     SettingsUpdateSerializer,
 )
-from src.apps.accounts.serializers.ranks import (
-    RankListSerializer,
+from src.apps.accounts.serializers.tokens import (
+    TokenObtainPairWithUserSerializer,
 )
-from src.apps.accounts.serializers.terms import (
-    TermsRetrieveSerializer,
+from src.apps.accounts.serializers.achievements import (
+    AchievementRetrieveSerializer,
 )
-from src.apps.accounts.serializers.friends import (
-    FriendListSerializer,
+from src.apps.accounts.serializers.referrals import (
+    ReferralCodeRetrieveSerializer,
+    ReferralCodeListSerializer,
 )

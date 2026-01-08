@@ -1,19 +1,11 @@
 from rest_framework import routers
 
-from src.apps.abandoned.views import (
-    AbandonedObjectViewSet,
-    AbandonedAreaViewSet,
-    AbandonedObjectCategoryViewSet,
-    EventViewSet,
-)
+from src.apps.abandoned.views import PlaceViewSet
+from src.apps.abandoned.views import AreaViewSet
 
-router = routers.SimpleRouter()
+router = routers.DefaultRouter()
 
-router.register("api/v1/objects", AbandonedObjectViewSet, basename="objects")
-router.register("api/v1/areas", AbandonedAreaViewSet, basename="areas")
-router.register(
-    "api/v1/categories", AbandonedObjectCategoryViewSet, basename="categories"
-)
-router.register("api/v1/events", EventViewSet, basename="events")
+router.register("api/v1/places", PlaceViewSet)
+router.register("api/v1/areas", AreaViewSet)
 
 urlpatterns = [*router.urls]

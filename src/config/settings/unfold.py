@@ -1,63 +1,47 @@
+from django.templatetags.static import static
 from django.urls import reverse_lazy
 from django.utils.translation import gettext_lazy as _
 
+from src.config.settings.base import INSTALLED_APPS
+
+INSTALLED_APPS = [
+    "unfold",
+    "unfold.contrib.filters",
+    "unfold.contrib.forms",
+    "unfold.contrib.inlines",
+    "unfold.contrib.import_export",
+    "unfold.contrib.guardian",
+    "unfold.contrib.simple_history",
+    *INSTALLED_APPS,
+]
+
 UNFOLD = {
-    "SITE_TITLE": "Urbanaut-API",
-    "SITE_HEADER": "Urbanaut-API",
+    "SITE_TITLE": "Urbanaut",
+    "SITE_HEADER": "Urbanaut",
     "SITE_URL": "/docs",
     "SITE_SYMBOL": "speed",
     "SHOW_HISTORY": True,
     "SHOW_VIEW_ON_SITE": True,
     "THEME": "dark",
-    "COLORS": {
-        "font": {
-            "subtle-light": "107 114 128",
-            "subtle-dark": "156 163 175",
-            "default-light": "75 85 99",
-            "default-dark": "209 213 219",
-            "important-light": "17 24 39",
-            "important-dark": "243 244 246",
-        },
-        "primary": {
-            "50": "250 245 255",
-            "100": "243 232 255",
-            "200": "233 213 255",
-            "300": "216 180 254",
-            "400": "192 132 252",
-            "500": "168 85 247",
-            "600": "147 51 234",
-            "700": "126 34 206",
-            "800": "107 33 168",
-            "900": "88 28 135",
-            "950": "59 7 100",
-        },
+    "SITE_LOGO": {
+        "light": lambda request: static("favicon.svg"),
+        "dark": lambda request: static("favicon.svg"),
     },
-    "EXTENSIONS": {
-        "modeltranslation": {
-            "flags": {
-                "en": "gb",
-                "uk": "uk",
-            },
+    "SITE_FAVICONS": [
+        {
+            "rel": "icon",
+            "sizes": "32x32",
+            "type": "image/svg+xml",
+            "href": lambda request: static("favicon.svg"),
         },
-    },
+    ],
     "SIDEBAR": {
         "show_search": True,
         "show_all_applications": True,
         "navigation": [
             {
-                "title": _("Settings"),
-                "collapsible": True,
-                "items": [
-                    {
-                        "title": _("Terms"),
-                        "icon": "gavel",
-                        "link": reverse_lazy("admin:accounts_terms_changelist"),
-                    },
-                ],
-            },
-            {
                 "title": _("Accounts"),
-                "collapsible": True,
+                "collapsible": False,
                 "items": [
                     {
                         "title": _("Users"),
@@ -65,55 +49,19 @@ UNFOLD = {
                         "link": reverse_lazy("admin:accounts_user_changelist"),
                     },
                     {
-                        "title": _("Ranks"),
-                        "icon": "star",
-                        "link": reverse_lazy("admin:accounts_rank_changelist"),
+                        "title": _("Achievements"),
+                        "icon": "diamond",
+                        "link": reverse_lazy("admin:accounts_achievement_changelist"),
                     },
                     {
-                        "title": _("Teams"),
-                        "icon": "group",
-                        "link": reverse_lazy("admin:accounts_team_changelist"),
-                    },
-                    {
-                        "title": _("Friends"),
-                        "icon": "handshake",
-                        "link": reverse_lazy("admin:accounts_friend_changelist"),
+                        "title": _("Referral Codes"),
+                        "icon": "link",
+                        "link": reverse_lazy("admin:accounts_referralcode_changelist"),
                     },
                     {
                         "title": _("Groups"),
                         "icon": "devices",
                         "link": reverse_lazy("admin:auth_group_changelist"),
-                    },
-                    {
-                        "title": _("Referral Links"),
-                        "icon": "link",
-                        "link": reverse_lazy("admin:accounts_referrallink_changelist"),
-                    },
-                ],
-            },
-            {
-                "title": _("Notifier"),
-                "collapsible": True,
-                "items": [
-                    {
-                        "title": _("Events"),
-                        "icon": "event",
-                        "link": reverse_lazy("admin:notifier_event_changelist"),
-                    },
-                    {
-                        "title": _("Categories"),
-                        "icon": "category",
-                        "link": reverse_lazy("admin:notifier_category_changelist"),
-                    },
-                    {
-                        "title": _("Notifications"),
-                        "icon": "notifications",
-                        "link": reverse_lazy("admin:notifier_notification_changelist"),
-                    },
-                    {
-                        "title": _("Newsletters"),
-                        "icon": "mail",
-                        "link": reverse_lazy("admin:notifier_newsletter_changelist"),
                     },
                 ],
             },
@@ -122,84 +70,62 @@ UNFOLD = {
                 "collapsible": True,
                 "items": [
                     {
-                        "title": _("Categories"),
-                        "icon": "category",
-                        "link": reverse_lazy("admin:abandoned_category_changelist"),
-                    },
-                    {
-                        "title": _("Objects"),
-                        "icon": "person",
-                        "link": reverse_lazy(
-                            "admin:abandoned_abandonedobject_changelist"
-                        ),
+                        "title": _("Places"),
+                        "icon": "location_on",
+                        "link": reverse_lazy("admin:abandoned_place_changelist"),
                     },
                     {
                         "title": _("Areas"),
-                        "icon": "group",
-                        "link": reverse_lazy(
-                            "admin:abandoned_abandonedarea_changelist"
-                        ),
+                        "icon": "explore_nearby",
+                        "link": reverse_lazy("admin:abandoned_area_changelist"),
                     },
                 ],
             },
             {
-                "title": _("Blog"),
+                "title": _("Tags"),
                 "collapsible": True,
                 "items": [
                     {
-                        "title": _("Topics"),
-                        "icon": "topic",
-                        "link": reverse_lazy("admin:blog_blogtopic_changelist"),
-                    },
-                    {
-                        "title": _("Posts"),
-                        "icon": "library_books",
-                        "link": reverse_lazy("admin:blog_blogpost_changelist"),
+                        "title": _("Tags"),
+                        "icon": "tag",
+                        "link": reverse_lazy("admin:tags_tag_changelist"),
                     },
                 ],
             },
             {
-                "title": _("Media"),
+                "title": _("Feedbacks"),
                 "collapsible": True,
                 "items": [
                     {
-                        "title": _("Files"),
-                        "icon": "attach_file",
-                        "link": reverse_lazy("admin:media_file_changelist"),
+                        "title": _("Feedbacks"),
+                        "icon": "feedback",
+                        "link": reverse_lazy("admin:feedbacks_feedback_changelist"),
                     },
                 ],
             },
             {
-                "title": _("Permissions"),
+                "title": _("Geo"),
                 "collapsible": True,
                 "items": [
                     {
-                        "title": _("Model Permission"),
-                        "icon": "lock",
-                        "link": reverse_lazy(
-                            "admin:permissions_modelpermission_changelist"
-                        ),
+                        "title": _("Countries"),
+                        "icon": "flag",
+                        "link": reverse_lazy("admin:geo_country_changelist"),
                     },
                     {
-                        "title": _("User-Model Permission"),
-                        "icon": "lock",
-                        "link": reverse_lazy(
-                            "admin:permissions_usermodelpermission_changelist"
-                        ),
+                        "title": _("Regions"),
+                        "icon": "extension",
+                        "link": reverse_lazy("admin:geo_region_changelist"),
                     },
                     {
-                        "title": _("Object Permission"),
-                        "icon": "lock",
-                        "link": reverse_lazy(
-                            "admin:permissions_objectpermission_changelist"
-                        ),
+                        "title": _("Sub Regions"),
+                        "icon": "extension",
+                        "link": reverse_lazy("admin:geo_subregion_changelist"),
                     },
                     {
-                        "title": _("User-Object Permission"),
-                        "icon": "lock",
-                        "link": reverse_lazy(
-                            "admin:permissions_userobjectpermission_changelist"
-                        ),
+                        "title": _("Cities"),
+                        "icon": "location_city",
+                        "link": reverse_lazy("admin:geo_city_changelist"),
                     },
                 ],
             },
