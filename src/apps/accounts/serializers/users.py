@@ -211,5 +211,4 @@ class UserListSerializer(serializers.ModelSerializer):
             "usernames",
             "first_name",
             "last_name",
-            "created_at",
         )

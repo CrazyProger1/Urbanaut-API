@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from src.apps.abandoned.models import Area
+from src.apps.accounts.serializers import UserListSerializer
 from src.apps.tags.services.db import get_all_tags
 from src.utils.django.geo import PolygonField
 
@@ -47,6 +48,7 @@ class AreaRetrieveSerializer(serializers.ModelSerializer):
         many=True,
         read_only=True,
     )
+    created_by = UserListSerializer(read_only=True)
 
     class Meta:
         model = Area
