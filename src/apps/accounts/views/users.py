@@ -3,7 +3,6 @@ from djoser import signals as djoser_signals
 from djoser.compat import get_user_email
 from djoser.conf import settings as djoser_settings
 from rest_framework import mixins, viewsets
-from rest_framework.permissions import IsAuthenticated
 
 from src.apps.accounts.serializers import (
     UserListSerializer,
@@ -17,7 +16,6 @@ class UserBaseViewSet(
     viewsets.GenericViewSet,
 ):
     queryset = get_all_users()
-    permission_classes = (IsAuthenticated,)
     serializer_class = UserListSerializer
     serializer_classes = {
         "list": UserListSerializer,
