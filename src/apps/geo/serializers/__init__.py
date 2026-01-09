@@ -1,1 +1,4 @@
-from src.apps.geo.serializers.countries import CountryListSerializer, CountryRetrieveSerializer
+from src.apps.geo.serializers.countries import (
+    CountryListSerializer,
+    CountryRetrieveSerializer,
+)

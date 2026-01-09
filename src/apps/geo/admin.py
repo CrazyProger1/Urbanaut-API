@@ -8,7 +8,7 @@ from django.contrib import admin
 from unfold.admin import ModelAdmin
 
 from src.apps.accounts.sites import site
-from src.apps.geo.models import Country, Region, City, SubRegion
+from src.apps.geo.models import Country, Region, City, SubRegion, Address
 
 
 @admin.register(Country, site=site)
@@ -38,3 +38,19 @@ class SubRegionAdmin(ModelAdmin, LightSubRegionAdmin):
 @admin.register(City, site=site)
 class CityAdmin(ModelAdmin, LightCityAdmin):
     pass
+
+
+@admin.register(Address, site=site)
+class AddressAdmin(ModelAdmin):
+    list_display = (
+        "text",
+    )
+    autocomplete_fields = (
+        "country",
+        "region",
+        "subregion",
+        "city",
+    )
+    search_fields = (
+        "text",
+    )

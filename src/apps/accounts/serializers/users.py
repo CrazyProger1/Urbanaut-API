@@ -7,8 +7,15 @@ from rest_framework import serializers
 from src.apps.accounts.models import User
 from src.apps.accounts.serializers.achievements import AchievementRetrieveSerializer
 from src.apps.accounts.serializers.metrics import MetricRetrieveSerializer
-from src.apps.accounts.serializers.settings import CurrentSettingsRetrieveSerializer, SettingsRetrieveSerializer
-from src.apps.accounts.services.db import apply_referral_code, get_referral_code_or_none, set_user_country
+from src.apps.accounts.serializers.settings import (
+    CurrentSettingsRetrieveSerializer,
+    SettingsRetrieveSerializer,
+)
+from src.apps.accounts.services.db import (
+    apply_referral_code,
+    get_referral_code_or_none,
+    set_user_country,
+)
 from src.apps.geo.services.db import get_country_or_none
 
 

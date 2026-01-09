@@ -7,3 +7,7 @@ def get_active_countries():
 
 def get_country_or_none(**data) -> Country | None:
     return Country.objects.filter(**data).first()
+
+
+def is_country_supported(country: Country) -> bool:
+    return country.is_active

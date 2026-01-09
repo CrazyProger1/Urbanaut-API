@@ -17,7 +17,9 @@ router = DefaultRouter()
 
 router.register("api/v1/referrals", ReferralCodeViewSet, basename="referrals")
 router.register("api/v1/users", UserViewSet, basename="users")
-router.register("api/v1/users/by_username", UserByUsernameViewSet, basename="users-by-username")
+router.register(
+    "api/v1/users/by_username", UserByUsernameViewSet, basename="users-by-username"
+)
 urlpatterns = [
     path("admin/", site.urls),
     path(
@@ -32,10 +34,11 @@ urlpatterns = [
     ),
     path("api/v1/tokens/", TokenObtainPairView.as_view(), name="jwt-create"),
     path("api/v1/tokens/refresh/", TokenRefreshView.as_view(), name="jwt-refresh"),
-
     path(
         "api/v1/users/me/",
-        DjoserUserViewSet.as_view({"get": "me", "put": "me", "patch": "me", "delete": "me"}),
+        DjoserUserViewSet.as_view(
+            {"get": "me", "put": "me", "patch": "me", "delete": "me"}
+        ),
         name="user-me",
     ),
     path(
@@ -45,7 +48,6 @@ urlpatterns = [
         ),
     ),
     *router.urls,
-
     # path("api/v1/users/activate/", UserViewSet.as_view({"post": "activation"}), name="user-activate"),
     # path("api/v1/users/resend-activation/", UserViewSet.as_view({"post": "resend_activation"}),
     #      name="user-resend-activation"),

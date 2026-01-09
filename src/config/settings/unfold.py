@@ -108,6 +108,11 @@ UNFOLD = {
                 "collapsible": True,
                 "items": [
                     {
+                        "title": _("Addresses"),
+                        "icon": "location_on",
+                        "link": reverse_lazy("admin:geo_address_changelist"),
+                    },
+                    {
                         "title": _("Countries"),
                         "icon": "flag",
                         "link": reverse_lazy("admin:geo_country_changelist"),

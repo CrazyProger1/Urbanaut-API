@@ -4,6 +4,7 @@ from django.conf import settings
 
 from src.apps.abandoned.models.preservation import PlacePreservation
 from src.apps.abandoned.models.security import PlaceSecurity
+from src.apps.geo.models import Address
 from src.utils.django.db import TimestampMixin
 
 
@@ -82,6 +83,14 @@ class Place(TimestampMixin, models.Model):
         default=False,
         verbose_name=_("is private"),
         help_text=_("Whether this place is private."),
+    )
+    address = models.ForeignKey(
+        "geo.Address",
+        on_delete=models.SET_NULL,
+        related_name="places",
+        null=True,
+        blank=True,
+        verbose_name=_("address"),
     )
 
     class Meta:
