@@ -5,7 +5,7 @@ from cities_light.abstract_models import (
     AbstractSubRegion,
 )
 from cities_light.receivers import connect_default_signals
-from django.db import models
+from django.contrib.gis.db import models
 from django.utils.translation import gettext_lazy as _
 
 
@@ -30,7 +30,12 @@ connect_default_signals(Region)
 
 
 class City(AbstractCity):
-    pass
+    point = models.PointField(
+        verbose_name=_("point"),
+        help_text=_("Point of the city."),
+        null=True,
+        blank=True,
+    )
 
 
 connect_default_signals(City)
@@ -79,4 +84,6 @@ class Address(models.Model):
     )
 
     def __str__(self):
-        return str(self.text or self.city or self.subregion or self.region or self.country)
+        return str(
+            self.text or self.city or self.subregion or self.region or self.country
+        )

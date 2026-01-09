@@ -14,7 +14,9 @@ from src.apps.abandoned.serializers import (
     PlaceCreateSerializer,
 )
 from src.apps.geo.services.db import is_country_supported
-from src.apps.geo.services.geocoding import try_convert_geocoding_address_to_database_address
+from src.apps.geo.services.geocoding import (
+    try_convert_geocoding_address_to_database_address,
+)
 from src.utils.django.views import MultipleSerializerViewsetMixin
 from src.utils.geo import reverse_geocode
 
@@ -46,7 +48,9 @@ class PlaceViewSet(
     def perform_create(self, serializer):
         point = serializer.validated_data["point"]
         address = reverse_geocode((point.y, point.x))
-        db_address = try_convert_geocoding_address_to_database_address(address=address, new=True)
+        db_address = try_convert_geocoding_address_to_database_address(
+            address=address, point=point, new=True
+        )
         country = db_address.country
 
         if country and not is_country_supported(country=country):
@@ -56,9 +60,8 @@ class PlaceViewSet(
             raise exceptions.PermissionDenied(detail="Address not exists")
 
         instance = serializer.save(created_by=self.request.user)
-        area = get_place_area_or_none(place=instance)
 
-        if area:
-            instance.area = area
-            instance.address = db_address
-            instance.save(update_fields=("area",))
+        instance.address = db_address
+        instance.area = get_place_area_or_none(place=instance)
+
+        instance.save(update_fields=("area", "address"))

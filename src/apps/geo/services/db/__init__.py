@@ -5,6 +5,7 @@ from src.apps.geo.services.db.countries import (
 )
 from src.apps.geo.services.db.cities import (
     get_city_or_none,
+    get_nearest_city_or_none,
 )
 
 from src.apps.geo.services.db.addresses import (
