@@ -14,7 +14,7 @@ class Address(TypedDict):
     text: str | None
 
 
-def reverse_geocode(point: tuple[float, float]) -> Address:
+def reverse_geocode(point: tuple[float, float]) -> Address | None:
     geolocator = Nominatim(user_agent="Urbanaut", timeout=10)
 
     location = geolocator.reverse(
@@ -23,6 +23,10 @@ def reverse_geocode(point: tuple[float, float]) -> Address:
         addressdetails=True,
         language="en",
     )
+
+    if not location:
+        return None
+
     address = location.raw["address"]
 
     logger.info("Reversed location %s: %s", point, location)

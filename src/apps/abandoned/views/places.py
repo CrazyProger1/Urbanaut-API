@@ -48,16 +48,21 @@ class PlaceViewSet(
     def perform_create(self, serializer):
         point = serializer.validated_data["point"]
         address = reverse_geocode((point.y, point.x))
+
+        if not address:
+            raise exceptions.PermissionDenied(detail="Address not exists")
+
         db_address = try_convert_geocoding_address_to_database_address(
             address=address, point=point, new=True
         )
+
+        if not db_address:
+            raise exceptions.PermissionDenied(detail="Address not exists")
+
         country = db_address.country
 
         if country and not is_country_supported(country=country):
             raise exceptions.PermissionDenied(detail="Country not supported")
-
-        if not db_address:
-            raise exceptions.PermissionDenied(detail="Address not exists")
 
         instance = serializer.save(created_by=self.request.user)
 
