@@ -1,8 +1,8 @@
 from rest_framework import serializers
 
-from src.apps.abandoned.enums import PreservationLevel
+from src.apps.abandoned.enums import PreservationLevel, SecurityLevel
 from src.apps.abandoned.models import Place
-from src.apps.abandoned.services.db import set_preservation_level
+from src.apps.abandoned.services.db import set_preservation_level, set_security_level
 from src.apps.accounts.serializers import UserListSerializer
 from src.apps.media.serializers import FileListSerializer
 from src.apps.tags.services.db import get_all_tags
@@ -59,6 +59,10 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
         choices=PreservationLevel,
         write_only=True,
     )
+    security = serializers.ChoiceField(
+        choices=SecurityLevel,
+        write_only=True,
+    )
 
     class Meta:
         model = Place
@@ -70,13 +74,19 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
             "updated_at",
             "is_private",
             "preservation",
+            "security",
         )
 
     def create(self, validated_data):
         preservation = validated_data.pop("preservation", None)
+        security = validated_data.pop("security", None)
         place = super().create(validated_data=validated_data)
         set_preservation_level(
             place=place,
             level=preservation,
+        )
+        set_security_level(
+            place=place,
+            level=security,
         )
         return place
