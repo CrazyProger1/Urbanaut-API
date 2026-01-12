@@ -143,8 +143,8 @@ UNFOLD = {
                         "icon": "attach_file",
                         "link": reverse_lazy("admin:media_file_changelist"),
                     },
-                ]
-            }
+                ],
+            },
         ],
     },
 }

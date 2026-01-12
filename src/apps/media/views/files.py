@@ -76,6 +76,8 @@ class FileViewSet(
         file = self.get_object()
         file_handle = file.file
         response = FileResponse(
-            file_handle.open("rb"), as_attachment=True, filename=file_handle.name
+            file_handle.open("rb"),
+            as_attachment=True,
+            filename=file_handle.name,
         )
         return response

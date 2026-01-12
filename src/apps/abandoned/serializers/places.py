@@ -4,6 +4,7 @@ from src.apps.abandoned.enums import PreservationLevel
 from src.apps.abandoned.models import Place
 from src.apps.abandoned.services.db import set_preservation_level
 from src.apps.accounts.serializers import UserListSerializer
+from src.apps.media.serializers import FileListSerializer
 from src.apps.tags.services.db import get_all_tags
 from src.utils.django.geo import PointField
 
@@ -35,6 +36,10 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
     )
     point = PointField()
     created_by = UserListSerializer(
+        read_only=True,
+    )
+    photos = FileListSerializer(
+        many=True,
         read_only=True,
     )
 

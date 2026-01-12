@@ -9,7 +9,7 @@ from unfold.contrib.forms.widgets import WysiwygWidget
 
 from src.apps.abandoned.admin.security import PlaceSecurityInline
 from src.apps.abandoned.admin.preservation import PlacePreservationInline
-from src.apps.abandoned.models import Place, PlaceTag
+from src.apps.abandoned.models import Place, PlaceTag, PlaceFile
 from src.apps.accounts.sites import site
 from src.utils.django.admin import CreatedByAdminMixin
 from src.utils.django.geo import ManualGeometryFieldWidget
@@ -23,12 +23,21 @@ class PlaceTagInline(StackedInline):
     verbose_name_plural = _("Tags")
 
 
+class PlaceFileInline(StackedInline):
+    tab = True
+    model = PlaceFile
+    extra = 1
+    verbose_name = _("File")
+    verbose_name_plural = _("Files")
+
+
 @admin.register(Place, site=site)
 class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
     inlines = (
         PlaceSecurityInline,
         PlacePreservationInline,
         PlaceTagInline,
+        PlaceFileInline,
     )
     created_by_field = "created_by"
     formfield_overrides = {

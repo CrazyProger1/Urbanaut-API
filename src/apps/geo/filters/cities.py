@@ -12,8 +12,10 @@ class CityFilter(filters.FilterSet):
         fields = ("query",)
 
     def search(self, queryset, name, value):
-        return queryset.annotate(
-            similarity=TrigramSimilarity("name", value),
-        ).filter(
-            similarity__gt=0.3
-        ).order_by("-similarity")
+        return (
+            queryset.annotate(
+                similarity=TrigramSimilarity("name", value),
+            )
+            .filter(similarity__gt=0.3)
+            .order_by("-similarity")
+        )
