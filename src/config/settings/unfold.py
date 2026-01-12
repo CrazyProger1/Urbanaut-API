@@ -134,6 +134,17 @@ UNFOLD = {
                     },
                 ],
             },
+            {
+                "title": _("Media"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Files"),
+                        "icon": "attach_file",
+                        "link": reverse_lazy("admin:media_file_changelist"),
+                    },
+                ]
+            }
         ],
     },
 }

@@ -4,7 +4,6 @@ from django.conf import settings
 
 from src.apps.abandoned.models.preservation import PlacePreservation
 from src.apps.abandoned.models.security import PlaceSecurity
-from src.apps.geo.models import Address
 from src.utils.django.db import TimestampMixin
 
 

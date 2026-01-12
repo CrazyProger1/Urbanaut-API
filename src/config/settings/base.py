@@ -34,6 +34,7 @@ INSTALLED_APPS = [
     "src.apps.tags",
     "src.apps.feedbacks",
     "src.apps.geo",
+    "src.apps.media",
 ]
 
 MIDDLEWARE = [
@@ -66,8 +67,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "src.config.web.wsgi.application"
 ASGI_APPLICATION = "src.config.web.asgi.application"
-STATIC_URL = config("STATIC_URL", default="static/")
-STATIC_ROOT = config("STATIC_ROOT", default="static/")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOCATION_FIELD = {
