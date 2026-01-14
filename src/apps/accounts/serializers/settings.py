@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from src.apps.accounts.models import Settings
 from src.apps.geo.serializers import CountryRetrieveSerializer
+from src.apps.geo.services.db import get_active_countries
 
 
 class SettingsRetrieveSerializer(serializers.ModelSerializer):
@@ -11,6 +12,7 @@ class SettingsRetrieveSerializer(serializers.ModelSerializer):
         model = Settings
         fields = (
             "language",
+            "is_notifications_enabled",
             "country",
         )
 
@@ -35,10 +37,16 @@ class CurrentSettingsRetrieveSerializer(serializers.ModelSerializer):
 
 
 class SettingsUpdateSerializer(serializers.ModelSerializer):
+    country = serializers.SlugRelatedField(
+        slug_field="tld",
+        queryset=get_active_countries(),
+    )
+
     class Meta:
         model = Settings
         fields = (
             "language",
             "is_notifications_enabled",
             "theme",
+            "country",
         )
