@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     "src.apps.feedbacks",
     "src.apps.geo",
     "src.apps.media",
+    "src.apps.notifications",
 ]
 
 MIDDLEWARE = [

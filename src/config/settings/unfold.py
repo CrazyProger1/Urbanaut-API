@@ -135,6 +135,26 @@ UNFOLD = {
                 ],
             },
             {
+                "title": _("Notifications"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Notifications"),
+                        "icon": "notifications",
+                        "link": reverse_lazy(
+                            "admin:notifications_notification_changelist"
+                        ),
+                    },
+                    {
+                        "title": _("Providers"),
+                        "icon": "send",
+                        "link": reverse_lazy(
+                            "admin:notifications_notificationprovider_changelist"
+                        ),
+                    },
+                ],
+            },
+            {
                 "title": _("Media"),
                 "collapsible": True,
                 "items": [
