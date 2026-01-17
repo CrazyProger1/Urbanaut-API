@@ -165,6 +165,47 @@ UNFOLD = {
                     },
                 ],
             },
+            {
+                "title": _("Celery"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Periodic Tasks"),
+                        "icon": "event_repeat",
+                        "link": reverse_lazy(
+                            "admin:django_celery_beat_periodictask_changelist"
+                        ),
+                    },
+                    {
+                        "title": _("Interval Schedules"),
+                        "icon": "timer",
+                        "link": reverse_lazy(
+                            "admin:django_celery_beat_intervalschedule_changelist"
+                        ),
+                    },
+                    {
+                        "title": _("Crontab Schedules"),
+                        "icon": "code",
+                        "link": reverse_lazy(
+                            "admin:django_celery_beat_crontabschedule_changelist"
+                        ),
+                    },
+                    {
+                        "title": _("Solar Schedules"),
+                        "icon": "wb_sunny",
+                        "link": reverse_lazy(
+                            "admin:django_celery_beat_solarschedule_changelist"
+                        ),
+                    },
+                    {
+                        "title": _("Clocked Schedules"),
+                        "icon": "access_time",
+                        "link": reverse_lazy(
+                            "admin:django_celery_beat_clockedschedule_changelist"
+                        ),
+                    },
+                ],
+            },
         ],
     },
 }

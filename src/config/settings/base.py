@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "django_filters",
     "djoser",
     "cities_light",
+    "django_celery_beat",
     "src.apps.docs",
     "src.apps.accounts",
     "src.apps.abandoned",

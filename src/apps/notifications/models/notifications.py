@@ -40,6 +40,13 @@ class Notification(CreatedAtMixin, models.Model):
         blank=True,
         related_name="notifications",
     )
+    is_shown = models.BooleanField(
+        default=False,
+        blank=False,
+        null=False,
+        verbose_name=_("is shown"),
+        help_text=_("Was this notification shown?"),
+    )
 
     def __str__(self):
         return self.title
