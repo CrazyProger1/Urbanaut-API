@@ -3,6 +3,9 @@ import logging
 from celery import shared_task
 
 from src.apps.notifications.services.db import get_notification_or_none, mark_shown
+from src.apps.notifications.services.websockets import (
+    show_notification_via_websocket as show_notification_via_websocket,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -21,6 +24,11 @@ def show_notification(pk):
         logger.warning("Notification #%s is already shown", pk)
         return
 
-    mark_shown(notification)
+    try:
+        show_notification_via_websocket(notification)
+        mark_shown(notification)
+    except Exception as e:
+        logger.exception("Failed to show notification #%s: %s", pk, e, exc_info=e)
+        return
 
     logger.info("Notification #%s shown", pk)

@@ -6,6 +6,8 @@ readme = "README.md"
 requires-python = ">=3.13"
 dependencies = [
     "celery>=5.6.2",
+    "channels-redis>=4.3.0",
+    "channels[daphne]>=4.3.2",
     "django>=5.2.6",
     "django-celery-beat>=2.8.1",
     "django-cities-light>=3.10.2",
@@ -25,10 +27,12 @@ dependencies = [
     "geopy>=2.4.1",
     "google-genai>=1.50.0",
     "psycopg2-binary>=2.9.11",
+    "pydantic>=2.12.4",
     "python-decouple>=3.8",
     "python-dotenv>=1.2.1",
     "redis>=7.0.1",
     "requests>=2.32.5",
+    "types-channels>=4.3.0.20250822",
     "uvicorn>=0.37.0",
 ]
 

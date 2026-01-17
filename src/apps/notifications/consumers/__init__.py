@@ -1,0 +1,1 @@
+from src.apps.notifications.consumers.notifications import AsyncNotificationConsumer
