@@ -8,4 +8,5 @@ urlpatterns = [
     path("", include("src.apps.feedbacks.urls")),
     path("", include("src.apps.geo.urls")),
     path("", include("src.apps.media.urls")),
+    path("", include("src.apps.notifications.urls")),
 ]

@@ -30,8 +30,8 @@ class Notification(CreatedAtMixin, models.Model):
     triggered_at = models.DateTimeField(
         blank=True,
         null=True,
-        verbose_name=_("triggered at"),
-        help_text=_("Notification should shown at date and time."),
+        verbose_name=_("trigger at"),
+        help_text=_("Notification should be shown at date and time."),
     )
     created_by = models.ForeignKey(
         settings.AUTH_USER_MODEL,
