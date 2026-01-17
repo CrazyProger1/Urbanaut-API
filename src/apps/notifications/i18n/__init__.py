@@ -1,0 +1,1 @@
+from src.apps.notifications.i18n.notifications import NotificationTranslationOptions

@@ -108,6 +108,11 @@ UNFOLD = {
                 "collapsible": True,
                 "items": [
                     {
+                        "title": _("Addresses"),
+                        "icon": "location_on",
+                        "link": reverse_lazy("admin:geo_address_changelist"),
+                    },
+                    {
                         "title": _("Countries"),
                         "icon": "flag",
                         "link": reverse_lazy("admin:geo_country_changelist"),
@@ -126,6 +131,78 @@ UNFOLD = {
                         "title": _("Cities"),
                         "icon": "location_city",
                         "link": reverse_lazy("admin:geo_city_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": _("Notifications"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Notifications"),
+                        "icon": "notifications",
+                        "link": reverse_lazy(
+                            "admin:notifications_notification_changelist"
+                        ),
+                    },
+                    {
+                        "title": _("Providers"),
+                        "icon": "send",
+                        "link": reverse_lazy(
+                            "admin:notifications_notificationprovider_changelist"
+                        ),
+                    },
+                ],
+            },
+            {
+                "title": _("Media"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Files"),
+                        "icon": "attach_file",
+                        "link": reverse_lazy("admin:media_file_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": _("Celery"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Periodic Tasks"),
+                        "icon": "event_repeat",
+                        "link": reverse_lazy(
+                            "admin:django_celery_beat_periodictask_changelist"
+                        ),
+                    },
+                    {
+                        "title": _("Interval Schedules"),
+                        "icon": "timer",
+                        "link": reverse_lazy(
+                            "admin:django_celery_beat_intervalschedule_changelist"
+                        ),
+                    },
+                    {
+                        "title": _("Crontab Schedules"),
+                        "icon": "code",
+                        "link": reverse_lazy(
+                            "admin:django_celery_beat_crontabschedule_changelist"
+                        ),
+                    },
+                    {
+                        "title": _("Solar Schedules"),
+                        "icon": "wb_sunny",
+                        "link": reverse_lazy(
+                            "admin:django_celery_beat_solarschedule_changelist"
+                        ),
+                    },
+                    {
+                        "title": _("Clocked Schedules"),
+                        "icon": "access_time",
+                        "link": reverse_lazy(
+                            "admin:django_celery_beat_clockedschedule_changelist"
+                        ),
                     },
                 ],
             },

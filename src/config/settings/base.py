@@ -28,12 +28,15 @@ INSTALLED_APPS = [
     "django_filters",
     "djoser",
     "cities_light",
+    "django_celery_beat",
     "src.apps.docs",
     "src.apps.accounts",
     "src.apps.abandoned",
     "src.apps.tags",
     "src.apps.feedbacks",
     "src.apps.geo",
+    "src.apps.media",
+    "src.apps.notifications",
 ]
 
 MIDDLEWARE = [
@@ -66,8 +69,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "src.config.web.wsgi.application"
 ASGI_APPLICATION = "src.config.web.asgi.application"
-STATIC_URL = config("STATIC_URL", default="static/")
-STATIC_ROOT = config("STATIC_ROOT", default="static/")
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 LOCATION_FIELD = {

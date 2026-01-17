@@ -22,3 +22,7 @@ db.migrate:
 db.superuser:
 	uv run python manage.py createsuperuser --no-input
 
+
+.PHONY: shell
+shell:
+    uv run python manage.py shell

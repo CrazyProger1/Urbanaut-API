@@ -1,4 +1,3 @@
-from django.conf import settings
 from django_filters import rest_framework as filters
 from rest_framework import viewsets, mixins, exceptions
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
@@ -14,7 +13,10 @@ from src.apps.abandoned.serializers import (
     PlaceListSerializer,
     PlaceCreateSerializer,
 )
-from src.apps.geo.services.db import get_country_or_none
+from src.apps.geo.services.db import is_country_supported
+from src.apps.geo.services.geocoding import (
+    try_convert_geocoding_address_to_database_address,
+)
 from src.utils.django.views import MultipleSerializerViewsetMixin
 from src.utils.geo import reverse_geocode
 
@@ -44,18 +46,27 @@ class PlaceViewSet(
         return get_user_or_public_places(user=self.request.user)
 
     def perform_create(self, serializer):
-        # TODO: use reverse geocoding for determining place address
-
         point = serializer.validated_data["point"]
         address = reverse_geocode((point.y, point.x))
 
-        country = get_country_or_none(tld=address.get("country_code"))
+        if not address:
+            raise exceptions.PermissionDenied(detail="Address not exists")
 
-        if country and not country.is_active:
+        db_address = try_convert_geocoding_address_to_database_address(
+            address=address, point=point, new=True
+        )
+
+        if not db_address:
+            raise exceptions.PermissionDenied(detail="Address not exists")
+
+        country = db_address.country
+
+        if country and not is_country_supported(country=country):
             raise exceptions.PermissionDenied(detail="Country not supported")
 
         instance = serializer.save(created_by=self.request.user)
-        area = get_place_area_or_none(place=instance)
-        if area:
-            instance.area = area
-            instance.save(update_fields=("area",))
+
+        instance.address = db_address
+        instance.area = get_place_area_or_none(place=instance)
+
+        instance.save(update_fields=("area", "address"))

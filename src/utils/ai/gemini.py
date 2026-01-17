@@ -22,12 +22,12 @@ logger = logging.getLogger(__name__)
 
 class GoogleGeminiAIAssistant(BaseAIAssistant):
     def __init__(
-            self,
-            api_key: str = default_settings.GOOGLE_GEMINI_API_KEY,
-            model: str = default_settings.GOOGLE_GEMINI_MODEL,
-            cache_enabled: bool = default_settings.GOOGLE_GEMINI_ENABLE_CACHE,
-            cache_expiration: int = default_settings.GOOGLE_GEMINI_CACHE_EXPIRATION,
-            cache_prefix: str = default_settings.GOOGLE_GEMINI_CACHE_PREFIX,
+        self,
+        api_key: str = default_settings.GOOGLE_GEMINI_API_KEY,
+        model: str = default_settings.GOOGLE_GEMINI_MODEL,
+        cache_enabled: bool = default_settings.GOOGLE_GEMINI_ENABLE_CACHE,
+        cache_expiration: int = default_settings.GOOGLE_GEMINI_CACHE_EXPIRATION,
+        cache_prefix: str = default_settings.GOOGLE_GEMINI_CACHE_PREFIX,
     ):
         self._api_key = api_key
         self._client = genai.Client(api_key=api_key)

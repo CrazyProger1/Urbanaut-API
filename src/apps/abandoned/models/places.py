@@ -4,6 +4,7 @@ from django.conf import settings
 
 from src.apps.abandoned.models.preservation import PlacePreservation
 from src.apps.abandoned.models.security import PlaceSecurity
+from src.apps.media.eums import FileType
 from src.utils.django.db import TimestampMixin
 
 
@@ -16,6 +17,23 @@ class PlaceTag(models.Model):
 
     tag = models.ForeignKey(
         "tags.Tag",
+        on_delete=models.CASCADE,
+    )
+    place = models.ForeignKey(
+        "Place",
+        on_delete=models.CASCADE,
+    )
+
+
+class PlaceFile(models.Model):
+    class Meta:
+        unique_together = (
+            "file",
+            "place",
+        )
+
+    file = models.ForeignKey(
+        to="media.File",
         on_delete=models.CASCADE,
     )
     place = models.ForeignKey(
@@ -83,6 +101,24 @@ class Place(TimestampMixin, models.Model):
         verbose_name=_("is private"),
         help_text=_("Whether this place is private."),
     )
+    address = models.ForeignKey(
+        "geo.Address",
+        on_delete=models.SET_NULL,
+        related_name="places",
+        null=True,
+        blank=True,
+        verbose_name=_("address"),
+    )
+    files = models.ManyToManyField(
+        "media.File",
+        through=PlaceFile,
+        related_name="places",
+        blank=True,
+    )
+
+    @property
+    def photos(self):
+        return self.files.filter(type=FileType.PHOTO)
 
     class Meta:
         verbose_name = _("Place")

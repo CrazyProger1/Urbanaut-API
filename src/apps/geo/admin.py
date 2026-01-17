@@ -5,10 +5,12 @@ from cities_light.admin import (
     SubRegionAdmin as LightSubRegionAdmin,
 )
 from django.contrib import admin
+from django.contrib.gis.db import models
 from unfold.admin import ModelAdmin
 
 from src.apps.accounts.sites import site
-from src.apps.geo.models import Country, Region, City, SubRegion
+from src.apps.geo.models import Country, Region, City, SubRegion, Address
+from src.utils.django.geo import ManualGeometryFieldWidget
 
 
 @admin.register(Country, site=site)
@@ -37,4 +39,20 @@ class SubRegionAdmin(ModelAdmin, LightSubRegionAdmin):
 
 @admin.register(City, site=site)
 class CityAdmin(ModelAdmin, LightCityAdmin):
-    pass
+    formfield_overrides = {
+        models.PointField: {
+            "widget": ManualGeometryFieldWidget,
+        },
+    }
+
+
+@admin.register(Address, site=site)
+class AddressAdmin(ModelAdmin):
+    list_display = ("text",)
+    autocomplete_fields = (
+        "country",
+        "region",
+        "subregion",
+        "city",
+    )
+    search_fields = ("text",)
