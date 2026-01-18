@@ -15,7 +15,7 @@ async def test_websocket():
     ws_url = "ws://localhost:8001/ws/"
 
     # Token from the provided JWT
-    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5ZDJjYjJlLTMwYmQtNDAzZi04MDRhLTZlZjdmZmU3N2I2NCIsImV4cCI6MTc2ODczNTcyMywiaWF0IjoxNzY4NzMyMTIzfQ.e9pS6xSb9jAHgoOsWkxGt7ugv1Jq-Jv1cDpqYD4BvKw"
+    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5ZDJjYjJlLTMwYmQtNDAzZi04MDRhLTZlZjdmZmU3N2I2NCIsImV4cCI6MTc2ODc2NzA0NSwiaWF0IjoxNzY4NzYzNDQ1fQ.THjGFaxJ654wcugpxNesBDJeb8933hjTUa_avb3K7To"
 
     # Construct WebSocket URL with token as query parameter
     ws_full_url = f"{ws_url}?{token}"
@@ -25,7 +25,9 @@ async def test_websocket():
 
     try:
         # Pass origin header that matches ALLOWED_HOSTS
-        async with websockets.connect(ws_full_url, origin="http://localhost") as websocket:
+        async with websockets.connect(
+            ws_full_url, origin="http://localhost"
+        ) as websocket:
 
             # Listen for messages forever
             print(f"[{datetime.now()}] ✓ Connected and listening for messages...")

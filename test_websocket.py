@@ -32,9 +32,7 @@ def on_open(ws):
     print("Connection opened")
 
     # Send a status check message
-    status_check_msg = {
-        "type": "status_check"
-    }
+    status_check_msg = {"type": "status_check"}
     ws.send(json.dumps(status_check_msg))
     print(f"Sent: {status_check_msg}")
 
@@ -42,7 +40,7 @@ def on_open(ws):
     time.sleep(1)
     notification_msg = {
         "type": "send_notification",
-        "message": "Test notification from Python script"
+        "message": "Test notification from Python script",
     }
     ws.send(json.dumps(notification_msg))
     print(f"Sent: {notification_msg}")
@@ -67,7 +65,7 @@ def main():
         on_open=on_open,
         on_message=on_message,
         on_error=on_error,
-        on_close=on_close
+        on_close=on_close,
     )
 
     # Run the connection (blocks until connection closes)

@@ -16,4 +16,4 @@ class TokenObtainPairWithUserSerializer(TokenObtainPairSerializer):
 
 
 class WebsocketTokenObtainSerializer(serializers.Serializer):
-    token = serializers.CharField()
+    token = serializers.CharField(read_only=True)

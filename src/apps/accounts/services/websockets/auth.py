@@ -11,7 +11,9 @@ from src.apps.accounts.services.db import get_user_or_none
 logger = logging.getLogger(__name__)
 
 
-def generate_websocket_token(user, ttl: timedelta = settings.WEBSOCKET_TOKEN_TTL) -> str:
+def generate_websocket_token(
+    user, ttl: timedelta = settings.WEBSOCKET_TOKEN_TTL
+) -> str:
     now = timezone.now()
     payload = {
         "id": str(user.id),
@@ -29,17 +31,17 @@ def generate_websocket_token(user, ttl: timedelta = settings.WEBSOCKET_TOKEN_TTL
 
 def verify_websocket_token(token: str):
     try:
-        data = jwt.decode(
-            token,
-            settings.SECRET_KEY,
-            algorithms=["HS256"]
-        )
+        data = jwt.decode(token, settings.SECRET_KEY, algorithms=["HS256"])
         user = get_user_or_none(id=data["id"])
         if not user:
-            raise InvalidWebsocketTokenError(message=f"User specified in payload not found: {data}", token=token)
+            raise InvalidWebsocketTokenError(
+                message=f"User specified in payload not found: {data}", token=token
+            )
 
         logger.info("Websocket token of user #%s verified successfully", user.id)
         return user
     except jwt.InvalidTokenError:
         logger.warning("Invalid websocket token: %s", token)
-        raise InvalidWebsocketTokenError(message=f"Failed to decode websocket token: {token}", token=token)
+        raise InvalidWebsocketTokenError(
+            message=f"Failed to decode websocket token: {token}", token=token
+        )
