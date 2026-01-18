@@ -26,3 +26,7 @@ def get_all_users() -> models.QuerySet[User]:
 
 def get_user_by_username_or_none(username: str) -> User | None:
     return User.objects.filter(usernames__username=username).first()
+
+
+def get_user_or_none(**data) -> User | None:
+    return User.objects.filter(**data).first()

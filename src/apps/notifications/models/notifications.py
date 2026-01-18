@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from src.apps.notifications.enums import NotificationAudience
 from src.utils.django.db import CreatedAtMixin
 
 
@@ -26,6 +27,13 @@ class Notification(CreatedAtMixin, models.Model):
         to=settings.AUTH_USER_MODEL,
         blank=True,
         through="NotificationRecipient",
+    )
+    audience = models.CharField(
+        choices=NotificationAudience,
+        default=NotificationAudience.SYSTEM,
+        max_length=20,
+        blank=False,
+        null=False,
     )
     triggered_at = models.DateTimeField(
         blank=True,

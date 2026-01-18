@@ -1,3 +1,5 @@
+from datetime import timedelta
+
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
@@ -6,3 +8,5 @@ CHANNEL_LAYERS = {
         },
     },
 }
+
+WEBSOCKET_TOKEN_TTL = timedelta(hours=1)
