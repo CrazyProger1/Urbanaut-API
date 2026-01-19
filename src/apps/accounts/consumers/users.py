@@ -3,6 +3,7 @@ from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 
 from src.apps.accounts.models import User
+from src.apps.accounts.services.db import aupdate_user_status
 
 
 class AsyncUserConsumer(AsyncJsonWebsocketConsumer):
@@ -34,10 +35,12 @@ class AsyncUserConsumer(AsyncJsonWebsocketConsumer):
             await self.close()
 
         await self.join_groups(user=user)
+        await aupdate_user_status(user=user, online=True)
 
     async def disconnect(self, close_code):
         user = self.get_user()
         await self.leave_groups(user=user)
+        await aupdate_user_status(user=user, online=False)
 
     async def send_event(self, event):
         event_type = event.pop("event", None)

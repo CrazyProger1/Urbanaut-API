@@ -73,6 +73,7 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
                     "last_name",
                     "bio",
                     "born_at",
+                    "is_online",
                 )
             },
         ),
@@ -99,11 +100,11 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
             },
         ),
     )
-    list_display = ("email", "first_name", "last_name", "is_staff", "created_at")
+    list_display = ("email", "first_name", "last_name", "is_staff", "is_online", "created_at")
     list_filter = ("is_staff", "is_superuser", "is_active", "groups")
     search_fields = ("first_name", "last_name", "email")
     ordering = ("created_at",)
-    readonly_fields = ("created_at",)
+    readonly_fields = ("created_at", "is_online",)
 
 
 @admin.register(Group, site=site)
