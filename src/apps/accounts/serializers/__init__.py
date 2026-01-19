@@ -11,6 +11,7 @@ from src.apps.accounts.serializers.settings import (
 )
 from src.apps.accounts.serializers.tokens import (
     TokenObtainPairWithUserSerializer,
+    WebsocketTokenObtainSerializer,
 )
 from src.apps.accounts.serializers.achievements import (
     AchievementRetrieveSerializer,

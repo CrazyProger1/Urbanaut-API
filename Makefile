@@ -8,6 +8,17 @@ run:
 	uv run python manage.py runserver 8001
 
 
+.PHONY: worker
+worker:
+	uv run celery -A src.config.settings.celery worker -l INFO
+
+
+.PHONY: beat
+beat:
+	uv run celery -A src.config.settings.celery beat -l INFO --scheduler django_celery_beat.schedulers:DatabaseScheduler
+
+
+
 .PHONY: db.migrations
 db.migrations:
 	uv run python manage.py makemigrations
@@ -25,4 +36,4 @@ db.superuser:
 
 .PHONY: shell
 shell:
-    uv run python manage.py shell
+	uv run python manage.py shell

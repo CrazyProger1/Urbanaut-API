@@ -20,6 +20,7 @@ include(
     "geo.py",
     "media.py",
     "celery.py",
+    "websockets.py",
     optional("rest.py"),
     optional("docs.py"),
     optional("unfold.py"),

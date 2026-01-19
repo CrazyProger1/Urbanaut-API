@@ -15,6 +15,7 @@ DEBUG = config("DEBUG", cast=bool, default=False)
 ALLOWED_HOSTS = config("ALLOWED_HOSTS", cast=Csv(), default=["*"])
 
 INSTALLED_APPS = [
+    "daphne",
     "modeltranslation",
     "django.contrib.admin",
     "django.contrib.auth",

@@ -11,3 +11,13 @@ class NotificationListSerializer(serializers.ModelSerializer):
             "title",
             "content",
         )
+
+
+class NotificationSendSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = (
+            "id",
+            "title",
+            "content",
+        )

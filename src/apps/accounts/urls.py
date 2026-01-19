@@ -11,7 +11,9 @@ from src.apps.accounts.views import (
     ReferralCodeViewSet,
     UserViewSet,
     UserByUsernameViewSet,
+    WebsocketTokenCreateView,
 )
+from src.apps.accounts.consumers import AsyncUserConsumer
 
 router = DefaultRouter()
 
@@ -34,6 +36,7 @@ urlpatterns = [
     ),
     path("api/v1/tokens/", TokenObtainPairView.as_view(), name="jwt-create"),
     path("api/v1/tokens/refresh/", TokenRefreshView.as_view(), name="jwt-refresh"),
+    path("api/v1/ws/tokens/", WebsocketTokenCreateView.as_view(), name="ws-create"),
     path(
         "api/v1/users/me/",
         DjoserUserViewSet.as_view(
@@ -63,4 +66,8 @@ urlpatterns = [
     #      name="user-reset-username"),
     # path("api/v1/users/reset-username-confirm/", UserViewSet.as_view({"post": "reset_username_confirm"}),
     #      name="user-reset-username-confirm"),
+]
+
+websocket_urlpatterns = [
+    path("ws/", AsyncUserConsumer.as_asgi()),
 ]

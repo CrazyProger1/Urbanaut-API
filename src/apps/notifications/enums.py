@@ -6,3 +6,9 @@ class NotificationProvider(models.TextChoices):
     EMAIL = "EMAIL", _("Email")
     WEBSITE = "WEBSITE", _("Website")
     TELEGRAM = "TELEGRAM", _("Telegram")
+
+
+class NotificationAudience(models.TextChoices):
+    SYSTEM = "SYSTEM", _("System")
+    GROUP = "GROUP", _("Group")
+    PERSONAL = "PERSONAL", _("Personal")

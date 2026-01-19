@@ -71,6 +71,13 @@ class User(
         null=True,
         blank=True,
     )
+    is_online = models.BooleanField(
+        default=False,
+        verbose_name=_("is online"),
+        help_text=_("User is online right now."),
+        blank=False,
+        null=False,
+    )
 
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "email"
