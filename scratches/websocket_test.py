@@ -15,7 +15,7 @@ async def test_websocket():
     ws_url = "ws://localhost:8001/ws/"
 
     # Token from the provided JWT
-    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5ZDJjYjJlLTMwYmQtNDAzZi04MDRhLTZlZjdmZmU3N2I2NCIsImV4cCI6MTc2ODc2NzA0NSwiaWF0IjoxNzY4NzYzNDQ1fQ.THjGFaxJ654wcugpxNesBDJeb8933hjTUa_avb3K7To"
+    token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImU5ZDJjYjJlLTMwYmQtNDAzZi04MDRhLTZlZjdmZmU3N2I2NCIsImV4cCI6MTc2ODg1NDAyMywiaWF0IjoxNzY4ODUwNDIzfQ.7lOCQHDQAtvcg1Ve6mtv4MsCX71Fpmjv8ZsUStWE0yQ"
 
     # Construct WebSocket URL with token as query parameter
     ws_full_url = f"{ws_url}?{token}"

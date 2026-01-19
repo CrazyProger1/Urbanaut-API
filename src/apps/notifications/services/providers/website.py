@@ -20,7 +20,7 @@ class WebsiteProvider(BaseProvider):
         data = {
             "data": serializer.data,
             "type": "send_event",
-            "event": settings.WEBSOCKET_EVENT_NOTIFICATION,
+            "event": settings.WEBSOCKET_NOTIFICATION_EVENT,
         }
 
         if notification.audience == NotificationAudience.SYSTEM:

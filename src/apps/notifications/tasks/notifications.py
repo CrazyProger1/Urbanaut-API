@@ -22,6 +22,7 @@ def show_notification_via_provider(pk, provider: PhysicalNotificationProvider):
 
     try:
         provider.show(notification=notification)
+        logger.info("Notification #%s shown via %s", pk, provider)
     except Exception as e:
         logger.exception("Failed to show notification #%s: %s", pk, e, exc_info=e)
 
