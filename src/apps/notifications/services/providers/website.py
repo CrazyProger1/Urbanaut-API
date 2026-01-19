@@ -1,17 +1,22 @@
 import channels.layers
 from asgiref.sync import async_to_sync
 from django.conf import settings
+from django.contrib.auth import get_user_model
 
 from src.apps.notifications.enums import NotificationAudience, NotificationProvider
 from src.apps.notifications.models import Notification
 from src.apps.notifications.serializers import NotificationSendSerializer
 from src.apps.notifications.services.providers.types import BaseProvider
 
+User = get_user_model()
+
 
 class WebsiteProvider(BaseProvider):
     PROVIDER = NotificationProvider.WEBSITE
 
     def get_compatible_recipients(self, notification: Notification):
+        if notification.audience == NotificationAudience.SYSTEM:
+            return User.objects.all()
         return notification.recipients.filter(is_online=True)
 
     def show(self, notification: Notification) -> None:

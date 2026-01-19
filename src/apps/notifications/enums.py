@@ -8,7 +8,16 @@ class NotificationProvider(models.TextChoices):
     TELEGRAM = "TELEGRAM", _("Telegram")
     PUSH = "PUSH", _("Push")
 
+
 class NotificationAudience(models.TextChoices):
     SYSTEM = "SYSTEM", _("System")
     GROUP = "GROUP", _("Group")
     PERSONAL = "PERSONAL", _("Personal")
+
+
+class NotificationType(models.TextChoices):
+    UPDATE = "UPDATE", _("Update")
+    REMINDER = "REMINDER", _("Reminder")
+    SYSTEM = "SYSTEM", _("System")
+    SOCIAL = "SOCIAL", _("Social")
+    ALERT = "ALERT", _("Alert")

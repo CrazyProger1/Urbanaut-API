@@ -10,6 +10,7 @@ class NotificationListSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "content",
+            "type",
         )
 
 
@@ -20,4 +21,5 @@ class NotificationSendSerializer(serializers.ModelSerializer):
             "id",
             "title",
             "content",
+            "type",
         )
