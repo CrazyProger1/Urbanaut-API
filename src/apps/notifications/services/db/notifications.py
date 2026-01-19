@@ -13,7 +13,7 @@ def get_user_notifications(user):
 
 
 def filter_notifications_by_recipient_read(
-    source: Source[Notification], recipient, is_read: bool
+        source: Source[Notification], recipient, is_read: bool
 ):
     queryset = get_queryset(source=source)
     return queryset.filter(
