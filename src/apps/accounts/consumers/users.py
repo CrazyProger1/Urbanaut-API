@@ -23,6 +23,7 @@ class AsyncUserConsumer(AsyncJsonWebsocketConsumer):
     def get_user(self) -> User | AnonymousUser:
         return self.scope["user"]
 
+
     def should_close(self, user: User) -> bool:
         return not user.is_authenticated or not user.is_active
 

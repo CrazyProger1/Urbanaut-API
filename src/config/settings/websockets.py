@@ -1,10 +1,14 @@
 from datetime import timedelta
+from decouple import config
+
+REDIS_HOST = config("REDIS_HOST", default="127.0.0.1")
+REDIS_PORT = config("REDIS_PORT", cast=int, default=6379)
 
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+            "hosts": [(REDIS_HOST, REDIS_PORT)],
         },
     },
 }

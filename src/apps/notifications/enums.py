@@ -21,3 +21,4 @@ class NotificationType(models.TextChoices):
     SYSTEM = "SYSTEM", _("System")
     SOCIAL = "SOCIAL", _("Social")
     ALERT = "ALERT", _("Alert")
+    SUCCESS = "SUCCESS", _("Success")

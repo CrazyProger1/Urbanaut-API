@@ -1,9 +1,9 @@
 [project]
 name = "urbanaut"
 version = "0.0.1"
-description = "Urbanaut-Club — a social platform for urban explorers, diggers, and extreme tourism enthusiasts."
+description = "Urbanaut-Club - a social platform for urban explorers, diggers, and extreme tourism enthusiasts."
 readme = "README.md"
-requires-python = ">=3.13"
+requires-python = ">=3.14"
 dependencies = [
     "celery>=5.6.2",
     "channels-redis>=4.3.0",
