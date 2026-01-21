@@ -48,6 +48,7 @@ class NotificationAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin)
         "title",
         "content",
     )
+    ordering = ("-triggered_at",)
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
