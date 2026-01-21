@@ -1,6 +1,8 @@
 import logging
+import os
 
 logger = logging.getLogger(__name__)
+
 
 def switch_maintenance(maintenance: bool):
     try:
