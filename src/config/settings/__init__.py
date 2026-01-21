@@ -21,6 +21,7 @@ include(
     "media.py",
     "celery.py",
     "websockets.py",
+    "constance.py",
     optional("rest.py"),
     optional("docs.py"),
     optional("unfold.py"),

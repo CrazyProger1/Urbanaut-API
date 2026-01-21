@@ -35,10 +35,22 @@ UNFOLD = {
             "href": lambda request: static("favicon.svg"),
         },
     ],
+    "ENVIRONMENT": ("Production", "danger"),
     "SIDEBAR": {
         "show_search": True,
         "show_all_applications": True,
         "navigation": [
+            {
+                "title": _("Site"),
+                "collapsible": False,
+                "items": [
+                    {
+                        "title": _("Config"),
+                        "icon": "settings",
+                        "link": reverse_lazy("admin:constance_config_changelist"),
+                    },
+                ],
+            },
             {
                 "title": _("Accounts"),
                 "collapsible": False,

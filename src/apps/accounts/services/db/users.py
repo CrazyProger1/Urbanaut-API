@@ -45,7 +45,9 @@ def update_user_status(user: User, online: bool):
         user.last_login = timezone.now()
 
     user.save(update_fields=("is_online", "last_login"))
-    logger.info("User status #%s status is %s", user.id, "online" if online else "offline")
+    logger.info(
+        "User status #%s status is %s", user.id, "online" if online else "offline"
+    )
 
 
 @database_sync_to_async

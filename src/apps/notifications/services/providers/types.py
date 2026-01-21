@@ -8,12 +8,10 @@ class BaseProvider(ABC):
     PROVIDER: NotificationProvider
 
     @abstractmethod
-    def get_compatible_recipients(self, notification: Notification):
-        ...
+    def get_compatible_recipients(self, notification: Notification): ...
 
     @abstractmethod
-    def show(self, notification: Notification) -> None:
-        ...
+    def show(self, notification: Notification) -> None: ...
 
     @classmethod
     def get_provider(cls, provider: NotificationProvider) -> "BaseProvider":

@@ -4,7 +4,9 @@ from celery import shared_task
 
 from src.apps.notifications.services.db import get_notification_or_none, mark_shown
 
-from src.apps.notifications.enums import NotificationProvider as PhysicalNotificationProvider
+from src.apps.notifications.enums import (
+    NotificationProvider as PhysicalNotificationProvider,
+)
 from src.apps.notifications.services.providers import BaseProvider
 
 logger = logging.getLogger(__name__)
@@ -42,7 +44,9 @@ def show_notification(pk):
         return
 
     try:
-        providers = set(notification.providers.values_list("physical_provider", flat=True))
+        providers = set(
+            notification.providers.values_list("physical_provider", flat=True)
+        )
 
         for provider in providers:
             show_notification_via_provider.delay(pk=pk, provider=provider)
