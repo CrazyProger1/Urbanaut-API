@@ -12,6 +12,13 @@ class Notification(CreatedAtMixin, models.Model):
         blank=False,
         null=False,
     )
+    subtitle = models.CharField(
+        max_length=250,
+        blank=True,
+        null=True,
+        verbose_name=_("subtitle"),
+        help_text=_("Notification subtitle (subtitle used in website-notifications, you can see it under the title)."),
+    )
     content = models.TextField(
         blank=True,
         null=True,

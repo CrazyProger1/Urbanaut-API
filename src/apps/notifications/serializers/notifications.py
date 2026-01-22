@@ -9,6 +9,7 @@ class NotificationListSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "title",
+            "subtitle",
             "content",
             "type",
         )
@@ -20,6 +21,7 @@ class NotificationSendSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "title",
+            "subtitle",
             "content",
             "type",
         )
