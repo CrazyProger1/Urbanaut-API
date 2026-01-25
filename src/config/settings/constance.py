@@ -1,4 +1,16 @@
+from decouple import config
 from unfold.contrib.constance.settings import UNFOLD_CONSTANCE_ADDITIONAL_FIELDS
+
+from src.config.settings.cache import REDIS_HOST, REDIS_PORT
+
+CONSTANCE_BACKEND = "constance.backends.redisd.RedisBackend"
+
+
+CONSTANCE_REDIS_CONNECTION = {
+    "host": REDIS_HOST,
+    "port": REDIS_PORT,
+    "db": 2,
+}
 
 CONSTANCE_CONFIG = {
     "MAINTENANCE": (
