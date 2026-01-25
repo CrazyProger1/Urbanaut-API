@@ -18,7 +18,7 @@ INSTALLED_APPS = [
 UNFOLD = {
     "SITE_TITLE": "Urbanaut",
     "SITE_HEADER": "Urbanaut",
-    "SITE_URL": "/docs",
+    "SITE_URL": "https://urbanaut.club",
     "SITE_SYMBOL": "speed",
     "SHOW_HISTORY": True,
     "SHOW_VIEW_ON_SITE": True,
