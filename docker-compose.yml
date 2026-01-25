@@ -32,6 +32,7 @@ services:
     restart: always
     volumes:
       - .:/urbanaut
+      - /var/www:/var/www
     ports:
       - "8000:8000"
     env_file:
