@@ -27,7 +27,8 @@ class EmailProvider(BaseProvider):
         try:
             send_mail(
                 subject=notification.title,
-                message=notification.content,
+                message=notification.subtitle,
+                html_message=notification.content,
                 from_email=settings.EMAIL_HOST_USER,
                 recipient_list=emails,
                 fail_silently=False,
