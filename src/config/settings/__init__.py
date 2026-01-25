@@ -22,6 +22,7 @@ include(
     "celery.py",
     "websockets.py",
     "constance.py",
+    "email.py",
     optional("rest.py"),
     optional("docs.py"),
     optional("unfold.py"),

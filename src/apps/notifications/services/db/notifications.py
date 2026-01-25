@@ -17,20 +17,24 @@ def get_user_notifications(user):
 
 
 def filter_notifications_by_recipient_read(
-        source: Source[Notification],
-        recipient,
-        is_read: bool,
+    source: Source[Notification],
+    recipient,
+    is_read: bool,
 ):
     queryset = get_queryset(source=source)
-    return queryset.filter(
-        Q(
-            recipients__in=NotificationRecipient.objects.filter(
-                is_read=is_read,
-                user=recipient,
-            ).values("user")
+    return (
+        queryset.filter(
+            Q(
+                recipients__in=NotificationRecipient.objects.filter(
+                    is_read=is_read,
+                    user=recipient,
+                ).values("user")
+            )
+            | (Q(audience=NotificationAudience.SYSTEM) & ~Q(recipients__in=[recipient]))
         )
-        | (Q(audience=NotificationAudience.SYSTEM) & ~Q(recipients__in=[recipient]))
-    ).distinct().order_by("-triggered_at")
+        .distinct()
+        .order_by("-triggered_at")
+    )
 
 
 def get_notification_or_none(**data) -> Notification | None:
