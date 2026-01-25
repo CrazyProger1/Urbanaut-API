@@ -25,11 +25,13 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "django.contrib.gis",
     "unfold.contrib.location_field",
+    "unfold.contrib.constance",
     "django.contrib.postgres",
     "django_filters",
     "djoser",
     "cities_light",
     "django_celery_beat",
+    "constance",
     "src.apps.docs",
     "src.apps.accounts",
     "src.apps.abandoned",
@@ -38,6 +40,7 @@ INSTALLED_APPS = [
     "src.apps.geo",
     "src.apps.media",
     "src.apps.notifications",
+    "src.apps.config",
 ]
 
 MIDDLEWARE = [

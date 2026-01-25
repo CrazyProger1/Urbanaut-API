@@ -73,6 +73,7 @@ target/
 # Virtual environment
 .venv/
 venv/
+.pyenv/
 
 # PyCharm
 .idea

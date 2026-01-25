@@ -9,7 +9,9 @@ from src.apps.notifications.services.db import (
 
 class NotificationFilter(filters.FilterSet):
     providers = filters.ModelMultipleChoiceFilter(
-        queryset=get_enabled_notification_providers()
+        queryset=get_enabled_notification_providers(),
+        field_name="providers__physical_provider",
+        to_field_name="physical_provider",
     )
     is_read = filters.BooleanFilter(method="filter_by_is_read")
 

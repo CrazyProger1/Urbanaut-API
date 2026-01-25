@@ -1,0 +1,94 @@
+services:
+  postgres:
+    container_name: urbanaut-postgres
+    image: postgis/postgis:latest
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    restart: always
+    env_file:
+      - .env
+    networks:
+      - postgres
+    healthcheck:
+      test: [ "CMD-SHELL", "pg_isready -U urbanaut -d urbanautdb" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  redis:
+    container_name: urbanaut-redis
+    image: redis
+    networks:
+      - redis
+    healthcheck:
+      test: [ "CMD", "redis-cli", "ping" ]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  api:
+    build: .
+    container_name: urbanaut-api
+    restart: always
+    volumes:
+      - .:/urbanaut
+      - /var/www:/var/www
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    networks:
+      - postgres
+      - redis
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  worker:
+    build: .
+    container_name: urbanaut-worker
+    command: [ "uv", "run", "celery", "-A", "src.config.settings.celery", "worker", "-l", "INFO" ]
+    restart: always
+    entrypoint: [ ]
+    volumes:
+      - .:/urbanaut
+    env_file:
+      - .env
+    networks:
+      - postgres
+      - redis
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+  beat:
+    build: .
+    container_name: urbanaut-beat
+    command: [ "uv", "run", "celery", "-A", "src.config.settings.celery", "beat", "-l", "INFO", "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler" ]
+    restart: always
+    entrypoint: [ ]
+    volumes:
+      - .:/urbanaut
+    env_file:
+      - .env
+    networks:
+      - postgres
+      - redis
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+
+volumes:
+  postgres_data:
+
+networks:
+  redis:
+    driver: bridge
+  postgres:
+    driver: bridge

@@ -6,6 +6,8 @@ from src.apps.accounts.services.db.users import (
     set_user_country,
     get_user_by_username_or_none,
     get_user_or_none,
+    update_user_status,
+    aupdate_user_status,
 )
 from src.apps.accounts.services.db.referrals import (
     get_all_referral_codes,

@@ -5,6 +5,7 @@ from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
 from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
 
+
 from unfold.forms import AdminPasswordChangeForm, UserChangeForm, UserCreationForm
 from unfold.admin import ModelAdmin, StackedInline
 
@@ -21,12 +22,12 @@ from src.apps.accounts.admin.referrals import (
 admin.site.unregister(Group)
 
 
-@admin.register(Settings)
+@admin.register(Settings, site=site)
 class SettingsAdmin(ModelAdmin):
     autocomplete_fields = ("country",)
 
 
-@admin.register(Username)
+@admin.register(Username, site=site)
 class UsernameAdmin(ModelAdmin):
     pass
 
@@ -73,6 +74,7 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
                     "last_name",
                     "bio",
                     "born_at",
+                    "is_online",
                 )
             },
         ),
@@ -99,11 +101,21 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
             },
         ),
     )
-    list_display = ("email", "first_name", "last_name", "is_staff", "created_at")
+    list_display = (
+        "email",
+        "first_name",
+        "last_name",
+        "is_staff",
+        "is_online",
+        "created_at",
+    )
     list_filter = ("is_staff", "is_superuser", "is_active", "groups")
     search_fields = ("first_name", "last_name", "email")
     ordering = ("created_at",)
-    readonly_fields = ("created_at",)
+    readonly_fields = (
+        "created_at",
+        "is_online",
+    )
 
 
 @admin.register(Group, site=site)

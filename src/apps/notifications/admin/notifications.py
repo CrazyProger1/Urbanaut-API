@@ -48,12 +48,13 @@ class NotificationAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin)
         "title",
         "content",
     )
+    ordering = ("-triggered_at",)
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)
 
         if not obj.triggered_at and not obj.is_shown:
-            show_notification.delay(obj.pk)
+            show_notification.apply_async((obj.pk,), countdown=5)
         else:
             plan_execution(
                 task_id=f"show_notification_{obj.pk}",
