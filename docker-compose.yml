@@ -10,7 +10,7 @@ services:
     networks:
       - postgres
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U urbanaut -d urbanautdb"]
+      test: [ "CMD-SHELL", "pg_isready -U urbanaut -d urbanautdb" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -21,7 +21,7 @@ services:
     networks:
       - redis
     healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
+      test: [ "CMD", "redis-cli", "ping" ]
       interval: 10s
       timeout: 5s
       retries: 5
@@ -50,6 +50,7 @@ services:
     container_name: urbanaut-worker
     command: [ "uv", "run", "celery", "-A", "src.config.settings.celery", "worker", "-l", "INFO" ]
     restart: always
+    entrypoint: [ ]
     volumes:
       - .:/urbanaut
     env_file:
@@ -68,6 +69,7 @@ services:
     container_name: urbanaut-beat
     command: [ "uv", "run", "celery", "-A", "src.config.settings.celery", "beat", "-l", "INFO", "--scheduler", "django_celery_beat.schedulers:DatabaseScheduler" ]
     restart: always
+    entrypoint: [ ]
     volumes:
       - .:/urbanaut
     env_file:
