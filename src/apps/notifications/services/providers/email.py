@@ -22,7 +22,9 @@ class EmailProvider(BaseProvider):
         return notification.recipients.filter(email__isnull=False)
 
     def show(self, notification: Notification) -> None:
-        emails = list(self.get_compatible_recipients(notification).values_list("email", flat=True))
+        emails = list(
+            self.get_compatible_recipients(notification).values_list("email", flat=True)
+        )
 
         try:
             send_mail(
