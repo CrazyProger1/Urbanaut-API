@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     "cities_light",
     "django_celery_beat",
     "constance",
+    "django_prometheus",
     "src.apps.docs",
     "src.apps.accounts",
     "src.apps.abandoned",
@@ -44,6 +45,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    "django_prometheus.middleware.PrometheusBeforeMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
@@ -52,6 +54,7 @@ MIDDLEWARE = [
     "django.contrib.messages.middleware.MessageMiddleware",
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
     "src.apps.accounts.middlewares.Admin2FAMiddleware",
+    "django_prometheus.middleware.PrometheusAfterMiddleware",
 ]
 
 ROOT_URLCONF = "src.config.web.urls"
