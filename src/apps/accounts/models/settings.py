@@ -40,6 +40,13 @@ class Settings(models.Model):
         verbose_name=_("notifications"),
         help_text=_("Notifications enabled."),
     )
+    is_emails_enabled = models.BooleanField(
+        default=True,
+        null=False,
+        blank=False,
+        verbose_name=_("emails"),
+        help_text=_("Emails enabled."),
+    )
     is_country_visible = models.BooleanField(
         default=True,
         null=False,
