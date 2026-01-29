@@ -108,31 +108,31 @@ class CurrentUserSerializer(serializers.ModelSerializer):
         data["metrics"] = [
             {
                 "name": "Karma",
-                "value": 3000,
+                "value": 0,
             },
             {
                 "name": "Experience",
-                "value": 100000,
+                "value": 0,
             },
             {
                 "name": "Reports",
-                "value": 50,
+                "value": 0,
             },
             {
                 "name": "Friends",
-                "value": 30,
+                "value": 0,
             },
             {
                 "name": "Teams",
-                "value": 1,
+                "value": 0,
             },
             {
                 "name": "Followers",
-                "value": 500,
+                "value": 0,
             },
             {
                 "name": "Places",
-                "value": 300,
+                "value": 0,
             },
         ]
         return data
@@ -174,31 +174,31 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
         data["metrics"] = [
             {
                 "name": "Karma",
-                "value": 3000,
+                "value": 0,
             },
             {
                 "name": "Experience",
-                "value": 100000,
+                "value": 0,
             },
             {
                 "name": "Reports",
-                "value": 50,
+                "value": 0,
             },
             {
                 "name": "Friends",
-                "value": 30,
+                "value": 0,
             },
             {
                 "name": "Teams",
-                "value": 1,
+                "value": 0,
             },
             {
                 "name": "Followers",
-                "value": 500,
+                "value": 0,
             },
             {
                 "name": "Places",
-                "value": 300,
+                "value": 0,
             },
         ]
         return data
