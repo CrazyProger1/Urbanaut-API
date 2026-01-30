@@ -29,6 +29,9 @@ class PushProvider(BaseProvider):
         audience = self.get_audience(notification=notification)
 
         notification_body = {
+            "headings": {
+                "en": notification.title,
+            },
             "contents": {
                 "en": notification.subtitle,
             }
