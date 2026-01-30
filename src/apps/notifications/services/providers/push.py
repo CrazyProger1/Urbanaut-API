@@ -28,6 +28,9 @@ class PushProvider(BaseProvider):
 
         audience = self.get_audience(notification=notification)
 
+        if not audience.count():
+            return
+
         notification_body = {
             "headings": {
                 "en": notification.title,
