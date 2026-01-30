@@ -1,3 +1,4 @@
+from datetime import timedelta
 from urllib.parse import urljoin
 
 from decouple import config
@@ -24,6 +25,8 @@ DJOSER = {
 }
 
 SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
     "AUTH_HEADER_TYPES": ("Bearer",),
     "TOKEN_OBTAIN_SERIALIZER": "src.apps.accounts.serializers.TokenObtainPairWithUserSerializer",
 }
