@@ -30,7 +30,7 @@ class PushProvider(BaseProvider):
 
         notification_body = {
             "contents": {
-                "en": notification.content,
+                "en": notification.subtitle,
             }
         }
 

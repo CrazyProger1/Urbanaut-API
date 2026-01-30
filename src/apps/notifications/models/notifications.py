@@ -18,7 +18,7 @@ class Notification(CreatedAtMixin, models.Model):
         null=True,
         verbose_name=_("subtitle"),
         help_text=_(
-            "Notification subtitle (subtitle used in website-notifications, you can see it under the title)."
+            "Notification subtitle (subtitle used in website and push notifications, you can see it under the title)."
         ),
     )
     content = models.TextField(
