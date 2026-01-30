@@ -35,7 +35,7 @@ class PushProvider(BaseProvider):
         }
 
         if notification.audience == NotificationAudience.SYSTEM:
-            notification_body["included_segments"] = ["Subscribed Users"]
+            notification_body["included_segments"] = ["Active Subscriptions"]
         else:
             notification_body["include_external_user_ids"] = list(map(str, audience.values_list("id", flat=True)))
 
