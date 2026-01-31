@@ -37,12 +37,14 @@ class PushProvider(BaseProvider):
             },
             "contents": {
                 "en": notification.subtitle,
-            }
+            },
         }
 
         if notification.audience == NotificationAudience.SYSTEM:
             notification_body["included_segments"] = ["Active Subscriptions"]
         else:
-            notification_body["include_external_user_ids"] = list(map(str, audience.values_list("id", flat=True)))
+            notification_body["include_external_user_ids"] = list(
+                map(str, audience.values_list("id", flat=True))
+            )
 
         async_to_sync(client.send_notification)(notification_body)

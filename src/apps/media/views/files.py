@@ -28,7 +28,7 @@ class FileViewSet(
     mixins.CreateModelMixin,
 ):
     queryset = get_visible_files()
-    permission_classes = (permissions.IsAuthenticatedOrReadOnly, IsFileOwnerOrReadOnly)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     parser_classes = (parsers.MultiPartParser,)
     serializer_class = FileListSerializer
     serializer_classes = {

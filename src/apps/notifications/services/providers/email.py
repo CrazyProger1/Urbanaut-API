@@ -18,13 +18,15 @@ class EmailProvider(BaseProvider):
 
     def get_audience(self, notification: Notification):
         if notification.audience == NotificationAudience.SYSTEM:
-            return User.objects.filter(email__isnull=False, settings__is_emails_enabled=True)
-        return notification.recipients.filter(email__isnull=False, settings__is_emails_enabled=True)
+            return User.objects.filter(
+                email__isnull=False, settings__is_emails_enabled=True
+            )
+        return notification.recipients.filter(
+            email__isnull=False, settings__is_emails_enabled=True
+        )
 
     def show(self, notification: Notification) -> None:
-        emails = list(
-            self.get_audience(notification).values_list("email", flat=True)
-        )
+        emails = list(self.get_audience(notification).values_list("email", flat=True))
 
         if not emails:
             return

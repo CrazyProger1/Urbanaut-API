@@ -26,8 +26,8 @@ async def main():
             "en": "Hello, world",
             "es": "Hola mundo",
             "fr": "Bonjour le monde",
-            "zh-Hans": "你好世界"
-        }
+            "zh-Hans": "你好世界",
+        },
     }
 
     print(f"Sending notification to external user ID: {external_user_id}")
@@ -35,5 +35,5 @@ async def main():
     print(f"Response: {response.body}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     asyncio.run(main())
