@@ -10,7 +10,7 @@ def get_all_notifications():
     return Notification.objects.all().order_by("-triggered_at")
 
 
-def get_user_notifications(user):
+def get_user_shown_notifications(user):
     return Notification.objects.filter(is_shown=True).filter(
         Q(recipients=user) | Q(audience=NotificationAudience.SYSTEM)
     ).order_by("-triggered_at")

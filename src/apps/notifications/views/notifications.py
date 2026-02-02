@@ -6,7 +6,7 @@ from src.apps.notifications.filters import NotificationFilter
 from src.apps.notifications.serializers import NotificationListSerializer
 from src.apps.notifications.services.db import (
     get_all_notifications,
-    get_user_notifications,
+    get_user_shown_notifications,
 )
 
 
@@ -21,4 +21,4 @@ class NotificationViewSet(
     filterset_class = NotificationFilter
 
     def get_queryset(self):
-        return get_user_notifications(user=self.request.user)
+        return get_user_shown_notifications(user=self.request.user)
