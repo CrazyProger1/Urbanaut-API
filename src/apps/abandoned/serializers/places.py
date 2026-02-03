@@ -2,9 +2,14 @@ from rest_framework import serializers
 
 from src.apps.abandoned.enums import PreservationLevel, SecurityLevel
 from src.apps.abandoned.models import Place
-from src.apps.abandoned.services.db import set_preservation_level, set_security_level
+from src.apps.abandoned.services.db import (
+    set_preservation_level,
+    set_security_level,
+    bind_files_to_place,
+)
 from src.apps.accounts.serializers import UserListSerializer
 from src.apps.media.serializers import FileListSerializer
+from src.apps.media.services.db import get_all_files
 from src.apps.tags.services.db import get_all_tags
 from src.utils.django.geo import PointField
 
@@ -63,6 +68,11 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
         choices=SecurityLevel,
         write_only=True,
     )
+    files = serializers.PrimaryKeyRelatedField(
+        queryset=get_all_files(),
+        many=True,
+        write_only=True,
+    )
 
     class Meta:
         model = Place
@@ -75,11 +85,13 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
             "is_private",
             "preservation",
             "security",
+            "files",
         )
 
     def create(self, validated_data):
         preservation = validated_data.pop("preservation", None)
         security = validated_data.pop("security", None)
+        files = validated_data.pop("files", None)
         place = super().create(validated_data=validated_data)
         set_preservation_level(
             place=place,
@@ -89,4 +101,10 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
             place=place,
             level=security,
         )
+
+        if files:
+            bind_files_to_place(
+                files=files,
+                place=place,
+            )
         return place

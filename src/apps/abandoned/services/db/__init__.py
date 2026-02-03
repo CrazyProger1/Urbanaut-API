@@ -5,6 +5,7 @@ from src.apps.abandoned.services.db.places import (
     get_all_preservation_levels,
     set_preservation_level,
     set_security_level,
+    bind_files_to_place,
 )
 from src.apps.abandoned.services.db.areas import (
     get_all_areas,

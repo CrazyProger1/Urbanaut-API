@@ -1,3 +1,4 @@
+from datetime import timedelta
 from urllib.parse import urljoin
 
 from decouple import config
@@ -20,10 +21,15 @@ DJOSER = {
     "SERIALIZERS": {
         "current_user": "src.apps.accounts.serializers.CurrentUserSerializer",
         "user_create": "src.apps.accounts.serializers.UserCreateSerializer",
+
     },
 }
 
 SIMPLE_JWT = {
+    "ACCESS_TOKEN_LIFETIME": timedelta(days=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(days=30),
     "AUTH_HEADER_TYPES": ("Bearer",),
     "TOKEN_OBTAIN_SERIALIZER": "src.apps.accounts.serializers.TokenObtainPairWithUserSerializer",
 }
+
+OTP_SECRET_KEY = config("OTP_SECRET_KEY", cast=str)

@@ -1,5 +1,6 @@
 from django.db import transaction
 from djoser.conf import settings
+from django.utils.translation import gettext_lazy as _
 from drf_spectacular.utils import extend_schema_field
 from djoser.serializers import UserCreateSerializer as DjoserUserCreateSerializer
 from rest_framework import serializers
@@ -14,7 +15,7 @@ from src.apps.accounts.serializers.settings import (
 from src.apps.accounts.services.db import (
     apply_referral_code,
     get_referral_code_or_none,
-    set_user_country,
+    set_user_country, get_user_by_username_or_none, update_user_initial_username,
 )
 from src.apps.geo.services.db import get_country_or_none
 
@@ -79,7 +80,11 @@ class CurrentUserSerializer(serializers.ModelSerializer):
         read_only=True,
         slug_field="username",
     )
-    achievements = serializers.SerializerMethodField()
+    username = serializers.CharField(
+        write_only=True,
+        required=False,
+    )
+    achievements = serializers.SerializerMethodField(read_only=True)
     metrics = MetricRetrieveSerializer(many=True, read_only=True)
 
     class Meta:
@@ -95,7 +100,27 @@ class CurrentUserSerializer(serializers.ModelSerializer):
             "metrics",
             "bio",
             "created_at",
+            "username",
         )
+
+    def validate(self, attrs):
+        username = attrs.get("username")
+
+        if username:
+            user = get_user_by_username_or_none(username=username)
+            if user and user != self.instance:
+                raise serializers.ValidationError(detail={"username": _("Username is already used.")})
+
+        return super().validate(attrs=attrs)
+
+    @transaction.atomic
+    def update(self, instance, validated_data):
+        username = validated_data.pop("username", None)
+
+        if username:
+            update_user_initial_username(user=self.instance, username=username)
+
+        return super().update(instance=instance, validated_data=validated_data)
 
     @extend_schema_field(AchievementRetrieveSerializer(many=True))
     def get_achievements(self, instance):
@@ -108,31 +133,31 @@ class CurrentUserSerializer(serializers.ModelSerializer):
         data["metrics"] = [
             {
                 "name": "Karma",
-                "value": 3000,
+                "value": 0,
             },
             {
                 "name": "Experience",
-                "value": 100000,
+                "value": 0,
             },
             {
                 "name": "Reports",
-                "value": 50,
+                "value": 0,
             },
             {
                 "name": "Friends",
-                "value": 30,
+                "value": 0,
             },
             {
                 "name": "Teams",
-                "value": 1,
+                "value": 0,
             },
             {
                 "name": "Followers",
-                "value": 500,
+                "value": 0,
             },
             {
                 "name": "Places",
-                "value": 300,
+                "value": 0,
             },
         ]
         return data
@@ -174,31 +199,31 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
         data["metrics"] = [
             {
                 "name": "Karma",
-                "value": 3000,
+                "value": 0,
             },
             {
                 "name": "Experience",
-                "value": 100000,
+                "value": 0,
             },
             {
                 "name": "Reports",
-                "value": 50,
+                "value": 0,
             },
             {
                 "name": "Friends",
-                "value": 30,
+                "value": 0,
             },
             {
                 "name": "Teams",
-                "value": 1,
+                "value": 0,
             },
             {
                 "name": "Followers",
-                "value": 500,
+                "value": 0,
             },
             {
                 "name": "Places",
-                "value": 300,
+                "value": 0,
             },
         ]
         return data

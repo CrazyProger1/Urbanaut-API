@@ -6,7 +6,8 @@ from django.db.models import Q
 from modeltranslation.utils import build_localized_fieldname
 
 from src.apps.abandoned.enums import PreservationLevel, SecurityLevel
-from src.apps.abandoned.models import Place, PlacePreservation
+from src.apps.abandoned.models import Place, PlacePreservation, PlaceFile
+from src.apps.media.models import File
 from src.utils.django.db import Source, get_queryset
 
 
@@ -50,3 +51,8 @@ def set_preservation_level(place: Place, level: PreservationLevel):
 def set_security_level(place: Place, level: SecurityLevel):
     place.security.level = level
     place.security.save()
+
+
+def bind_files_to_place(files: Iterable[File], place: Place):
+    for file in files:
+        PlaceFile.objects.create(file=file, place=place)

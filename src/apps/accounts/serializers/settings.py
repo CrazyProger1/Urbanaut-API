@@ -13,6 +13,7 @@ class SettingsRetrieveSerializer(serializers.ModelSerializer):
         fields = (
             "language",
             "is_notifications_enabled",
+            "is_emails_enabled",
             "country",
         )
 
@@ -25,6 +26,7 @@ class CurrentSettingsRetrieveSerializer(serializers.ModelSerializer):
         fields = (
             "language",
             "is_notifications_enabled",
+            "is_emails_enabled",
             "theme",
             "country",
         )
@@ -47,6 +49,7 @@ class SettingsUpdateSerializer(serializers.ModelSerializer):
         fields = (
             "language",
             "is_notifications_enabled",
+            "is_emails_enabled",
             "theme",
             "country",
         )

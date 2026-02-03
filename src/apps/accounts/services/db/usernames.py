@@ -1,8 +1,10 @@
 import random
 import string
 
+from autoslug.utils import slugify
+
 from src.apps.accounts.models import Username, User
-from src.utils.usernames import generate_username_from_email
+from src.utils.usernames import generate_username_from_email, normalize_username
 
 
 def has_username(user: User) -> bool:
@@ -22,7 +24,7 @@ def give_username(user, username: str, initial: bool = False) -> Username:
 
 
 def get_initial_username(user: User) -> Username:
-    return user.usernames.first()
+    return user.usernames.filter(is_initial=True).first()
 
 
 def give_initial_username(user: User) -> Username:
@@ -37,3 +39,18 @@ def give_initial_username(user: User) -> Username:
         username=username,
         initial=True,
     )
+
+
+def update_user_initial_username(user: User, username: str):
+    username = normalize_username(username=username)
+    username_obj = get_initial_username(user=user)
+
+    if username_obj:
+        username_obj.username = username
+        username_obj.save(update_fields=["username"])
+
+    referral_code = user.referral_codes.first()
+
+    if referral_code:
+        referral_code.code = username
+        referral_code.save(update_fields=["code"])

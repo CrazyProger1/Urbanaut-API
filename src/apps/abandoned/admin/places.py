@@ -41,9 +41,9 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
     )
     created_by_field = "created_by"
     formfield_overrides = {
-        models.TextField: {
-            "widget": WysiwygWidget,
-        },
+        # models.TextField: {
+        #     "widget": WysiwygWidget,
+        # },
         models.PointField: {
             "widget": ManualGeometryFieldWidget,
         },

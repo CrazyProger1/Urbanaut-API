@@ -1,0 +1,58 @@
+{% extends 'unfold/layouts/unauthenticated.html' %}
+
+{% load i18n static unfold %}
+
+{% block extrastyle %}
+    {{ block.super }}
+{% endblock %}
+
+{% block title %}
+    {% trans "Two-Factor Authentication" %} | {{ site_title }}
+{% endblock %}
+
+{% block content %}
+    {% include "unfold/helpers/unauthenticated_title.html" with title=_('Two-Factor Authentication') subtitle=_('Verify your identity') %}
+
+    {% include "unfold/helpers/messages.html" %}
+
+    {% if error %}
+        <div class="flex flex-col gap-4 mb-8 *:mb-0">
+            {% include "unfold/helpers/messages/error.html" with error=error %}
+        </div>
+    {% endif %}
+
+    {% block login_before %}{% endblock %}
+
+    <form method="post" id="2fa-form">
+        {% csrf_token %}
+
+        <div class="flex flex-col group mb-5 last:mb-4">
+            <div class="flex flex-col gap-2">
+                <label for="code" class="block font-semibold text-font-important-light dark:text-font-important-dark">
+                    {% trans "Authentication Code" %}
+                    <span class="text-red-600">*</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="code"
+                    name="code"
+                    placeholder="{% trans 'Enter the code' %}"
+                    required
+                    autocomplete="off"
+                    maxlength="6"
+                    inputmode="numeric"
+                    class="px-3 py-2 rounded-default border border-base-200 bg-white text-sm transition-colors placeholder:text-font-muted-light focus:border-primary-600 focus:outline-none focus:ring-1 focus:ring-primary-600 dark:border-base-700 dark:bg-base-800 dark:text-font-light-dark dark:placeholder:text-font-muted-dark dark:focus:border-primary-500 dark:focus:ring-primary-500"
+                >
+            </div>
+        </div>
+
+        <div class="flex flex-col gap-3 mt-6">
+            {% component "unfold/components/button.html" with submit=1 variant="primary" class="submit-row w-full" %}
+                {% trans "Verify" %} <span class="material-symbols-outlined relative right-0 transition-all group-hover:-right-1 text-sm">arrow_forward</span>
+            {% endcomponent %}
+        </div>
+    </form>
+
+    {% block login_after %}{% endblock %}
+{% endblock %}

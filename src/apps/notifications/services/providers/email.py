@@ -16,13 +16,20 @@ logger = logging.getLogger(__name__)
 class EmailProvider(BaseProvider):
     PROVIDER = NotificationProvider.EMAIL
 
-    def get_compatible_recipients(self, notification: Notification):
+    def get_audience(self, notification: Notification):
         if notification.audience == NotificationAudience.SYSTEM:
-            return User.objects.filter(email__isnull=False)
-        return notification.recipients.filter(email__isnull=False)
+            return User.objects.filter(
+                email__isnull=False, settings__is_emails_enabled=True
+            )
+        return notification.recipients.filter(
+            email__isnull=False, settings__is_emails_enabled=True
+        )
 
     def show(self, notification: Notification) -> None:
-        emails = list(self.get_compatible_recipients(notification).values_list("email", flat=True))
+        emails = list(self.get_audience(notification).values_list("email", flat=True))
+
+        if not emails:
+            return
 
         try:
             send_mail(

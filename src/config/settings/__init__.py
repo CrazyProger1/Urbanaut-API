@@ -23,6 +23,7 @@ include(
     "websockets.py",
     "constance.py",
     "email.py",
+    "onesignal.py",
     optional("rest.py"),
     optional("docs.py"),
     optional("unfold.py"),

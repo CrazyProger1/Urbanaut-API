@@ -3,6 +3,7 @@ from rest_framework import viewsets, mixins, exceptions
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 
 from src.apps.abandoned.filters import PlaceFilter
+from src.apps.abandoned.pagination import DefaultUnlimitedPagination
 from src.apps.abandoned.services.db import (
     get_all_places,
     get_place_area_or_none,
@@ -38,6 +39,7 @@ class PlaceViewSet(
     }
     filterset_class = PlaceFilter
     filter_backends = (filters.DjangoFilterBackend,)
+    pagination_class = DefaultUnlimitedPagination
 
     def get_queryset(self):
         user = self.request.user

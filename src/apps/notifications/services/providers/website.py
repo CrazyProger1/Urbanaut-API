@@ -14,7 +14,7 @@ User = get_user_model()
 class WebsiteProvider(BaseProvider):
     PROVIDER = NotificationProvider.WEBSITE
 
-    def get_compatible_recipients(self, notification: Notification):
+    def get_audience(self, notification: Notification):
         if notification.audience == NotificationAudience.SYSTEM:
             return User.objects.all()
         return notification.recipients.filter(is_online=True)
@@ -34,7 +34,7 @@ class WebsiteProvider(BaseProvider):
                 data,
             )
         else:
-            for recipient in self.get_compatible_recipients(notification=notification):
+            for recipient in self.get_audience(notification=notification):
                 async_to_sync(channel_layer.group_send)(
                     settings.WEBSOCKET_USER_GROUP.format(id=recipient.id),
                     data,
