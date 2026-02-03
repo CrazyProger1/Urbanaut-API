@@ -50,7 +50,6 @@ def update_user_status(user: User, online: bool):
     )
 
 
-
 def update_user_username(user: User, username: str):
     # DANGER
     # TODO: update to the multiusername system

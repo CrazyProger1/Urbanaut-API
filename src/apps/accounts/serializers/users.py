@@ -106,8 +106,9 @@ class CurrentUserSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         username = attrs.get("username")
 
-        if username and get_user_by_username_or_none(username=username):
-            raise serializers.ValidationError(detail={"username": _("Username is already used.")})
+        if username:
+            if get_user_by_username_or_none(username=username) != self.instance:
+                raise serializers.ValidationError(detail={"username": _("Username is already used.")})
 
         return super().validate(attrs=attrs)
 
