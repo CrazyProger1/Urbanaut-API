@@ -1,7 +1,7 @@
 import logging
 
 from channels.db import database_sync_to_async
-from django.db import models, transaction
+from django.db import models
 from django.utils import timezone
 
 from src.apps.accounts.models import User
@@ -50,21 +50,6 @@ def update_user_status(user: User, online: bool):
     )
 
 
-def update_user_username(user: User, username: str):
-    # DANGER
-    # TODO: update to the multiusername system
-    # DANGER
-    username_obj = user.usernames.first()
-
-    if username_obj:
-        username_obj.username = username
-        username_obj.save(update_fields=["username"])
-
-    referral_code = user.referral_codes.first()
-
-    if referral_code:
-        referral_code.code = username
-        referral_code.save(update_fields=["code"])
 
 
 @database_sync_to_async

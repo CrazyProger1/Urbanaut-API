@@ -8,7 +8,7 @@ from src.apps.accounts.services.db.users import (
     get_user_or_none,
     update_user_status,
     aupdate_user_status,
-    update_user_username,
+
 )
 from src.apps.accounts.services.db.referrals import (
     get_all_referral_codes,
@@ -25,6 +25,7 @@ from src.apps.accounts.services.db.usernames import (
     get_username_or_none,
     give_username,
     give_initial_username,
+    update_user_initial_username,
 )
 from src.apps.accounts.services.db.referrals import (
     has_referral_code,

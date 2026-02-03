@@ -15,7 +15,7 @@ from src.apps.accounts.serializers.settings import (
 from src.apps.accounts.services.db import (
     apply_referral_code,
     get_referral_code_or_none,
-    set_user_country, get_user_by_username_or_none, update_user_username,
+    set_user_country, get_user_by_username_or_none, update_user_initial_username,
 )
 from src.apps.geo.services.db import get_country_or_none
 
@@ -118,7 +118,7 @@ class CurrentUserSerializer(serializers.ModelSerializer):
         username = validated_data.pop("username", None)
 
         if username:
-            update_user_username(user=self.instance, username=username)
+            update_user_initial_username(user=self.instance, username=username)
 
         return super().update(instance=instance, validated_data=validated_data)
 
