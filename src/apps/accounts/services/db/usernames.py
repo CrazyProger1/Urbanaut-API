@@ -1,8 +1,6 @@
 import random
 import string
 
-from autoslug.utils import slugify
-
 from src.apps.accounts.models import Username, User
 from src.utils.usernames import generate_username_from_email, normalize_username
 

@@ -54,6 +54,13 @@ class Settings(models.Model):
         verbose_name=_("is country visible"),
         help_text=_("User country is visible in profile."),
     )
+    is_interactive_mode_enabled = models.BooleanField(
+        default=True,
+        null=False,
+        blank=False,
+        verbose_name=_("is interactive mode enabled"),
+        help_text=_("User will informational toasts, hints, and tooltips"),
+    )
     theme = models.CharField(
         max_length=10,
         choices=UITheme,
