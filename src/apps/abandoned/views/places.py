@@ -1,6 +1,8 @@
 from django_filters import rest_framework as filters
-from rest_framework import viewsets, mixins, exceptions
+from rest_framework import viewsets, mixins, exceptions, status
+from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.response import Response
 
 from src.apps.abandoned.filters import PlaceFilter
 from src.apps.abandoned.pagination import DefaultUnlimitedPagination
@@ -8,11 +10,12 @@ from src.apps.abandoned.services.db import (
     get_all_places,
     get_place_area_or_none,
     get_user_or_public_places,
+    toggle_favorite,
 )
 from src.apps.abandoned.serializers import (
     PlaceRetrieveSerializer,
     PlaceListSerializer,
-    PlaceCreateSerializer,
+    PlaceCreateSerializer, PlaceToggleFavoriteSerializer,
 )
 from src.apps.geo.services.db import is_country_supported
 from src.apps.geo.services.geocoding import (
@@ -36,6 +39,7 @@ class PlaceViewSet(
         "list": PlaceListSerializer,
         "retrieve": PlaceRetrieveSerializer,
         "create": PlaceCreateSerializer,
+        "toggle_favorite": PlaceToggleFavoriteSerializer,
     }
     filterset_class = PlaceFilter
     filter_backends = (filters.DjangoFilterBackend,)
@@ -72,3 +76,13 @@ class PlaceViewSet(
         instance.area = get_place_area_or_none(place=instance)
 
         instance.save(update_fields=("area", "address"))
+
+    @action(methods=["PATCH"], detail=True, url_path="toggle-favorite")
+    def toggle_favorite(self, request, pk=None):
+        is_favorite = toggle_favorite(
+            place=self.get_object(),
+            user=request.user,
+        )
+
+        serializer = self.get_serializer(instance={"is_favorite": is_favorite})
+        return Response(serializer.data, status=status.HTTP_200_OK)

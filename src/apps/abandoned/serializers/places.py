@@ -5,7 +5,7 @@ from src.apps.abandoned.models import Place
 from src.apps.abandoned.services.db import (
     set_preservation_level,
     set_security_level,
-    bind_files_to_place,
+    bind_files_to_place, is_favorite,
 )
 from src.apps.accounts.serializers import UserListSerializer
 from src.apps.media.serializers import FileListSerializer
@@ -16,13 +16,24 @@ from src.utils.django.geo import PointField
 
 class PlaceListSerializer(serializers.ModelSerializer):
     point = PointField()
+    is_favorite = serializers.SerializerMethodField(
+        read_only=True,
+    )
 
     class Meta:
         model = Place
         fields = (
             "id",
             "point",
+            "is_favorite",
         )
+
+    def get_is_favorite(self, obj) -> bool:
+        request = self.context.get("request")
+
+        if request and request.user.is_authenticated:
+            return is_favorite(place=obj, user=request.user)
+        return False
 
 
 class PlaceRetrieveSerializer(serializers.ModelSerializer):
@@ -47,10 +58,20 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
         many=True,
         read_only=True,
     )
+    is_favorite = serializers.SerializerMethodField(
+        read_only=True,
+    )
 
     class Meta:
         model = Place
         fields = "__all__"
+
+    def get_is_favorite(self, obj) -> bool:
+        request = self.context.get("request")
+
+        if request and request.user.is_authenticated:
+            return is_favorite(place=obj, user=request.user)
+        return False
 
 
 class PlaceCreateSerializer(serializers.ModelSerializer):
@@ -108,3 +129,10 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
                 place=place,
             )
         return place
+
+
+class PlaceToggleFavoriteSerializer(serializers.Serializer):
+    is_favorite = serializers.BooleanField(read_only=True)
+
+    class Meta:
+        fields = "__all__"

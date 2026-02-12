@@ -5,10 +5,10 @@ from django.contrib.auth.admin import GroupAdmin as BaseGroupAdmin
 from django.contrib.auth.models import Group
 from django.utils.translation import gettext_lazy as _
 
-
 from unfold.forms import AdminPasswordChangeForm, UserChangeForm, UserCreationForm
 from unfold.admin import ModelAdmin, StackedInline
 
+from src.apps.abandoned.admin.places import PlaceFavoriteInline
 from src.apps.accounts.models import User, Settings, Username
 from src.apps.accounts.sites import site
 from src.apps.accounts.admin.achivements import AchievementAdmin, AchievementInline
@@ -63,6 +63,7 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
         UsernameInline,
         AchievementInline,
         ReferralCodeInline,
+        PlaceFavoriteInline,
     )
     fieldsets = (
         (None, {"fields": ("email", "password")}),

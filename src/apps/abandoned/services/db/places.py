@@ -1,3 +1,4 @@
+import logging
 from typing import Iterable
 
 from django.conf import settings
@@ -6,9 +7,11 @@ from django.db.models import Q
 from modeltranslation.utils import build_localized_fieldname
 
 from src.apps.abandoned.enums import PreservationLevel, SecurityLevel
-from src.apps.abandoned.models import Place, PlacePreservation, PlaceFile
+from src.apps.abandoned.models import Place, PlacePreservation, PlaceFile, UserFavoritePlace
 from src.apps.media.models import File
 from src.utils.django.db import Source, get_queryset
+
+logger = logging.getLogger(__name__)
 
 
 def get_all_places():
@@ -24,7 +27,7 @@ def get_user_or_public_places(user) -> models.QuerySet[Place]:
 
 
 def search_places(
-    term: str = None, source: Source[Place] = Place
+        term: str = None, source: Source[Place] = Place
 ) -> models.QuerySet[Place]:
     queryset = get_queryset(source=source)
     query = Q()
@@ -56,3 +59,19 @@ def set_security_level(place: Place, level: SecurityLevel):
 def bind_files_to_place(files: Iterable[File], place: Place):
     for file in files:
         PlaceFile.objects.create(file=file, place=place)
+
+
+def toggle_favorite(place: Place, user):
+    m2m = UserFavoritePlace.objects.filter(user=user, place=place).first()
+    if m2m:
+        m2m.delete()
+        logger.info("Place %s favorite mark is deleted for %s", place, user)
+        return False
+    else:
+        UserFavoritePlace.objects.get_or_create(user=user, place=place)
+        logger.info("Place %s marked as favorite for %s", place, user)
+        return True
+
+
+def is_favorite(place: Place, user):
+    return UserFavoritePlace.objects.filter(user=user, place=place).exists()

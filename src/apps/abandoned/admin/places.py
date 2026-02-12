@@ -9,7 +9,7 @@ from unfold.contrib.forms.widgets import WysiwygWidget
 
 from src.apps.abandoned.admin.security import PlaceSecurityInline
 from src.apps.abandoned.admin.preservation import PlacePreservationInline
-from src.apps.abandoned.models import Place, PlaceTag, PlaceFile
+from src.apps.abandoned.models import Place, PlaceTag, PlaceFile, UserFavoritePlace
 from src.apps.accounts.sites import site
 from src.utils.django.admin import CreatedByAdminMixin
 from src.utils.django.geo import ManualGeometryFieldWidget
@@ -29,6 +29,14 @@ class PlaceFileInline(StackedInline):
     extra = 1
     verbose_name = _("File")
     verbose_name_plural = _("Files")
+
+
+class PlaceFavoriteInline(StackedInline):
+    tab = True
+    model = UserFavoritePlace
+    extra = 1
+    verbose_name = _("Favorite Place")
+    verbose_name_plural = _("Favorite Places")
 
 
 @admin.register(Place, site=site)

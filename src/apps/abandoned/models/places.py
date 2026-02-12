@@ -42,6 +42,27 @@ class PlaceFile(models.Model):
     )
 
 
+class UserFavoritePlace(models.Model):
+    class Meta:
+        unique_together = (
+            "user",
+            "place",
+        )
+
+    user = models.ForeignKey(
+        to=settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        blank=False,
+        null=False,
+    )
+    place = models.ForeignKey(
+        to="Place",
+        on_delete=models.CASCADE,
+        blank=False,
+        null=False,
+    )
+
+
 class Place(TimestampMixin, models.Model):
     name = models.CharField(
         max_length=250,
@@ -114,6 +135,12 @@ class Place(TimestampMixin, models.Model):
         through=PlaceFile,
         related_name="places",
         blank=True,
+    )
+    favorite_by = models.ManyToManyField(
+        to=settings.AUTH_USER_MODEL,
+        through=UserFavoritePlace,
+        blank=True,
+        related_name="favorite_places",
     )
 
     @property
