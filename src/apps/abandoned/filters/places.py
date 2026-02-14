@@ -1,7 +1,7 @@
 from django_filters import rest_framework as filters
 
 from src.apps.abandoned.models import Place
-from src.apps.abandoned.services.db import search_places
+from src.apps.abandoned.services.db import search_places, filter_favorites, filter_private
 from src.apps.abandoned.services.ai import search_places_ai
 from src.apps.tags.services.db.tags import get_all_tags
 from src.utils.django.geo import BoundsSerializer
@@ -18,6 +18,8 @@ class PlaceFilter(filters.FilterSet):
     preservation = filters.CharFilter(field_name="preservation__level")
     security = filters.CharFilter(field_name="security__level")
     country = filters.CharFilter(field_name="address__country__tld")
+    is_favorite = filters.BooleanFilter(method="filter_favorites")
+    is_private = filters.BooleanFilter(method="filter_private")
 
     class Meta:
         model = Place
@@ -31,6 +33,22 @@ class PlaceFilter(filters.FilterSet):
 
     def ai_search(self, queryset, name, value):
         return search_places_ai(source=queryset, term=value)
+
+    def filter_favorites(self, queryset, name, value):
+        user = self.request.user
+
+        if user.is_authenticated and value:
+            return filter_favorites(queryset=queryset, user=user)
+
+        return queryset
+
+    def filter_private(self, queryset, name, value):
+        user = self.request.user
+
+        if user.is_authenticated and value:
+            return filter_private(queryset=queryset, user=user)
+
+        return queryset
 
     def filter_queryset(self, queryset):
         queryset = super().filter_queryset(queryset=queryset)

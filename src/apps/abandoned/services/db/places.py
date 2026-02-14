@@ -75,3 +75,11 @@ def toggle_favorite(place: Place, user):
 
 def is_favorite(place: Place, user):
     return UserFavoritePlace.objects.filter(user=user, place=place).exists()
+
+
+def filter_favorites(queryset: models.QuerySet[Place], user) -> models.QuerySet[Place]:
+    return queryset.filter(favorite_by=user)
+
+
+def filter_private(queryset: models.QuerySet[Place], user) -> models.QuerySet[Place]:
+    return queryset.filter(is_private=True, created_by=user)
