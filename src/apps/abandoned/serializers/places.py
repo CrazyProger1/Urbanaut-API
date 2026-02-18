@@ -106,7 +106,6 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
             "is_private",
-            "is_supposed",
             "preservation",
             "security",
             "files",
