@@ -10,12 +10,12 @@ from src.apps.abandoned.services.db import (
     get_all_places,
     get_place_area_or_none,
     get_user_or_public_places,
-    toggle_favorite,
+    toggle_place_favorite, toggle_place_supposed,
 )
 from src.apps.abandoned.serializers import (
     PlaceRetrieveSerializer,
     PlaceListSerializer,
-    PlaceCreateSerializer, PlaceToggleFavoriteSerializer,
+    PlaceCreateSerializer, PlaceToggleFavoriteSerializer, PlaceToggleSupposedSerializer,
 )
 from src.apps.geo.services.db import is_country_supported
 from src.apps.geo.services.geocoding import (
@@ -40,6 +40,7 @@ class PlaceViewSet(
         "retrieve": PlaceRetrieveSerializer,
         "create": PlaceCreateSerializer,
         "toggle_favorite": PlaceToggleFavoriteSerializer,
+        "toggle_supposed": PlaceToggleSupposedSerializer,
     }
     filterset_class = PlaceFilter
     filter_backends = (filters.DjangoFilterBackend,)
@@ -79,10 +80,19 @@ class PlaceViewSet(
 
     @action(methods=["PATCH"], detail=True, url_path="toggle-favorite")
     def toggle_favorite(self, request, pk=None):
-        is_favorite = toggle_favorite(
+        is_favorite = toggle_place_favorite(
             place=self.get_object(),
             user=request.user,
         )
 
         serializer = self.get_serializer(instance={"is_favorite": is_favorite})
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    @action(methods=["PATCH"], detail=True, url_path="toggle-supposed")
+    def toggle_supposed(self, request, pk=None):
+        is_supposed = toggle_place_supposed(
+            place=self.get_object(),
+        )
+
+        serializer = self.get_serializer(instance={"is_supposed": is_supposed})
         return Response(serializer.data, status=status.HTTP_200_OK)

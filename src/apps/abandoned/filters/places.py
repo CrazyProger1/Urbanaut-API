@@ -1,7 +1,8 @@
 from django_filters import rest_framework as filters
 
 from src.apps.abandoned.models import Place
-from src.apps.abandoned.services.db import search_places, filter_favorites, filter_private
+from src.apps.abandoned.services.db import search_places, filter_favorite_user_places, filter_private_user_places, \
+    filter_supposed_places
 from src.apps.abandoned.services.ai import search_places_ai
 from src.apps.tags.services.db.tags import get_all_tags
 from src.utils.django.geo import BoundsSerializer
@@ -20,6 +21,7 @@ class PlaceFilter(filters.FilterSet):
     country = filters.CharFilter(field_name="address__country__tld")
     is_favorite = filters.BooleanFilter(method="filter_favorites")
     is_private = filters.BooleanFilter(method="filter_private")
+    is_supposed = filters.BooleanFilter(method="filter_supposed")
 
     class Meta:
         model = Place
@@ -38,7 +40,7 @@ class PlaceFilter(filters.FilterSet):
         user = self.request.user
 
         if user.is_authenticated and value:
-            return filter_favorites(queryset=queryset, user=user)
+            return filter_favorite_user_places(queryset=queryset, user=user)
 
         return queryset
 
@@ -46,9 +48,16 @@ class PlaceFilter(filters.FilterSet):
         user = self.request.user
 
         if user.is_authenticated and value:
-            return filter_private(queryset=queryset, user=user)
+            return filter_private_user_places(
+                queryset=queryset,
+                user=user,
+                private=value,
+            )
 
         return queryset
+
+    def filter_supposed(self, queryset, name, value):
+        return filter_supposed_places(queryset=queryset, supposed=value)
 
     def filter_queryset(self, queryset):
         queryset = super().filter_queryset(queryset=queryset)

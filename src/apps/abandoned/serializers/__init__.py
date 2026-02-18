@@ -3,6 +3,7 @@ from src.apps.abandoned.serializers.places import (
     PlaceListSerializer,
     PlaceCreateSerializer,
     PlaceToggleFavoriteSerializer,
+    PlaceToggleSupposedSerializer,
 )
 from src.apps.abandoned.serializers.areas import (
     AreaRetrieveSerializer,

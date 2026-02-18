@@ -122,6 +122,11 @@ class Place(TimestampMixin, models.Model):
         verbose_name=_("is private"),
         help_text=_("Whether this place is private."),
     )
+    is_supposed = models.BooleanField(
+        default=False,
+        verbose_name=_("is supposed"),
+        help_text=_("Whether this place is supposed to be abandoned."),
+    )
     address = models.ForeignKey(
         "geo.Address",
         on_delete=models.SET_NULL,

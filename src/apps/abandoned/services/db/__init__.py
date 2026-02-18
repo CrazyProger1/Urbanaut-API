@@ -6,10 +6,12 @@ from src.apps.abandoned.services.db.places import (
     set_preservation_level,
     set_security_level,
     bind_files_to_place,
-    toggle_favorite,
-    is_favorite,
-    filter_favorites,
-    filter_private,
+    toggle_place_favorite,
+    is_place_favorite,
+    filter_favorite_user_places,
+    filter_private_user_places,
+    toggle_place_supposed,
+    filter_supposed_places,
 )
 from src.apps.abandoned.services.db.areas import (
     get_all_areas,

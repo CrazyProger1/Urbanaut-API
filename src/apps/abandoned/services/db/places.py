@@ -61,7 +61,7 @@ def bind_files_to_place(files: Iterable[File], place: Place):
         PlaceFile.objects.create(file=file, place=place)
 
 
-def toggle_favorite(place: Place, user):
+def toggle_place_favorite(place: Place, user):
     m2m = UserFavoritePlace.objects.filter(user=user, place=place).first()
     if m2m:
         m2m.delete()
@@ -73,13 +73,25 @@ def toggle_favorite(place: Place, user):
         return True
 
 
-def is_favorite(place: Place, user):
+def toggle_place_supposed(place: Place):
+    is_supposed = place.is_supposed
+    place.is_supposed = not is_supposed
+    place.save(update_fields=("is_supposed",))
+
+
+def is_place_favorite(place: Place, user):
     return UserFavoritePlace.objects.filter(user=user, place=place).exists()
 
 
-def filter_favorites(queryset: models.QuerySet[Place], user) -> models.QuerySet[Place]:
+def filter_favorite_user_places(queryset: models.QuerySet[Place], user) -> models.QuerySet[Place]:
     return queryset.filter(favorite_by=user)
 
 
-def filter_private(queryset: models.QuerySet[Place], user) -> models.QuerySet[Place]:
-    return queryset.filter(is_private=True, created_by=user)
+def filter_private_user_places(queryset: models.QuerySet[Place], user, private: bool) -> models.QuerySet[Place]:
+    if private:
+        return queryset.filter(is_private=True, created_by=user)
+    return queryset.filter(is_private=False)
+
+
+def filter_supposed_places(queryset: models.QuerySet[Place], supposed: bool) -> models.QuerySet[Place]:
+    return queryset.filter(is_supposed=supposed)

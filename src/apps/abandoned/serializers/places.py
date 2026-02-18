@@ -5,7 +5,7 @@ from src.apps.abandoned.models import Place
 from src.apps.abandoned.services.db import (
     set_preservation_level,
     set_security_level,
-    bind_files_to_place, is_favorite,
+    bind_files_to_place, is_place_favorite,
 )
 from src.apps.accounts.serializers import UserListSerializer
 from src.apps.media.serializers import FileListSerializer
@@ -26,13 +26,15 @@ class PlaceListSerializer(serializers.ModelSerializer):
             "id",
             "point",
             "is_favorite",
+            "is_supposed",
+            "is_private",
         )
 
     def get_is_favorite(self, obj) -> bool:
         request = self.context.get("request")
 
         if request and request.user.is_authenticated:
-            return is_favorite(place=obj, user=request.user)
+            return is_place_favorite(place=obj, user=request.user)
         return False
 
 
@@ -70,7 +72,7 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
         request = self.context.get("request")
 
         if request and request.user.is_authenticated:
-            return is_favorite(place=obj, user=request.user)
+            return is_place_favorite(place=obj, user=request.user)
         return False
 
 
@@ -104,6 +106,7 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
             "created_at",
             "updated_at",
             "is_private",
+            "is_supposed",
             "preservation",
             "security",
             "files",
@@ -133,6 +136,13 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
 
 class PlaceToggleFavoriteSerializer(serializers.Serializer):
     is_favorite = serializers.BooleanField(read_only=True)
+
+    class Meta:
+        fields = "__all__"
+
+
+class PlaceToggleSupposedSerializer(serializers.Serializer):
+    is_supposed = serializers.BooleanField(read_only=True)
 
     class Meta:
         fields = "__all__"
