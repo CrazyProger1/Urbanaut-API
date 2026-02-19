@@ -24,6 +24,7 @@ include(
     "constance.py",
     "email.py",
     "onesignal.py",
+    "lookups.py",
     optional("rest.py"),
     optional("docs.py"),
     optional("unfold.py"),

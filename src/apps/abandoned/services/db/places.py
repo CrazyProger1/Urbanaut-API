@@ -46,9 +46,13 @@ def get_all_preservation_levels() -> models.QuerySet[PlacePreservation]:
     return PlacePreservation.objects.all()
 
 
-def set_preservation_level(place: Place, level: PreservationLevel):
-    place.preservation.level = level
-    place.preservation.save()
+def set_preservation_level(place: Place, **factors):
+    preservation = place.preservation
+    for factor, value in factors.items():
+        if factor in dir(preservation):
+            setattr(preservation, factor, value)
+
+    preservation.save()
 
 
 def set_security_level(place: Place, level: SecurityLevel):

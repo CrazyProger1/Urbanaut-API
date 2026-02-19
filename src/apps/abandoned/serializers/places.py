@@ -12,6 +12,7 @@ from src.apps.media.serializers import FileListSerializer
 from src.apps.media.services.db import get_all_files
 from src.apps.tags.services.db import get_all_tags
 from src.utils.django.geo import PointField
+from src.apps.abandoned.serializers.preservations import PlacePreservationCreateRetrieveSerializer
 
 
 class PlaceListSerializer(serializers.ModelSerializer):
@@ -83,10 +84,8 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
         many=True,
         queryset=get_all_tags(),
     )
-    preservation = serializers.ChoiceField(
-        choices=PreservationLevel,
-        write_only=True,
-    )
+    preservation = PlacePreservationCreateRetrieveSerializer()
+
     security = serializers.ChoiceField(
         choices=SecurityLevel,
         write_only=True,
@@ -118,7 +117,7 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
         place = super().create(validated_data=validated_data)
         set_preservation_level(
             place=place,
-            level=preservation,
+            **preservation,
         )
         set_security_level(
             place=place,
