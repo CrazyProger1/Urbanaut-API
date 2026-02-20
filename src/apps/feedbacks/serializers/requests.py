@@ -8,5 +8,4 @@ class RequestCreateSerializer(serializers.ModelSerializer):
         model = Request
         fields = (
             "context",
-            "requested_by",
         )
