@@ -1,18 +1,19 @@
 from rest_framework import serializers
 
-from src.apps.abandoned.enums import PreservationLevel, SecurityLevel
 from src.apps.abandoned.models import Place
+from src.apps.abandoned.serializers.security import PlaceSecurityCreateRetrieveSerializer
 from src.apps.abandoned.services.db import (
     set_preservation_level,
     set_security_level,
-    bind_files_to_place, is_place_favorite,
+    bind_files_to_place,
+    is_place_favorite,
 )
 from src.apps.accounts.serializers import UserListSerializer
 from src.apps.media.serializers import FileListSerializer
 from src.apps.media.services.db import get_all_files
 from src.apps.tags.services.db import get_all_tags
 from src.utils.django.geo import PointField
-from src.apps.abandoned.serializers.preservations import PlacePreservationCreateRetrieveSerializer
+from src.apps.abandoned.serializers.preservation import PlacePreservationCreateRetrieveSerializer
 
 
 class PlaceListSerializer(serializers.ModelSerializer):
@@ -40,12 +41,10 @@ class PlaceListSerializer(serializers.ModelSerializer):
 
 
 class PlaceRetrieveSerializer(serializers.ModelSerializer):
-    security = serializers.SlugRelatedField(
-        slug_field="level",
+    security = PlaceSecurityCreateRetrieveSerializer(
         read_only=True,
     )
-    preservation = serializers.SlugRelatedField(
-        slug_field="level",
+    preservation = PlacePreservationCreateRetrieveSerializer(
         read_only=True,
     )
     tags = serializers.SlugRelatedField(
@@ -85,11 +84,8 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
         queryset=get_all_tags(),
     )
     preservation = PlacePreservationCreateRetrieveSerializer()
+    security = PlaceSecurityCreateRetrieveSerializer()
 
-    security = serializers.ChoiceField(
-        choices=SecurityLevel,
-        write_only=True,
-    )
     files = serializers.PrimaryKeyRelatedField(
         queryset=get_all_files(),
         many=True,
@@ -121,7 +117,7 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
         )
         set_security_level(
             place=place,
-            level=security,
+            **security,
         )
 
         if files:

@@ -55,9 +55,13 @@ def set_preservation_level(place: Place, **factors):
     preservation.save()
 
 
-def set_security_level(place: Place, level: SecurityLevel):
-    place.security.level = level
-    place.security.save()
+def set_security_level(place: Place, **factors):
+    security = place.security
+    for factor, value in factors.items():
+        if factor in dir(security):
+            setattr(security, factor, value)
+
+    security.save()
 
 
 def bind_files_to_place(files: Iterable[File], place: Place):

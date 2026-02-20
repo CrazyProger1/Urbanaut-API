@@ -21,42 +21,42 @@ class PlacePreservation(models.Model):
     )
     has_roof = models.BooleanField(
         default=False,
-        verbose_name=_("has roof"),
+        verbose_name=_("roof"),
         help_text=_("Has roof?"),
         blank=False,
         null=False,
     )
     has_walls = models.BooleanField(
         default=False,
-        verbose_name=_("has walls"),
+        verbose_name=_("walls"),
         help_text=_("Has walls?"),
         blank=False,
         null=False,
     )
     has_floor = models.BooleanField(
         default=False,
-        verbose_name=_("has floor"),
+        verbose_name=_("floor"),
         help_text=_("Has floor?"),
         blank=False,
         null=False,
     )
     has_windows = models.BooleanField(
         default=False,
-        verbose_name=_("has windows"),
+        verbose_name=_("windows"),
         help_text=_("Has windows?"),
         blank=False,
         null=False,
     )
     has_internal_ceilings = models.BooleanField(
         default=False,
-        verbose_name=_("has internal ceilings"),
+        verbose_name=_("internal ceilings"),
         help_text=_("Has internal ceilings?"),
         blank=False,
         null=False,
     )
     has_doors = models.BooleanField(
         default=False,
-        verbose_name=_("has doors"),
+        verbose_name=_("doors"),
         help_text=_("Has doors?"),
         blank=False,
         null=False,

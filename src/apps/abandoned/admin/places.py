@@ -74,7 +74,7 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
         "area__name",
     )
     list_filter = (
-        "security__level",
+        "security__has_security",
         "created_at",
         "built_at",
         "abandoned_at",

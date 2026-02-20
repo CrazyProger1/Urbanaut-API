@@ -18,6 +18,7 @@ class PlaceFilter(filters.FilterSet):
     ai_query = filters.CharFilter(method="ai_search")
     preservation = filters.CharFilter(field_name="preservation__level")
     security = filters.CharFilter(field_name="security__level")
+    has_security = filters.BooleanFilter(field_name="security__has_security")
     country = filters.CharFilter(field_name="address__country__tld")
     is_favorite = filters.BooleanFilter(method="filter_favorites")
     is_private = filters.BooleanFilter(method="filter_private")
