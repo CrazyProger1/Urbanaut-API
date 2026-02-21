@@ -14,6 +14,8 @@ class RequestAdmin(ModelAdmin):
     list_display = (
         "id",
         "type",
+        "path",
+        "requested_by",
         "is_fulfilled",
         "fulfilled_by",
         "fulfilled_at",
@@ -21,6 +23,10 @@ class RequestAdmin(ModelAdmin):
     list_display_links = (
         "id",
         "type",
+        "path",
+    )
+    list_filter = (
+        "is_fulfilled",
     )
 
     actions_submit_line = ("mark_fulfilled",)

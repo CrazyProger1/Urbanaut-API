@@ -9,4 +9,5 @@ class RequestCreateSerializer(serializers.ModelSerializer):
         fields = (
             "context",
             "type",
+            "path",
         )

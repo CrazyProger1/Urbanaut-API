@@ -21,6 +21,13 @@ class Request(CreatedAtMixin, models.Model):
         blank=False,
         help_text=_("Type of the request."),
     )
+    path = models.CharField(
+        verbose_name=_("path"),
+        help_text=_("User path."),
+        max_length=255,
+        blank=True,
+        null=True,
+    )
     context = models.JSONField(
         verbose_name=_("context"),
         blank=False,
