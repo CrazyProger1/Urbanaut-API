@@ -152,10 +152,6 @@ class PlaceUpdateSerializer(serializers.ModelSerializer):
             "created_by",
             "created_at",
             "updated_at",
-            "is_private",
-            "preservation",
-            "security",
-            "files",
         )
 
     def update(self, instance, validated_data):
