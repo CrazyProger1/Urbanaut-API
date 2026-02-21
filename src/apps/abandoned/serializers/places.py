@@ -128,6 +128,64 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
         return place
 
 
+class PlaceUpdateSerializer(serializers.ModelSerializer):
+    point = PointField()
+    tags = serializers.SlugRelatedField(
+        slug_field="tag",
+        many=True,
+        queryset=get_all_tags(),
+    )
+    preservation = PlacePreservationCreateRetrieveSerializer()
+    security = PlaceSecurityCreateRetrieveSerializer()
+
+    files = serializers.PrimaryKeyRelatedField(
+        queryset=get_all_files(),
+        many=True,
+        write_only=True,
+    )
+
+    class Meta:
+        model = Place
+        fields = "__all__"
+        read_only_fields = (
+            "id",
+            "created_by",
+            "created_at",
+            "updated_at",
+            "is_private",
+            "preservation",
+            "security",
+            "files",
+        )
+
+    def update(self, instance, validated_data):
+        preservation = validated_data.pop("preservation", None)
+        security = validated_data.pop("security", None)
+        files = validated_data.pop("files", None)
+
+        print(validated_data)
+        super().update(instance=instance, validated_data=validated_data)
+
+        if preservation:
+            set_preservation_level(
+                place=instance,
+                **preservation,
+            )
+
+        if security:
+            set_security_level(
+                place=instance,
+                **security,
+            )
+
+        if files:
+            bind_files_to_place(
+                files=files,
+                place=instance,
+            )
+        return instance
+
+
 class PlaceToggleFavoriteSerializer(serializers.Serializer):
     is_favorite = serializers.BooleanField(read_only=True)
 

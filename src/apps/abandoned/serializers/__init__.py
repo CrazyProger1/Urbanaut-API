@@ -4,6 +4,7 @@ from src.apps.abandoned.serializers.places import (
     PlaceCreateSerializer,
     PlaceToggleFavoriteSerializer,
     PlaceToggleSupposedSerializer,
+    PlaceUpdateSerializer,
 )
 from src.apps.abandoned.serializers.areas import (
     AreaRetrieveSerializer,
