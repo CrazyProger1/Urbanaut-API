@@ -13,9 +13,14 @@ from src.apps.feedbacks.services.db import mark_request_fulfilled
 class RequestAdmin(ModelAdmin):
     list_display = (
         "id",
+        "type",
         "is_fulfilled",
         "fulfilled_by",
         "fulfilled_at",
+    )
+    list_display_links = (
+        "id",
+        "type",
     )
 
     actions_submit_line = ("mark_fulfilled",)

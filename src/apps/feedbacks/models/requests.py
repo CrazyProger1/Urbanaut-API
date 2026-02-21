@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from src.apps.feedbacks.enums import RequestType
 from src.utils.django.db import CreatedAtMixin
 
 
@@ -11,6 +12,14 @@ class Request(CreatedAtMixin, models.Model):
         blank=True,
         null=True,
         help_text=_("Executor's comment related to the request."),
+    )
+    type = models.CharField(
+        choices=RequestType,
+        default=RequestType.OTHER,
+        max_length=20,
+        null=False,
+        blank=False,
+        help_text=_("Type of the request."),
     )
     context = models.JSONField(
         verbose_name=_("context"),
