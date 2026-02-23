@@ -45,6 +45,8 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
 
   worker:
     build: .
@@ -84,6 +86,23 @@ services:
       redis:
         condition: service_healthy
 
+  elasticsearch:
+    image: elasticsearch:7.16.1
+    container_name: es
+    environment:
+      discovery.type: single-node
+      ES_JAVA_OPTS: "-Xms512m -Xmx512m"
+    ports:
+      - "9200:9200"
+      - "9300:9300"
+    healthcheck:
+      test: [ "CMD-SHELL", "curl --silent --fail localhost:9200/_cluster/health || exit 1" ]
+      interval: 10s
+      timeout: 10s
+      retries: 3
+    networks:
+      - elastic
+
 volumes:
   postgres_data:
 
@@ -91,4 +110,6 @@ networks:
   redis:
     driver: bridge
   postgres:
+    driver: bridge
+  elastic:
     driver: bridge

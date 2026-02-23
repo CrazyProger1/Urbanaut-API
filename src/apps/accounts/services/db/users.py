@@ -14,7 +14,7 @@ def get_or_create_user_by_email(email: str) -> User:
     try:
         return User.objects.get(email=email)
     except User.DoesNotExist:
-        return User.objects.create_oauth_user(email=email)[0]
+        return User.objects.create_oauth_user(email=email)
 
 
 def count_users() -> int:
@@ -48,8 +48,6 @@ def update_user_status(user: User, online: bool):
     logger.info(
         "User status #%s status is %s", user.id, "online" if online else "offline"
     )
-
-
 
 
 @database_sync_to_async

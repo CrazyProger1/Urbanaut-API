@@ -12,6 +12,7 @@ from src.apps.accounts.views import (
     UserViewSet,
     UserByUsernameViewSet,
     WebsocketTokenCreateView,
+    LanguageListAPIView,
 )
 from src.apps.accounts.consumers import AsyncUserConsumer
 
@@ -20,7 +21,7 @@ router = DefaultRouter()
 router.register("api/v1/referrals", ReferralCodeViewSet, basename="referrals")
 router.register("api/v1/users", UserViewSet, basename="users")
 router.register(
-    "api/v1/users/by_username", UserByUsernameViewSet, basename="users-by-username"
+    "api/v1/users/by-username", UserByUsernameViewSet, basename="users-by-username"
 )
 urlpatterns = [
     path("admin/", site.urls),
@@ -49,6 +50,10 @@ urlpatterns = [
         SettingsViewSet.as_view(
             {"put": "update", "patch": "partial_update", "get": "retrieve"}
         ),
+    ),
+    path(
+        "api/v1/languages/",
+        LanguageListAPIView.as_view(),
     ),
     *router.urls,
     # path("api/v1/users/activate/", UserViewSet.as_view({"post": "activation"}), name="user-activate"),

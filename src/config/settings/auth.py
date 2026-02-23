@@ -21,7 +21,6 @@ DJOSER = {
     "SERIALIZERS": {
         "current_user": "src.apps.accounts.serializers.CurrentUserSerializer",
         "user_create": "src.apps.accounts.serializers.UserCreateSerializer",
-
     },
 }
 

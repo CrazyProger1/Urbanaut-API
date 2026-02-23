@@ -113,6 +113,11 @@ UNFOLD = {
                         "icon": "feedback",
                         "link": reverse_lazy("admin:feedbacks_feedback_changelist"),
                     },
+                    {
+                        "title": _("Requests"),
+                        "icon": "function",
+                        "link": reverse_lazy("admin:feedbacks_request_changelist"),
+                    },
                 ],
             },
             {

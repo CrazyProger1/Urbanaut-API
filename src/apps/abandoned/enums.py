@@ -7,7 +7,7 @@ class SecurityLevel(TextChoices):
     EASY = "EASY", _("Easy")
     MEDIUM = "MEDIUM", _("Medium")
     HARD = "HARD", _("Hard")
-    CRITICAL = "IMPOSSIBLE", _("Impossible")
+    IMPOSSIBLE = "IMPOSSIBLE", _("Impossible")
 
 
 class PreservationLevel(TextChoices):
@@ -16,3 +16,9 @@ class PreservationLevel(TextChoices):
     MEDIUM = "MEDIUM", _("Medium")
     HIGH = "HIGH", _("High")
     AWESOME = "AWESOME", _("Awesome")
+
+
+class SecurityType(TextChoices):
+    NONE = "NONE", _("No Security")
+    PRIVATE = "PRIVATE", _("Private")
+    MILITARY = "MILITARY", _("Military")

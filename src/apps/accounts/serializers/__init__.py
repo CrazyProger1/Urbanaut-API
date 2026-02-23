@@ -20,3 +20,6 @@ from src.apps.accounts.serializers.referrals import (
     ReferralCodeRetrieveSerializer,
     ReferralCodeListSerializer,
 )
+from src.apps.accounts.serializers.languages import (
+    LanguageListSerializer,
+)

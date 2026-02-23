@@ -1,7 +1,12 @@
 from django_filters import rest_framework as filters
 
 from src.apps.abandoned.models import Place
-from src.apps.abandoned.services.db import search_places
+from src.apps.abandoned.services.db import (
+    search_places,
+    filter_favorite_user_places,
+    filter_private_user_places,
+    filter_supposed_places,
+)
 from src.apps.abandoned.services.ai import search_places_ai
 from src.apps.tags.services.db.tags import get_all_tags
 from src.utils.django.geo import BoundsSerializer
@@ -17,7 +22,11 @@ class PlaceFilter(filters.FilterSet):
     ai_query = filters.CharFilter(method="ai_search")
     preservation = filters.CharFilter(field_name="preservation__level")
     security = filters.CharFilter(field_name="security__level")
+    has_security = filters.BooleanFilter(field_name="security__has_security")
     country = filters.CharFilter(field_name="address__country__tld")
+    is_favorite = filters.BooleanFilter(method="filter_favorites")
+    is_private = filters.BooleanFilter(method="filter_private")
+    is_supposed = filters.BooleanFilter(method="filter_supposed")
 
     class Meta:
         model = Place
@@ -31,6 +40,29 @@ class PlaceFilter(filters.FilterSet):
 
     def ai_search(self, queryset, name, value):
         return search_places_ai(source=queryset, term=value)
+
+    def filter_favorites(self, queryset, name, value):
+        user = self.request.user
+
+        if user.is_authenticated and value:
+            return filter_favorite_user_places(queryset=queryset, user=user)
+
+        return queryset
+
+    def filter_private(self, queryset, name, value):
+        user = self.request.user
+
+        if user.is_authenticated and value:
+            return filter_private_user_places(
+                queryset=queryset,
+                user=user,
+                private=value,
+            )
+
+        return queryset
+
+    def filter_supposed(self, queryset, name, value):
+        return filter_supposed_places(queryset=queryset, supposed=value)
 
     def filter_queryset(self, queryset):
         queryset = super().filter_queryset(queryset=queryset)
