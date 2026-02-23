@@ -15,6 +15,4 @@ class PlacePreservationCreateRetrieveSerializer(serializers.ModelSerializer):
             "has_internal_ceilings",
             "level",
         )
-        read_only_fields = (
-            "level",
-        )
+        read_only_fields = ("level",)

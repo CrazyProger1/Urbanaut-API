@@ -50,8 +50,6 @@ def update_user_status(user: User, online: bool):
     )
 
 
-
-
 @database_sync_to_async
 def aupdate_user_status(user: User, online: bool):
     update_user_status(user, online)

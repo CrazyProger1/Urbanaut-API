@@ -13,10 +13,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-LANGUAGES = [
-    ("en", _("English")),
-    ("uk", _("Ukrainian"))
-]
+LANGUAGES = [("en", _("English")), ("uk", _("Ukrainian"))]
 
 LOCALE_PATHS = [
     BASE_DIR.joinpath("locales"),

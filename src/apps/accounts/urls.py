@@ -11,7 +11,8 @@ from src.apps.accounts.views import (
     ReferralCodeViewSet,
     UserViewSet,
     UserByUsernameViewSet,
-    WebsocketTokenCreateView, LanguageListAPIView,
+    WebsocketTokenCreateView,
+    LanguageListAPIView,
 )
 from src.apps.accounts.consumers import AsyncUserConsumer
 

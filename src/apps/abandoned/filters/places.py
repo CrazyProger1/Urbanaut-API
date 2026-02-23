@@ -1,8 +1,12 @@
 from django_filters import rest_framework as filters
 
 from src.apps.abandoned.models import Place
-from src.apps.abandoned.services.db import search_places, filter_favorite_user_places, filter_private_user_places, \
-    filter_supposed_places
+from src.apps.abandoned.services.db import (
+    search_places,
+    filter_favorite_user_places,
+    filter_private_user_places,
+    filter_supposed_places,
+)
 from src.apps.abandoned.services.ai import search_places_ai
 from src.apps.tags.services.db.tags import get_all_tags
 from src.utils.django.geo import BoundsSerializer

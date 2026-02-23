@@ -1,6 +1,9 @@
 from rest_framework import viewsets, mixins
 
-from src.apps.feedbacks.serializers import FeedbackCreateSerializer, RequestCreateSerializer
+from src.apps.feedbacks.serializers import (
+    FeedbackCreateSerializer,
+    RequestCreateSerializer,
+)
 from src.apps.feedbacks.services.db import get_all_feedbacks, get_all_requests
 
 

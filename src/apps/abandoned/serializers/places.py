@@ -1,7 +1,9 @@
 from rest_framework import serializers
 
 from src.apps.abandoned.models import Place
-from src.apps.abandoned.serializers.security import PlaceSecurityCreateRetrieveSerializer
+from src.apps.abandoned.serializers.security import (
+    PlaceSecurityCreateRetrieveSerializer,
+)
 from src.apps.abandoned.services.db import (
     set_preservation_level,
     set_security_level,
@@ -13,7 +15,9 @@ from src.apps.media.serializers import FileListSerializer
 from src.apps.media.services.db import get_all_files
 from src.apps.tags.services.db import get_all_tags
 from src.utils.django.geo import PointField
-from src.apps.abandoned.serializers.preservation import PlacePreservationCreateRetrieveSerializer
+from src.apps.abandoned.serializers.preservation import (
+    PlacePreservationCreateRetrieveSerializer,
+)
 
 
 class PlaceListSerializer(serializers.ModelSerializer):

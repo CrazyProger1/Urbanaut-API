@@ -83,9 +83,9 @@ class PlacePreservation(models.Model):
         self.save(update_fields=("level",))
 
     def save(
-            self,
-            *args,
-            **kwargs,
+        self,
+        *args,
+        **kwargs,
     ):
         super().save(*args, **kwargs)
 

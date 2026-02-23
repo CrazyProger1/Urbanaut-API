@@ -11,15 +11,17 @@ def get_all_notifications():
 
 
 def get_user_shown_notifications(user):
-    return Notification.objects.filter(is_shown=True).filter(
-        Q(recipients=user) | Q(audience=NotificationAudience.SYSTEM)
-    ).order_by("-triggered_at")
+    return (
+        Notification.objects.filter(is_shown=True)
+        .filter(Q(recipients=user) | Q(audience=NotificationAudience.SYSTEM))
+        .order_by("-triggered_at")
+    )
 
 
 def filter_notifications_by_recipient_read(
-        source: Source[Notification],
-        recipient,
-        is_read: bool,
+    source: Source[Notification],
+    recipient,
+    is_read: bool,
 ):
     queryset = get_queryset(source=source)
     return (

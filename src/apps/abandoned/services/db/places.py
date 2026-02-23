@@ -7,7 +7,12 @@ from django.db.models import Q
 from modeltranslation.utils import build_localized_fieldname
 
 from src.apps.abandoned.enums import PreservationLevel, SecurityLevel
-from src.apps.abandoned.models import Place, PlacePreservation, PlaceFile, UserFavoritePlace
+from src.apps.abandoned.models import (
+    Place,
+    PlacePreservation,
+    PlaceFile,
+    UserFavoritePlace,
+)
 from src.apps.media.models import File
 from src.utils.django.db import Source, get_queryset
 
@@ -27,7 +32,7 @@ def get_user_or_public_places(user) -> models.QuerySet[Place]:
 
 
 def search_places(
-        term: str = None, source: Source[Place] = Place
+    term: str = None, source: Source[Place] = Place
 ) -> models.QuerySet[Place]:
     queryset = get_queryset(source=source)
     query = Q()
@@ -91,15 +96,21 @@ def is_place_favorite(place: Place, user):
     return UserFavoritePlace.objects.filter(user=user, place=place).exists()
 
 
-def filter_favorite_user_places(queryset: models.QuerySet[Place], user) -> models.QuerySet[Place]:
+def filter_favorite_user_places(
+    queryset: models.QuerySet[Place], user
+) -> models.QuerySet[Place]:
     return queryset.filter(favorite_by=user)
 
 
-def filter_private_user_places(queryset: models.QuerySet[Place], user, private: bool) -> models.QuerySet[Place]:
+def filter_private_user_places(
+    queryset: models.QuerySet[Place], user, private: bool
+) -> models.QuerySet[Place]:
     if private:
         return queryset.filter(is_private=True, created_by=user)
     return queryset.filter(is_private=False)
 
 
-def filter_supposed_places(queryset: models.QuerySet[Place], supposed: bool) -> models.QuerySet[Place]:
+def filter_supposed_places(
+    queryset: models.QuerySet[Place], supposed: bool
+) -> models.QuerySet[Place]:
     return queryset.filter(is_supposed=supposed)

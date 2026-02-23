@@ -15,7 +15,9 @@ from src.apps.accounts.serializers.settings import (
 from src.apps.accounts.services.db import (
     apply_referral_code,
     get_referral_code_or_none,
-    set_user_country, get_user_by_username_or_none, update_user_initial_username,
+    set_user_country,
+    get_user_by_username_or_none,
+    update_user_initial_username,
 )
 from src.apps.geo.services.db import get_country_or_none
 
@@ -109,7 +111,9 @@ class CurrentUserSerializer(serializers.ModelSerializer):
         if username:
             user = get_user_by_username_or_none(username=username)
             if user and user != self.instance:
-                raise serializers.ValidationError(detail={"username": _("Username is already used.")})
+                raise serializers.ValidationError(
+                    detail={"username": _("Username is already used.")}
+                )
 
         return super().validate(attrs=attrs)
 

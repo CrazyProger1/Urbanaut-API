@@ -25,9 +25,7 @@ class RequestAdmin(ModelAdmin):
         "type",
         "path",
     )
-    list_filter = (
-        "is_fulfilled",
-    )
+    list_filter = ("is_fulfilled",)
 
     actions_submit_line = ("mark_fulfilled",)
 

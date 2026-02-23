@@ -7,6 +7,7 @@ class PlaceSecurityCreateRetrieveSerializer(serializers.ModelSerializer):
     """
     Doubts about the legality
     """
+
     class Meta:
         model = PlaceSecurity
         fields = (
