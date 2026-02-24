@@ -104,10 +104,6 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
             "created_by",
             "created_at",
             "updated_at",
-            "is_private",
-            "preservation",
-            "security",
-            "files",
         )
 
     def create(self, validated_data):
