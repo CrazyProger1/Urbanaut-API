@@ -15,7 +15,7 @@ User = get_user_model()
 LIST_URL = "/api/v1/places/"
 
 
-class PlaceAPITestCase(APITestCase):
+class PlaceAPIFiltersTestCase(APITestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
