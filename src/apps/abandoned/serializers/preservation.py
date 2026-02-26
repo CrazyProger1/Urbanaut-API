@@ -3,7 +3,7 @@ from rest_framework import serializers
 from src.apps.abandoned.models import PlacePreservation
 
 
-class PlacePreservationCreateRetrieveSerializer(serializers.ModelSerializer):
+class PlacePreservationCreateRetrieveUpdateSerializer(serializers.ModelSerializer):
     class Meta:
         model = PlacePreservation
         fields = (
@@ -13,6 +13,8 @@ class PlacePreservationCreateRetrieveSerializer(serializers.ModelSerializer):
             "has_windows",
             "has_doors",
             "has_internal_ceilings",
+            "has_furniture",
+            "is_clean",
             "level",
         )
         read_only_fields = ("level",)

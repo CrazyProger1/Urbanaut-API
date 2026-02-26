@@ -16,7 +16,7 @@ from src.apps.media.services.db import get_all_files
 from src.apps.tags.services.db import get_all_tags
 from src.utils.django.geo import PointField
 from src.apps.abandoned.serializers.preservation import (
-    PlacePreservationCreateRetrieveSerializer,
+    PlacePreservationCreateRetrieveUpdateSerializer,
 )
 
 
@@ -48,7 +48,7 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
     security = PlaceSecurityCreateRetrieveSerializer(
         read_only=True,
     )
-    preservation = PlacePreservationCreateRetrieveSerializer(
+    preservation = PlacePreservationCreateRetrieveUpdateSerializer(
         read_only=True,
     )
     tags = serializers.SlugRelatedField(
@@ -87,7 +87,7 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
         many=True,
         queryset=get_all_tags(),
     )
-    preservation = PlacePreservationCreateRetrieveSerializer()
+    preservation = PlacePreservationCreateRetrieveUpdateSerializer()
     security = PlaceSecurityCreateRetrieveSerializer()
 
     files = serializers.PrimaryKeyRelatedField(
@@ -135,7 +135,7 @@ class PlaceUpdateSerializer(serializers.ModelSerializer):
         many=True,
         queryset=get_all_tags(),
     )
-    preservation = PlacePreservationCreateRetrieveSerializer()
+    preservation = PlacePreservationCreateRetrieveUpdateSerializer()
     security = PlaceSecurityCreateRetrieveSerializer()
 
     files = serializers.PrimaryKeyRelatedField(

@@ -1,1 +1,1 @@
-uv run python manage.py test src.apps.abandoned
+uv run python manage.py test src.apps.abandoned --keepdb

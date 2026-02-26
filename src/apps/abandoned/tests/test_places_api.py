@@ -101,12 +101,12 @@ class PlaceAPIFiltersTestCase(APITestCase):
         preservation.has_roof = True            # +3
         preservation.has_floor = True           # +2
         preservation.has_walls = True           # +2
-        preservation.has_internal_ceilings = True  # +2  → total 9 → HIGH
+        preservation.has_internal_ceilings = True  # +2  → total 9 → MEDIUM
         preservation.save()
 
         place_none = Place.objects.create(name="Ruins", point=Point(11.0, 21.0), created_by=self.user)
 
-        response = self.client.get(LIST_URL, {"preservation": PreservationLevel.HIGH})
+        response = self.client.get(LIST_URL, {"preservation": PreservationLevel.MEDIUM})
 
         self.assertEqual(response.status_code, 200)
         ids = self._ids(response)
