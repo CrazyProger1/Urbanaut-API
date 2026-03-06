@@ -30,7 +30,7 @@ class Command(BaseCommand):
             rows = csv.reader(csvfile, delimiter=',')
             for i, row in enumerate(rows):
                 if i == 0:
-                    return
+                    continue
                 tag_en, tag_uk, tag_ru = row
                 self.stdout.write(self.style.SUCCESS(f"Upserted {tag_en} into database"))
                 Tag.objects.get_or_create(**{
