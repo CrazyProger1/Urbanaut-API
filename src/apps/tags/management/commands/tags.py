@@ -16,7 +16,7 @@ class Command(BaseCommand):
         parser.add_argument(
             "file",
             type=str,
-            help="CSV file ",
+            help="CSV file",
         )
 
     def handle(self, *args, **options):
