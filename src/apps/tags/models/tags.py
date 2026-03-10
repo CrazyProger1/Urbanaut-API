@@ -5,7 +5,7 @@ from src.utils.django.db import TimestampMixin
 
 
 class Tag(TimestampMixin, models.Model):
-    tag = models.SlugField(
+    tag = models.CharField(
         max_length=100,
         verbose_name=_("tag"),
         null=False,
