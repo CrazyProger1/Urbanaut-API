@@ -33,8 +33,8 @@ class Command(BaseCommand):
                     continue
                 tag_en, tag_uk, tag_ru = row
                 self.stdout.write(self.style.SUCCESS(f"Upserted {tag_en} into database"))
-                Tag.objects.get_or_create(**{
-                    "tag_en": tag_en,
-                    "tag_uk": tag_uk,
-                    "tag_ru": tag_ru,
-                })
+                Tag.objects.update_or_create(
+                    tag_en=tag_en,
+                    defaults={"tag_uk": tag_uk, "tag_ru": tag_ru},
+                    create_defaults={"tag_en": tag_en, "tag_uk": tag_uk, "tag_ru": tag_ru},
+                )
