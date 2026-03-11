@@ -26,15 +26,21 @@ class Command(BaseCommand):
             self.stdout.write(self.style.ERROR(f"File not found: {file}"))
             return
 
-        with open(file, newline='') as csvfile:
-            rows = csv.reader(csvfile, delimiter=',')
+        with open(file, newline="") as csvfile:
+            rows = csv.reader(csvfile, delimiter=",")
             for i, row in enumerate(rows):
                 if i == 0:
                     continue
                 tag_en, tag_uk, tag_ru = row
-                self.stdout.write(self.style.SUCCESS(f"Upserted {tag_en} into database"))
+                self.stdout.write(
+                    self.style.SUCCESS(f"Upserted {tag_en} into database")
+                )
                 Tag.objects.update_or_create(
                     tag_en=tag_en,
                     defaults={"tag_uk": tag_uk, "tag_ru": tag_ru},
-                    create_defaults={"tag_en": tag_en, "tag_uk": tag_uk, "tag_ru": tag_ru},
+                    create_defaults={
+                        "tag_en": tag_en,
+                        "tag_uk": tag_uk,
+                        "tag_ru": tag_ru,
+                    },
                 )
