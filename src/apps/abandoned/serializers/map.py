@@ -9,7 +9,9 @@ class MapRequestSerializer(serializers.Serializer):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         self.fields["tags"].choices = list(get_all_tags().values_list("tag", flat=True))
-        self.fields["country"].choices = list(get_active_countries().values_list("tld", flat=True))
+        self.fields["country"].choices = list(
+            get_active_countries().values_list("tld", flat=True)
+        )
 
     tags = serializers.MultipleChoiceField(
         required=False,
@@ -30,24 +32,18 @@ class MapRequestSerializer(serializers.Serializer):
         choices=SecurityLevel,
     )
     has_security = serializers.BooleanField(
-        required=False,
-        help_text="Show secured only"
+        required=False, help_text="Show secured only"
     )
     country = serializers.ChoiceField(
         required=False,
         choices=[],
     )
     is_favorite = serializers.BooleanField(
-        required=False,
-        help_text="Show favorite only"
+        required=False, help_text="Show favorite only"
     )
-    is_private = serializers.BooleanField(
-        required=False,
-        help_text="Show private only"
-    )
+    is_private = serializers.BooleanField(required=False, help_text="Show private only")
     is_supposed = serializers.BooleanField(
-        required=False,
-        help_text="Show supposed only"
+        required=False, help_text="Show supposed only"
     )
 
 

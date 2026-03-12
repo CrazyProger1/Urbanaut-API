@@ -207,8 +207,8 @@ def serialize_place_to_geojson(place: Place, user):
             "is_private": place.is_private,
             "is_supposed": place.is_supposed,
             "is_favorite": (
-                    user.is_authenticated and
-                    is_place_favorite(place=place, user=user)),
+                user.is_authenticated and is_place_favorite(place=place, user=user)
+            ),
         },
         "geometry": {
             "type": "Point",
