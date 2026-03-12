@@ -6,9 +6,14 @@ from src.apps.tags.services.db import get_all_tags
 
 
 class MapRequestSerializer(serializers.Serializer):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["tags"].choices = list(get_all_tags().values_list("tag", flat=True))
+        self.fields["country"].choices = list(get_active_countries().values_list("tld", flat=True))
+
     tags = serializers.MultipleChoiceField(
-        choices=get_all_tags().values_list("tag", flat=True),
         required=False,
+        choices=[],
     )
     query = serializers.CharField(
         required=False,
@@ -30,10 +35,7 @@ class MapRequestSerializer(serializers.Serializer):
     )
     country = serializers.ChoiceField(
         required=False,
-        choices=get_active_countries().values_list(
-            "tld",
-            flat=True,
-        ),
+        choices=[],
     )
     is_favorite = serializers.BooleanField(
         required=False,
