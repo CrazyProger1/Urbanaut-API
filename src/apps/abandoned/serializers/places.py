@@ -202,7 +202,7 @@ def serialize_place_to_geojson(place: Place, user):
     return {
         "type": "Feature",
         "properties": {
-            "id": 1,
+            "id": place.pk,
             "type": "Place",
             "is_private": place.is_private,
             "is_supposed": place.is_supposed,
