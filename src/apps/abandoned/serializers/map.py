@@ -32,18 +32,28 @@ class MapRequestSerializer(serializers.Serializer):
         choices=SecurityLevel,
     )
     has_security = serializers.BooleanField(
-        required=False, help_text="Show secured only"
+        required=False,
+        help_text="Show secured only",
+        allow_null=True,
     )
     country = serializers.ChoiceField(
         required=False,
         choices=[],
     )
     is_favorite = serializers.BooleanField(
-        required=False, help_text="Show favorite only"
+        required=False,
+        help_text="Show favorite only",
+        allow_null=True,
     )
-    is_private = serializers.BooleanField(required=False, help_text="Show private only")
+    is_private = serializers.BooleanField(
+        required=False,
+        help_text="Show private only",
+        allow_null=True,
+    )
     is_supposed = serializers.BooleanField(
-        required=False, help_text="Show supposed only"
+        required=False,
+        help_text="Show supposed only",
+        allow_null=True,
     )
 
 
