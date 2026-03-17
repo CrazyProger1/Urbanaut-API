@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     "src.apps.media",
     "src.apps.notifications",
     "src.apps.config",
+    "src.apps.expeditions",
 ]
 
 MIDDLEWARE = [
