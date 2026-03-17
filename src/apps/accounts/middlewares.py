@@ -5,6 +5,7 @@ from django.contrib.auth.models import AnonymousUser
 from django.contrib.auth import get_user_model
 from django.shortcuts import redirect
 from django.urls import reverse
+from django.utils import translation
 
 from src.apps.accounts.exceptions import InvalidWebsocketTokenError
 from src.apps.accounts.services.websockets import verify_websocket_token
@@ -41,7 +42,6 @@ class Admin2FAMiddleware:
             reverse("admin:login"),
             reverse("admin:admin_2fa"),
         )
-        print(self.allowed_routes)
 
     def is_2fa_verified(self, request):
         return request.session.get("admin_2fa_verified", False)

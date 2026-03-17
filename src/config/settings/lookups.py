@@ -3,9 +3,9 @@ from src.apps.abandoned.enums import PreservationLevel, SecurityLevel
 PRESERVATION_LEVEL_LOOKUP = {
     (0, 0): PreservationLevel.NONE,
     (1, 5): PreservationLevel.LOW,
-    (6, 8): PreservationLevel.MEDIUM,
-    (9, 10): PreservationLevel.HIGH,
-    (11, 11): PreservationLevel.AWESOME,
+    (6, 10): PreservationLevel.MEDIUM,
+    (11, 14): PreservationLevel.HIGH,
+    (15, 15): PreservationLevel.AWESOME,
 }
 
 PRESERVATION_LEVEL_WEIGHTS_LOOKUP = {
@@ -15,6 +15,8 @@ PRESERVATION_LEVEL_WEIGHTS_LOOKUP = {
     "has_doors": 1,
     "has_windows": 1,
     "has_internal_ceilings": 2,
+    "has_furniture": 2,
+    "is_clean": 2,
 }
 
 SECURITY_LEVEL_WEIGHTS_LOOKUP = {

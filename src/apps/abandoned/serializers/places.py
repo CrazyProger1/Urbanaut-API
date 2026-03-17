@@ -1,3 +1,5 @@
+from typing import Iterable
+
 from rest_framework import serializers
 
 from src.apps.abandoned.models import Place
@@ -16,7 +18,7 @@ from src.apps.media.services.db import get_all_files
 from src.apps.tags.services.db import get_all_tags
 from src.utils.django.geo import PointField
 from src.apps.abandoned.serializers.preservation import (
-    PlacePreservationCreateRetrieveSerializer,
+    PlacePreservationCreateRetrieveUpdateSerializer,
 )
 
 
@@ -48,7 +50,7 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
     security = PlaceSecurityCreateRetrieveSerializer(
         read_only=True,
     )
-    preservation = PlacePreservationCreateRetrieveSerializer(
+    preservation = PlacePreservationCreateRetrieveUpdateSerializer(
         read_only=True,
     )
     tags = serializers.SlugRelatedField(
@@ -87,7 +89,7 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
         many=True,
         queryset=get_all_tags(),
     )
-    preservation = PlacePreservationCreateRetrieveSerializer()
+    preservation = PlacePreservationCreateRetrieveUpdateSerializer()
     security = PlaceSecurityCreateRetrieveSerializer()
 
     files = serializers.PrimaryKeyRelatedField(
@@ -104,10 +106,6 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
             "created_by",
             "created_at",
             "updated_at",
-            "is_private",
-            "preservation",
-            "security",
-            "files",
         )
 
     def create(self, validated_data):
@@ -139,7 +137,7 @@ class PlaceUpdateSerializer(serializers.ModelSerializer):
         many=True,
         queryset=get_all_tags(),
     )
-    preservation = PlacePreservationCreateRetrieveSerializer()
+    preservation = PlacePreservationCreateRetrieveUpdateSerializer()
     security = PlaceSecurityCreateRetrieveSerializer()
 
     files = serializers.PrimaryKeyRelatedField(
@@ -198,3 +196,22 @@ class PlaceToggleSupposedSerializer(serializers.Serializer):
 
     class Meta:
         fields = "__all__"
+
+
+def serialize_place_to_geojson(place: Place, user):
+    return {
+        "type": "Feature",
+        "properties": {
+            "id": place.pk,
+            "type": "Place",
+            "is_private": place.is_private,
+            "is_supposed": place.is_supposed,
+            "is_favorite": (
+                user.is_authenticated and is_place_favorite(place=place, user=user)
+            ),
+        },
+        "geometry": {
+            "type": "Point",
+            "coordinates": [place.point.x, place.point.y],
+        },
+    }

@@ -61,6 +61,20 @@ class PlacePreservation(models.Model):
         blank=False,
         null=False,
     )
+    has_furniture = models.BooleanField(
+        default=False,
+        verbose_name=_("furniture"),
+        help_text=_("Has furniture?"),
+        blank=False,
+        null=False,
+    )
+    is_clean = models.BooleanField(
+        default=False,
+        verbose_name=_("clean"),
+        help_text=_("Is clean?"),
+        blank=False,
+        null=False,
+    )
 
     @property
     def actual_level(self) -> PreservationLevel:

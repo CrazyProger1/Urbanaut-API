@@ -42,12 +42,14 @@ INSTALLED_APPS = [
     "src.apps.media",
     "src.apps.notifications",
     "src.apps.config",
+    "src.apps.expeditions",
 ]
 
 MIDDLEWARE = [
     "django_prometheus.middleware.PrometheusBeforeMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
+    "django.middleware.locale.LocaleMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
     "django.contrib.auth.middleware.AuthenticationMiddleware",
@@ -74,6 +76,10 @@ TEMPLATES = [
         },
     },
 ]
+
+MIGRATION_MODULES = {
+    "cities_light": None,
+}
 
 WSGI_APPLICATION = "src.config.web.wsgi.application"
 ASGI_APPLICATION = "src.config.web.asgi.application"

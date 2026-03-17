@@ -44,6 +44,9 @@ class PlaceFilter(filters.FilterSet):
     def filter_favorites(self, queryset, name, value):
         user = self.request.user
 
+        if value is None:
+            return queryset
+
         if user.is_authenticated and value:
             return filter_favorite_user_places(queryset=queryset, user=user)
 
@@ -51,6 +54,9 @@ class PlaceFilter(filters.FilterSet):
 
     def filter_private(self, queryset, name, value):
         user = self.request.user
+
+        if value is None:
+            return queryset
 
         if user.is_authenticated and value:
             return filter_private_user_places(
@@ -62,6 +68,9 @@ class PlaceFilter(filters.FilterSet):
         return queryset
 
     def filter_supposed(self, queryset, name, value):
+        if value is None:
+            return queryset
+
         return filter_supposed_places(queryset=queryset, supposed=value)
 
     def filter_queryset(self, queryset):

@@ -1,0 +1,9 @@
+repos:
+- repo: local
+  hooks:
+    - id: tests
+      name: Run tests
+      entry: "bash tests.sh"
+      language: system
+      verbose: true
+      pass_filenames: false

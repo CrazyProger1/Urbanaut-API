@@ -94,6 +94,17 @@ UNFOLD = {
                 ],
             },
             {
+                "title": _("Expeditions"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Expeditions"),
+                        "icon": "backpack",
+                        "link": reverse_lazy("admin:expeditions_expedition_changelist"),
+                    },
+                ],
+            },
+            {
                 "title": _("Tags"),
                 "collapsible": True,
                 "items": [
