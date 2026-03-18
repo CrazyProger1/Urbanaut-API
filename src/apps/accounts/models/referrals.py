@@ -19,11 +19,10 @@ class Referral(CreatedAtMixin, models.Model):
         null=False,
         blank=False,
     )
-    user = models.ForeignKey(
+    user = models.OneToOneField(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name="referral",
-        unique=True,
         null=False,
         blank=False,
     )
@@ -84,9 +83,9 @@ class ReferralMixin(models.Model):
             give_initial_referral_code(user=self)
 
     def save(
-        self,
-        *args,
-        **kwargs,
+            self,
+            *args,
+            **kwargs,
     ):
         super().save(*args, **kwargs)
         self._give_initial_referral_code()

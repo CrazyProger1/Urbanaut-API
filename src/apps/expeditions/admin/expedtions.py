@@ -2,12 +2,15 @@ from django.contrib import admin
 from unfold.admin import ModelAdmin
 
 from src.apps.accounts.sites import site
+from src.apps.expeditions.admin.participations import ParticipationInline
+from src.apps.expeditions.admin.waypoints import WaypointInline
 from src.apps.expeditions.models import Expedition
 from src.utils.django.admin import CreatedByAdminMixin
 
 
 @admin.register(Expedition, site=site)
 class ExpeditionAdmin(CreatedByAdminMixin, ModelAdmin):
+    inlines = (ParticipationInline, WaypointInline)
     created_by_field = "created_by"
     list_display = (
         "name",
