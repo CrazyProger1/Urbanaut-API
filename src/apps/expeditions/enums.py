@@ -7,3 +7,14 @@ class ExpeditionState(models.TextChoices):
     IN_PROCESS = "IN_PROCESS", _("In process")
     FINISHED = "FINISHED", _("Finished")
     CANCELLED = "CANCELLED", _("Cancelled")
+
+
+class ParticipationState(models.TextChoices):
+    REQUESTED = "REQUESTED", _("Requested")
+    PLANNED = "PLANNED", _("Planned")
+    PARTICIPATED = "PARTICIPATED", _("Participated")
+
+
+class WaypointType(models.TextChoices):
+    POI = "POI", _("POI")
+    MEETING = "MEETING", _("Meeting")
