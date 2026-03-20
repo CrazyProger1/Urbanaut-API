@@ -12,9 +12,8 @@ class WaypointInline(StackedInline):
     tab = True
     verbose_name = _("Waypoint")
     verbose_name_plural = _("Waypoints")
-    autocomplete_fields = (
-        "place",
-    )
+    autocomplete_fields = ("place",)
+
 
 @admin.register(Waypoint, site=site)
 class WaypointAdmin(ModelAdmin):

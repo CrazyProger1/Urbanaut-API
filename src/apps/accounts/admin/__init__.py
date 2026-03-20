@@ -18,6 +18,7 @@ from src.apps.accounts.admin.referrals import (
     ReferralAdmin,
     ReferralCodeInline,
 )
+from src.apps.accounts.admin.teams import TeamAdmin
 
 admin.site.unregister(Group)
 
