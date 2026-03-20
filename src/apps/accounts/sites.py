@@ -20,6 +20,10 @@ class AdvancedAdminSite(UnfoldAdminSite):
         context = {
             **self.each_context(request),
         }
+        if settings.DEBUG:
+            request.session["admin_2fa_verified"] = True
+            return redirect(reverse("admin:index"))
+
         if request.method == "POST":
             code = request.POST.get("code")
             key = settings.OTP_SECRET_KEY + str(request.user.id)
