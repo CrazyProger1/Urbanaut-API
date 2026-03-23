@@ -23,3 +23,8 @@ from src.apps.accounts.serializers.referrals import (
 from src.apps.accounts.serializers.languages import (
     LanguageListSerializer,
 )
+from src.apps.accounts.serializers.teams import (
+    TeamListSerializer,
+    TeamCreateSerializer,
+    TeamRetrieveSerializer,
+)
