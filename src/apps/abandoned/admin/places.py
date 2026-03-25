@@ -64,6 +64,38 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
         "is_private",
         "is_supposed",
     )
+    fieldsets = (
+        (_("General"), {
+            "fields": (
+                "name",
+                "description",
+                "area",
+                "address",
+                "point",
+            ),
+        }),
+        (_("Details"), {
+            "fields": (
+                "built_at",
+                "abandoned_at",
+                "is_private",
+                "is_supposed",
+            ),
+        }),
+        (_("Meta"), {
+            "fields": (
+                created_by_field,
+            ),
+        }),
+        (_("Stats"), {
+            "fields": (
+                "display_views",
+            ),
+        }),
+    )
+
+    readonly_fields = ("display_views",)
+
     autocomplete_fields = (
         created_by_field,
         "area",
@@ -91,3 +123,8 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
         return None
 
     display_area.short_description = _("area")
+
+    def display_views(self, obj: Place):
+        return obj.views.count()
+
+    display_views.short_description = _("views")

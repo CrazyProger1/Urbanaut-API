@@ -23,7 +23,6 @@ class Views(models.Model):
         blank=True,
     )
 
-    @property
     def count(self):
         return self.views.count()
 

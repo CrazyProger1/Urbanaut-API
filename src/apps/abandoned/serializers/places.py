@@ -74,7 +74,7 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
         fields = "__all__"
 
     def get_views(self, obj: Place):
-        return obj.views.count
+        return obj.views.count()
 
     def get_is_favorite(self, obj) -> bool:
         request = self.context.get("request")
