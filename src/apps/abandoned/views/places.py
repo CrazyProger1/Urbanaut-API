@@ -54,6 +54,16 @@ class PlaceViewSet(
     filter_backends = (filters.DjangoFilterBackend,)
     pagination_class = DefaultUnlimitedPagination
 
+    def retrieve(self, request, *args, **kwargs):
+        instance = self.get_object()
+        user = self.request.user
+
+        if user.is_authenticated:
+            instance.views.increase(user=self.request.user)
+
+        serializer = self.get_serializer(instance)
+        return Response(serializer.data)
+
     def get_permissions(self):
         common = super().get_permissions()
         if self.action == "update":
