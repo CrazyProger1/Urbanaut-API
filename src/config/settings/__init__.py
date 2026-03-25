@@ -26,6 +26,7 @@ include(
     "onesignal.py",
     "lookups.py",
     "elastic.py",
+    "stats.py",
     optional("rest.py"),
     optional("docs.py"),
     optional("unfold.py"),

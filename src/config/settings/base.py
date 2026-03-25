@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     "src.apps.notifications",
     "src.apps.config",
     "src.apps.expeditions",
+    "src.apps.stats",
 ]
 
 MIDDLEWARE = [

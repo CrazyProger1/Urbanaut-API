@@ -1,5 +1,3 @@
-from typing import Iterable
-
 from rest_framework import serializers
 
 from src.apps.abandoned.models import Place
@@ -69,10 +67,14 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
     is_favorite = serializers.SerializerMethodField(
         read_only=True,
     )
+    views = serializers.SerializerMethodField()
 
     class Meta:
         model = Place
         fields = "__all__"
+
+    def get_views(self, obj: Place):
+        return obj.views.count()
 
     def get_is_favorite(self, obj) -> bool:
         request = self.context.get("request")
@@ -207,7 +209,7 @@ def serialize_place_to_geojson(place: Place, user):
             "is_private": place.is_private,
             "is_supposed": place.is_supposed,
             "is_favorite": (
-                user.is_authenticated and is_place_favorite(place=place, user=user)
+                    user.is_authenticated and is_place_favorite(place=place, user=user)
             ),
         },
         "geometry": {

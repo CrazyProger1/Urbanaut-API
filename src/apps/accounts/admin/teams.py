@@ -24,6 +24,4 @@ class TeamAdmin(ModelAdmin, TabbedTranslationAdmin):
     inlines = (TeamMemberInline,)
     list_display = ("name",)
     search_fields = ("name",)
-    autocomplete_fields = (
-        "created_by",
-    )
+    autocomplete_fields = ("created_by",)
