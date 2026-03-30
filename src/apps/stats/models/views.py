@@ -29,6 +29,7 @@ class Views(models.Model):
     def increase(self, user):
         if not UserViews.objects.filter(
                 user=user,
+                views=self.views,
                 created_at__gte=timezone.now() - settings.USER_VIEW_EXPIRATION_SECONDS,
         ).exists():
             UserViews.objects.create(user=user, views=self)
