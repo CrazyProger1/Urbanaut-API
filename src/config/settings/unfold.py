@@ -194,9 +194,7 @@ UNFOLD = {
                     {
                         "title": _("News"),
                         "icon": "news",
-                        "link": reverse_lazy(
-                            "admin:news_news_changelist"
-                        ),
+                        "link": reverse_lazy("admin:news_news_changelist"),
                     },
                 ],
             },

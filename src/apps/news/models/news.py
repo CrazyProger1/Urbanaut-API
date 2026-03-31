@@ -18,9 +18,7 @@ class News(ViewsMixin, CreatedAtMixin, UpdatedAtMixin, models.Model):
         blank=True,
         null=True,
         verbose_name=_("subtitle"),
-        help_text=_(
-            "Subtitle of the newsletter."
-        ),
+        help_text=_("Subtitle of the newsletter."),
     )
     content = models.TextField(
         blank=True,
