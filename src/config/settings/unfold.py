@@ -188,6 +188,19 @@ UNFOLD = {
                 ],
             },
             {
+                "title": _("News"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("News"),
+                        "icon": "news",
+                        "link": reverse_lazy(
+                            "admin:news_news_changelist"
+                        ),
+                    },
+                ],
+            },
+            {
                 "title": _("Media"),
                 "collapsible": True,
                 "items": [

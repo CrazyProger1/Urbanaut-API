@@ -67,14 +67,18 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
     is_favorite = serializers.SerializerMethodField(
         read_only=True,
     )
-    views = serializers.SerializerMethodField()
+    views_count = serializers.SerializerMethodField()
+    favorites_count = serializers.SerializerMethodField()
 
     class Meta:
         model = Place
         fields = "__all__"
 
-    def get_views(self, obj: Place):
+    def get_views_count(self, obj: Place):
         return obj.views.count()
+
+    def get_favorites_count(self, obj: Place):
+        return obj.favorite_by.count()
 
     def get_is_favorite(self, obj) -> bool:
         request = self.context.get("request")
