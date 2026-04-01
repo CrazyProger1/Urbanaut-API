@@ -17,4 +17,5 @@ class NewsListSerializer(serializers.ModelSerializer):
             "title",
             "subtitle",
             "published_at",
+            "type",
         )

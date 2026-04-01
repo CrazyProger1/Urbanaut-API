@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from src.apps.news.enums import NewsType
 from src.apps.stats.models import ViewsMixin
 from src.utils.django.db import CreatedAtMixin, UpdatedAtMixin
 
@@ -43,6 +44,13 @@ class News(ViewsMixin, CreatedAtMixin, UpdatedAtMixin, models.Model):
         null=True,
         blank=True,
         related_name="news",
+    )
+    type = models.CharField(
+        max_length=20,
+        choices=NewsType,
+        default=NewsType.SYSTEM,
+        verbose_name=_("type"),
+        help_text=_("Newsletter type.")
     )
 
     class Meta:
