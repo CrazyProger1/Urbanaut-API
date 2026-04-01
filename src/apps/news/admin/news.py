@@ -26,6 +26,7 @@ class NewsAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
                     "title",
                     "subtitle",
                     "content",
+                    "type",
                 ),
             },
         ),
