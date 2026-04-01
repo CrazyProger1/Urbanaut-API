@@ -11,4 +11,5 @@ urlpatterns = [
     path("", include("src.apps.media.urls")),
     path("", include("src.apps.notifications.urls")),
     path("", include("src.apps.news.urls")),
+    path("", include("src.apps.stats.urls")),
 ]

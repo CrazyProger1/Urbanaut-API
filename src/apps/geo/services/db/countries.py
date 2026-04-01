@@ -11,3 +11,7 @@ def get_country_or_none(**data) -> Country | None:
 
 def is_country_supported(country: Country) -> bool:
     return country.is_active
+
+
+def count_active_countries() -> int:
+    return Country.objects.filter(is_active=True).count()

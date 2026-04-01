@@ -46,3 +46,7 @@ def get_user_or_public_areas(user) -> models.QuerySet[Area]:
     if user.is_authenticated:
         query |= Q(created_by=user)
     return Area.objects.filter(query).distinct()
+
+
+def count_areas() -> int:
+    return Area.objects.count()

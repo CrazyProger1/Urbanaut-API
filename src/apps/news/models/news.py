@@ -48,3 +48,6 @@ class News(ViewsMixin, CreatedAtMixin, UpdatedAtMixin, models.Model):
     class Meta:
         verbose_name = _("News")
         verbose_name_plural = _("News")
+
+    def __str__(self):
+        return self.title

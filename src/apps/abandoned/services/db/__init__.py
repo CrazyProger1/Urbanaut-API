@@ -12,10 +12,12 @@ from src.apps.abandoned.services.db.places import (
     filter_private_user_places,
     toggle_place_supposed,
     filter_supposed_places,
+    count_places,
 )
 from src.apps.abandoned.services.db.areas import (
     get_all_areas,
     get_place_area_or_none,
     get_parent_area_or_none,
     get_user_or_public_areas,
+    count_areas,
 )
