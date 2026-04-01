@@ -53,7 +53,7 @@ class NewsAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
             },
         ),
     )
-    readonly_fields = ("display_views", "has_more",)
+    readonly_fields = ("display_views",)
 
     def display_views(self, obj: News):
         return obj.views.count()

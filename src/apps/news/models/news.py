@@ -57,7 +57,7 @@ class News(ViewsMixin, CreatedAtMixin, UpdatedAtMixin, models.Model):
         verbose_name=_("has more"),
         blank=False,
         null=False,
-        help_text=_("Whether the newsletter has more content."),
+        help_text=_('Show "Read more" button on the newsletter.'),
     )
 
     class Meta:
@@ -66,14 +66,3 @@ class News(ViewsMixin, CreatedAtMixin, UpdatedAtMixin, models.Model):
 
     def __str__(self):
         return self.title
-
-    def save(
-            self,
-            *args,
-            **kwargs,
-    ):
-        super().save(*args, **kwargs)
-
-        if self.content and "has_more" not in kwargs.get("update_fields", ()):
-            self.has_more = True
-            self.save(update_fields=("has_more",))
