@@ -14,11 +14,13 @@ class GlobalStatsView(views.APIView):
         responses=GlobalStatsRetrieveSerializer,
     )
     def get(self, request, **kwargs):
-        serializer = GlobalStatsRetrieveSerializer(instance={
-            "places_count": count_places(),
-            "areas_count": count_areas(),
-            "users_count": count_users(),
-            "countries_count": count_active_countries(),
-            "expeditions_count": count_expeditions(),
-        })
+        serializer = GlobalStatsRetrieveSerializer(
+            instance={
+                "places_count": count_places(),
+                "areas_count": count_areas(),
+                "users_count": count_users(),
+                "countries_count": count_active_countries(),
+                "expeditions_count": count_expeditions(),
+            }
+        )
         return response.Response(serializer.data, status=status.HTTP_200_OK)

@@ -50,7 +50,7 @@ class News(ViewsMixin, CreatedAtMixin, UpdatedAtMixin, models.Model):
         choices=NewsType,
         default=NewsType.SYSTEM,
         verbose_name=_("type"),
-        help_text=_("Newsletter type.")
+        help_text=_("Newsletter type."),
     )
     has_more = models.BooleanField(
         default=False,
