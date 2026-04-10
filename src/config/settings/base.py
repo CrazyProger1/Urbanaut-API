@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     "src.apps.expeditions",
     "src.apps.stats",
     "src.apps.news",
+    "src.apps.external",
 ]
 
 MIDDLEWARE = [
