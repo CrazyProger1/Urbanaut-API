@@ -65,33 +65,41 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
         "is_supposed",
     )
     fieldsets = (
-        (_("General"), {
-            "fields": (
-                "name",
-                "description",
-                "area",
-                "address",
-                "point",
-            ),
-        }),
-        (_("Details"), {
-            "fields": (
-                "built_at",
-                "abandoned_at",
-                "is_private",
-                "is_supposed",
-            ),
-        }),
-        (_("Meta"), {
-            "fields": (
-                created_by_field,
-            ),
-        }),
-        (_("Stats"), {
-            "fields": (
-                "display_views",
-            ),
-        }),
+        (
+            _("General"),
+            {
+                "fields": (
+                    "name",
+                    "description",
+                    "area",
+                    "address",
+                    "point",
+                ),
+            },
+        ),
+        (
+            _("Details"),
+            {
+                "fields": (
+                    "built_at",
+                    "abandoned_at",
+                    "is_private",
+                    "is_supposed",
+                ),
+            },
+        ),
+        (
+            _("Meta"),
+            {
+                "fields": (created_by_field,),
+            },
+        ),
+        (
+            _("Stats"),
+            {
+                "fields": ("display_views",),
+            },
+        ),
     )
 
     readonly_fields = ("display_views",)

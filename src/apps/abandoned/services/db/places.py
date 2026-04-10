@@ -114,3 +114,7 @@ def filter_supposed_places(
     queryset: models.QuerySet[Place], supposed: bool
 ) -> models.QuerySet[Place]:
     return queryset.filter(is_supposed=supposed)
+
+
+def count_places() -> int:
+    return Place.objects.count()

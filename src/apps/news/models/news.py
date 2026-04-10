@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
+from src.apps.news.enums import NewsType
 from src.apps.stats.models import ViewsMixin
 from src.utils.django.db import CreatedAtMixin, UpdatedAtMixin
 
@@ -18,9 +19,7 @@ class News(ViewsMixin, CreatedAtMixin, UpdatedAtMixin, models.Model):
         blank=True,
         null=True,
         verbose_name=_("subtitle"),
-        help_text=_(
-            "Subtitle of the newsletter."
-        ),
+        help_text=_("Subtitle of the newsletter."),
     )
     content = models.TextField(
         blank=True,
@@ -46,7 +45,24 @@ class News(ViewsMixin, CreatedAtMixin, UpdatedAtMixin, models.Model):
         blank=True,
         related_name="news",
     )
+    type = models.CharField(
+        max_length=20,
+        choices=NewsType,
+        default=NewsType.SYSTEM,
+        verbose_name=_("type"),
+        help_text=_("Newsletter type."),
+    )
+    has_more = models.BooleanField(
+        default=False,
+        verbose_name=_("has more"),
+        blank=False,
+        null=False,
+        help_text=_('Show "Read more" button on the newsletter.'),
+    )
 
     class Meta:
         verbose_name = _("News")
         verbose_name_plural = _("News")
+
+    def __str__(self):
+        return self.title

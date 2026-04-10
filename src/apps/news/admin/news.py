@@ -16,36 +16,42 @@ class NewsAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
         created_by_field,
         "created_at",
     )
-    list_filter = (
-        "is_published",
-    )
-    search_fields = (
-        "title",
-    )
+    list_filter = ("is_published",)
+    search_fields = ("title",)
     fieldsets = (
-        (_("General"), {
-            "fields": (
-                "title",
-                "subtitle",
-                "content",
-            ),
-        }),
-        (_("Details"), {
-            "fields": (
-                "is_published",
-                "published_at",
-            ),
-        }),
-        (_("Meta"), {
-            "fields": (
-                created_by_field,
-            ),
-        }),
-        (_("Stats"), {
-            "fields": (
-                "display_views",
-            ),
-        }),
+        (
+            _("General"),
+            {
+                "fields": (
+                    "title",
+                    "subtitle",
+                    "content",
+                    "type",
+                    "has_more",
+                ),
+            },
+        ),
+        (
+            _("Details"),
+            {
+                "fields": (
+                    "is_published",
+                    "published_at",
+                ),
+            },
+        ),
+        (
+            _("Meta"),
+            {
+                "fields": (created_by_field,),
+            },
+        ),
+        (
+            _("Stats"),
+            {
+                "fields": ("display_views",),
+            },
+        ),
     )
     readonly_fields = ("display_views",)
 

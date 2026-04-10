@@ -148,6 +148,14 @@ class Place(TimestampMixin, ViewsMixin, models.Model):
         blank=True,
         related_name="favorite_places",
     )
+    provider = models.ForeignKey(
+        to="Provider",
+        on_delete=models.SET_NULL,
+        null=True,
+        blank=True,
+        verbose_name=_("provider"),
+        help_text=_("External provider of information about this place."),
+    )
 
     @property
     def photos(self):

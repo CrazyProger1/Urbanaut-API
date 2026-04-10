@@ -28,9 +28,9 @@ class Views(models.Model):
 
     def increase(self, user):
         if not UserViews.objects.filter(
-                user=user,
-                views=self,
-                created_at__gte=timezone.now() - settings.USER_VIEW_EXPIRATION_SECONDS,
+            user=user,
+            views=self,
+            created_at__gte=timezone.now() - settings.USER_VIEW_EXPIRATION_SECONDS,
         ).exists():
             UserViews.objects.create(user=user, views=self)
 
@@ -44,9 +44,9 @@ class ViewsMixin(models.Model):
     )
 
     def save(
-            self,
-            *args,
-            **kwargs,
+        self,
+        *args,
+        **kwargs,
     ):
         if not self.views_id:
             self.views = Views.objects.create()
