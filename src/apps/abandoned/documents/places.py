@@ -1,6 +1,8 @@
 from django_elasticsearch_dsl import Document, fields
 from django_elasticsearch_dsl.registries import registry
 
+from src.apps.abandoned.models import Place
+
 
 @registry.register_document
 class PlaceDocument(Document):

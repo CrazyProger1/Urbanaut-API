@@ -91,7 +91,7 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
         (
             _("Meta"),
             {
-                "fields": (created_by_field,),
+                "fields": (created_by_field, "provider",),
             },
         ),
         (
@@ -107,6 +107,7 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
     autocomplete_fields = (
         created_by_field,
         "area",
+        "provider",
     )
     search_fields = (
         "name",

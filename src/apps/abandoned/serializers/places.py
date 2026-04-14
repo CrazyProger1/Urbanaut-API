@@ -8,7 +8,7 @@ from src.apps.abandoned.services.db import (
     set_preservation_level,
     set_security_level,
     bind_files_to_place,
-    is_place_favorite,
+    is_place_favorite, get_all_providers,
 )
 from src.apps.accounts.serializers import UserListSerializer
 from src.apps.media.serializers import FileListSerializer
@@ -69,6 +69,10 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
     )
     views_count = serializers.SerializerMethodField()
     favorites_count = serializers.SerializerMethodField()
+    provider = serializers.SlugRelatedField(
+        slug_field="provider",
+        read_only=True,
+    )
 
     class Meta:
         model = Place
@@ -102,6 +106,10 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
         queryset=get_all_files(),
         many=True,
         write_only=True,
+    )
+    provider = serializers.SlugRelatedField(
+        slug_field="provider",
+        queryset=get_all_providers(),
     )
 
     class Meta:
@@ -213,7 +221,7 @@ def serialize_place_to_geojson(place: Place, user):
             "is_private": place.is_private,
             "is_supposed": place.is_supposed,
             "is_favorite": (
-                user.is_authenticated and is_place_favorite(place=place, user=user)
+                    user.is_authenticated and is_place_favorite(place=place, user=user)
             ),
         },
         "geometry": {
