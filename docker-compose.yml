@@ -88,7 +88,7 @@ services:
 
   elasticsearch:
     image: elasticsearch:7.16.1
-    container_name: es
+    container_name: urbanaut-elastic
     environment:
       discovery.type: single-node
       ES_JAVA_OPTS: "-Xms512m -Xmx512m"

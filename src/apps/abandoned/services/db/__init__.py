@@ -21,3 +21,6 @@ from src.apps.abandoned.services.db.areas import (
     get_user_or_public_areas,
     count_areas,
 )
+from src.apps.abandoned.services.db.providers import (
+    get_all_providers,
+)

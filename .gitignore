@@ -176,3 +176,10 @@ cython_debug/
 
 # Media files
 /media/
+
+# Terraform Secrets
+infra/vault/.terraform/
+infra/vault/.terraform.lock.hcl
+infra/vault/terraform.tfvars
+infra/vault/terraform.tfstate
+infra/vault/terraform.tfstate.backup
