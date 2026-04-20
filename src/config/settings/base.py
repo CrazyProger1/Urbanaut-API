@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     "src.apps.stats",
     "src.apps.news",
     "src.apps.external",
+    "src.apps.finances",
 ]
 
 MIDDLEWARE = [

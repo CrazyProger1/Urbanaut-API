@@ -210,6 +210,22 @@ UNFOLD = {
                 ],
             },
             {
+                "title": _("Finances"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("Balances"),
+                        "icon": "balance",
+                        "link": reverse_lazy("admin:finances_balance_changelist"),
+                    },
+                    {
+                        "title": _("Transactions"),
+                        "icon": "currency_exchange",
+                        "link": reverse_lazy("admin:finances_transaction_changelist"),
+                    },
+                ],
+            },
+            {
                 "title": _("Celery"),
                 "collapsible": True,
                 "items": [

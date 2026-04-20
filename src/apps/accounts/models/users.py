@@ -8,6 +8,7 @@ from src.apps.accounts.managers import UserManager
 from src.apps.accounts.models.referrals import ReferralMixin
 from src.apps.accounts.models.settings import SettingsMixin
 from src.apps.accounts.models.usernames import UsernameMixin
+from src.apps.finances.models import BalanceMixin
 
 from src.utils.django.db import TimestampMixin
 
@@ -18,6 +19,7 @@ class User(
     UsernameMixin,
     TimestampMixin,
     PermissionsMixin,
+    BalanceMixin,
     AbstractBaseUser,
 ):
     id = models.UUIDField(
