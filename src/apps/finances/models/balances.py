@@ -57,6 +57,10 @@ class BalanceMixin(models.Model):
 
     @property
     def money(self) -> int:
-        payins = self.balance.transactions_in.aggregate(Sum("amount"))["amount__sum"] or 0
-        payouts = self.balance.transactions_out.aggregate(Sum("amount"))["amount__sum"] or 0
+        try:
+            balance = self.balance
+        except Balance.DoesNotExist:
+            return 0
+        payins = balance.transactions_in.aggregate(Sum("amount"))["amount__sum"] or 0
+        payouts = balance.transactions_out.aggregate(Sum("amount"))["amount__sum"] or 0
         return payins - payouts
