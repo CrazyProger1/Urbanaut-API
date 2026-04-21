@@ -3,6 +3,7 @@ import uuid
 
 from django.conf import settings
 from django.db import models
+from django.db.models import Sum
 from django.utils.translation import gettext_lazy as _
 
 from src.utils.django.db import TimestampMixin
@@ -53,3 +54,9 @@ class BalanceMixin(models.Model):
             **kwargs,
         )
         self._create_balance()
+
+    @property
+    def money(self) -> int:
+        payins = self.balance.transactions_in.aggregate(Sum("amount"))["amount__sum"] or 0
+        payouts = self.balance.transactions_out.aggregate(Sum("amount"))["amount__sum"] or 0
+        return payins - payouts

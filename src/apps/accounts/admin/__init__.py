@@ -81,6 +81,14 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
             },
         ),
         (
+            _("Assets"),
+            {
+                "fields": (
+                    "urbucks",
+                ),
+            },
+        ),
+        (
             _("Permissions"),
             {
                 "fields": (
@@ -109,6 +117,7 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
         "last_name",
         "is_staff",
         "is_online",
+        "urbucks",
         "created_at",
     )
     list_filter = ("is_staff", "is_superuser", "is_active", "groups")
@@ -117,7 +126,13 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
     readonly_fields = (
         "created_at",
         "is_online",
+        "urbucks",
     )
+
+    def urbucks(self, user):
+        return user.money or 0
+
+    urbucks.short_description = _("Urbucks")
 
 
 @admin.register(Group, site=site)

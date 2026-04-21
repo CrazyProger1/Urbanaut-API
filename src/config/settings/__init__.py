@@ -27,6 +27,7 @@ include(
     "lookups.py",
     "elastic.py",
     "stats.py",
+    "finances.py",
     optional("rest.py"),
     optional("docs.py"),
     optional("unfold.py"),

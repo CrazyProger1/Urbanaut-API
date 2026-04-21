@@ -1,0 +1,2 @@
+class AlreadySignedError(RuntimeError):
+    pass
