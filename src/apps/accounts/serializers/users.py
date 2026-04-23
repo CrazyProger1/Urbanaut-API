@@ -88,6 +88,7 @@ class CurrentUserSerializer(serializers.ModelSerializer):
     )
     achievements = serializers.SerializerMethodField(read_only=True)
     metrics = MetricRetrieveSerializer(many=True, read_only=True)
+    balance = serializers.IntegerField(read_only=True, source="money")
 
     class Meta:
         model = User
@@ -103,6 +104,7 @@ class CurrentUserSerializer(serializers.ModelSerializer):
             "bio",
             "created_at",
             "username",
+            "balance",
         )
 
     def validate(self, attrs):

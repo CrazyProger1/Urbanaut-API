@@ -110,6 +110,7 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
     provider = serializers.SlugRelatedField(
         slug_field="provider",
         queryset=get_all_providers(),
+        required=False,
     )
 
     class Meta:

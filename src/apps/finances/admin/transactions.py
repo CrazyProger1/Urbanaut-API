@@ -13,8 +13,3 @@ class TransactionAdmin(ModelAdmin):
         "signature",
         "is_valid",
     )
-
-    def is_valid(self, transaction: Transaction) -> bool:
-        return True
-
-    is_valid.short_description = "Valid"
