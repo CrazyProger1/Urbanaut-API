@@ -65,7 +65,11 @@ class Transaction(models.Model):
             balance_out_pk=self.balance_out.pk,
             amount=self.amount,
             timestamp=current_time.timestamp(),
-            previous_signature=previous_transaction.signature if previous_transaction else settings.INITIAL_SIGNATURE,
+            previous_signature=(
+                previous_transaction.signature
+                if previous_transaction
+                else settings.INITIAL_SIGNATURE
+            ),
             pk=self.pk,
         )
         self.created_at = current_time
@@ -83,7 +87,11 @@ class Transaction(models.Model):
 
         previous_transaction = get_previous_transaction(transaction=self)
 
-        if chain and previous_transaction and not previous_transaction.is_valid(chain=True):
+        if (
+            chain
+            and previous_transaction
+            and not previous_transaction.is_valid(chain=True)
+        ):
             return False
 
         return verify(
@@ -91,15 +99,19 @@ class Transaction(models.Model):
             amount=self.amount,
             balance_in_pk=self.balance_in.pk,
             balance_out_pk=self.balance_out.pk,
-            previous_signature=previous_transaction.signature if previous_transaction else settings.INITIAL_SIGNATURE,
+            previous_signature=(
+                previous_transaction.signature
+                if previous_transaction
+                else settings.INITIAL_SIGNATURE
+            ),
             timestamp=self.created_at.timestamp(),
             pk=self.pk,
         )
 
     def save(
-            self,
-            *args,
-            **kwargs,
+        self,
+        *args,
+        **kwargs,
     ):
         if not self.signature:
             self._sign()

@@ -83,9 +83,7 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
         (
             _("Assets"),
             {
-                "fields": (
-                    "urbucks",
-                ),
+                "fields": ("urbucks",),
             },
         ),
         (

@@ -9,26 +9,40 @@ logger = logging.getLogger(__name__)
 
 
 @transaction.atomic
-def make_transaction(amount: int, balance_out: Balance, balance_in: Balance) -> Transaction:
+def make_transaction(
+    amount: int, balance_out: Balance, balance_in: Balance
+) -> Transaction:
     if amount < 0:
         raise ValueError("Amount cannot be negative. Change in/out balances")
     elif amount == 0:
         raise ValueError("Amount cannot be zero")
 
-    logger.info("Performing transaction (%s): %s -> %s", amount, balance_in.pk, balance_out.pk)
-    transaction = Transaction.objects.create(amount=amount, balance_out=balance_out, balance_in=balance_in)
+    logger.info(
+        "Performing transaction (%s): %s -> %s", amount, balance_in.pk, balance_out.pk
+    )
+    tn = Transaction.objects.create(
+        amount=amount,
+        balance_out=balance_out,
+        balance_in=balance_in,
+    )
+
+    if not tn.is_valid(chain=True):
+        raise RuntimeError("Transaction chain is invalid!")
+
     logger.info(
         "Transaction (%s, %s) performed: %s -> %s",
         amount,
-        transaction.signature,
+        tn.signature,
         balance_in.pk,
         balance_out.pk,
     )
-    return transaction
+    return tn
 
 
 @transaction.atomic
-def make_system_transaction(amount: int, balance: Balance, pool: Balance = None) -> Transaction:
+def make_system_transaction(
+    amount: int, balance: Balance, pool: Balance = None
+) -> Transaction:
     if not pool:
         pool = get_system_pool()
 

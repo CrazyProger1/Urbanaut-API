@@ -46,7 +46,9 @@ class BalanceMixin(models.Model):
     def _create_balance(self):
         if not self.pk or not hasattr(self, "balance"):
             balance = Balance.objects.create(owned_by=self)
-            logger.info(f"Created balance instance ({balance.pk}) for new user ({self.pk})")
+            logger.info(
+                f"Created balance instance ({balance.pk}) for new user ({self.pk})"
+            )
 
     def save(self, *args, **kwargs):
         super().save(
