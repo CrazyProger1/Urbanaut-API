@@ -38,6 +38,12 @@ class Balance(TimestampMixin, models.Model):
     def __str__(self):
         return f"{self.owned_by if self.owned_by else 'Pool'} ({str(self.id)[:10]})"
 
+    @property
+    def money(self) -> int:
+        payins = self.transactions_in.aggregate(Sum("amount"))["amount__sum"] or 0
+        payouts = self.transactions_out.aggregate(Sum("amount"))["amount__sum"] or 0
+        return payins - payouts
+
 
 class BalanceMixin(models.Model):
     class Meta:
@@ -60,9 +66,6 @@ class BalanceMixin(models.Model):
     @property
     def money(self) -> int:
         try:
-            balance = self.balance
+            return self.balance.money
         except Balance.DoesNotExist:
             return 0
-        payins = balance.transactions_in.aggregate(Sum("amount"))["amount__sum"] or 0
-        payouts = balance.transactions_out.aggregate(Sum("amount"))["amount__sum"] or 0
-        return payins - payouts
