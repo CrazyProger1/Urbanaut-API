@@ -1,4 +1,3 @@
-
 from django.apps import AppConfig
 
 from src.utils.django.settings import default_settings

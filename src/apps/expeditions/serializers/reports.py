@@ -24,6 +24,4 @@ class ReportRetrieveSerializer(serializers.ModelSerializer):
 class ReportCreateSerializer(serializers.ModelSerializer):
     class Meta:
         model = Report
-        fields = (
-            "summary",
-        )
+        fields = ("summary",)

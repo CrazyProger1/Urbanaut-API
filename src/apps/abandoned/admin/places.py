@@ -91,7 +91,10 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
         (
             _("Meta"),
             {
-                "fields": (created_by_field, "provider",),
+                "fields": (
+                    created_by_field,
+                    "provider",
+                ),
             },
         ),
         (
