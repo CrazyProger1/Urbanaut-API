@@ -1,6 +1,14 @@
-class AlreadySignedError(RuntimeError):
+class TransactionError(RuntimeError):
     pass
 
 
-class BalanceOutError(RuntimeError):
+class AlreadySignedError(TransactionError):
+    pass
+
+
+class BalanceOutError(TransactionError):
+    pass
+
+
+class TransactionChainInvalidError(TransactionError):
     pass
