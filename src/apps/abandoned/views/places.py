@@ -4,6 +4,7 @@ from rest_framework.decorators import action
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.response import Response
 
+from src.apps.abandoned.events import PlaceEventChannel, PlaceCreatedEvent
 from src.apps.abandoned.filters import PlaceFilter
 from src.apps.abandoned.pagination import DefaultUnlimitedPagination
 from src.apps.abandoned.permissions import IsOwnerOrReadOnly
@@ -101,6 +102,11 @@ class PlaceViewSet(
         instance.area = get_place_area_or_none(place=instance)
 
         instance.save(update_fields=("area", "address"))
+
+        PlaceEventChannel.place_created.publish(event=PlaceCreatedEvent(
+            created_by=self.request.user,
+            place=instance,
+        ))
 
     @action(methods=["PATCH"], detail=True, url_path="toggle-favorite")
     def toggle_favorite(self, request, pk=None):
