@@ -9,6 +9,11 @@ class AbandonedConfig(AppConfig):
     label = "abandoned"
 
     def ready(self):
-        from src.apps.abandoned.events import PlaceEventChannel, handle_place_created
+        from src.apps.abandoned.events import (
+            PlaceEventChannel,
+            handle_place_created,
+            handle_place_removed_by_moderator,
+        )
 
         PlaceEventChannel.place_created.subscribe(handle_place_created)
+        PlaceEventChannel.place_removed_by_moderator.subscribe(handle_place_removed_by_moderator)

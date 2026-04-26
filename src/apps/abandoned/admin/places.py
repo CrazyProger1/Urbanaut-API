@@ -9,6 +9,8 @@ from unfold.contrib.forms.widgets import WysiwygWidget
 
 from src.apps.abandoned.admin.security import PlaceSecurityInline
 from src.apps.abandoned.admin.preservation import PlacePreservationInline
+from src.apps.abandoned.events import PlaceEventChannel
+from src.apps.abandoned.events.args import PlaceRemovedEvent
 from src.apps.abandoned.models import Place, PlaceTag, PlaceFile, UserFavoritePlace
 from src.apps.accounts.sites import site
 from src.utils.django.admin import CreatedByAdminMixin
@@ -140,3 +142,14 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
         return obj.views.count()
 
     display_views.short_description = _("views")
+
+    def delete_model(self, request, obj: Place):
+        super().delete_model(request=request, obj=obj)
+
+        PlaceEventChannel.place_removed_by_moderator.publish(
+            event=PlaceRemovedEvent(
+                created_by=obj.created_by,
+                place=obj,
+                removed_by=request.user,
+            )
+        )

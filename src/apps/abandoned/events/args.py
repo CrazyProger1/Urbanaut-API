@@ -8,3 +8,10 @@ from src.apps.accounts.models import User
 class PlaceCreatedEvent:
     created_by: User
     place: Place
+
+
+@dataclass
+class PlaceRemovedEvent:
+    created_by: User | None
+    place: Place
+    removed_by: User
