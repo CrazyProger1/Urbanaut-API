@@ -39,3 +39,6 @@ CORS_ALLOW_ALL_ORIGINS = config(
     cast=bool,
     default=False,
 )
+HMAC_MASTER_KEY = config(
+    "HMAC_MASTER_KEY",
+)

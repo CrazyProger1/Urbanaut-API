@@ -4,6 +4,7 @@ from djoser.compat import get_user_email
 from djoser.conf import settings as djoser_settings
 from rest_framework import mixins, viewsets
 
+from src.apps.accounts.events import UserCreatedEvent, UserEventChannel
 from src.apps.accounts.serializers import (
     UserListSerializer,
     UserRetrieveSerializer,
@@ -46,6 +47,7 @@ class UserViewSet(
             user=user,
             request=self.request,
         )
+        UserEventChannel.user_created.publish(event=UserCreatedEvent(user=user))
 
         context = {"user": user}
         to = [get_user_email(user)]

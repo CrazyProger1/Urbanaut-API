@@ -15,7 +15,17 @@ DEFAULT_ACHIEVEMENTS = [
         "weight": 32_766,
         "significance": "TRANSCENDENCE",
     },
+    {
+        "name": "Contributor",
+        "slug": "contributor",
+        "description_en": "Rewarded for contribution.",
+        "icon": "wrench",
+        "weight": 32_765,
+        "significance": "INITIATION",
+    },
 ]
 
 URBANAUT_ACHIEVEMENT_SLUG = "urbanaut"
 URBANAUT_ACHIEVEMENT_NEW_USERS_COUNT = 100
+
+CONTRIBUTOR_ACHIEVEMENT_SLUG = "contributor"

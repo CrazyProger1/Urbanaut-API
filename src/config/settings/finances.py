@@ -3,3 +3,14 @@ from decouple import config
 INITIAL_SIGNATURE = config(
     "INITIAL_SIGNATURE", cast=str, default="INSECURE_DEBUG_SIGNATURE"
 )
+
+FINANCIAL_REWARDS = {
+    "NEW_USER": 10,
+    "PLACE_CREATION": 10,
+}
+
+FINANCIAL_DESTINATIONS = {
+    "NEW_USER": {"type": "NEW_USER"},
+    "PLACE_CREATION": {"type": "PLACE_CREATION"},
+    "PLACE_REMOVAL": {"type": "PLACE_REMOVAL"},
+}
