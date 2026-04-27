@@ -80,6 +80,27 @@ UNFOLD = {
                         "icon": "diversity_3",
                         "link": reverse_lazy("admin:accounts_team_changelist"),
                     },
+
+                ],
+            },
+            {
+                "title": _("API"),
+                "collapsible": True,
+                "items": [
+                    {
+                        "title": _("API Applications"),
+                        "icon": "settings_applications",
+                        "link": reverse_lazy(
+                            "admin:external_application_changelist"
+                        ),
+                    },
+                    {
+                        "title": _("API Keys"),
+                        "icon": "key",
+                        "link": reverse_lazy(
+                            "admin:external_key_changelist"
+                        ),
+                    },
                 ],
             },
             {
