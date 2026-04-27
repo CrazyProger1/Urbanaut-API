@@ -14,6 +14,7 @@ def make_transaction(
         amount: int,
         balance_out: Balance,
         balance_in: Balance,
+        destination: dict = None,
 ) -> Transaction:
     # TODO: use railway oriented programming
     if amount < 0:
@@ -31,6 +32,7 @@ def make_transaction(
         amount=amount,
         balance_out=balance_out,
         balance_in=balance_in,
+        destination=destination,
     )
 
     if not tn.is_valid(chain=True):
@@ -51,6 +53,7 @@ def make_system_transaction(
         amount: int,
         balance: Balance,
         pool: Balance = None,
+        destination: dict = None,
 ) -> Transaction:
     if not pool:
         pool = get_system_pool()
@@ -60,6 +63,7 @@ def make_system_transaction(
         "amount": abs(amount),
         "balance_in": balance,
         "balance_out": pool,
+        "destination": destination,
     }
 
     if is_out:

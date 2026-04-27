@@ -8,8 +8,9 @@ from src.apps.finances.services.finances import make_system_transaction
 
 def top_up_user_balance_by_place_creation(user: User, place: Place):
     make_system_transaction(
-        amount=settings.REWARDS["PLACE_CREATION"],
+        amount=settings.FINANCIAL_REWARDS["PLACE_CREATION"],
         balance=user.balance,
+        destination={**settings.FINANCIAL_DESTINATIONS["PLACE_CREATION"], "place_pk": place.pk},
     )
 
 
@@ -22,6 +23,7 @@ def give_user_achievement_by_place_creation(user: User, place: Place):
 
 def fine_user_balance_by_place_removal(user: User, place: Place):
     make_system_transaction(
-        amount=-settings.REWARDS["PLACE_CREATION"],
+        amount=-settings.FINANCIAL_REWARDS["PLACE_CREATION"],
         balance=user.balance,
+        destination={**settings.FINANCIAL_DESTINATIONS["PLACE_REMOVAL"], "place_pk": place.id},
     )

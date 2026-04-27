@@ -1,6 +1,7 @@
 from django.contrib import admin
 from django.contrib.gis.db import models
 from django.utils.safestring import mark_safe
+from django.db import transaction
 from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
 from rest_framework.reverse import reverse
@@ -143,13 +144,23 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
 
     display_views.short_description = _("views")
 
-    def delete_model(self, request, obj: Place):
-        super().delete_model(request=request, obj=obj)
-
+    def _notify_deleted(self, request, place: Place):
         PlaceEventChannel.place_removed_by_moderator.publish(
             event=PlaceRemovedEvent(
-                created_by=obj.created_by,
-                place=obj,
+                created_by=place.created_by,
+                place=place,
                 removed_by=request.user,
             )
         )
+
+    @transaction.atomic
+    def delete_model(self, request, obj: Place):
+        super().delete_model(request=request, obj=obj)
+        self._notify_deleted(request=request, place=obj)
+
+    @transaction.atomic
+    def delete_queryset(self, request, queryset):
+        places = tuple(queryset)
+        super().delete_queryset(request=request, queryset=queryset)
+        for place in places:
+            self._notify_deleted(request=request, place=place)
