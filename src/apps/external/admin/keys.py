@@ -14,8 +14,9 @@ class KeyAdmin(CreatedByAdminMixin, ModelAdmin):
         created_by_field,
         "created_at",
     )
-    autocomplete_fields = (created_by_field, "application",)
-    search_fields = (
-        "name",
+    autocomplete_fields = (
+        created_by_field,
+        "application",
     )
+    search_fields = ("name",)
     list_filter = ("created_at",)

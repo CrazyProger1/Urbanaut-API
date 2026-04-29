@@ -15,7 +15,7 @@ def give_new_user_achievements(user: User):
     user_count = count_users()
 
     if (
-            urbanaut_achievement
-            and user_count <= settings.URBANAUT_ACHIEVEMENT_NEW_USERS_COUNT
+        urbanaut_achievement
+        and user_count <= settings.URBANAUT_ACHIEVEMENT_NEW_USERS_COUNT
     ):
         give_achievement(user, urbanaut_achievement)

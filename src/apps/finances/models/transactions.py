@@ -93,9 +93,9 @@ class Transaction(models.Model):
         previous_transaction = get_previous_transaction(transaction=self)
 
         if (
-                chain
-                and previous_transaction
-                and not previous_transaction.is_valid(chain=True)
+            chain
+            and previous_transaction
+            and not previous_transaction.is_valid(chain=True)
         ):
             return False
 
@@ -114,9 +114,9 @@ class Transaction(models.Model):
         )
 
     def save(
-            self,
-            *args,
-            **kwargs,
+        self,
+        *args,
+        **kwargs,
     ):
         if not self.signature:
             self._sign()

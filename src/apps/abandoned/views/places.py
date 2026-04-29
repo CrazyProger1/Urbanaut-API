@@ -103,10 +103,12 @@ class PlaceViewSet(
 
         instance.save(update_fields=("area", "address"))
 
-        PlaceEventChannel.place_created.publish(event=PlaceCreatedEvent(
-            created_by=self.request.user,
-            place=instance,
-        ))
+        PlaceEventChannel.place_created.publish(
+            event=PlaceCreatedEvent(
+                created_by=self.request.user,
+                place=instance,
+            )
+        )
 
     @action(methods=["PATCH"], detail=True, url_path="toggle-favorite")
     def toggle_favorite(self, request, pk=None):

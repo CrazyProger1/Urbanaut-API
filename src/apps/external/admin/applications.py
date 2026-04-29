@@ -15,7 +15,5 @@ class ApplicationAdmin(CreatedByAdminMixin, ModelAdmin):
         "created_at",
     )
     autocomplete_fields = (created_by_field,)
-    search_fields = (
-        "name",
-    )
+    search_fields = ("name",)
     list_filter = ("created_at",)

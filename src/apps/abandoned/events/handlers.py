@@ -1,7 +1,8 @@
 from src.apps.abandoned.events.args import PlaceCreatedEvent, PlaceRemovedEvent
 from src.apps.abandoned.services.rewards import (
     top_up_user_balance_by_place_creation,
-    give_user_achievement_by_place_creation, fine_user_balance_by_place_removal,
+    give_user_achievement_by_place_creation,
+    fine_user_balance_by_place_removal,
 )
 
 

@@ -16,4 +16,6 @@ class AbandonedConfig(AppConfig):
         )
 
         PlaceEventChannel.place_created.subscribe(handle_place_created)
-        PlaceEventChannel.place_removed_by_moderator.subscribe(handle_place_removed_by_moderator)
+        PlaceEventChannel.place_removed_by_moderator.subscribe(
+            handle_place_removed_by_moderator
+        )
