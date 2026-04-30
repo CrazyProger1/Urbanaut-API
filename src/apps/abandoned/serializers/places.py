@@ -71,7 +71,7 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
     views_count = serializers.SerializerMethodField()
     favorites_count = serializers.SerializerMethodField()
     provider = serializers.SlugRelatedField(
-        slug_field="provider",
+        slug_field="slug",
         read_only=True,
     )
 

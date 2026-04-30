@@ -65,6 +65,6 @@ class KeyAdmin(CreatedByAdminMixin, ModelAdmin):
     )
 
     def key(self, obj: Key):
-        return obj.key
+        return obj.key.hex()
 
     key.short_description = "Key"
