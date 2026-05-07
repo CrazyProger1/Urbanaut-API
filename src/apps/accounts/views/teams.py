@@ -24,3 +24,6 @@ class TeamViewSet(
         "create": TeamCreateSerializer,
         "retrieve": TeamRetrieveSerializer,
     }
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)

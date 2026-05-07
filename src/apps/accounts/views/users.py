@@ -3,8 +3,10 @@ from djoser import signals as djoser_signals
 from djoser.compat import get_user_email
 from djoser.conf import settings as djoser_settings
 from rest_framework import mixins, viewsets
+from django_filters import rest_framework as filters
 
 from src.apps.accounts.events import UserCreatedEvent, UserEventChannel
+from src.apps.accounts.filters import UserFilter
 from src.apps.accounts.serializers import (
     UserListSerializer,
     UserRetrieveSerializer,
@@ -34,6 +36,8 @@ class UserViewSet(
     mixins.ListModelMixin,
     mixins.RetrieveModelMixin,
 ):
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = UserFilter
 
     def get_permissions(self):
         if self.action == "create":
