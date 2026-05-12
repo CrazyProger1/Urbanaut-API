@@ -1,6 +1,7 @@
 from rest_framework import serializers
 
 from src.apps.accounts.models import Team
+from src.apps.accounts.serializers import UserListSerializer
 
 
 class TeamListSerializer(serializers.ModelSerializer):
@@ -13,6 +14,9 @@ class TeamListSerializer(serializers.ModelSerializer):
 
 
 class TeamRetrieveSerializer(serializers.ModelSerializer):
+    members = UserListSerializer(read_only=True, many=True)
+    created_by = UserListSerializer(read_only=True, many=False)
+
     class Meta:
         model = Team
         fields = "__all__"
