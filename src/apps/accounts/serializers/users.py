@@ -89,7 +89,6 @@ class CurrentUserSerializer(serializers.ModelSerializer):
     achievements = serializers.SerializerMethodField(read_only=True)
     metrics = MetricRetrieveSerializer(many=True, read_only=True)
     balance = serializers.IntegerField(read_only=True, source="money")
-    experience = serializers.IntegerField(read_only=True, source="experience")
 
     class Meta:
         model = User
@@ -181,7 +180,6 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
     )
     achievements = serializers.SerializerMethodField()
     metrics = MetricRetrieveSerializer(many=True, read_only=True)
-    experience = serializers.IntegerField(read_only=True, source="experience")
 
     class Meta:
         model = User
@@ -245,7 +243,6 @@ class UserListSerializer(serializers.ModelSerializer):
         read_only=True,
         slug_field="username",
     )
-    experience = serializers.IntegerField(read_only=True, source="experience")
 
     class Meta:
         model = User
