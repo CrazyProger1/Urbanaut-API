@@ -89,6 +89,7 @@ class CurrentUserSerializer(serializers.ModelSerializer):
     achievements = serializers.SerializerMethodField(read_only=True)
     metrics = MetricRetrieveSerializer(many=True, read_only=True)
     balance = serializers.IntegerField(read_only=True, source="money")
+    experience = serializers.IntegerField(read_only=True, source="experience")
 
     class Meta:
         model = User
@@ -105,6 +106,7 @@ class CurrentUserSerializer(serializers.ModelSerializer):
             "created_at",
             "username",
             "balance",
+            "experience",
         )
 
     def validate(self, attrs):
@@ -179,6 +181,7 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
     )
     achievements = serializers.SerializerMethodField()
     metrics = MetricRetrieveSerializer(many=True, read_only=True)
+    experience = serializers.IntegerField(read_only=True, source="experience")
 
     class Meta:
         model = User
@@ -192,6 +195,7 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
             "metrics",
             "bio",
             "created_at",
+            "experience",
         )
 
     @extend_schema_field(AchievementRetrieveSerializer(many=True))
@@ -241,6 +245,7 @@ class UserListSerializer(serializers.ModelSerializer):
         read_only=True,
         slug_field="username",
     )
+    experience = serializers.IntegerField(read_only=True, source="experience")
 
     class Meta:
         model = User
@@ -249,4 +254,5 @@ class UserListSerializer(serializers.ModelSerializer):
             "usernames",
             "first_name",
             "last_name",
+            "experience",
         )

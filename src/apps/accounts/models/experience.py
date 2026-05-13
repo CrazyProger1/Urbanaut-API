@@ -1,12 +1,9 @@
-import logging
 import uuid
 
 from django.conf import settings
 from django.db import models
-from django.utils import timezone
 from django.utils.translation import gettext_lazy as _
 
-from src.apps.finances.exceptions import AlreadySignedError
 from src.utils.django.db import CreatedAtMixin
 
 
@@ -31,4 +28,14 @@ class ExperienceTransaction(CreatedAtMixin, models.Model):
         on_delete=models.CASCADE,
         null=False,
         blank=False,
+        related_name="experience_transactions",
     )
+
+
+class ExperienceMixin(models.Model):
+    class Meta:
+        abstract = True
+
+    @property
+    def experience(self):
+        return self.experience_transactions.aggregate(models.Sum("amount"))["amount__sum"]
