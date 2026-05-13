@@ -5,3 +5,4 @@ from src.apps.accounts.models.achievements import Achievement, UserAchievement
 from src.apps.accounts.models.referrals import Referral, ReferralCode
 from src.apps.accounts.models.teams import Team, TeamMember
 from src.apps.accounts.models.experience import ExperienceTransaction
+from src.apps.accounts.models.karma import KarmaTransaction
