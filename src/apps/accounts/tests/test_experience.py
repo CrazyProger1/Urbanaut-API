@@ -1,6 +1,7 @@
 import pytest
 
 from src.apps.accounts.models import User, ExperienceTransaction
+from src.apps.accounts.services.db.experience import make_experience_transaction
 
 
 @pytest.fixture
@@ -30,3 +31,28 @@ class TestUserExperience:
         other = User.objects.create_user(email="other@example.com", password="pass")
         ExperienceTransaction.objects.create(user=other, amount=500)
         assert user.experience is None
+
+
+@pytest.mark.django_db
+class TestMakeExperienceTransaction:
+    def test_creates_transaction(self, user):
+        tx = make_experience_transaction(user=user, amount=100)
+        assert tx.pk is not None
+        assert tx.user == user
+        assert tx.amount == 100
+
+    def test_zero_raises(self, user):
+        with pytest.raises(ValueError):
+            make_experience_transaction(user=user, amount=0)
+
+    def test_negative_raises(self, user):
+        with pytest.raises(ValueError):
+            make_experience_transaction(user=user, amount=-1)
+
+    def test_persisted_to_db(self, user):
+        make_experience_transaction(user=user, amount=50)
+        assert ExperienceTransaction.objects.filter(user=user).count() == 1
+
+    def test_float_amount_cast_to_int(self, user):
+        tx = make_experience_transaction(user=user, amount=9.9)
+        assert tx.amount == 9

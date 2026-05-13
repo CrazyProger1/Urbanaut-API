@@ -1,6 +1,7 @@
 import pytest
 
 from src.apps.accounts.models import User, KarmaTransaction
+from src.apps.accounts.services.db.karma import make_karma_transaction
 
 
 @pytest.fixture
@@ -34,3 +35,28 @@ class TestUserKarma:
         other = User.objects.create_user(email="other@example.com", password="pass")
         KarmaTransaction.objects.create(user=other, amount=50)
         assert user.karma is None
+
+
+@pytest.mark.django_db
+class TestMakeKarmaTransaction:
+    def test_creates_transaction(self, user):
+        tx = make_karma_transaction(user=user, amount=10)
+        assert tx.pk is not None
+        assert tx.user == user
+        assert tx.amount == 10
+
+    def test_negative_amount(self, user):
+        tx = make_karma_transaction(user=user, amount=-5)
+        assert tx.amount == -5
+
+    def test_zero_raises(self, user):
+        with pytest.raises(ValueError):
+            make_karma_transaction(user=user, amount=0)
+
+    def test_persisted_to_db(self, user):
+        make_karma_transaction(user=user, amount=10)
+        assert KarmaTransaction.objects.filter(user=user).count() == 1
+
+    def test_float_amount_cast_to_int(self, user):
+        tx = make_karma_transaction(user=user, amount=7.9)
+        assert tx.amount == 7
