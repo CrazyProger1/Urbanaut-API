@@ -13,7 +13,7 @@ from src.apps.accounts.views import (
     UserByUsernameViewSet,
     WebsocketTokenCreateView,
     LanguageListAPIView,
-    TeamViewSet,
+    TeamViewSet, AchievementViewSet,
 )
 from src.apps.accounts.consumers import AsyncUserConsumer
 
@@ -25,6 +25,7 @@ router.register(
     "api/v1/users/by-username", UserByUsernameViewSet, basename="users-by-username"
 )
 router.register("api/v1/teams", TeamViewSet, basename="teams")
+router.register("api/v1/achievements", AchievementViewSet, basename="achievements")
 
 urlpatterns = [
     path("admin/", site.urls),
