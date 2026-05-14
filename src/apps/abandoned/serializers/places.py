@@ -71,7 +71,7 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
     views_count = serializers.SerializerMethodField()
     favorites_count = serializers.SerializerMethodField()
     provider = serializers.SlugRelatedField(
-        slug_field="provider",
+        slug_field="slug",
         read_only=True,
     )
 
@@ -109,7 +109,7 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
         write_only=True,
     )
     provider = serializers.SlugRelatedField(
-        slug_field="provider",
+        slug_field="slug",
         queryset=get_all_providers(),
         required=False,
     )
@@ -223,7 +223,7 @@ def serialize_place_to_geojson(place: Place, user):
             "is_private": place.is_private,
             "is_supposed": place.is_supposed,
             "is_favorite": (
-                user.is_authenticated and is_place_favorite(place=place, user=user)
+                    user.is_authenticated and is_place_favorite(place=place, user=user)
             ),
         },
         "geometry": {

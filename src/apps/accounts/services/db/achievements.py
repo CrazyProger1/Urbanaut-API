@@ -1,5 +1,7 @@
 import logging
 
+from django.db import models
+
 from src.apps.accounts.models import Achievement, User, UserAchievement
 
 logger = logging.getLogger(__name__)
@@ -12,3 +14,7 @@ def get_achievement_or_none_by_slug(slug: str) -> Achievement:
 def give_achievement(user: User, achievement: Achievement):
     UserAchievement.objects.create(user=user, achievement=achievement)
     logger.info(f"Given achievement %s to user %s", achievement, user)
+
+
+def get_all_achievements() -> models.QuerySet[Achievement]:
+    return Achievement.objects.all()

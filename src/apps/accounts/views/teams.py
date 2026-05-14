@@ -17,10 +17,13 @@ class TeamViewSet(
     mixins.CreateModelMixin,
 ):
     queryset = get_all_teams()
-    permission_classes = (permissions.IsAuthenticated,)
+    permission_classes = (permissions.IsAuthenticatedOrReadOnly,)
     serializer_class = TeamListSerializer
     serializer_classes = {
         "list": TeamListSerializer,
         "create": TeamCreateSerializer,
         "retrieve": TeamRetrieveSerializer,
     }
+
+    def perform_create(self, serializer):
+        serializer.save(created_by=self.request.user)

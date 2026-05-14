@@ -62,7 +62,7 @@ def test_make_transaction(amount: int, balance_in, balance_out, pool) -> None:
     ],
 )
 def test_make_transaction_negative_or_zero(
-        amount: int, balance_in, balance_out
+    amount: int, balance_in, balance_out
 ) -> None:
     with pytest.raises(ValueError):
         make_transaction(
@@ -113,7 +113,7 @@ def test_make_system_transaction(amount: int, balance_in, pool) -> None:
     ],
 )
 def test_make_transaction_with_no_money(
-        amount: int, balance_out: Balance, balance_in: Balance
+    amount: int, balance_out: Balance, balance_in: Balance
 ) -> None:
     with pytest.raises(BalanceOutError):
         make_transaction(

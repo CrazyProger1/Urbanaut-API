@@ -6,6 +6,7 @@ from django.utils import timezone
 
 from src.apps.accounts.models import User
 from src.apps.geo.models import Country
+from src.utils.django.db import Source, get_queryset
 
 logger = logging.getLogger(__name__)
 
@@ -53,3 +54,8 @@ def update_user_status(user: User, online: bool):
 @database_sync_to_async
 def aupdate_user_status(user: User, online: bool):
     update_user_status(user, online)
+
+
+def search_users(source: Source[User], query: str) -> models.QuerySet[User]:
+    queryset = get_queryset(source=source)
+    return queryset.filter(usernames__username__icontains=query)

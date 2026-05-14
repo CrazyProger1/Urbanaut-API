@@ -12,6 +12,7 @@ class AchievementRetrieveSerializer(serializers.ModelSerializer):
             "weight",
             "icon",
             "significance",
+            "slug",
         )
 
 
@@ -21,4 +22,5 @@ class AchievementListSerializer(serializers.ModelSerializer):
         fields = (
             "id",
             "name",
+            "slug",
         )

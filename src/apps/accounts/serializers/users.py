@@ -105,6 +105,8 @@ class CurrentUserSerializer(serializers.ModelSerializer):
             "created_at",
             "username",
             "balance",
+            "experience",
+            "karma",
         )
 
     def validate(self, attrs):
@@ -192,6 +194,8 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
             "metrics",
             "bio",
             "created_at",
+            "experience",
+            "karma",
         )
 
     @extend_schema_field(AchievementRetrieveSerializer(many=True))
@@ -249,4 +253,6 @@ class UserListSerializer(serializers.ModelSerializer):
             "usernames",
             "first_name",
             "last_name",
+            "experience",
+            "karma",
         )

@@ -37,3 +37,8 @@ db.superuser:
 .PHONY: shell
 shell:
 	uv run python manage.py shell
+
+
+.PHONY: test
+test:
+	uv run pytest .

@@ -11,10 +11,10 @@ logger = logging.getLogger(__name__)
 
 @transaction.atomic
 def make_transaction(
-        amount: int,
-        balance_out: Balance,
-        balance_in: Balance,
-        destination: dict = None,
+    amount: int,
+    balance_out: Balance,
+    balance_in: Balance,
+    destination: dict = None,
 ) -> Transaction:
     # TODO: use railway oriented programming
     if amount < 0:
@@ -50,10 +50,10 @@ def make_transaction(
 
 @transaction.atomic
 def make_system_transaction(
-        amount: int,
-        balance: Balance,
-        pool: Balance = None,
-        destination: dict = None,
+    amount: int,
+    balance: Balance,
+    pool: Balance = None,
+    destination: dict = None,
 ) -> Transaction:
     if not pool:
         pool = get_system_pool()

@@ -62,12 +62,12 @@ class Key(TimestampMixin, models.Model):
 
     @property
     def key(self) -> bytes:
-        return Fernet(settings.HMAC_MASTER_KEY).decrypt(self.encrypted_key)
+        return Fernet(settings.HMAC_MASTER_KEY).decrypt(bytes(self.encrypted_key))
 
     def save(
-            self,
-            *args,
-            **kwargs,
+        self,
+        *args,
+        **kwargs,
     ):
         if not self.encrypted_key:
             self._issue()

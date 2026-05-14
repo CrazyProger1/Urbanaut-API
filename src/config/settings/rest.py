@@ -8,6 +8,7 @@ INSTALLED_APPS += [
 
 AUTHENTICATION_CLASSES = [
     "rest_framework_simplejwt.authentication.JWTAuthentication",
+    "src.apps.external.authentications.HMACAuthentication",
 ]
 
 if DEBUG:

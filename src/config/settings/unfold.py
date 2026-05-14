@@ -80,7 +80,6 @@ UNFOLD = {
                         "icon": "diversity_3",
                         "link": reverse_lazy("admin:accounts_team_changelist"),
                     },
-
                 ],
             },
             {
@@ -90,16 +89,12 @@ UNFOLD = {
                     {
                         "title": _("API Applications"),
                         "icon": "settings_applications",
-                        "link": reverse_lazy(
-                            "admin:external_application_changelist"
-                        ),
+                        "link": reverse_lazy("admin:external_application_changelist"),
                     },
                     {
                         "title": _("API Keys"),
                         "icon": "key",
-                        "link": reverse_lazy(
-                            "admin:external_key_changelist"
-                        ),
+                        "link": reverse_lazy("admin:external_key_changelist"),
                     },
                 ],
             },

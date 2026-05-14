@@ -9,6 +9,7 @@ class AccountsConfig(AppConfig):
 
     def ready(self):
         from src.apps.accounts.events import UserEventChannel, handle_user_created
+
         default_settings.setdefault(
             "GOOGLE_OAUTH_URL", "https://accounts.google.com/o/oauth2/v2/auth"
         )
