@@ -56,3 +56,8 @@ def give_new_user_achievements(user: User):
             and user_count <= settings.URBANAUT_ACHIEVEMENT_NEW_USERS_COUNT
     ):
         give_achievement(user, urbanaut_achievement)
+
+
+def populate_database_with_achievements_from_settings():
+    for achievement in settings.DEFAULT_ACHIEVEMENTS:
+        Achievement.objects.get_or_create(**achievement)
