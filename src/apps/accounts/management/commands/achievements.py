@@ -5,7 +5,6 @@ from django.contrib.auth import get_user_model
 from django.core.management.base import BaseCommand
 
 from src.apps.accounts.models import Achievement
-from src.apps.accounts.services.db import get_achievement_or_none_by_slug
 
 User = get_user_model()
 
