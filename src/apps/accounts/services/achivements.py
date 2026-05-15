@@ -58,10 +58,12 @@ def notify_user_achievement_assigned(user: User, achievement: Achievement):
 
 @transaction.atomic
 def give_achievement(user: User, achievement: Achievement):
-    UserAchievement.objects.create(user=user, achievement=achievement)
-    reward_user_for_achievement(user=user, achievement=achievement)
-    notify_user_achievement_assigned(user=user, achievement=achievement)
-    logger.info(f"Achievement %s assigned to user %s", achievement, user)
+    _, created = UserAchievement.objects.get_or_create(user=user, achievement=achievement)
+
+    if created:
+        reward_user_for_achievement(user=user, achievement=achievement)
+        notify_user_achievement_assigned(user=user, achievement=achievement)
+        logger.info(f"Achievement %s assigned to user %s", achievement, user)
 
 
 def give_new_user_achievements(user: User):
