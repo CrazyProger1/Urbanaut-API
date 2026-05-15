@@ -19,6 +19,7 @@ from src.apps.accounts.services.oauth import (
     authenticate_google_oauth_code,
     decode_id_token,
 )
+from src.apps.accounts.services.users import publish_user_created
 
 logger = logging.getLogger(__name__)
 
@@ -60,5 +61,6 @@ class GoogleOauthCallbackView(APIView):
                 "user": internal_user,
             },
         )
+        publish_user_created(user=internal_user)
         logger.info("User authenticated via Google Oauth: %s", google_user)
         return Response(response_serializer.data, status=status.HTTP_200_OK)
