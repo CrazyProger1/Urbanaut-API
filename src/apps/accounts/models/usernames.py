@@ -45,10 +45,18 @@ class UsernameMixin(models.Model):
         if not has_username(user=self):
             give_initial_username(user=self)
 
+    @property
+    def initial_username(self):
+        from src.apps.accounts.services.db import (
+            get_initial_username,
+        )
+
+        return get_initial_username(user=self)
+
     def save(
-        self,
-        *args,
-        **kwargs,
+            self,
+            *args,
+            **kwargs,
     ):
         super().save(*args, **kwargs)
         self._give_initial_username()

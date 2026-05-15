@@ -10,6 +10,9 @@ class AccountsConfig(AppConfig):
         from src.apps.accounts.events import (
             UserEventChannel,
             handle_user_created,
+            handle_user_referral,
+            handle_user_achievement,
+
         )
         default_settings.setdefault(
             "GOOGLE_OAUTH_URL", "https://accounts.google.com/o/oauth2/v2/auth"
@@ -32,3 +35,5 @@ class AccountsConfig(AppConfig):
         )
 
         UserEventChannel.user_created.subscribe(handle_user_created)
+        UserEventChannel.user_referral.subscribe(handle_user_referral)
+        UserEventChannel.user_achievement.subscribe(handle_user_achievement)

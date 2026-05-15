@@ -14,8 +14,8 @@ def get_referral_code_or_none(**data):
     return ReferralCode.objects.filter(**data).first()
 
 
-def apply_referral_code(code: ReferralCode, user) -> Referral:
-    return Referral.objects.create(code=code, user=user)
+def create_referral(**data) -> Referral:
+    return Referral.objects.create(**data)
 
 
 def has_referral_code(user: User) -> bool:

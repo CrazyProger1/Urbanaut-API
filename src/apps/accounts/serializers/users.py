@@ -13,12 +13,12 @@ from src.apps.accounts.serializers.settings import (
     SettingsRetrieveSerializer,
 )
 from src.apps.accounts.services.db import (
-    apply_referral_code,
     get_referral_code_or_none,
     set_user_country,
     get_user_by_username_or_none,
     update_user_initial_username,
 )
+from src.apps.accounts.services.referrals import apply_referral_code
 from src.apps.geo.services.db import get_country_or_none
 
 

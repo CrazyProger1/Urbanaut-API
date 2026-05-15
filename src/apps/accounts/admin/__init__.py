@@ -9,8 +9,8 @@ from unfold.forms import AdminPasswordChangeForm, UserChangeForm, UserCreationFo
 from unfold.admin import ModelAdmin, StackedInline
 
 from src.apps.abandoned.admin.places import PlaceFavoriteInline
+from src.apps.accounts.events import UserEventChannel, UserAchievementEvent
 from src.apps.accounts.models import User, Settings, Username, UserAchievement
-from src.apps.accounts.services.achivements import reward_user_for_achievement, notify_user_achievement_assigned
 from src.apps.accounts.sites import site
 from src.apps.accounts.admin.achivements import AchievementAdmin, AchievementInline
 from src.apps.accounts.admin.referrals import (
@@ -136,8 +136,8 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
         instances = formset.save(commit=False)
         for instance in instances:
             if isinstance(instance, UserAchievement):
-                reward_user_for_achievement(user=instance.user, achievement=instance.achievement)
-                notify_user_achievement_assigned(user=instance.user, achievement=instance.achievement)
+                UserEventChannel.user_achievement.publish(
+                    UserAchievementEvent(user=instance.user, achievement=instance.achievement))
             instance.save()
         for obj in formset.deleted_objects:
             obj.delete()

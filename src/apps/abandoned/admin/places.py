@@ -6,7 +6,6 @@ from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
 from rest_framework.reverse import reverse
 from unfold.admin import ModelAdmin, StackedInline
-from unfold.contrib.forms.widgets import WysiwygWidget
 
 from src.apps.abandoned.admin.security import PlaceSecurityInline
 from src.apps.abandoned.admin.preservation import PlacePreservationInline
