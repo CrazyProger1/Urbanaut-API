@@ -11,8 +11,6 @@ class AccountsConfig(AppConfig):
             UserEventChannel,
             handle_user_created,
         )
-        from src.apps.accounts.services.achivements import populate_database_with_achievements_from_settings
-
         default_settings.setdefault(
             "GOOGLE_OAUTH_URL", "https://accounts.google.com/o/oauth2/v2/auth"
         )
@@ -34,7 +32,3 @@ class AccountsConfig(AppConfig):
         )
 
         UserEventChannel.user_created.subscribe(handle_user_created)
-
-        populate_database_with_achievements_from_settings()
-        # for defaults in settings.DEFAULT_ACHIEVEMENTS:
-        #     Achievement.objects.get_or_create(**defaults)
