@@ -15,7 +15,7 @@ from src.apps.accounts.services.db import (
 from src.apps.finances.services.finances import make_system_transaction
 from src.apps.notifications.enums import NotificationProvider, NotificationAudience, NotificationType
 from src.apps.notifications.services.notify import notify
-from src.utils.django.i18n import localize_field
+from src.utils.django.i18n import localize
 
 logger = logging.getLogger(__name__)
 
@@ -45,8 +45,8 @@ def reward_user_for_achievement(user: User, achievement: Achievement):
 
 def notify_user_achievement_assigned(user: User, achievement: Achievement):
     notify(
-        title=localize_field(field="title", value="Achievement assigned"),
-        subtitle=localize_field(field="subtitle", value="You've got an achievement - %(name)s!", name=achievement.name),
+        title=localize(value="Achievement assigned"),
+        subtitle=localize(value="You've got an achievement - %(name)s!", name=achievement.name),
         now=True,
         tp=NotificationType.SUCCESS,
         users=(user,),
