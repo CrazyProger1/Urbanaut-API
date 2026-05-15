@@ -6,8 +6,9 @@ from src.apps.abandoned.models import Place
 from src.apps.accounts.models import User
 from src.apps.accounts.services.db import (
     get_achievement_or_none_by_slug,
-    give_achievement, make_karma_transaction,
+    make_karma_transaction,
 )
+from src.apps.accounts.services.achivements import give_achievement
 from src.apps.finances.services.finances import make_system_transaction
 
 logger = logging.getLogger(__name__)

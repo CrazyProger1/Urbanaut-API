@@ -18,7 +18,6 @@ from src.apps.accounts.services.db.referrals import (
 )
 from src.apps.accounts.services.db.achievements import (
     get_achievement_or_none_by_slug,
-    give_achievement,
     get_all_achievements,
 )
 from src.apps.accounts.services.db.usernames import (

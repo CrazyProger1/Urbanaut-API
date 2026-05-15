@@ -11,8 +11,8 @@ def user(db):
 
 @pytest.mark.django_db
 class TestUserKarma:
-    def test_no_transactions_returns_none(self, user):
-        assert user.karma is None
+    def test_no_transactions_returns_zero(self, user):
+        assert user.karma == 0
 
     def test_single_positive_transaction(self, user):
         KarmaTransaction.objects.create(user=user, amount=10)
@@ -34,7 +34,7 @@ class TestUserKarma:
     def test_only_counts_own_transactions(self, user, db):
         other = User.objects.create_user(email="other@example.com", password="pass")
         KarmaTransaction.objects.create(user=other, amount=50)
-        assert user.karma is None
+        assert user.karma == 0
 
 
 @pytest.mark.django_db

@@ -9,7 +9,8 @@ from unfold.forms import AdminPasswordChangeForm, UserChangeForm, UserCreationFo
 from unfold.admin import ModelAdmin, StackedInline
 
 from src.apps.abandoned.admin.places import PlaceFavoriteInline
-from src.apps.accounts.models import User, Settings, Username
+from src.apps.accounts.models import User, Settings, Username, UserAchievement
+from src.apps.accounts.services.achivements import reward_user_for_achievement
 from src.apps.accounts.sites import site
 from src.apps.accounts.admin.achivements import AchievementAdmin, AchievementInline
 from src.apps.accounts.admin.referrals import (
@@ -115,7 +116,9 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
         "last_name",
         "is_staff",
         "is_online",
-        "urbucks",
+        "money",
+        "experience",
+        "karma",
         "created_at",
     )
     list_filter = ("is_staff", "is_superuser", "is_active", "groups")
@@ -124,13 +127,20 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
     readonly_fields = (
         "created_at",
         "is_online",
-        "urbucks",
+        "money",
+        "experience",
+        "karma",
     )
 
-    def urbucks(self, user):
-        return user.money or 0
-
-    urbucks.short_description = _("Urbucks")
+    def save_formset(self, request, form, formset, change):
+        instances = formset.save(commit=False)
+        for instance in instances:
+            if isinstance(instance, UserAchievement):
+                reward_user_for_achievement(user=instance.user, achievement=instance.achievement)
+            instance.save()
+        for obj in formset.deleted_objects:
+            obj.delete()
+        formset.save_m2m()
 
 
 @admin.register(Group, site=site)
