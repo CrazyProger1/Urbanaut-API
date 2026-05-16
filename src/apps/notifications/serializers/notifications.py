@@ -15,6 +15,19 @@ class NotificationListSerializer(serializers.ModelSerializer):
         )
 
 
+class NotificationRetrieveSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Notification
+        fields = (
+            "id",
+            "title",
+            "subtitle",
+            "content",
+            "type",
+            "triggered_at",
+        )
+
+
 class NotificationSendSerializer(serializers.ModelSerializer):
     class Meta:
         model = Notification

@@ -1,4 +1,5 @@
 from src.apps.notifications.serializers.notifications import (
     NotificationListSerializer,
     NotificationSendSerializer,
+    NotificationRetrieveSerializer,
 )
