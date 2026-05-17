@@ -7,7 +7,6 @@ from rest_framework_simplejwt.tokens import RefreshToken, AuthUser
 
 from src.apps.accounts.serializers import CurrentUserSerializer
 
-
 logger = logging.getLogger(__name__)
 
 
@@ -37,6 +36,10 @@ class GoogleOauthCallbackResponseSerializer(serializers.Serializer):
     @classmethod
     def get_token(cls, user: AuthUser) -> RefreshToken:
         return cls.token_class.for_user(user)
+
+
+class GoogleOauthRedirectURIRequestSerializer(serializers.Serializer):
+    code = serializers.CharField(required=False)
 
 
 class GoogleOauthRedirectURIResponseSerializer(serializers.Serializer):

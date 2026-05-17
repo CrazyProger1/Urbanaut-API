@@ -18,6 +18,10 @@ def create_referral(**data) -> Referral:
     return Referral.objects.create(**data)
 
 
+def is_referral(user: User, code: ReferralCode) -> bool:
+    return Referral.objects.filter(code=code, user=user).exists()
+
+
 def has_referral_code(user: User) -> bool:
     return user.referral_codes.exists()
 

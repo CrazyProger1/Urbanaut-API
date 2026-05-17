@@ -11,6 +11,7 @@ class Referral(CreatedAtMixin, models.Model):
     class Meta:
         verbose_name = _("Referral")
         verbose_name_plural = _("Referrals")
+        unique_together = (("user", "code"),)
 
     code = models.ForeignKey(
         to="ReferralCode",
@@ -83,9 +84,9 @@ class ReferralMixin(models.Model):
             give_initial_referral_code(user=self)
 
     def save(
-        self,
-        *args,
-        **kwargs,
+            self,
+            *args,
+            **kwargs,
     ):
         super().save(*args, **kwargs)
         self._give_initial_referral_code()
