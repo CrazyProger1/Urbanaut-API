@@ -39,7 +39,7 @@ class GoogleOauthRedirectURIView(APIView):
     def post(self, request, **kwargs):
         token = secrets.token_urlsafe(16)
 
-        serializer = GoogleOauthCallbackRequestSerializer(data=request.data)
+        serializer = GoogleOauthRedirectURIRequestSerializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         logger.debug("Generating Google Oauth redirect URI: %s", token)
 
