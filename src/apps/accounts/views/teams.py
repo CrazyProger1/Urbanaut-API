@@ -8,7 +8,7 @@ from src.apps.accounts.serializers import (
     TeamCreateSerializer,
     TeamRetrieveSerializer,
 )
-from src.apps.accounts.services.db import get_all_teams
+from src.apps.accounts.services.db import get_all_teams, add_creator_as_member
 from src.utils.django.views import MultipleSerializerViewsetMixin
 
 
@@ -32,4 +32,5 @@ class TeamViewSet(
 
     def perform_create(self, serializer):
         team = serializer.save(created_by=self.request.user)
+        add_creator_as_member(team=team)
         TeamEventChannel.team_created.publish(event=TeamCreatedEvent(team=team))

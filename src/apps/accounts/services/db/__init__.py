@@ -42,6 +42,7 @@ from src.apps.accounts.services.db.teams import (
     get_all_team_members,
     count_user_teams,
     filter_where_member,
+    add_creator_as_member,
 )
 from src.apps.accounts.services.db.experience import (
     make_experience_transaction,
