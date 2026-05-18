@@ -17,6 +17,7 @@ from src.apps.accounts.services.db.referrals import (
     is_referral,
     get_user_referrals,
     get_all_referrals,
+    count_user_referrals,
 )
 from src.apps.accounts.services.db.achievements import (
     get_achievement_or_none_by_slug,
@@ -39,6 +40,7 @@ from src.apps.accounts.services.db.referrals import (
 from src.apps.accounts.services.db.teams import (
     get_all_teams,
     get_all_team_members,
+    count_user_teams,
 )
 from src.apps.accounts.services.db.experience import (
     make_experience_transaction,

@@ -7,3 +7,7 @@ def get_all_teams():
 
 def get_all_team_members():
     return TeamMember.objects.all()
+
+
+def count_user_teams(user) -> int:
+    return TeamMember.objects.filter(member=user).count()

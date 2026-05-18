@@ -16,7 +16,7 @@ from src.apps.accounts.services.db import (
     get_referral_code_or_none,
     set_user_country,
     get_user_by_username_or_none,
-    update_user_initial_username,
+    update_user_initial_username, count_user_referrals, count_user_teams,
 )
 from src.apps.accounts.services.referrals import try_apply_referral_code
 from src.apps.geo.services.db import get_country_or_none
@@ -140,32 +140,16 @@ class CurrentUserSerializer(serializers.ModelSerializer):
         # TODO: remove mock
         data["metrics"] = [
             {
-                "name": "Karma",
+                "key": "friends",
                 "value": 0,
             },
             {
-                "name": "Experience",
-                "value": 0,
+                "key": "teams",
+                "value": count_user_teams(user=instance),
             },
             {
-                "name": "Reports",
-                "value": 0,
-            },
-            {
-                "name": "Friends",
-                "value": 0,
-            },
-            {
-                "name": "Teams",
-                "value": 0,
-            },
-            {
-                "name": "Followers",
-                "value": 0,
-            },
-            {
-                "name": "Places",
-                "value": 0,
+                "key": "referrals",
+                "value": count_user_referrals(user=instance),
             },
         ]
         return data
@@ -208,32 +192,16 @@ class UserRetrieveSerializer(serializers.ModelSerializer):
         # TODO: remove mock
         data["metrics"] = [
             {
-                "name": "Karma",
+                "key": "friends",
                 "value": 0,
             },
             {
-                "name": "Experience",
-                "value": 0,
+                "key": "teams",
+                "value": count_user_teams(user=instance),
             },
             {
-                "name": "Reports",
-                "value": 0,
-            },
-            {
-                "name": "Friends",
-                "value": 0,
-            },
-            {
-                "name": "Teams",
-                "value": 0,
-            },
-            {
-                "name": "Followers",
-                "value": 0,
-            },
-            {
-                "name": "Places",
-                "value": 0,
+                "key": "referrals",
+                "value": count_user_referrals(user=instance),
             },
         ]
         return data
