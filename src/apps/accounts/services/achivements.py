@@ -3,7 +3,7 @@ import logging
 from django.conf import settings
 from django.db import transaction
 
-from src.apps.accounts.models import User, Achievement
+from src.apps.accounts.models import User, Achievement, Team
 from src.apps.accounts.services.db import (
     get_achievement_or_none_by_slug,
     count_users, assign_achievement,
@@ -38,3 +38,7 @@ def give_default_achievements(user: User):
 
 def give_achievement_for_referral(user: User):
     give_achievement(user, settings.RECRUITER_ACHIEVEMENT_SLUG)
+
+
+def give_achievement_for_team(team: Team):
+    give_achievement(team.created_by, settings.LEADER_ACHIEVEMENT_SLUG)

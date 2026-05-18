@@ -1,5 +1,8 @@
+from django_filters import rest_framework as filters
 from rest_framework import viewsets, mixins, permissions
 
+from src.apps.accounts.events import TeamEventChannel, TeamCreatedEvent
+from src.apps.accounts.filters import TeamFilter
 from src.apps.accounts.serializers import (
     TeamListSerializer,
     TeamCreateSerializer,
@@ -24,6 +27,9 @@ class TeamViewSet(
         "create": TeamCreateSerializer,
         "retrieve": TeamRetrieveSerializer,
     }
+    filter_backends = (filters.DjangoFilterBackend,)
+    filterset_class = TeamFilter
 
     def perform_create(self, serializer):
-        serializer.save(created_by=self.request.user)
+        team = serializer.save(created_by=self.request.user)
+        TeamEventChannel.team_created.publish(event=TeamCreatedEvent(team=team))

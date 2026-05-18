@@ -9,9 +9,11 @@ class AccountsConfig(AppConfig):
     def ready(self):
         from src.apps.accounts.events import (
             UserEventChannel,
+            TeamEventChannel,
             handle_user_created,
             handle_user_referral,
             handle_user_achievement,
+            handle_team_created,
 
         )
         default_settings.setdefault(
@@ -37,3 +39,4 @@ class AccountsConfig(AppConfig):
         UserEventChannel.user_created.subscribe(handle_user_created)
         UserEventChannel.user_referral.subscribe(handle_user_referral)
         UserEventChannel.user_achievement.subscribe(handle_user_achievement)
+        TeamEventChannel.team_created.subscribe(handle_team_created)
