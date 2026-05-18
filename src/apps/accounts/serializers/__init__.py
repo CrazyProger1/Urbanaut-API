@@ -19,6 +19,7 @@ from src.apps.accounts.serializers.achievements import (
 from src.apps.accounts.serializers.referrals import (
     ReferralCodeRetrieveSerializer,
     ReferralCodeListSerializer,
+    ReferralListSerializer,
 )
 from src.apps.accounts.serializers.languages import (
     LanguageListSerializer,

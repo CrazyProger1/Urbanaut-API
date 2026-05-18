@@ -1,5 +1,15 @@
+from django.db import models
+
 from src.apps.accounts.models import ReferralCode, Referral, User
 from src.apps.accounts.services.db.usernames import get_initial_username
+
+
+def get_all_referrals() -> models.QuerySet[Referral]:
+    return Referral.objects.all()
+
+
+def get_user_referrals(user) -> models.QuerySet[Referral]:
+    return Referral.objects.filter(code__created_by=user)
 
 
 def get_all_referral_codes():

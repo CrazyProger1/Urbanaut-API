@@ -13,13 +13,16 @@ from src.apps.accounts.views import (
     UserByUsernameViewSet,
     WebsocketTokenCreateView,
     LanguageListAPIView,
-    TeamViewSet, AchievementViewSet,
+    TeamViewSet,
+    AchievementViewSet,
+    ReferralsViewSet,
 )
 from src.apps.accounts.consumers import AsyncUserConsumer
 
 router = DefaultRouter()
 
-router.register("api/v1/referrals", ReferralCodeViewSet, basename="referrals")
+router.register("api/v1/referral-codes", ReferralCodeViewSet, basename="referral-codes")
+router.register("api/v1/referrals", ReferralsViewSet, basename="referrals")
 router.register("api/v1/users", UserViewSet, basename="users")
 router.register(
     "api/v1/users/by-username", UserByUsernameViewSet, basename="users-by-username"
