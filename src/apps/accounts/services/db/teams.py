@@ -1,5 +1,7 @@
+from django.conf import settings
 from django.db import models
 from django.db.models import Q
+from modeltranslation.utils import build_localized_fieldname
 
 from src.apps.accounts.models import Team, TeamMember
 from src.utils.django.db import Source, get_queryset
@@ -28,3 +30,19 @@ def filter_where_member(source: Source[Team], user, is_member: bool) -> models.Q
         return queryset.filter(members=user)
     else:
         return queryset.filter(~Q(members=user))
+
+
+def search_teams(
+        term: str = None, source: Source[Team] = Team
+) -> models.QuerySet[Team]:
+    queryset = get_queryset(source=source)
+    query = Q()
+    term = term.lower()
+
+    if term:
+        for lang_code, _ in settings.LANGUAGES:
+            field = build_localized_fieldname("name", lang_code)
+            query |= Q(**{f"{field}__trigram_similar": term})
+            query |= Q(**{f"{field}__icontains": term})
+
+    return queryset.filter(query).distinct()
