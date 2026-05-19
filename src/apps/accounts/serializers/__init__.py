@@ -29,3 +29,6 @@ from src.apps.accounts.serializers.teams import (
     TeamCreateSerializer,
     TeamRetrieveSerializer,
 )
+from src.apps.accounts.serializers.members import (
+    TeamMemberListSerializer,
+)

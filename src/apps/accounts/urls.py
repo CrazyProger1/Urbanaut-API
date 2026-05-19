@@ -14,6 +14,7 @@ from src.apps.accounts.views import (
     WebsocketTokenCreateView,
     LanguageListAPIView,
     TeamViewSet,
+    TeamMemberViewSet,
     AchievementViewSet,
     ReferralsViewSet,
 )
@@ -28,6 +29,7 @@ router.register(
     "api/v1/users/by-username", UserByUsernameViewSet, basename="users-by-username"
 )
 router.register("api/v1/teams", TeamViewSet, basename="teams")
+router.register("api/v1/members", TeamMemberViewSet, basename="members")
 router.register("api/v1/achievements", AchievementViewSet, basename="achievements")
 
 urlpatterns = [
