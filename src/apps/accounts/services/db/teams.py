@@ -42,7 +42,6 @@ def search_teams(
     if term:
         for lang_code, _ in settings.LANGUAGES:
             field = build_localized_fieldname("name", lang_code)
-            query |= Q(**{f"{field}__trigram_similar": term})
             query |= Q(**{f"{field}__icontains": term})
 
     return queryset.filter(query).distinct()
