@@ -3,7 +3,7 @@ from django.db import models
 from django.db.models import Q
 from modeltranslation.utils import build_localized_fieldname
 
-from src.apps.accounts.models import Team, TeamMember
+from src.apps.accounts.models import Team, TeamMember, User
 from src.utils.django.db import Source, get_queryset
 
 
@@ -23,13 +23,23 @@ def add_creator_as_member(team: Team) -> TeamMember:
     return TeamMember.objects.create(team=team, member=team.created_by)
 
 
-def filter_where_member(source: Source[Team], user, is_member: bool) -> models.QuerySet[Team]:
+def filter_teams_where_member(source: Source[Team], user, is_member: bool) -> models.QuerySet[Team]:
     queryset = get_queryset(source=source)
 
     if is_member:
         return queryset.filter(members=user)
     else:
         return queryset.filter(~Q(members=user))
+
+
+def get_team_or_none(**data) -> Team | None:
+    return Team.objects.filter(**data).first()
+
+
+def filter_users_by_team(source: Source[User], team: Team) -> models.QuerySet[User]:
+    queryset = get_queryset(source=source)
+
+    return queryset.filter(teammember__team=team)
 
 
 def search_teams(
