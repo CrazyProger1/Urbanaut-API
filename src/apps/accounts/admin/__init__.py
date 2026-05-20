@@ -20,6 +20,7 @@ from src.apps.accounts.admin.referrals import (
     ReferralCodeInline,
 )
 from src.apps.accounts.admin.teams import TeamAdmin
+from src.apps.accounts.admin.permissions import ObjectPermissionAdmin
 
 admin.site.unregister(Group)
 

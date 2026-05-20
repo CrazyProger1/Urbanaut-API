@@ -4,6 +4,7 @@ from django.conf import settings
 
 from src.apps.abandoned.models.preservation import PlacePreservation
 from src.apps.abandoned.models.security import PlaceSecurity
+from src.apps.accounts.models import ObjectPermissionsMixin
 from src.apps.media.eums import FileType
 from src.apps.stats.models import ViewsMixin
 from src.utils.django.db import TimestampMixin
@@ -64,7 +65,12 @@ class UserFavoritePlace(models.Model):
     )
 
 
-class Place(TimestampMixin, ViewsMixin, models.Model):
+class Place(
+    ObjectPermissionsMixin,
+    TimestampMixin,
+    ViewsMixin,
+    models.Model,
+):
     name = models.CharField(
         max_length=250,
         verbose_name=_("name"),

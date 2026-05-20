@@ -19,6 +19,10 @@ def count_user_teams(user) -> int:
     return TeamMember.objects.filter(member=user).count()
 
 
+def get_user_teams(user) -> models.QuerySet[Team]:
+    return Team.objects.filter(members=user)
+
+
 def add_creator_as_member(team: Team) -> TeamMember:
     return TeamMember.objects.create(team=team, member=team.created_by)
 

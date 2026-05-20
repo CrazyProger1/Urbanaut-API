@@ -13,7 +13,7 @@ from src.apps.abandoned.services.db import (
     get_place_area_or_none,
     get_user_or_public_places,
     toggle_place_favorite,
-    toggle_place_supposed,
+    toggle_place_supposed, get_visible_places_for_user,
 )
 from src.apps.abandoned.serializers import (
     PlaceRetrieveSerializer,
@@ -75,7 +75,7 @@ class PlaceViewSet(
         user = self.request.user
         if user.is_authenticated and user.is_superuser:
             return self.queryset
-        return get_user_or_public_places(user=self.request.user)
+        return get_visible_places_for_user(user=self.request.user)
 
     def perform_create(self, serializer):
         point = serializer.validated_data["point"]
