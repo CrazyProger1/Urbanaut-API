@@ -36,12 +36,18 @@ def get_private_places() -> models.QuerySet[Place]:
     return Place.objects.filter(is_private=True)
 
 
+def get_public_places() -> models.QuerySet[Place]:
+    return Place.objects.filter(is_private=False)
+
+
 def get_visible_places_for_user(user) -> models.QuerySet[Place]:
+    if not user.is_authenticated:
+        return get_public_places()
+
     visible_perms = get_visible_permissions(user=user)
 
     query = Q(is_private=False)
-    if user.is_authenticated:
-        query |= Q(created_by=user)
+    query |= Q(created_by=user)
     query |= Q(is_private=True, permission__in=visible_perms)
 
     return Place.objects.filter(query).distinct()
