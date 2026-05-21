@@ -23,8 +23,7 @@ class UserFilter(filters.FilterSet):
 
         def amount(model):
             return Subquery(
-                model.objects
-                .filter(user=OuterRef("pk"))
+                model.objects.filter(user=OuterRef("pk"))
                 .order_by()
                 .values("user")
                 .annotate(total=Sum("amount"))
@@ -34,21 +33,24 @@ class UserFilter(filters.FilterSet):
         try:
             field = value.removeprefix("-")
             if field == "karma":
-                return queryset.annotate(karma_amount=Coalesce(amount(KarmaTransaction), 0)).order_by(
-                    f"{value}_amount"
-                )
+                return queryset.annotate(
+                    karma_amount=Coalesce(amount(KarmaTransaction), 0)
+                ).order_by(f"{value}_amount")
             elif field == "experience":
                 queryset = queryset.annotate(
-                    experience_amount=Coalesce(amount(ExperienceTransaction), 0)).order_by(
-                    f"{value}_amount"
-                )
+                    experience_amount=Coalesce(amount(ExperienceTransaction), 0)
+                ).order_by(f"{value}_amount")
             elif field == "score":
-                return queryset.annotate(
-                    karma_amount=Coalesce(amount(KarmaTransaction), 0),
-                    experience_amount=Coalesce(amount(ExperienceTransaction), 0),
-                ).annotate(
-                    score=F("karma_amount") + F("experience_amount"),
-                ).order_by(value)
+                return (
+                    queryset.annotate(
+                        karma_amount=Coalesce(amount(KarmaTransaction), 0),
+                        experience_amount=Coalesce(amount(ExperienceTransaction), 0),
+                    )
+                    .annotate(
+                        score=F("karma_amount") + F("experience_amount"),
+                    )
+                    .order_by(value)
+                )
 
             return queryset.order_by(value)
         except FieldError:

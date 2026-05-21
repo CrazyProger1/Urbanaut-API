@@ -30,17 +30,13 @@ class KeyAdmin(CreatedByAdminMixin, ModelAdmin):
         (
             _("General"),
             {
-                "fields": (
-                    "name",
-                ),
+                "fields": ("name",),
             },
         ),
         (
             _("Details"),
             {
-                "fields": (
-                    "is_revoked",
-                ),
+                "fields": ("is_revoked",),
             },
         ),
         (

@@ -38,4 +38,7 @@ class ExperienceMixin(models.Model):
 
     @property
     def experience(self):
-        return self.experience_transactions.aggregate(models.Sum("amount"))["amount__sum"] or 0
+        return (
+            self.experience_transactions.aggregate(models.Sum("amount"))["amount__sum"]
+            or 0
+        )

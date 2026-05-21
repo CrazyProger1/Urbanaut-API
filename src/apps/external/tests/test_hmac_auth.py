@@ -46,7 +46,9 @@ def key(application, user):
     )
 
 
-def _build_request(factory, key: Key, *, method="POST", path="/api/test/", payload=None):
+def _build_request(
+    factory, key: Key, *, method="POST", path="/api/test/", payload=None
+):
     payload = payload if payload is not None else {"hello": "world"}
     request = getattr(factory, method.lower())(path, payload, format="json")
     signature = get_signature(

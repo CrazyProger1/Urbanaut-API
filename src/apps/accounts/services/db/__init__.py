@@ -58,4 +58,9 @@ from src.apps.accounts.services.db.permissions import (
     filter_editable_objects_for_user,
     get_visible_permissions,
     get_editable_permissions,
+    update_user_edit_permission,
+    update_user_view_permission,
+    update_team_edit_permission,
+    update_team_view_permission,
+    reset_permissions,
 )

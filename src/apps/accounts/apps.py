@@ -14,8 +14,8 @@ class AccountsConfig(AppConfig):
             handle_user_referral,
             handle_user_achievement,
             handle_team_created,
-
         )
+
         default_settings.setdefault(
             "GOOGLE_OAUTH_URL", "https://accounts.google.com/o/oauth2/v2/auth"
         )

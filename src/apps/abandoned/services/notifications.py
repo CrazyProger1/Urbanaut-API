@@ -12,7 +12,9 @@ from src.utils.django.i18n import localize
 def notify_user_place_created(user: User, place: Place):
     notify(
         title=localize(value='Place "%(name)s" created!', name=place.name),
-        subtitle=localize(value='Place "%(name)s" created successfully', name=place.name),
+        subtitle=localize(
+            value='Place "%(name)s" created successfully', name=place.name
+        ),
         now=True,
         tp=NotificationType.SUCCESS,
         users=(user,),
@@ -25,7 +27,9 @@ def notify_user_place_created(user: User, place: Place):
 def notify_user_place_removed(user: User, place: Place):
     notify(
         title=localize(value='Place "%(name)s" removed', name=place.name),
-        subtitle=localize(value='Place "%(name)s" removed by administrator', name=place.name),
+        subtitle=localize(
+            value='Place "%(name)s" removed by administrator', name=place.name
+        ),
         now=True,
         tp=NotificationType.ALERT,
         users=(user,),

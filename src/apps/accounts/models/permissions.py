@@ -18,7 +18,7 @@ class UserObjectPermission(models.Model):
     permission = models.ForeignKey(
         to=ObjectPermission,
         on_delete=models.CASCADE,
-        related_name="user_object_permissions"
+        related_name="user_object_permissions",
     )
     user = models.ForeignKey(
         to=User,
@@ -42,7 +42,7 @@ class TeamObjectPermission(models.Model):
     permission = models.ForeignKey(
         to=ObjectPermission,
         on_delete=models.CASCADE,
-        related_name="team_object_permissions"
+        related_name="team_object_permissions",
     )
     team = models.ForeignKey(
         to=Team,
@@ -67,9 +67,9 @@ class ObjectPermissionsMixin(models.Model):
     )
 
     def save(
-            self,
-            *args,
-            **kwargs,
+        self,
+        *args,
+        **kwargs,
     ):
         if not getattr(self, "permission", None):
             self.permission = ObjectPermission.objects.create()

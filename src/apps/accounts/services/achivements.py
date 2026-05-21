@@ -6,7 +6,8 @@ from django.db import transaction
 from src.apps.accounts.models import User, Achievement, Team
 from src.apps.accounts.services.db import (
     get_achievement_or_none_by_slug,
-    count_users, assign_achievement,
+    count_users,
+    assign_achievement,
 )
 
 logger = logging.getLogger(__name__)
@@ -21,7 +22,9 @@ def give_achievement(user: User, achievement: Achievement | str):
 
     if isinstance(achievement, Achievement):
         if assign_achievement(user=user, achievement=achievement):
-            UserEventChannel.user_achievement.publish(UserAchievementEvent(user=user, achievement=achievement))
+            UserEventChannel.user_achievement.publish(
+                UserAchievementEvent(user=user, achievement=achievement)
+            )
             logger.info(f"Achievement %s assigned to user %s", achievement, user)
         else:
             logger.info("Achievement already assigned to user %s, skipping", user)

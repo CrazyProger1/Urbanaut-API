@@ -11,7 +11,8 @@ from src.apps.abandoned.services.db import (
     is_place_favorite,
     get_all_providers,
 )
-from src.apps.accounts.serializers import UserListSerializer
+from src.apps.accounts.serializers import UserListSerializer, PermissionsSerializer, PermissionsSerializerMixin
+from src.apps.accounts.services.db import get_all_users, get_all_teams
 from src.apps.media.serializers import FileListSerializer
 from src.apps.media.services.db import get_all_files
 from src.apps.tags.services.db import get_all_tags
@@ -45,7 +46,7 @@ class PlaceListSerializer(serializers.ModelSerializer):
         return False
 
 
-class PlaceRetrieveSerializer(serializers.ModelSerializer):
+class PlaceRetrieveSerializer(PermissionsSerializerMixin, serializers.ModelSerializer):
     security = PlaceSecurityCreateRetrieveSerializer(
         read_only=True,
     )
@@ -93,7 +94,7 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
         return False
 
 
-class PlaceCreateSerializer(serializers.ModelSerializer):
+class PlaceCreateSerializer(PermissionsSerializerMixin, serializers.ModelSerializer):
     point = PointField()
     tags = serializers.SlugRelatedField(
         slug_field="tag",
@@ -146,7 +147,7 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
         return place
 
 
-class PlaceUpdateSerializer(serializers.ModelSerializer):
+class PlaceUpdateSerializer(PermissionsSerializerMixin, serializers.ModelSerializer):
     point = PointField()
     tags = serializers.SlugRelatedField(
         slug_field="tag",

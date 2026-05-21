@@ -3,7 +3,8 @@ from rest_framework import viewsets, mixins, permissions
 from src.apps.accounts.serializers import (
     TeamListSerializer,
     TeamCreateSerializer,
-    TeamRetrieveSerializer, AchievementRetrieveSerializer,
+    TeamRetrieveSerializer,
+    AchievementRetrieveSerializer,
 )
 from src.apps.accounts.services.db import get_all_teams, get_all_achievements
 from src.utils.django.views import MultipleSerializerViewsetMixin

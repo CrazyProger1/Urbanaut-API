@@ -6,14 +6,17 @@ from django.db import models
 from django.db.models import Q
 from modeltranslation.utils import build_localized_fieldname
 
-from src.apps.abandoned.enums import PreservationLevel, SecurityLevel
 from src.apps.abandoned.models import (
     Place,
     PlacePreservation,
     PlaceFile,
     UserFavoritePlace,
 )
-from src.apps.accounts.services.db import filter_visible_objects_for_user, get_visible_permissions
+from src.apps.accounts.services.db import (
+    get_visible_permissions,
+    update_user_view_permission,
+    update_team_view_permission, reset_permissions,
+)
 from src.apps.media.models import File
 from src.utils.django.db import Source, get_queryset
 
@@ -140,3 +143,17 @@ def filter_supposed_places(
 
 def count_places() -> int:
     return Place.objects.count()
+
+
+def share_place_with_users(place: Place, users: Iterable):
+    reset_permissions(obj=place)
+
+    for user in users:
+        update_user_view_permission(obj=place, user=user, can_view=True)
+
+
+def share_place_with_teams(place: Place, teams: Iterable):
+    reset_permissions(obj=place)
+
+    for team in teams:
+        update_team_view_permission(obj=place, team=team, can_view=True)

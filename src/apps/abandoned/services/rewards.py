@@ -16,7 +16,9 @@ logger = logging.getLogger(__name__)
 
 def top_up_user_balance_by_place_creation(user: User, place: Place):
     amount = settings.FINANCIAL_REWARDS["PLACE_CREATION"]
-    logger.info("Topping up balance for user %s by %s for place %s", user.pk, amount, place.pk)
+    logger.info(
+        "Topping up balance for user %s by %s for place %s", user.pk, amount, place.pk
+    )
     make_system_transaction(
         amount=amount,
         balance=user.balance,
@@ -33,7 +35,12 @@ def give_user_achievement_by_place_creation(user: User, place: Place):
 
 def fine_user_balance_by_place_removal(user: User, place: Place):
     amount = settings.FINANCIAL_REWARDS["PLACE_CREATION"]
-    logger.info("Fining balance for user %s by %s for place %s removal", user.pk, amount, place.pk)
+    logger.info(
+        "Fining balance for user %s by %s for place %s removal",
+        user.pk,
+        amount,
+        place.pk,
+    )
     make_system_transaction(
         amount=-amount,
         balance=user.balance,
@@ -46,11 +53,18 @@ def fine_user_balance_by_place_removal(user: User, place: Place):
 
 def increase_user_karma_by_place_creation(user: User, place: Place):
     amount = settings.KARMA_REWARDS["PLACE_CREATION"]
-    logger.info("Increasing karma for user %s by %s for place %s", user.pk, amount, place.pk)
+    logger.info(
+        "Increasing karma for user %s by %s for place %s", user.pk, amount, place.pk
+    )
     make_karma_transaction(user=user, amount=amount)
 
 
 def decrease_user_karma_by_place_removal(user: User, place: Place):
     amount = settings.KARMA_REWARDS["PLACE_CREATION"]
-    logger.info("Decreasing karma for user %s by %s for place %s removal", user.pk, amount, place.pk)
+    logger.info(
+        "Decreasing karma for user %s by %s for place %s removal",
+        user.pk,
+        amount,
+        place.pk,
+    )
     make_karma_transaction(user=user, amount=-amount)

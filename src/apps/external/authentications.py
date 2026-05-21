@@ -29,7 +29,11 @@ class HMACAuthentication(authentication.BaseAuthentication):
 
     def _verify_key(self, key: Key):
         if key.expired_at and key.expired_at < timezone.now():
-            logger.warning("HMAC authentication failed: key %s expired at %s", key.pk, key.expired_at)
+            logger.warning(
+                "HMAC authentication failed: key %s expired at %s",
+                key.pk,
+                key.expired_at,
+            )
             raise exceptions.AuthenticationFailed("Key expired")
 
         if key.is_revoked:
@@ -44,11 +48,11 @@ class HMACAuthentication(authentication.BaseAuthentication):
             raise exceptions.AuthenticationFailed("Request lost integrity")
 
         if not verify_signature(
-                key=key.key,
-                method=request.method,
-                signature=signature_bytes,
-                url=request.build_absolute_uri(),
-                payload=request.body,
+            key=key.key,
+            method=request.method,
+            signature=signature_bytes,
+            url=request.build_absolute_uri(),
+            payload=request.body,
         ):
             logger.warning(
                 "HMAC authentication failed: invalid signature for key %s on %s %s",

@@ -16,5 +16,7 @@ def get_all_achievements() -> models.QuerySet[Achievement]:
 
 
 def assign_achievement(user: User, achievement: Achievement) -> bool:
-    _, created = UserAchievement.objects.get_or_create(user=user, achievement=achievement)
+    _, created = UserAchievement.objects.get_or_create(
+        user=user, achievement=achievement
+    )
     return created

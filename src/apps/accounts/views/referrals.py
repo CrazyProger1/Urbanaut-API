@@ -2,7 +2,10 @@ from rest_framework import viewsets, permissions, mixins
 from django_filters import rest_framework as filters
 
 from src.apps.accounts.filters.referrals import ReferralFilter
-from src.apps.accounts.serializers import ReferralCodeListSerializer, ReferralListSerializer
+from src.apps.accounts.serializers import (
+    ReferralCodeListSerializer,
+    ReferralListSerializer,
+)
 from src.apps.accounts.services.db import (
     get_all_referral_codes,
     get_user_referral_codes,

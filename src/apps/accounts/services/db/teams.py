@@ -27,7 +27,9 @@ def add_creator_as_member(team: Team) -> TeamMember:
     return TeamMember.objects.create(team=team, member=team.created_by)
 
 
-def filter_teams_where_member(source: Source[Team], user, is_member: bool) -> models.QuerySet[Team]:
+def filter_teams_where_member(
+    source: Source[Team], user, is_member: bool
+) -> models.QuerySet[Team]:
     queryset = get_queryset(source=source)
 
     if is_member:
@@ -47,7 +49,7 @@ def filter_users_by_team(source: Source[User], team: Team) -> models.QuerySet[Us
 
 
 def search_teams(
-        term: str = None, source: Source[Team] = Team
+    term: str = None, source: Source[Team] = Team
 ) -> models.QuerySet[Team]:
     queryset = get_queryset(source=source)
     query = Q()

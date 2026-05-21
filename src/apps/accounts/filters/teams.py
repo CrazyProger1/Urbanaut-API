@@ -10,12 +10,12 @@ class TeamFilter(filters.FilterSet):
 
     class Meta:
         model = Team
-        fields = (
-            "query",
-        )
+        fields = ("query",)
 
     def filter_where_member(self, queryset, name, value):
-        return filter_teams_where_member(source=queryset, user=self.request.user, is_member=value)
+        return filter_teams_where_member(
+            source=queryset, user=self.request.user, is_member=value
+        )
 
     def search(self, queryset, name, value):
         return search_teams(term=value, source=queryset)

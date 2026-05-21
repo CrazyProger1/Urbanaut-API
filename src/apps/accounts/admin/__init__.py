@@ -138,7 +138,10 @@ class UserAdmin(BaseUserAdmin, ModelAdmin):
         for instance in instances:
             if isinstance(instance, UserAchievement):
                 UserEventChannel.user_achievement.publish(
-                    UserAchievementEvent(user=instance.user, achievement=instance.achievement))
+                    UserAchievementEvent(
+                        user=instance.user, achievement=instance.achievement
+                    )
+                )
             instance.save()
         for obj in formset.deleted_objects:
             obj.delete()

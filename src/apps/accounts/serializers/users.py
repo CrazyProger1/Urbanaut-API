@@ -16,7 +16,9 @@ from src.apps.accounts.services.db import (
     get_referral_code_or_none,
     set_user_country,
     get_user_by_username_or_none,
-    update_user_initial_username, count_user_referrals, count_user_teams,
+    update_user_initial_username,
+    count_user_referrals,
+    count_user_teams,
 )
 from src.apps.accounts.services.referrals import try_apply_referral_code
 from src.apps.geo.services.db import get_country_or_none
