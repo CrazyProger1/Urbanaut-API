@@ -6,7 +6,6 @@ from django.utils.translation import gettext_lazy as _
 from modeltranslation.admin import TabbedTranslationAdmin
 from rest_framework.reverse import reverse
 from unfold.admin import ModelAdmin, StackedInline
-from unfold.contrib.forms.widgets import WysiwygWidget
 
 from src.apps.abandoned.admin.security import PlaceSecurityInline
 from src.apps.abandoned.admin.preservation import PlacePreservationInline
@@ -106,9 +105,17 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
                 "fields": ("display_views",),
             },
         ),
+        (
+            _("Access"),
+            {
+                "fields": (
+                    "permission",
+                ),
+            },
+        ),
     )
 
-    readonly_fields = ("display_views",)
+    readonly_fields = ("display_views", "permission",)
 
     autocomplete_fields = (
         created_by_field,

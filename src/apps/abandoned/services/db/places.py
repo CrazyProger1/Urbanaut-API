@@ -13,6 +13,7 @@ from src.apps.abandoned.models import (
     PlaceFile,
     UserFavoritePlace,
 )
+from src.apps.accounts.services.db import filter_visible_objects_for_user, get_visible_permissions
 from src.apps.media.models import File
 from src.utils.django.db import Source, get_queryset
 
@@ -31,8 +32,29 @@ def get_user_or_public_places(user) -> models.QuerySet[Place]:
     return Place.objects.filter(query).distinct()
 
 
+def get_private_places() -> models.QuerySet[Place]:
+    return Place.objects.filter(is_private=True)
+
+
+def get_public_places() -> models.QuerySet[Place]:
+    return Place.objects.filter(is_private=False)
+
+
+def get_visible_places_for_user(user) -> models.QuerySet[Place]:
+    if not user.is_authenticated:
+        return get_public_places()
+
+    visible_perms = get_visible_permissions(user=user)
+
+    query = Q(is_private=False)
+    query |= Q(created_by=user)
+    query |= Q(is_private=True, permission__in=visible_perms)
+
+    return Place.objects.filter(query).distinct()
+
+
 def search_places(
-    term: str = None, source: Source[Place] = Place
+        term: str = None, source: Source[Place] = Place
 ) -> models.QuerySet[Place]:
     queryset = get_queryset(source=source)
     query = Q()
@@ -97,13 +119,13 @@ def is_place_favorite(place: Place, user):
 
 
 def filter_favorite_user_places(
-    queryset: models.QuerySet[Place], user
+        queryset: models.QuerySet[Place], user
 ) -> models.QuerySet[Place]:
     return queryset.filter(favorite_by=user)
 
 
 def filter_private_user_places(
-    queryset: models.QuerySet[Place], user, private: bool
+        queryset: models.QuerySet[Place], user, private: bool
 ) -> models.QuerySet[Place]:
     if private:
         return queryset.filter(is_private=True, created_by=user)
@@ -111,7 +133,7 @@ def filter_private_user_places(
 
 
 def filter_supposed_places(
-    queryset: models.QuerySet[Place], supposed: bool
+        queryset: models.QuerySet[Place], supposed: bool
 ) -> models.QuerySet[Place]:
     return queryset.filter(is_supposed=supposed)
 

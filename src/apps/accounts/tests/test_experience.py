@@ -11,8 +11,8 @@ def user(db):
 
 @pytest.mark.django_db
 class TestUserExperience:
-    def test_no_transactions_returns_none(self, user):
-        assert user.experience is None
+    def test_no_transactions_returns_zero(self, user):
+        assert user.experience == 0
 
     def test_single_transaction(self, user):
         ExperienceTransaction.objects.create(user=user, amount=100)
@@ -30,7 +30,7 @@ class TestUserExperience:
     def test_only_counts_own_transactions(self, user, db):
         other = User.objects.create_user(email="other@example.com", password="pass")
         ExperienceTransaction.objects.create(user=other, amount=500)
-        assert user.experience is None
+        assert user.experience == 0
 
 
 @pytest.mark.django_db

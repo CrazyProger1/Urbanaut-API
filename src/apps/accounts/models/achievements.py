@@ -78,6 +78,21 @@ class Achievement(CreatedAtMixin, models.Model):
         null=False,
         blank=False,
     )
+    karma = models.PositiveIntegerField(
+        verbose_name=_("karma"),
+        help_text=_("Karma reward of the achievement."),
+        default=0,
+    )
+    experience = models.PositiveIntegerField(
+        verbose_name=_("experience"),
+        help_text=_("Experience reward of the achievement."),
+        default=0,
+    )
+    money = models.PositiveIntegerField(
+        verbose_name=_("money"),
+        help_text=_("Financial reaward of the achievement."),
+        default=0,
+    )
 
     class Meta:
         verbose_name = _("Achievement")

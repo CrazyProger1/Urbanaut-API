@@ -2,5 +2,5 @@ from rest_framework import serializers
 
 
 class MetricRetrieveSerializer(serializers.Serializer):
-    name = serializers.CharField()
+    key = serializers.CharField()
     value = serializers.IntegerField()

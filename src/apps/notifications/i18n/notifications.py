@@ -4,7 +4,7 @@ from src.apps.notifications.models import Notification
 
 
 class NotificationTranslationOptions(TranslationOptions):
-    fields = ("title", "content")
+    fields = ("title", "subtitle", "content")
 
 
 translator.register(Notification, NotificationTranslationOptions)

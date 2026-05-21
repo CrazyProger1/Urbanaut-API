@@ -38,4 +38,4 @@ class KarmaMixin(models.Model):
 
     @property
     def karma(self):
-        return self.karma_transactions.aggregate(models.Sum("amount"))["amount__sum"]
+        return self.karma_transactions.aggregate(models.Sum("amount"))["amount__sum"] or 0

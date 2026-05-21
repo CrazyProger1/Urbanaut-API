@@ -13,6 +13,8 @@ from src.apps.abandoned.services.db.places import (
     toggle_place_supposed,
     filter_supposed_places,
     count_places,
+    get_private_places,
+    get_visible_places_for_user,
 )
 from src.apps.abandoned.services.db.areas import (
     get_all_areas,

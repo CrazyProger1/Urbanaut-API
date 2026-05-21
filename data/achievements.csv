@@ -1,0 +1,7 @@
+name_en,name_uk,name_ru,slug,description_en,description_uk,description_ru,weight,icon,significance,karma,experience,money
+Urbanaut,Urbanaut,Urbanaut,urbanaut,Awarded for outstanding service to the Urbanaut community. First 100 users will got this achievement automatically.,Нагорода за видатний внесок у спільноту Urbanaut. Перші 100 користувачів отримають це досягнення автоматично.,Награда за выдающийся вклад в сообщество Urbanaut. Первые 100 пользователей получат это достижение автоматически.,32767,zap,TRANSCENDENCE,50,0,50
+Moderator,Модератор,Модератор,moderator,Staff only.,Тільки для персоналу.,Только для персонала.,32766,eye,TRANSCENDENCE,100,0,100
+Contributor,Контриб'ютор,Контрибьютор,contributor,Rewarded for contribution.,Нагорода за внесок.,Награда за вклад.,1,wrench,INITIATION,5,0,5
+Recruiter,Рекрутер,Рекрутер,recruiter,Awarded for inviting a new user via referral link.,Нагорода за запрошення нового користувача за реферальним посиланням.,Награда за приглашение нового пользователя по реферальной ссылке.,20000,user-plus,MASTERY,10,0,50
+Tester,Тестувальник,Тестировщик,tester,Awarded for testing the platform and providing feedback.,Нагорода за тестування платформи та надання зворотного зв'язку.,Награда за тестирование платформы и предоставление обратной связи.,19999,bug,MASTERY,15,0,50
+Leader,Лідер,Лидер,leader,Awarded for creating a team.,Нагорода за створення команди.,Награда за создание команды.,5000,crown,GROWTH,5,0,5

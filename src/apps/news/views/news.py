@@ -1,4 +1,4 @@
-from rest_framework import viewsets, mixins
+from rest_framework import viewsets, mixins, filters
 
 from src.apps.news.serializers import NewsListSerializer, NewsRetrieveSerializer
 from src.apps.news.services.db import get_published_news
@@ -17,3 +17,5 @@ class NewsViewSet(
         "list": NewsListSerializer,
         "retrieve": NewsRetrieveSerializer,
     }
+    filter_backends = (filters.OrderingFilter,)
+    ordering_fields = ("published_at",)

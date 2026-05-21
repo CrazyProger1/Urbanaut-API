@@ -1,5 +1,4 @@
 from django.apps import AppConfig
-
 from src.utils.django.settings import default_settings
 
 
@@ -8,8 +7,15 @@ class AccountsConfig(AppConfig):
     name = "src.apps.accounts"
 
     def ready(self):
-        from src.apps.accounts.events import UserEventChannel, handle_user_created
+        from src.apps.accounts.events import (
+            UserEventChannel,
+            TeamEventChannel,
+            handle_user_created,
+            handle_user_referral,
+            handle_user_achievement,
+            handle_team_created,
 
+        )
         default_settings.setdefault(
             "GOOGLE_OAUTH_URL", "https://accounts.google.com/o/oauth2/v2/auth"
         )
@@ -31,6 +37,6 @@ class AccountsConfig(AppConfig):
         )
 
         UserEventChannel.user_created.subscribe(handle_user_created)
-
-        # for defaults in settings.DEFAULT_ACHIEVEMENTS:
-        #     Achievement.objects.get_or_create(**defaults)
+        UserEventChannel.user_referral.subscribe(handle_user_referral)
+        UserEventChannel.user_achievement.subscribe(handle_user_achievement)
+        TeamEventChannel.team_created.subscribe(handle_team_created)

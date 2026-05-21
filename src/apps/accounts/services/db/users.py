@@ -11,11 +11,11 @@ from src.utils.django.db import Source, get_queryset
 logger = logging.getLogger(__name__)
 
 
-def get_or_create_user_by_email(email: str) -> User:
+def get_or_create_user_by_email(email: str) -> tuple[User, bool]:
     try:
-        return User.objects.get(email=email)
+        return User.objects.get(email=email), False
     except User.DoesNotExist:
-        return User.objects.create_oauth_user(email=email)
+        return User.objects.create_oauth_user(email=email), True
 
 
 def count_users() -> int:

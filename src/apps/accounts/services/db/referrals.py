@@ -1,6 +1,19 @@
+from django.db import models
+
 from src.apps.accounts.models import ReferralCode, Referral, User
 from src.apps.accounts.services.db.usernames import get_initial_username
 
+
+def get_all_referrals() -> models.QuerySet[Referral]:
+    return Referral.objects.all()
+
+
+def get_user_referrals(user) -> models.QuerySet[Referral]:
+    return Referral.objects.filter(code__created_by=user)
+
+
+def count_user_referrals(user: User) -> int:
+    return get_user_referrals(user).count()
 
 def get_all_referral_codes():
     return ReferralCode.objects.all()
@@ -14,8 +27,12 @@ def get_referral_code_or_none(**data):
     return ReferralCode.objects.filter(**data).first()
 
 
-def apply_referral_code(code: ReferralCode, user) -> Referral:
-    return Referral.objects.create(code=code, user=user)
+def create_referral(**data) -> Referral:
+    return Referral.objects.create(**data)
+
+
+def is_referral(user: User, code: ReferralCode) -> bool:
+    return Referral.objects.filter(code=code, user=user).exists()
 
 
 def has_referral_code(user: User) -> bool:

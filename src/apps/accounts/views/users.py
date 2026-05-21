@@ -13,6 +13,7 @@ from src.apps.accounts.serializers import (
     UserCreateSerializer,
 )
 from src.apps.accounts.services.db import get_all_users, get_user_by_username_or_none
+from src.apps.accounts.services.users import publish_user_created
 
 
 class UserBaseViewSet(
@@ -51,7 +52,7 @@ class UserViewSet(
             user=user,
             request=self.request,
         )
-        UserEventChannel.user_created.publish(event=UserCreatedEvent(user=user))
+        publish_user_created(user=user)
 
         context = {"user": user}
         to = [get_user_email(user)]

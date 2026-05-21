@@ -6,8 +6,9 @@ from src.apps.abandoned.models import Place
 from src.apps.accounts.models import User
 from src.apps.accounts.services.db import (
     get_achievement_or_none_by_slug,
-    give_achievement, make_karma_transaction,
+    make_karma_transaction,
 )
+from src.apps.accounts.services.achivements import give_achievement
 from src.apps.finances.services.finances import make_system_transaction
 
 logger = logging.getLogger(__name__)
@@ -27,15 +28,7 @@ def top_up_user_balance_by_place_creation(user: User, place: Place):
 
 
 def give_user_achievement_by_place_creation(user: User, place: Place):
-    achievement = get_achievement_or_none_by_slug(
-        slug=settings.CONTRIBUTOR_ACHIEVEMENT_SLUG
-    )
-
-    if achievement:
-        logger.info("Giving achievement %s to user %s for place %s", achievement.slug, user.pk, place.pk)
-        give_achievement(user=user, achievement=achievement)
-    else:
-        logger.warning("Achievement with slug %s not found, skipping", settings.CONTRIBUTOR_ACHIEVEMENT_SLUG)
+    give_achievement(user=user, achievement=settings.CONTRIBUTOR_ACHIEVEMENT_SLUG)
 
 
 def fine_user_balance_by_place_removal(user: User, place: Place):

@@ -13,6 +13,10 @@ class AchievementRetrieveSerializer(serializers.ModelSerializer):
             "icon",
             "significance",
             "slug",
+            "description",
+            "karma",
+            "experience",
+            "money",
         )
 
 

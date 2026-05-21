@@ -29,11 +29,11 @@ class RecipientsInline(TabularInline):
 class NotificationAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
     inlines = (RecipientsInline,)
     created_by_field = "created_by"
-    formfield_overrides = {
-        models.TextField: {
-            "widget": WysiwygWidget,
-        },
-    }
+    # formfield_overrides = {
+    #     models.TextField: {
+    #         "widget": WysiwygWidget,
+    #     },
+    # }
     list_display = (
         "title",
         created_by_field,

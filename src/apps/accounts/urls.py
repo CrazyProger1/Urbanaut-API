@@ -13,18 +13,23 @@ from src.apps.accounts.views import (
     UserByUsernameViewSet,
     WebsocketTokenCreateView,
     LanguageListAPIView,
-    TeamViewSet, AchievementViewSet,
+    TeamViewSet,
+    TeamMemberViewSet,
+    AchievementViewSet,
+    ReferralsViewSet,
 )
 from src.apps.accounts.consumers import AsyncUserConsumer
 
 router = DefaultRouter()
 
-router.register("api/v1/referrals", ReferralCodeViewSet, basename="referrals")
+router.register("api/v1/referral-codes", ReferralCodeViewSet, basename="referral-codes")
+router.register("api/v1/referrals", ReferralsViewSet, basename="referrals")
 router.register("api/v1/users", UserViewSet, basename="users")
 router.register(
     "api/v1/users/by-username", UserByUsernameViewSet, basename="users-by-username"
 )
 router.register("api/v1/teams", TeamViewSet, basename="teams")
+router.register("api/v1/members", TeamMemberViewSet, basename="members")
 router.register("api/v1/achievements", AchievementViewSet, basename="achievements")
 
 urlpatterns = [
