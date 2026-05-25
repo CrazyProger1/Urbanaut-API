@@ -33,6 +33,6 @@ from src.apps.accounts.serializers.members import (
     TeamMemberListSerializer,
 )
 from src.apps.accounts.serializers.permissions import (
-    PermissionsSerializer,
-    PermissionsSerializerMixin,
+    PermissionsRetrieveSerializerMixin,
+    PermissionsCreateUpdateSerializerMixin,
 )
