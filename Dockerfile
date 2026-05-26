@@ -8,10 +8,8 @@ RUN apt-get update -y && \
     apt-get install -y --no-install-recommends \
         gdal-bin libgdal-dev \
         binutils libproj-dev \
-        make curl zstd && \
+        make && \
     rm -rf /var/lib/apt/lists/*
-
-RUN curl -fsSL https://ollama.com/install.sh | sh
 
   # set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
