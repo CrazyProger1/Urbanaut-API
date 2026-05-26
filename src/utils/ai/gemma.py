@@ -11,10 +11,7 @@ default_settings.setdefault("GOOGLE_GEMMA_ENABLE_CACHE", True)
 default_settings.setdefault("GOOGLE_GEMMA_CACHE_EXPIRATION", None)
 default_settings.setdefault("GOOGLE_GEMMA_CACHE_PREFIX", "gemma_cache")
 default_settings.setdefault("GOOGLE_GEMMA_MODEL", "gemma3:1b")
-# Limit context window to reduce VRAM/RAM usage (default is 8192).
-# 512 is enough for short search queries that return compact JSON.
-default_settings.setdefault("GOOGLE_GEMMA_NUM_CTX", 512)
-# Cap generated tokens — search results are small JSON objects.
+default_settings.setdefault("GOOGLE_GEMMA_NUM_CTX", 1024)
 default_settings.setdefault("GOOGLE_GEMMA_NUM_PREDICT", 256)
 default_settings.setdefault(
     "GOOGLE_GEMMA_SEARCH_ENGINE_INSTRUCTIONS",
