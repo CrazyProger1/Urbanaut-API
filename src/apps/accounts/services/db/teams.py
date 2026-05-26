@@ -49,13 +49,13 @@ def filter_users_by_team(source: Source[User], team: Team) -> models.QuerySet[Us
 
 
 def search_teams(
-    term: str = None, source: Source[Team] = Team
+    term: str | None = None, source: Source[Team] = Team
 ) -> models.QuerySet[Team]:
     queryset = get_queryset(source=source)
     query = Q()
-    term = term.lower()
 
     if term:
+        term = term.lower()
         for lang_code, _ in settings.LANGUAGES:
             field = build_localized_fieldname("name", lang_code)
             query |= Q(**{f"{field}__icontains": term})
