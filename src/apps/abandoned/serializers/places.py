@@ -50,7 +50,9 @@ class PlaceListSerializer(serializers.ModelSerializer):
         return False
 
 
-class PlaceRetrieveSerializer(PermissionsRetrieveSerializerMixin, serializers.ModelSerializer):
+class PlaceRetrieveSerializer(
+    PermissionsRetrieveSerializerMixin, serializers.ModelSerializer
+):
     security = PlaceSecurityCreateRetrieveSerializer(
         read_only=True,
     )
@@ -98,7 +100,9 @@ class PlaceRetrieveSerializer(PermissionsRetrieveSerializerMixin, serializers.Mo
         return False
 
 
-class PlaceCreateSerializer(PermissionsCreateUpdateSerializerMixin, serializers.ModelSerializer):
+class PlaceCreateSerializer(
+    PermissionsCreateUpdateSerializerMixin, serializers.ModelSerializer
+):
     point = PointField()
     tags = serializers.SlugRelatedField(
         slug_field="tag",
@@ -151,7 +155,9 @@ class PlaceCreateSerializer(PermissionsCreateUpdateSerializerMixin, serializers.
         return place
 
 
-class PlaceUpdateSerializer(PermissionsCreateUpdateSerializerMixin, serializers.ModelSerializer):
+class PlaceUpdateSerializer(
+    PermissionsCreateUpdateSerializerMixin, serializers.ModelSerializer
+):
     point = PointField()
     tags = serializers.SlugRelatedField(
         slug_field="tag",
@@ -228,7 +234,7 @@ def serialize_place_to_geojson(place: Place, user):
             "is_private": place.is_private,
             "is_supposed": place.is_supposed,
             "is_favorite": (
-                    user.is_authenticated and is_place_favorite(place=place, user=user)
+                user.is_authenticated and is_place_favorite(place=place, user=user)
             ),
         },
         "geometry": {

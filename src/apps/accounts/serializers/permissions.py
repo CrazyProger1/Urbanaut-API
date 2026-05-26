@@ -3,7 +3,11 @@ from rest_framework import serializers
 from src.apps.accounts.models import UserObjectPermission, TeamObjectPermission
 from src.apps.accounts.serializers.users import UserListSerializer
 from src.apps.accounts.serializers.teams import TeamListSerializer
-from src.apps.accounts.services.db import get_all_teams, get_all_users, reset_permissions
+from src.apps.accounts.services.db import (
+    get_all_teams,
+    get_all_users,
+    reset_permissions,
+)
 
 
 class ActorsCreateSerializer(serializers.Serializer):
@@ -75,24 +79,28 @@ def _write_permissions(instance, permissions):
     edit_users = set(edit.get("users", []))
     edit_teams = set(edit.get("teams", []))
 
-    UserObjectPermission.objects.bulk_create([
-        UserObjectPermission(
-            permission=instance.permission,
-            user=user,
-            is_visible=user in view_users,
-            is_editable=user in edit_users,
-        )
-        for user in view_users | edit_users
-    ])
-    TeamObjectPermission.objects.bulk_create([
-        TeamObjectPermission(
-            permission=instance.permission,
-            team=team,
-            is_visible=team in view_teams,
-            is_editable=team in edit_teams,
-        )
-        for team in view_teams | edit_teams
-    ])
+    UserObjectPermission.objects.bulk_create(
+        [
+            UserObjectPermission(
+                permission=instance.permission,
+                user=user,
+                is_visible=user in view_users,
+                is_editable=user in edit_users,
+            )
+            for user in view_users | edit_users
+        ]
+    )
+    TeamObjectPermission.objects.bulk_create(
+        [
+            TeamObjectPermission(
+                permission=instance.permission,
+                team=team,
+                is_visible=team in view_teams,
+                is_editable=team in edit_teams,
+            )
+            for team in view_teams | edit_teams
+        ]
+    )
 
 
 class PermissionsRetrieveSerializerMixin(serializers.ModelSerializer):

@@ -3,10 +3,10 @@ import json
 from django.conf import settings
 
 from src.apps.tags.services.db import get_all_tags
-from src.utils.ai import GoogleGeminiSearchEngine
+from src.utils.ai import GoogleGemmaSearchEngine
 
 
-class GoogleGeminiAbandonedAISearchEngine(GoogleGeminiSearchEngine):
+class GoogleGemmaAbandonedAISearchEngine(GoogleGemmaSearchEngine):
     instructions = settings.ABANDONED_AI_SEARCH_ENGINE_INSTRUCTIONS
 
     def _execute(self, query: str, instructions: str | None = None) -> str:

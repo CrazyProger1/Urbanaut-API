@@ -18,5 +18,5 @@ If you can't answer in some reason - just return the random list of tags.
 """
 
 ABANDONED_AI_SEARCH_ENGINE = (
-    "src.apps.abandoned.services.ai.gemini.GoogleGeminiAbandonedAISearchEngine"
+    "src.apps.abandoned.services.ai.gemma.GoogleGemmaAbandonedAISearchEngine"
 )
