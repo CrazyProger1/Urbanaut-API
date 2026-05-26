@@ -11,7 +11,7 @@ default_settings.setdefault("GOOGLE_GEMMA_ENABLE_CACHE", True)
 default_settings.setdefault("GOOGLE_GEMMA_CACHE_EXPIRATION", None)
 default_settings.setdefault("GOOGLE_GEMMA_CACHE_PREFIX", "gemma_cache")
 default_settings.setdefault("GOOGLE_GEMMA_MODEL", "gemma3:1b")
-default_settings.setdefault("GOOGLE_GEMMA_NUM_CTX", 1024)
+default_settings.setdefault("GOOGLE_GEMMA_NUM_CTX", 1024 * 4)
 default_settings.setdefault("GOOGLE_GEMMA_NUM_PREDICT", 256)
 default_settings.setdefault("GOOGLE_GEMMA_TEMPERATURE", 0)
 default_settings.setdefault(
