@@ -19,5 +19,5 @@ If nothing matches: {{"tags": []}}
 """
 
 ABANDONED_AI_SEARCH_ENGINE = (
-    "src.apps.abandoned.services.ai.gemma.GoogleGemmaAbandonedAISearchEngine"
+    "src.apps.abandoned.services.ai.gemini.GoogleGeminiAbandonedAISearchEngine"
 )
