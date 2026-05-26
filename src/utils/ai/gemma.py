@@ -11,7 +11,7 @@ from src.utils.django.settings import default_settings
 default_settings.setdefault("GOOGLE_GEMMA_ENABLE_CACHE", False)
 default_settings.setdefault("GOOGLE_GEMMA_CACHE_EXPIRATION", None)
 default_settings.setdefault("GOOGLE_GEMMA_CACHE_PREFIX", "gemma_cache")
-default_settings.setdefault("GOOGLE_GEMMA_MODEL", "gemma3:latest")
+default_settings.setdefault("GOOGLE_GEMMA_MODEL", "gemma3:1b")
 default_settings.setdefault(
     "GOOGLE_GEMMA_SEARCH_ENGINE_INSTRUCTIONS",
     "Return only valid JSON. No markdown or extra text.",
@@ -42,7 +42,7 @@ class GoogleGemmaAIAssistant(BaseAIAssistant):
             query = f"{instructions}\n\nQuery: {query}"
         
         response = chat(
-            model="gemma3",
+            model=self._model,
             messages=[{"role": "user", "content": query}],
         )
         text = response.message.content
