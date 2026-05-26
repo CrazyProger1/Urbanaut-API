@@ -14,7 +14,7 @@ Match by meaning, category, and synonyms across languages. Examples:
 - "hospital" / "больница" → hospital, medical, sanatorium, asylum
 
 Output: {{"tags": ["tag1", "tag2"]}} — valid JSON only, no markdown, no explanation.
-EVERY tag in your response MUST be present in the ALLOWED TAGS list above.
+EVERY tag in your response MUST be present in the ALLOWED TAGS list above. Tags are English slugs only.
 If nothing matches: {{"tags": []}}
 """
 
