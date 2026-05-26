@@ -4,13 +4,13 @@ FROM python:3.14-slim-bookworm
   # set work directory
 WORKDIR /urbanaut
 
-RUN apt-get update -y
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+        gdal-bin libgdal-dev \
+        binutils libproj-dev \
+        make curl zstd && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN apt-get install -y gdal-bin libgdal-dev
-RUN apt-get install -y python3-gdal
-RUN apt-get install -y binutils libproj-dev
-RUN apt-get install -y make
-RUN apt-get install -y curl
 RUN curl -fsSL https://ollama.com/install.sh | sh
 
   # set environment variables
