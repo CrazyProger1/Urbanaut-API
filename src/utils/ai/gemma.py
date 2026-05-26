@@ -1,6 +1,5 @@
 import json
 import logging
-from urllib import response
 
 from ollama import chat
 
@@ -8,10 +7,15 @@ from src.utils.ai.types import BaseAIAssistant, BaseAISearchSearchEngine
 from src.utils.cache import func_cache
 from src.utils.django.settings import default_settings
 
-default_settings.setdefault("GOOGLE_GEMMA_ENABLE_CACHE", False)
+default_settings.setdefault("GOOGLE_GEMMA_ENABLE_CACHE", True)
 default_settings.setdefault("GOOGLE_GEMMA_CACHE_EXPIRATION", None)
 default_settings.setdefault("GOOGLE_GEMMA_CACHE_PREFIX", "gemma_cache")
 default_settings.setdefault("GOOGLE_GEMMA_MODEL", "gemma3:1b")
+# Limit context window to reduce VRAM/RAM usage (default is 8192).
+# 512 is enough for short search queries that return compact JSON.
+default_settings.setdefault("GOOGLE_GEMMA_NUM_CTX", 512)
+# Cap generated tokens — search results are small JSON objects.
+default_settings.setdefault("GOOGLE_GEMMA_NUM_PREDICT", 256)
 default_settings.setdefault(
     "GOOGLE_GEMMA_SEARCH_ENGINE_INSTRUCTIONS",
     "Return only valid JSON. No markdown or extra text.",
@@ -27,11 +31,15 @@ class GoogleGemmaAIAssistant(BaseAIAssistant):
         cache_enabled: bool = default_settings.GOOGLE_GEMMA_ENABLE_CACHE,
         cache_expiration: int = default_settings.GOOGLE_GEMMA_CACHE_EXPIRATION,
         cache_prefix: str = default_settings.GOOGLE_GEMMA_CACHE_PREFIX,
+        num_ctx: int = default_settings.GOOGLE_GEMMA_NUM_CTX,
+        num_predict: int = default_settings.GOOGLE_GEMMA_NUM_PREDICT,
     ):
         self._model = model
         self._cache_enabled = cache_enabled
         self._cache_exp = cache_expiration
         self._cache_prefix = cache_prefix
+        self._num_ctx = num_ctx
+        self._num_predict = num_predict
 
     def _execute(self, query: str, instructions: str | None = None) -> str:
         logger.info('Executing query "%s"', query)
@@ -40,10 +48,11 @@ class GoogleGemmaAIAssistant(BaseAIAssistant):
             instructions = query
         else:
             query = f"{instructions}\n\nQuery: {query}"
-        
+
         response = chat(
             model=self._model,
             messages=[{"role": "user", "content": query}],
+            options={"num_ctx": self._num_ctx, "num_predict": self._num_predict},
         )
         text = response.message.content
         logger.info("Query result: %s", text)
