@@ -13,6 +13,7 @@ default_settings.setdefault("GOOGLE_GEMMA_CACHE_PREFIX", "gemma_cache")
 default_settings.setdefault("GOOGLE_GEMMA_MODEL", "gemma3:1b")
 default_settings.setdefault("GOOGLE_GEMMA_NUM_CTX", 1024)
 default_settings.setdefault("GOOGLE_GEMMA_NUM_PREDICT", 256)
+default_settings.setdefault("GOOGLE_GEMMA_TEMPERATURE", 0)
 default_settings.setdefault(
     "GOOGLE_GEMMA_SEARCH_ENGINE_INSTRUCTIONS",
     "Return only valid JSON. No markdown or extra text.",
@@ -30,6 +31,7 @@ class GoogleGemmaAIAssistant(BaseAIAssistant):
         cache_prefix: str = default_settings.GOOGLE_GEMMA_CACHE_PREFIX,
         num_ctx: int = default_settings.GOOGLE_GEMMA_NUM_CTX,
         num_predict: int = default_settings.GOOGLE_GEMMA_NUM_PREDICT,
+        temperature: int = default_settings.GOOGLE_GEMMA_TEMPERATURE,
     ):
         self._model = model
         self._cache_enabled = cache_enabled
@@ -37,6 +39,7 @@ class GoogleGemmaAIAssistant(BaseAIAssistant):
         self._cache_prefix = cache_prefix
         self._num_ctx = num_ctx
         self._num_predict = num_predict
+        self._temperature = temperature
 
     def _execute(self, query: str, instructions: str | None = None) -> str:
         logger.info('Executing query "%s"', query)
@@ -49,7 +52,7 @@ class GoogleGemmaAIAssistant(BaseAIAssistant):
         response = chat(
             model=self._model,
             messages=[{"role": "user", "content": query}],
-            options={"num_ctx": self._num_ctx, "num_predict": self._num_predict},
+            options={"num_ctx": self._num_ctx, "num_predict": self._num_predict, "temperature": self._temperature},
         )
         text = response.message.content
         logger.info("Query result: %s", text)
