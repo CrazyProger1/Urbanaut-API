@@ -10,6 +10,8 @@ RUN apt-get install -y gdal-bin libgdal-dev
 RUN apt-get install -y python3-gdal
 RUN apt-get install -y binutils libproj-dev
 RUN apt-get install -y make
+RUN apt-get install -y curl
+RUN curl -fsSL https://ollama.com/install.sh | sh
 
   # set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
