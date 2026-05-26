@@ -12,5 +12,5 @@ class GoogleGeminiAbandonedAISearchEngine(GoogleGeminiSearchEngine):
     def _execute(self, query: str, instructions: str | None = None) -> str:
         if instructions:
             slugs = list(get_all_tags().values_list("tag", flat=True).distinct())
-            instructions = instructions.format(tags=json.dumps(slugs))
+            instructions = instructions.format(tags=", ".join(sorted(slugs)))
         return super()._execute(query=query, instructions=instructions)
