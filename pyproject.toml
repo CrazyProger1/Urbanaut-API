@@ -5,6 +5,8 @@ description = "Urbanaut-Club - a social platform for urban explorers, diggers, a
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "anthropic>=0.104.1",
+    "babel>=2.18.0",
     "celery>=5.6.2",
     "channels-redis>=4.3.0",
     "channels[daphne]>=4.3.2",

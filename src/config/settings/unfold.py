@@ -22,6 +22,7 @@ UNFOLD = {
     "SITE_SYMBOL": "speed",
     "SHOW_HISTORY": True,
     "SHOW_VIEW_ON_SITE": True,
+    "SHOW_LANGUAGES": True,
     "THEME": "dark",
     "SITE_LOGO": {
         "light": lambda request: static("favicon.svg"),

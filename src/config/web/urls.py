@@ -1,6 +1,7 @@
 from django.urls import path, include
 
 urlpatterns = [
+    path("i18n/", include("django.conf.urls.i18n")),
     path("", include("django_prometheus.urls")),
     path("", include("src.apps.accounts.urls")),
     path("", include("src.apps.docs.urls")),
