@@ -84,9 +84,9 @@ class ReferralMixin(models.Model):
             give_initial_referral_code(user=self)
 
     def save(
-            self,
-            *args,
-            **kwargs,
+        self,
+        *args,
+        **kwargs,
     ):
         super().save(*args, **kwargs)
         self._give_initial_referral_code()

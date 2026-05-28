@@ -1,4 +1,9 @@
-from src.apps.accounts.events.args import UserCreatedEvent, UserReferralEvent, UserAchievementEvent, TeamCreatedEvent
+from src.apps.accounts.events.args import (
+    UserCreatedEvent,
+    UserReferralEvent,
+    UserAchievementEvent,
+    TeamCreatedEvent,
+)
 from src.utils.events import EventChannel, Event
 
 

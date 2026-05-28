@@ -23,7 +23,9 @@ class Command(BaseCommand):
         file = options.pop("file")
 
         if not os.path.exists(file):
-            self.stdout.write(self.style.ERROR(f"Specified file does not exist: {file}"))
+            self.stdout.write(
+                self.style.ERROR(f"Specified file does not exist: {file}")
+            )
             return
 
         with open(file, "r", encoding="utf-8") as f:
@@ -35,4 +37,6 @@ class Command(BaseCommand):
                     defaults=row,
                 )
 
-                self.stdout.write(self.style.SUCCESS(f"[{i + 1}] Upserted achievement {slug}"))
+                self.stdout.write(
+                    self.style.SUCCESS(f"[{i + 1}] Upserted achievement {slug}")
+                )

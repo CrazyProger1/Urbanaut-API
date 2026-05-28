@@ -36,7 +36,7 @@ class GoogleGeminiAIAssistant(BaseAIAssistant):
         self._cache_exp = cache_expiration
         self._cache_prefix = cache_prefix
 
-    def _execute(self, query: str, instructions: str) -> str:
+    def _execute(self, query: str, instructions: str | None = None) -> str:
         logger.info("Executing query %s with instructions %s", query, instructions)
         response = self._client.models.generate_content(
             model=self._model,
@@ -47,10 +47,15 @@ class GoogleGeminiAIAssistant(BaseAIAssistant):
             ),
         )
         text = response.text
+        
+        if not text:
+            logger.warning("Got empty response")
+            return ""
+    
         logger.info("Query result: %s", text)
         return text
 
-    def execute(self, query: str, instructions: str = None) -> str:
+    def execute(self, query: str, instructions: str | None = None) -> str:
         if self._cache_enabled:
             return func_cache(prefix=self._cache_prefix, exp=self._cache_exp)(
                 target=self._execute,
@@ -64,7 +69,7 @@ class GoogleGeminiAIAssistant(BaseAIAssistant):
 class GoogleGeminiSearchEngine(GoogleGeminiAIAssistant, BaseAISearchSearchEngine):
     instructions: str = default_settings.GOOGLE_GEMINI_SEARCH_ENGINE_INSTRUCTIONS
 
-    def __init__(self, instructions: str = None, **kwargs):
+    def __init__(self, instructions: str | None = None, **kwargs):
         self._search_instructions = instructions or self.instructions
         super().__init__(**kwargs)
 

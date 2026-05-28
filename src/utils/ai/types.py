@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class BaseAIAssistant(ABC):
 
     @abstractmethod
-    def execute(self, query: str, instructions: str = None) -> str: ...
+    def execute(self, query: str, instructions: str | None = None) -> str: ...
 
 
 class BaseAISearchSearchEngine(ABC):

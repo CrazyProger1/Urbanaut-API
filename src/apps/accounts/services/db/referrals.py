@@ -15,6 +15,7 @@ def get_user_referrals(user) -> models.QuerySet[Referral]:
 def count_user_referrals(user: User) -> int:
     return get_user_referrals(user).count()
 
+
 def get_all_referral_codes():
     return ReferralCode.objects.all()
 

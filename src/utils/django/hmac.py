@@ -2,9 +2,9 @@ import hmac
 
 
 def _canonicalize(
-        method: str,
-        url: str,
-        payload: bytes,
+    method: str,
+    url: str,
+    payload: bytes,
 ) -> bytes:
     parts = [
         method.upper().encode(),
@@ -15,26 +15,20 @@ def _canonicalize(
 
 
 def get_signature(
-        key: bytes,
-        method: str,
-        url: str,
-        payload: bytes,
+    key: bytes,
+    method: str,
+    url: str,
+    payload: bytes,
 ) -> bytes:
-    return hmac.new(
-        key, _canonicalize(method, url, payload), "SHA256"
-    ).digest()
+    return hmac.new(key, _canonicalize(method, url, payload), "SHA256").digest()
 
 
 def verify_signature(
-        key: bytes,
-        signature: bytes,
-        method: str,
-        url: str,
-        payload: bytes,
+    key: bytes,
+    signature: bytes,
+    method: str,
+    url: str,
+    payload: bytes,
 ) -> bool:
-    expected = hmac.new(
-        key, _canonicalize(method, url, payload), "SHA256"
-    ).digest()
+    expected = hmac.new(key, _canonicalize(method, url, payload), "SHA256").digest()
     return hmac.compare_digest(expected, signature)
-
-

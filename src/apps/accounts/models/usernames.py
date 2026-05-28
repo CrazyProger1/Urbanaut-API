@@ -54,9 +54,9 @@ class UsernameMixin(models.Model):
         return get_initial_username(user=self)
 
     def save(
-            self,
-            *args,
-            **kwargs,
+        self,
+        *args,
+        **kwargs,
     ):
         super().save(*args, **kwargs)
         self._give_initial_username()

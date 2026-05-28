@@ -69,7 +69,9 @@ class GoogleOauthCallbackView(APIView):
         try:
             tokens = authenticate_google_oauth_code(code=oauth_code)
         except HTTPError:
-            logger.error("Failed to authenticate the provided code or state: %s", oauth_code)
+            logger.error(
+                "Failed to authenticate the provided code or state: %s", oauth_code
+            )
             raise AuthenticationFailed(
                 detail="Failed to authenticate the provided code or state.",
             )

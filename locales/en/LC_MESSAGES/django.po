@@ -1,0 +1,1447 @@
+# English translations for PROJECT.
+# Copyright (C) 2026 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2026.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2026-05-27 23:12+0300\n"
+"PO-Revision-Date: 2026-05-27 23:10+0300\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.18.0\n"
+
+#: src/apps/abandoned/enums.py:6 src/apps/abandoned/enums.py:22
+msgid "No Security"
+msgstr ""
+
+#: src/apps/abandoned/enums.py:7
+msgid "Easy"
+msgstr ""
+
+#: src/apps/abandoned/enums.py:8 src/apps/abandoned/enums.py:16
+msgid "Medium"
+msgstr ""
+
+#: src/apps/abandoned/enums.py:9
+msgid "Hard"
+msgstr ""
+
+#: src/apps/abandoned/enums.py:10
+msgid "Impossible"
+msgstr ""
+
+#: src/apps/abandoned/enums.py:14
+msgid "No Preservation"
+msgstr ""
+
+#: src/apps/abandoned/enums.py:15
+msgid "Low"
+msgstr ""
+
+#: src/apps/abandoned/enums.py:17
+msgid "High"
+msgstr ""
+
+#: src/apps/abandoned/enums.py:18
+msgid "Awesome"
+msgstr ""
+
+#: src/apps/abandoned/enums.py:23
+msgid "Private"
+msgstr ""
+
+#: src/apps/abandoned/enums.py:24
+msgid "Military"
+msgstr ""
+
+#: src/apps/abandoned/admin/areas.py:18 src/apps/abandoned/admin/places.py:24
+msgid "Tag"
+msgstr ""
+
+#: src/apps/abandoned/admin/areas.py:19 src/apps/abandoned/admin/places.py:25
+#: src/config/settings/unfold.py:129 src/config/settings/unfold.py:133
+msgid "Tags"
+msgstr ""
+
+#: src/apps/abandoned/admin/places.py:32
+msgid "File"
+msgstr ""
+
+#: src/apps/abandoned/admin/places.py:33 src/config/settings/unfold.py:222
+msgid "Files"
+msgstr ""
+
+#: src/apps/abandoned/admin/places.py:40
+msgid "Favorite Place"
+msgstr ""
+
+#: src/apps/abandoned/admin/places.py:41
+msgid "Favorite Places"
+msgstr ""
+
+#: src/apps/abandoned/admin/places.py:71 src/apps/external/admin/keys.py:31
+#: src/apps/news/admin/news.py:23
+msgid "General"
+msgstr ""
+
+#: src/apps/abandoned/admin/places.py:83 src/apps/external/admin/keys.py:37
+#: src/apps/news/admin/news.py:35
+msgid "Details"
+msgstr ""
+
+#: src/apps/abandoned/admin/places.py:94 src/apps/external/admin/keys.py:52
+#: src/apps/news/admin/news.py:44
+msgid "Meta"
+msgstr ""
+
+#: src/apps/abandoned/admin/places.py:103 src/apps/news/admin/news.py:50
+msgid "Stats"
+msgstr ""
+
+#: src/apps/abandoned/admin/places.py:109
+msgid "Access"
+msgstr ""
+
+#: src/apps/abandoned/admin/places.py:148
+#: src/apps/abandoned/models/places.py:99
+msgid "area"
+msgstr ""
+
+#: src/apps/abandoned/admin/places.py:153 src/apps/news/admin/news.py:61
+msgid "views"
+msgstr ""
+
+#: src/apps/abandoned/admin/preservation.py:18
+#: src/apps/abandoned/admin/preservation.py:19
+msgid "Preservation"
+msgstr ""
+
+#: src/apps/abandoned/admin/security.py:18
+#: src/apps/abandoned/admin/security.py:19
+msgid "Security"
+msgstr ""
+
+#: src/apps/abandoned/models/areas.py:28 src/apps/abandoned/models/places.py:76
+#: src/apps/abandoned/models/providers.py:11
+#: src/apps/accounts/models/achievements.py:33
+#: src/apps/accounts/models/teams.py:32
+#: src/apps/expeditions/models/expeditions.py:12
+#: src/apps/external/models/applications.py:17
+#: src/apps/external/models/keys.py:35
+#: src/apps/notifications/models/providers.py:12
+msgid "name"
+msgstr ""
+
+#: src/apps/abandoned/models/areas.py:29 src/apps/abandoned/models/places.py:77
+msgid "Name of the place."
+msgstr ""
+
+#: src/apps/abandoned/models/areas.py:34 src/apps/abandoned/models/places.py:82
+#: src/apps/abandoned/models/providers.py:25
+#: src/apps/accounts/models/achievements.py:47
+#: src/apps/accounts/models/teams.py:38
+#: src/apps/expeditions/models/expeditions.py:18
+#: src/apps/notifications/models/providers.py:18
+msgid "description"
+msgstr ""
+
+#: src/apps/abandoned/models/areas.py:35
+msgid "Description of the abandoned object."
+msgstr ""
+
+#: src/apps/abandoned/models/areas.py:52
+msgid "parent"
+msgstr ""
+
+#: src/apps/abandoned/models/areas.py:53
+msgid "Parent area."
+msgstr ""
+
+#: src/apps/abandoned/models/areas.py:56
+msgid "polygon"
+msgstr ""
+
+#: src/apps/abandoned/models/areas.py:57
+msgid "Polygon of the abandoned area."
+msgstr ""
+
+#: src/apps/abandoned/models/areas.py:64
+#: src/apps/abandoned/models/places.py:123
+msgid "tags"
+msgstr ""
+
+#: src/apps/abandoned/models/areas.py:70
+#: src/apps/abandoned/models/places.py:129
+msgid "is private"
+msgstr ""
+
+#: src/apps/abandoned/models/areas.py:71
+msgid "Whether this area is private."
+msgstr ""
+
+#: src/apps/abandoned/models/areas.py:75
+msgid "Area"
+msgstr ""
+
+#: src/apps/abandoned/models/areas.py:76 src/config/settings/unfold.py:111
+msgid "Areas"
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:83
+msgid "Description of the place."
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:100
+msgid "Area which contains this place (eg Chernobyl Exclusion Zone)."
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:103
+msgid "built at"
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:104
+msgid "Place built date and time."
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:109
+msgid "abandoned at"
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:110
+msgid "When place became abandoned date and time."
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:115
+#: src/apps/expeditions/models/waypoints.py:22 src/apps/geo/models.py:34
+msgid "point"
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:116
+msgid "Point of the abandoned place."
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:130
+msgid "Whether this place is private."
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:134
+msgid "is supposed"
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:135
+msgid "Whether this place is supposed to be abandoned."
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:143 src/apps/geo/models.py:81
+msgid "address"
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:162
+msgid "provider"
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:163
+msgid "External provider of information about this place."
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:171
+msgid "Place"
+msgstr ""
+
+#: src/apps/abandoned/models/places.py:172 src/config/settings/unfold.py:106
+msgid "Places"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:19
+#: src/apps/abandoned/models/security.py:23
+msgid "level"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:20
+msgid "Current preservation level based on community feedbacks."
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:24
+msgid "roof"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:25
+msgid "Has roof?"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:31
+msgid "walls"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:32
+msgid "Has walls?"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:38
+msgid "floor"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:39
+msgid "Has floor?"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:45
+msgid "windows"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:46
+msgid "Has windows?"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:52
+msgid "internal ceilings"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:53
+msgid "Has internal ceilings?"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:59
+msgid "doors"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:60
+msgid "Has doors?"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:66
+msgid "furniture"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:67
+msgid "Has furniture?"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:73
+msgid "clean"
+msgstr ""
+
+#: src/apps/abandoned/models/preservation.py:74
+msgid "Is clean?"
+msgstr ""
+
+#: src/apps/abandoned/models/providers.py:12
+#: src/apps/notifications/models/providers.py:13
+msgid "Name of the provider."
+msgstr ""
+
+#: src/apps/abandoned/models/providers.py:18
+#: src/apps/accounts/models/achievements.py:40
+msgid "slug"
+msgstr ""
+
+#: src/apps/abandoned/models/providers.py:19
+msgid "Slug of the provider."
+msgstr ""
+
+#: src/apps/abandoned/models/providers.py:26
+#: src/apps/notifications/models/providers.py:19
+msgid "Description of the provider."
+msgstr ""
+
+#: src/apps/abandoned/models/providers.py:33
+#: src/apps/accounts/models/referrals.py:46 src/apps/media/models/files.py:25
+msgid "created by"
+msgstr ""
+
+#: src/apps/abandoned/models/security.py:24
+msgid "Current security level based on community feedbacks."
+msgstr ""
+
+#: src/apps/abandoned/models/security.py:28
+msgid "security"
+msgstr ""
+
+#: src/apps/abandoned/models/security.py:29
+msgid "Has security?"
+msgstr ""
+
+#: src/apps/abandoned/models/security.py:36
+msgid "dogs"
+msgstr ""
+
+#: src/apps/abandoned/models/security.py:37
+msgid "Has dogs?"
+msgstr ""
+
+#: src/apps/abandoned/models/security.py:43
+msgid "weapons"
+msgstr ""
+
+#: src/apps/abandoned/models/security.py:44
+msgid "Has weapons?"
+msgstr ""
+
+#: src/apps/abandoned/models/security.py:50
+msgid "cameras"
+msgstr ""
+
+#: src/apps/abandoned/models/security.py:51
+msgid "Has cameras?"
+msgstr ""
+
+#: src/apps/abandoned/models/security.py:57
+msgid "sensors"
+msgstr ""
+
+#: src/apps/abandoned/models/security.py:58
+msgid "Has sensors?"
+msgstr ""
+
+#: src/apps/accounts/enums.py:6
+msgid "Light"
+msgstr ""
+
+#: src/apps/accounts/enums.py:7
+msgid "Dark"
+msgstr ""
+
+#: src/apps/accounts/enums.py:11
+msgid "Initiation"
+msgstr ""
+
+#: src/apps/accounts/enums.py:12
+msgid "Growth"
+msgstr ""
+
+#: src/apps/accounts/enums.py:13
+msgid "Mastery"
+msgstr ""
+
+#: src/apps/accounts/enums.py:14
+msgid "Valor"
+msgstr ""
+
+#: src/apps/accounts/enums.py:15
+msgid "Transcendence"
+msgstr ""
+
+#: src/apps/accounts/admin/__init__.py:43
+#: src/apps/accounts/admin/__init__.py:44
+msgid "Settings"
+msgstr ""
+
+#: src/apps/accounts/admin/__init__.py:55
+msgid "Username"
+msgstr ""
+
+#: src/apps/accounts/admin/__init__.py:56
+msgid "Usernames"
+msgstr ""
+
+#: src/apps/accounts/admin/__init__.py:74
+msgid "Personal info"
+msgstr ""
+
+#: src/apps/accounts/admin/__init__.py:86
+msgid "Assets"
+msgstr ""
+
+#: src/apps/accounts/admin/__init__.py:92
+msgid "Permissions"
+msgstr ""
+
+#: src/apps/accounts/admin/__init__.py:103
+msgid "Important dates"
+msgstr ""
+
+#: src/apps/accounts/admin/achivements.py:19
+#: src/apps/accounts/models/achievements.py:99 src/config/settings/unfold.py:64
+msgid "Achievements"
+msgstr ""
+
+#: src/apps/accounts/admin/achivements.py:20
+msgid "achievement"
+msgstr ""
+
+#: src/apps/accounts/admin/permissions.py:18
+msgid "User-Object Permission"
+msgstr ""
+
+#: src/apps/accounts/admin/permissions.py:19
+msgid "User-Object Permissions"
+msgstr ""
+
+#: src/apps/accounts/admin/permissions.py:27
+msgid "Team-Object Permission"
+msgstr ""
+
+#: src/apps/accounts/admin/permissions.py:28
+msgid "Team-Object Permissions"
+msgstr ""
+
+#: src/apps/accounts/admin/referrals.py:17
+#: src/apps/accounts/models/referrals.py:12
+msgid "Referral"
+msgstr ""
+
+#: src/apps/accounts/admin/referrals.py:18
+#: src/apps/accounts/models/referrals.py:13
+msgid "Referrals"
+msgstr ""
+
+#: src/apps/accounts/admin/referrals.py:31
+#: src/apps/accounts/models/referrals.py:37
+msgid "Referral Code"
+msgstr ""
+
+#: src/apps/accounts/admin/referrals.py:32
+#: src/apps/accounts/models/referrals.py:38 src/config/settings/unfold.py:69
+msgid "Referral Codes"
+msgstr ""
+
+#: src/apps/accounts/admin/teams.py:14
+msgid "Member"
+msgstr ""
+
+#: src/apps/accounts/admin/teams.py:15
+msgid "Members"
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:34
+msgid "Name of the achievement."
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:41
+msgid "Slug of the achievement."
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:48
+msgid "Description of the achievement."
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:53
+msgid "weight"
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:54
+msgid "Weight of the achievement (affects the position in the profile)"
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:61
+msgid "icon"
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:62
+msgid "Lucide icon of the achievement."
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:74
+msgid "significance"
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:77
+msgid "Significance of the achievement."
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:82
+msgid "karma"
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:83
+msgid "Karma reward of the achievement."
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:87
+msgid "experience"
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:88
+msgid "Experience reward of the achievement."
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:92
+msgid "money"
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:93
+msgid "Financial reaward of the achievement."
+msgstr ""
+
+#: src/apps/accounts/models/achievements.py:98
+msgid "Achievement"
+msgstr ""
+
+#: src/apps/accounts/models/experience.py:12
+msgid "Experience Transaction"
+msgstr ""
+
+#: src/apps/accounts/models/experience.py:13
+msgid "Experience Transactions"
+msgstr ""
+
+#: src/apps/accounts/models/experience.py:21
+#: src/apps/accounts/models/karma.py:21
+#: src/apps/finances/models/transactions.py:38
+msgid "amount"
+msgstr ""
+
+#: src/apps/accounts/models/karma.py:12
+msgid "Karma Transaction"
+msgstr ""
+
+#: src/apps/accounts/models/karma.py:13
+msgid "Karma Transactions"
+msgstr ""
+
+#: src/apps/accounts/models/referrals.py:54
+msgid "code"
+msgstr ""
+
+#: src/apps/accounts/models/referrals.py:65
+#: src/apps/accounts/models/usernames.py:27
+msgid "is initial"
+msgstr ""
+
+#: src/apps/accounts/models/referrals.py:66
+msgid "User's initial referral code (given when user was created)"
+msgstr ""
+
+#: src/apps/accounts/models/settings.py:18
+msgid "user"
+msgstr ""
+
+#: src/apps/accounts/models/settings.py:25
+msgid "language"
+msgstr ""
+
+#: src/apps/accounts/models/settings.py:26
+msgid "Preferred language of the user."
+msgstr ""
+
+#: src/apps/accounts/models/settings.py:33 src/apps/geo/models.py:55
+msgid "country"
+msgstr ""
+
+#: src/apps/accounts/models/settings.py:34
+msgid "User country."
+msgstr ""
+
+#: src/apps/accounts/models/settings.py:40
+msgid "notifications"
+msgstr ""
+
+#: src/apps/accounts/models/settings.py:41
+msgid "Notifications enabled."
+msgstr ""
+
+#: src/apps/accounts/models/settings.py:47
+msgid "emails"
+msgstr ""
+
+#: src/apps/accounts/models/settings.py:48
+msgid "Emails enabled."
+msgstr ""
+
+#: src/apps/accounts/models/settings.py:54
+msgid "is country visible"
+msgstr ""
+
+#: src/apps/accounts/models/settings.py:55
+msgid "User country is visible in profile."
+msgstr ""
+
+#: src/apps/accounts/models/settings.py:61
+msgid "is interactive mode enabled"
+msgstr ""
+
+#: src/apps/accounts/models/settings.py:62
+msgid "User will informational toasts, hints, and tooltips"
+msgstr ""
+
+#: src/apps/accounts/models/settings.py:68
+msgid "theme"
+msgstr ""
+
+#: src/apps/accounts/models/settings.py:69
+msgid "Preferred theme of the user."
+msgstr ""
+
+#: src/apps/accounts/models/teams.py:33
+msgid "Name of the team."
+msgstr ""
+
+#: src/apps/accounts/models/teams.py:39
+msgid "Description of the team."
+msgstr ""
+
+#: src/apps/accounts/models/teams.py:44
+msgid "motto"
+msgstr ""
+
+#: src/apps/accounts/models/teams.py:45
+msgid "Motto of the team."
+msgstr ""
+
+#: src/apps/accounts/models/teams.py:52
+msgid "members"
+msgstr ""
+
+#: src/apps/accounts/models/teams.py:53
+msgid "Members of the team."
+msgstr ""
+
+#: src/apps/accounts/models/teams.py:65
+msgid "Team"
+msgstr ""
+
+#: src/apps/accounts/models/teams.py:66 src/config/settings/unfold.py:79
+msgid "Teams"
+msgstr ""
+
+#: src/apps/accounts/models/usernames.py:20
+msgid "username"
+msgstr ""
+
+#: src/apps/accounts/models/usernames.py:21
+msgid "Unique user username."
+msgstr ""
+
+#: src/apps/accounts/models/usernames.py:28
+msgid "User's initial username (given when user was created)"
+msgstr ""
+
+#: src/apps/accounts/models/users.py:38
+msgid "first name"
+msgstr ""
+
+#: src/apps/accounts/models/users.py:44
+msgid "last name"
+msgstr ""
+
+#: src/apps/accounts/models/users.py:50
+msgid "email address"
+msgstr ""
+
+#: src/apps/accounts/models/users.py:51
+msgid "Email address of the user."
+msgstr ""
+
+#: src/apps/accounts/models/users.py:55
+msgid "staff status"
+msgstr ""
+
+#: src/apps/accounts/models/users.py:56
+msgid "Designates whether the user can log into this admin site."
+msgstr ""
+
+#: src/apps/accounts/models/users.py:60
+msgid "active"
+msgstr ""
+
+#: src/apps/accounts/models/users.py:62
+msgid ""
+"designates whether this user should be treated as active. Unselect this "
+"instead of deleting accounts."
+msgstr ""
+
+#: src/apps/accounts/models/users.py:70
+msgid "birth date"
+msgstr ""
+
+#: src/apps/accounts/models/users.py:71
+msgid "User birth date."
+msgstr ""
+
+#: src/apps/accounts/models/users.py:75
+msgid "bio"
+msgstr ""
+
+#: src/apps/accounts/models/users.py:76
+msgid "User short biography."
+msgstr ""
+
+#: src/apps/accounts/models/users.py:82
+msgid "is online"
+msgstr ""
+
+#: src/apps/accounts/models/users.py:83
+msgid "User is online right now."
+msgstr ""
+
+#: src/apps/accounts/models/users.py:94
+msgid "User"
+msgstr ""
+
+#: src/apps/accounts/models/users.py:95 src/config/settings/unfold.py:59
+msgid "Users"
+msgstr ""
+
+#: src/apps/accounts/serializers/users.py:121
+msgid "Username is already used."
+msgstr ""
+
+#: src/apps/expeditions/enums.py:6 src/apps/expeditions/enums.py:14
+msgid "Planned"
+msgstr ""
+
+#: src/apps/expeditions/enums.py:7
+msgid "In process"
+msgstr ""
+
+#: src/apps/expeditions/enums.py:8
+msgid "Finished"
+msgstr ""
+
+#: src/apps/expeditions/enums.py:9
+msgid "Cancelled"
+msgstr ""
+
+#: src/apps/expeditions/enums.py:13
+msgid "Requested"
+msgstr ""
+
+#: src/apps/expeditions/enums.py:15
+msgid "Participated"
+msgstr ""
+
+#: src/apps/expeditions/enums.py:19
+msgid "POI"
+msgstr ""
+
+#: src/apps/expeditions/enums.py:20
+msgid "Meeting"
+msgstr ""
+
+#: src/apps/expeditions/admin/participations.py:13
+#: src/apps/expeditions/models/participations.py:30
+msgid "Participation"
+msgstr ""
+
+#: src/apps/expeditions/admin/participations.py:14
+#: src/apps/expeditions/models/participations.py:31
+msgid "Participations"
+msgstr ""
+
+#: src/apps/expeditions/admin/reports.py:13
+msgid "Report"
+msgstr ""
+
+#: src/apps/expeditions/admin/reports.py:14
+msgid "Reports"
+msgstr ""
+
+#: src/apps/expeditions/admin/waypoints.py:13
+msgid "Waypoint"
+msgstr ""
+
+#: src/apps/expeditions/admin/waypoints.py:14
+msgid "Waypoints"
+msgstr ""
+
+#: src/apps/expeditions/models/expeditions.py:13
+msgid "Name of the expedition."
+msgstr ""
+
+#: src/apps/expeditions/models/expeditions.py:19
+msgid "Description of the expedition."
+msgstr ""
+
+#: src/apps/expeditions/models/expeditions.py:31
+msgid "start at"
+msgstr ""
+
+#: src/apps/expeditions/models/expeditions.py:32
+msgid "Start date and time (planned or actual)."
+msgstr ""
+
+#: src/apps/expeditions/models/expeditions.py:37
+msgid "ended at"
+msgstr ""
+
+#: src/apps/expeditions/models/expeditions.py:38
+msgid "End date and time (planned or actual or cancel)."
+msgstr ""
+
+#: src/apps/expeditions/models/expeditions.py:45
+#: src/apps/expeditions/models/participations.py:24
+msgid "state"
+msgstr ""
+
+#: src/apps/expeditions/models/expeditions.py:46
+msgid "State of the expedition."
+msgstr ""
+
+#: src/apps/expeditions/models/expeditions.py:52
+msgid "Expedition"
+msgstr ""
+
+#: src/apps/expeditions/models/expeditions.py:53
+#: src/config/settings/unfold.py:118 src/config/settings/unfold.py:122
+msgid "Expeditions"
+msgstr ""
+
+#: src/apps/expeditions/models/reports.py:17
+msgid "summary"
+msgstr ""
+
+#: src/apps/expeditions/models/reports.py:18
+msgid "Summary of the expedition from participant's point of view."
+msgstr ""
+
+#: src/apps/expeditions/models/reports.py:22
+msgid "is confirmed"
+msgstr ""
+
+#: src/apps/expeditions/models/reports.py:23
+msgid "Participant surely took part in the expedition."
+msgstr ""
+
+#: src/apps/expeditions/models/waypoints.py:23
+msgid "Visited point (if place not specified)."
+msgstr ""
+
+#: src/apps/expeditions/models/waypoints.py:29
+msgid "is visited"
+msgstr ""
+
+#: src/apps/expeditions/models/waypoints.py:30
+msgid "Expedition visited this point."
+msgstr ""
+
+#: src/apps/external/admin/keys.py:43 src/apps/external/models/keys.py:78
+msgid "Key"
+msgstr ""
+
+#: src/apps/external/models/applications.py:24
+msgid "Application"
+msgstr ""
+
+#: src/apps/external/models/applications.py:25
+msgid "Applications"
+msgstr ""
+
+#: src/apps/external/models/keys.py:21
+msgid "application"
+msgstr ""
+
+#: src/apps/external/models/keys.py:22
+msgid "Application the key belongs to."
+msgstr ""
+
+#: src/apps/external/models/keys.py:42
+msgid "is revoked"
+msgstr ""
+
+#: src/apps/external/models/keys.py:43
+msgid "Whether the key is revoked."
+msgstr ""
+
+#: src/apps/external/models/keys.py:48
+msgid "encrypted key"
+msgstr ""
+
+#: src/apps/external/models/keys.py:51
+msgid "Encrypted key."
+msgstr ""
+
+#: src/apps/external/models/keys.py:54
+msgid "expired at"
+msgstr ""
+
+#: src/apps/external/models/keys.py:79
+msgid "Keys"
+msgstr ""
+
+#: src/apps/feedbacks/enums.py:6
+msgid "Correction"
+msgstr ""
+
+#: src/apps/feedbacks/enums.py:7
+msgid "Complaint"
+msgstr ""
+
+#: src/apps/feedbacks/enums.py:8 src/apps/media/eums.py:11
+msgid "Other"
+msgstr ""
+
+#: src/apps/feedbacks/admin/requests.py:33
+msgid "Mark fulfilled"
+msgstr ""
+
+#: src/apps/feedbacks/models/feedbacks.py:9 src/apps/news/models/news.py:27
+#: src/apps/notifications/models/notifications.py:27
+msgid "content"
+msgstr ""
+
+#: src/apps/feedbacks/models/feedbacks.py:12
+msgid "The content of the feedbacks"
+msgstr ""
+
+#: src/apps/feedbacks/models/requests.py:11
+msgid "comment"
+msgstr ""
+
+#: src/apps/feedbacks/models/requests.py:14
+msgid "Executor's comment related to the request."
+msgstr ""
+
+#: src/apps/feedbacks/models/requests.py:22
+msgid "Type of the request."
+msgstr ""
+
+#: src/apps/feedbacks/models/requests.py:25
+msgid "path"
+msgstr ""
+
+#: src/apps/feedbacks/models/requests.py:26
+msgid "User path."
+msgstr ""
+
+#: src/apps/feedbacks/models/requests.py:32
+msgid "context"
+msgstr ""
+
+#: src/apps/feedbacks/models/requests.py:35
+msgid "Context of the request."
+msgstr ""
+
+#: src/apps/feedbacks/models/requests.py:38
+msgid "is fulfilled"
+msgstr ""
+
+#: src/apps/feedbacks/models/requests.py:46
+msgid "requested by"
+msgstr ""
+
+#: src/apps/feedbacks/models/requests.py:47
+msgid "User who requested the request."
+msgstr ""
+
+#: src/apps/feedbacks/models/requests.py:55
+msgid "fulfilled by"
+msgstr ""
+
+#: src/apps/feedbacks/models/requests.py:56
+msgid "Executor who fulfilled the request."
+msgstr ""
+
+#: src/apps/feedbacks/models/requests.py:62
+msgid "fulfilled at"
+msgstr ""
+
+#: src/apps/feedbacks/models/requests.py:65
+msgid "Date and time at which the request was fulfilled."
+msgstr ""
+
+#: src/apps/finances/models/balances.py:28
+msgid "pool"
+msgstr ""
+
+#: src/apps/finances/models/balances.py:35
+msgid "Balance"
+msgstr ""
+
+#: src/apps/finances/models/balances.py:36 src/config/settings/unfold.py:233
+msgid "Balances"
+msgstr ""
+
+#: src/apps/finances/models/transactions.py:19
+msgid "destination"
+msgstr ""
+
+#: src/apps/finances/models/transactions.py:44
+msgid "signature"
+msgstr ""
+
+#: src/apps/finances/models/transactions.py:50 src/utils/django/db/mixins.py:8
+msgid "created at"
+msgstr ""
+
+#: src/apps/finances/models/transactions.py:51 src/utils/django/db/mixins.py:9
+msgid "Creation date and time."
+msgstr ""
+
+#: src/apps/geo/models.py:17
+msgid "is active"
+msgstr ""
+
+#: src/apps/geo/models.py:18
+msgid "Country is supported"
+msgstr ""
+
+#: src/apps/geo/models.py:35
+msgid "Point of the city."
+msgstr ""
+
+#: src/apps/geo/models.py:62
+msgid "region"
+msgstr ""
+
+#: src/apps/geo/models.py:69
+msgid "subregion"
+msgstr ""
+
+#: src/apps/geo/models.py:76
+msgid "city"
+msgstr ""
+
+#: src/apps/media/eums.py:6
+msgid "Photo"
+msgstr ""
+
+#: src/apps/media/eums.py:7
+msgid "Video"
+msgstr ""
+
+#: src/apps/media/eums.py:8
+msgid "Audio"
+msgstr ""
+
+#: src/apps/media/eums.py:9
+msgid "Document"
+msgstr ""
+
+#: src/apps/media/eums.py:10
+msgid "Executable"
+msgstr ""
+
+#: src/apps/media/forms/files.py:10
+msgid "Select a file to upload."
+msgstr ""
+
+#: src/apps/media/forms/files.py:20
+#, python-brace-format
+msgid "Uploaded file. Download current file: {file_link}"
+msgstr ""
+
+#: src/apps/media/models/files.py:26
+msgid "User who uploaded the file."
+msgstr ""
+
+#: src/apps/media/models/files.py:32
+msgid "file"
+msgstr ""
+
+#: src/apps/media/models/files.py:33
+msgid "Uploaded file."
+msgstr ""
+
+#: src/apps/media/models/files.py:38
+msgid "Type"
+msgstr ""
+
+#: src/apps/media/models/files.py:39
+msgid "File type."
+msgstr ""
+
+#: src/apps/media/models/files.py:44
+msgid "Hidden"
+msgstr ""
+
+#: src/apps/media/models/files.py:46
+msgid "Hidden from general users and available only for admins and creator."
+msgstr ""
+
+#: src/apps/news/enums.py:6 src/apps/notifications/enums.py:19
+msgid "Update"
+msgstr ""
+
+#: src/apps/news/enums.py:7 src/apps/notifications/enums.py:20
+msgid "Reminder"
+msgstr ""
+
+#: src/apps/news/enums.py:8 src/apps/notifications/enums.py:13
+#: src/apps/notifications/enums.py:21
+msgid "System"
+msgstr ""
+
+#: src/apps/news/enums.py:9 src/apps/notifications/enums.py:22
+msgid "Social"
+msgstr ""
+
+#: src/apps/news/enums.py:10 src/apps/notifications/enums.py:23
+msgid "Alert"
+msgstr ""
+
+#: src/apps/news/enums.py:11 src/apps/notifications/enums.py:24
+msgid "Success"
+msgstr ""
+
+#: src/apps/news/models/news.py:13
+msgid "title"
+msgstr ""
+
+#: src/apps/news/models/news.py:21
+#: src/apps/notifications/models/notifications.py:19
+msgid "subtitle"
+msgstr ""
+
+#: src/apps/news/models/news.py:22
+msgid "Subtitle of the newsletter."
+msgstr ""
+
+#: src/apps/news/models/news.py:28
+msgid "Newsletter content."
+msgstr ""
+
+#: src/apps/news/models/news.py:32
+msgid "is published"
+msgstr ""
+
+#: src/apps/news/models/news.py:39
+msgid "published at"
+msgstr ""
+
+#: src/apps/news/models/news.py:52
+msgid "type"
+msgstr ""
+
+#: src/apps/news/models/news.py:53
+msgid "Newsletter type."
+msgstr ""
+
+#: src/apps/news/models/news.py:57
+msgid "has more"
+msgstr ""
+
+#: src/apps/news/models/news.py:60
+msgid "Show \"Read more\" button on the newsletter."
+msgstr ""
+
+#: src/apps/news/models/news.py:64 src/apps/news/models/news.py:65
+#: src/config/settings/unfold.py:207 src/config/settings/unfold.py:211
+msgid "News"
+msgstr ""
+
+#: src/apps/notifications/enums.py:6
+msgid "Email"
+msgstr ""
+
+#: src/apps/notifications/enums.py:7
+msgid "Website"
+msgstr ""
+
+#: src/apps/notifications/enums.py:8
+msgid "Telegram"
+msgstr ""
+
+#: src/apps/notifications/enums.py:9
+msgid "Push"
+msgstr ""
+
+#: src/apps/notifications/enums.py:14
+msgid "Group"
+msgstr ""
+
+#: src/apps/notifications/enums.py:15
+msgid "Personal"
+msgstr ""
+
+#: src/apps/notifications/admin/notifications.py:24
+#: src/apps/notifications/admin/notifications.py:25
+msgid "Accidence"
+msgstr ""
+
+#: src/apps/notifications/models/notifications.py:21
+msgid ""
+"Notification subtitle (subtitle used in website and push notifications, "
+"you can see it under the title)."
+msgstr ""
+
+#: src/apps/notifications/models/notifications.py:28
+msgid "Notification content."
+msgstr ""
+
+#: src/apps/notifications/models/notifications.py:57
+msgid "trigger at"
+msgstr ""
+
+#: src/apps/notifications/models/notifications.py:58
+msgid "Notification should be shown at date and time."
+msgstr ""
+
+#: src/apps/notifications/models/notifications.py:71
+msgid "is shown"
+msgstr ""
+
+#: src/apps/notifications/models/notifications.py:72
+msgid "Was this notification shown?"
+msgstr ""
+
+#: src/apps/notifications/models/providers.py:25
+msgid "physical provider"
+msgstr ""
+
+#: src/apps/notifications/models/providers.py:26
+msgid "Physically implemented provider."
+msgstr ""
+
+#: src/apps/notifications/models/providers.py:33
+msgid "is enabled"
+msgstr ""
+
+#: src/apps/notifications/models/providers.py:40
+msgid "Provider"
+msgstr ""
+
+#: src/apps/notifications/models/providers.py:41
+#: src/config/settings/unfold.py:198
+msgid "Providers"
+msgstr ""
+
+#: src/apps/notifications/models/recepients.py:27
+msgid "is read"
+msgstr ""
+
+#: src/apps/notifications/models/recepients.py:28
+msgid "User read message."
+msgstr ""
+
+#: src/apps/notifications/models/recepients.py:33
+msgid "read at"
+msgstr ""
+
+#: src/apps/notifications/models/recepients.py:34
+msgid "User read message at date and time."
+msgstr ""
+
+#: src/apps/tags/models/tags.py:10
+msgid "tag"
+msgstr ""
+
+#: src/config/settings/i18n.py:17
+msgid "English"
+msgstr ""
+
+#: src/config/settings/i18n.py:18
+msgid "Ukrainian"
+msgstr ""
+
+#: src/config/settings/i18n.py:19
+msgid "Russian"
+msgstr ""
+
+#: src/config/settings/unfold.py:44
+msgid "Site"
+msgstr ""
+
+#: src/config/settings/unfold.py:48
+msgid "Config"
+msgstr ""
+
+#: src/config/settings/unfold.py:55
+msgid "Accounts"
+msgstr ""
+
+#: src/config/settings/unfold.py:74
+msgid "Groups"
+msgstr ""
+
+#: src/config/settings/unfold.py:86
+msgid "API"
+msgstr ""
+
+#: src/config/settings/unfold.py:90
+msgid "API Applications"
+msgstr ""
+
+#: src/config/settings/unfold.py:95
+msgid "API Keys"
+msgstr ""
+
+#: src/config/settings/unfold.py:102
+msgid "Abandoned"
+msgstr ""
+
+#: src/config/settings/unfold.py:140 src/config/settings/unfold.py:144
+msgid "Feedbacks"
+msgstr ""
+
+#: src/config/settings/unfold.py:149
+msgid "Requests"
+msgstr ""
+
+#: src/config/settings/unfold.py:156
+msgid "Geo"
+msgstr ""
+
+#: src/config/settings/unfold.py:160
+msgid "Addresses"
+msgstr ""
+
+#: src/config/settings/unfold.py:165
+msgid "Countries"
+msgstr ""
+
+#: src/config/settings/unfold.py:170
+msgid "Regions"
+msgstr ""
+
+#: src/config/settings/unfold.py:175
+msgid "Sub Regions"
+msgstr ""
+
+#: src/config/settings/unfold.py:180
+msgid "Cities"
+msgstr ""
+
+#: src/config/settings/unfold.py:187 src/config/settings/unfold.py:191
+msgid "Notifications"
+msgstr ""
+
+#: src/config/settings/unfold.py:218
+msgid "Media"
+msgstr ""
+
+#: src/config/settings/unfold.py:229
+msgid "Finances"
+msgstr ""
+
+#: src/config/settings/unfold.py:238
+msgid "Transactions"
+msgstr ""
+
+#: src/config/settings/unfold.py:245
+msgid "Celery"
+msgstr ""
+
+#: src/config/settings/unfold.py:249
+msgid "Periodic Tasks"
+msgstr ""
+
+#: src/config/settings/unfold.py:256
+msgid "Interval Schedules"
+msgstr ""
+
+#: src/config/settings/unfold.py:263
+msgid "Crontab Schedules"
+msgstr ""
+
+#: src/config/settings/unfold.py:270
+msgid "Solar Schedules"
+msgstr ""
+
+#: src/config/settings/unfold.py:277
+msgid "Clocked Schedules"
+msgstr ""
+
+#: src/utils/django/db/mixins.py:21
+msgid "updated at"
+msgstr ""
+
+#: src/utils/django/db/mixins.py:22
+msgid "Update date and time."
+msgstr ""
+
+#: src/utils/django/geo/serializers/fields.py:36
+msgid "Enter a valid location."
+msgstr ""
+
+#: src/utils/django/geo/serializers/fields.py:117
+msgid "Enter a valid polygon."
+msgstr ""
+

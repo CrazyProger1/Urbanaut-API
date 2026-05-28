@@ -26,6 +26,21 @@ services:
       timeout: 5s
       retries: 5
 
+  ollama:
+    container_name: urbanaut-ollama
+    image: ollama/ollama
+    restart: always
+    volumes:
+      - ollama_data:/root/.ollama
+    networks:
+      - ollama
+    healthcheck:
+      test: [ "CMD-SHELL", "ollama list || exit 1" ]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+      start_period: 30s
+
   api:
     build: .
     container_name: urbanaut-api
@@ -37,15 +52,20 @@ services:
       - "8000:8000"
     env_file:
       - .env
+    environment:
+      OLLAMA_HOST: http://ollama:11434
     networks:
       - postgres
       - redis
+      - ollama
     depends_on:
       postgres:
         condition: service_healthy
       redis:
         condition: service_healthy
       elasticsearch:
+        condition: service_healthy
+      ollama:
         condition: service_healthy
 
   worker:
@@ -58,13 +78,18 @@ services:
       - .:/urbanaut
     env_file:
       - .env
+    environment:
+      OLLAMA_HOST: http://ollama:11434
     networks:
       - postgres
       - redis
+      - ollama
     depends_on:
       postgres:
         condition: service_healthy
       redis:
+        condition: service_healthy
+      ollama:
         condition: service_healthy
 
   beat:
@@ -105,6 +130,7 @@ services:
 
 volumes:
   postgres_data:
+  ollama_data:
 
 networks:
   redis:
@@ -112,4 +138,6 @@ networks:
   postgres:
     driver: bridge
   elastic:
+    driver: bridge
+  ollama:
     driver: bridge

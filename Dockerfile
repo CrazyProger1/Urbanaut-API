@@ -4,12 +4,12 @@ FROM python:3.14-slim-bookworm
   # set work directory
 WORKDIR /urbanaut
 
-RUN apt-get update -y
-
-RUN apt-get install -y gdal-bin libgdal-dev
-RUN apt-get install -y python3-gdal
-RUN apt-get install -y binutils libproj-dev
-RUN apt-get install -y make
+RUN apt-get update -y && \
+    apt-get install -y --no-install-recommends \
+        gdal-bin libgdal-dev \
+        binutils libproj-dev \
+        make && \
+    rm -rf /var/lib/apt/lists/*
 
   # set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \

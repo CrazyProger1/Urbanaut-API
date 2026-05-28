@@ -108,14 +108,15 @@ class PlaceAdmin(CreatedByAdminMixin, TabbedTranslationAdmin, ModelAdmin):
         (
             _("Access"),
             {
-                "fields": (
-                    "permission",
-                ),
+                "fields": ("permission",),
             },
         ),
     )
 
-    readonly_fields = ("display_views", "permission",)
+    readonly_fields = (
+        "display_views",
+        "permission",
+    )
 
     autocomplete_fields = (
         created_by_field,

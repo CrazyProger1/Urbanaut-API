@@ -11,7 +11,12 @@ from src.apps.abandoned.services.db import (
     is_place_favorite,
     get_all_providers,
 )
-from src.apps.accounts.serializers import UserListSerializer
+from src.apps.accounts.serializers import (
+    UserListSerializer,
+    PermissionsRetrieveSerializerMixin,
+    PermissionsCreateUpdateSerializerMixin,
+)
+from src.apps.accounts.services.db import get_all_users, get_all_teams
 from src.apps.media.serializers import FileListSerializer
 from src.apps.media.services.db import get_all_files
 from src.apps.tags.services.db import get_all_tags
@@ -45,7 +50,9 @@ class PlaceListSerializer(serializers.ModelSerializer):
         return False
 
 
-class PlaceRetrieveSerializer(serializers.ModelSerializer):
+class PlaceRetrieveSerializer(
+    PermissionsRetrieveSerializerMixin, serializers.ModelSerializer
+):
     security = PlaceSecurityCreateRetrieveSerializer(
         read_only=True,
     )
@@ -93,7 +100,9 @@ class PlaceRetrieveSerializer(serializers.ModelSerializer):
         return False
 
 
-class PlaceCreateSerializer(serializers.ModelSerializer):
+class PlaceCreateSerializer(
+    PermissionsCreateUpdateSerializerMixin, serializers.ModelSerializer
+):
     point = PointField()
     tags = serializers.SlugRelatedField(
         slug_field="tag",
@@ -146,7 +155,9 @@ class PlaceCreateSerializer(serializers.ModelSerializer):
         return place
 
 
-class PlaceUpdateSerializer(serializers.ModelSerializer):
+class PlaceUpdateSerializer(
+    PermissionsCreateUpdateSerializerMixin, serializers.ModelSerializer
+):
     point = PointField()
     tags = serializers.SlugRelatedField(
         slug_field="tag",
@@ -223,7 +234,7 @@ def serialize_place_to_geojson(place: Place, user):
             "is_private": place.is_private,
             "is_supposed": place.is_supposed,
             "is_favorite": (
-                    user.is_authenticated and is_place_favorite(place=place, user=user)
+                user.is_authenticated and is_place_favorite(place=place, user=user)
             ),
         },
         "geometry": {

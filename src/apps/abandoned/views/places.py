@@ -13,7 +13,8 @@ from src.apps.abandoned.services.db import (
     get_place_area_or_none,
     get_user_or_public_places,
     toggle_place_favorite,
-    toggle_place_supposed, get_visible_places_for_user,
+    toggle_place_supposed,
+    get_visible_places_for_user,
 )
 from src.apps.abandoned.serializers import (
     PlaceRetrieveSerializer,

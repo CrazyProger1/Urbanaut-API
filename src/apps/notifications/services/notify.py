@@ -13,7 +13,11 @@ from src.apps.notifications.enums import (
     NotificationType,
     NotificationProvider,
 )
-from src.apps.notifications.models import Notification, NotificationRecipient, NotificationProvider
+from src.apps.notifications.models import (
+    Notification,
+    NotificationRecipient,
+    NotificationProvider,
+)
 from src.utils.django.beat import plan_execution
 from src.apps.notifications.tasks import show_notification
 
@@ -30,13 +34,17 @@ def _localized_field(basename: str, translations: dict) -> dict:
     return result
 
 
-def _resolve_providers(providers: Iterable[PhysicalNotificationProvider]) -> list[NotificationProvider]:
+def _resolve_providers(
+    providers: Iterable[PhysicalNotificationProvider],
+) -> list[NotificationProvider]:
     if not providers:
         return []
 
     resolved = []
     for provider in providers:
-        provider_obj = NotificationProvider.objects.filter(physical_provider=provider).first()
+        provider_obj = NotificationProvider.objects.filter(
+            physical_provider=provider
+        ).first()
         if provider_obj:
             resolved.append(provider_obj)
 
@@ -45,19 +53,21 @@ def _resolve_providers(providers: Iterable[PhysicalNotificationProvider]) -> lis
 
 @transaction.atomic
 def notify(
-        title: dict,
-        subtitle: dict = None,
-        content: dict = None,
-        now: bool = False,
-        trigger_at: datetime = None,
-        providers: Iterable[PhysicalNotificationProvider] = None,
-        audience: NotificationAudience = None,
-        users: Iterable[User] = None,
-        tp: NotificationType = None,
-        initiator: User = None,
+    title: dict,
+    subtitle: dict = None,
+    content: dict = None,
+    now: bool = False,
+    trigger_at: datetime = None,
+    providers: Iterable[PhysicalNotificationProvider] = None,
+    audience: NotificationAudience = None,
+    users: Iterable[User] = None,
+    tp: NotificationType = None,
+    initiator: User = None,
 ):
     if not now and not trigger_at:
-        raise RuntimeError("Earthier now or trigger_at must be specified to notify user")
+        raise RuntimeError(
+            "Earthier now or trigger_at must be specified to notify user"
+        )
 
     kwargs = {}
 
@@ -69,7 +79,13 @@ def notify(
     if content:
         kwargs.update(_localized_field("content", content))
 
-    logger.debug("Creating notification: type=%s, audience=%s, now=%s, trigger_at=%s", tp, audience, now, trigger_at)
+    logger.debug(
+        "Creating notification: type=%s, audience=%s, now=%s, trigger_at=%s",
+        tp,
+        audience,
+        now,
+        trigger_at,
+    )
 
     notification = Notification.objects.create(
         type=tp,
@@ -84,14 +100,24 @@ def notify(
     if users:
         users = list(users)
         NotificationRecipient.objects.bulk_create(
-            [NotificationRecipient(user=user, notification=notification) for user in users])
-        logger.debug("Created %s recipients for notification %s", len(users), notification.pk)
+            [
+                NotificationRecipient(user=user, notification=notification)
+                for user in users
+            ]
+        )
+        logger.debug(
+            "Created %s recipients for notification %s", len(users), notification.pk
+        )
 
     if now:
         logger.debug("Dispatching notification %s immediately", notification.pk)
         show_notification.apply_async((notification.pk,), countdown=5)
     else:
-        logger.debug("Scheduling notification %s at %s", notification.pk, notification.triggered_at)
+        logger.debug(
+            "Scheduling notification %s at %s",
+            notification.pk,
+            notification.triggered_at,
+        )
         plan_execution(
             task_id=f"show_notification_{notification.pk}",
             task="src.apps.notifications.tasks.notifications.show_notification",

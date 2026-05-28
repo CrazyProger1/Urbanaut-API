@@ -1,10 +1,25 @@
 import logging
 
-from src.apps.accounts.events.args import UserCreatedEvent, UserReferralEvent, UserAchievementEvent, TeamCreatedEvent
-from src.apps.accounts.services.achivements import give_default_achievements, give_achievement_for_referral, \
-    give_achievement_for_team
-from src.apps.accounts.services.rewards import reward_new_user, reward_user_referrer, reward_user_for_achievement
-from src.apps.accounts.services.notifications import notify_user_referrer, notify_user_got_achievement
+from src.apps.accounts.events.args import (
+    UserCreatedEvent,
+    UserReferralEvent,
+    UserAchievementEvent,
+    TeamCreatedEvent,
+)
+from src.apps.accounts.services.achivements import (
+    give_default_achievements,
+    give_achievement_for_referral,
+    give_achievement_for_team,
+)
+from src.apps.accounts.services.rewards import (
+    reward_new_user,
+    reward_user_referrer,
+    reward_user_for_achievement,
+)
+from src.apps.accounts.services.notifications import (
+    notify_user_referrer,
+    notify_user_got_achievement,
+)
 
 logger = logging.getLogger(__name__)
 

@@ -9,7 +9,11 @@ from src.apps.abandoned.serializers import (
     MapResponseSerializer,
     serialize_place_to_geojson,
 )
-from src.apps.abandoned.services.db import get_all_places, get_user_or_public_places, get_visible_places_for_user
+from src.apps.abandoned.services.db import (
+    get_all_places,
+    get_user_or_public_places,
+    get_visible_places_for_user,
+)
 
 
 class GeoJSONMapAPIView(views.APIView):

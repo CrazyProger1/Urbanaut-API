@@ -1,3 +1,5 @@
+from rest_framework.exceptions import NotAuthenticated
+
 from django_filters import rest_framework as filters
 
 from src.apps.accounts.models import Team
@@ -10,12 +12,15 @@ class TeamFilter(filters.FilterSet):
 
     class Meta:
         model = Team
-        fields = (
-            "query",
-        )
+        fields = ("query",)
 
     def filter_where_member(self, queryset, name, value):
-        return filter_teams_where_member(source=queryset, user=self.request.user, is_member=value)
+        user = self.request.user if self.request else None
+        if not user or not user.is_authenticated:
+            raise NotAuthenticated
+        return filter_teams_where_member(
+            source=queryset, user=user, is_member=value
+        )
 
     def search(self, queryset, name, value):
         return search_teams(term=value, source=queryset)

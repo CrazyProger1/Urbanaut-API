@@ -5,6 +5,8 @@ description = "Urbanaut-Club - a social platform for urban explorers, diggers, a
 readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
+    "anthropic>=0.104.1",
+    "babel>=2.18.0",
     "celery>=5.6.2",
     "channels-redis>=4.3.0",
     "channels[daphne]>=4.3.2",
@@ -31,6 +33,7 @@ dependencies = [
     "elasticsearch-dsl>=0.0.9",
     "geopy>=2.4.1",
     "google-genai>=1.50.0",
+    "ollama>=0.6.2",
     "onesignal-sdk>=2.0.0",
     "pre-commit>=4.5.1",
     "psycopg2-binary>=2.9.11",

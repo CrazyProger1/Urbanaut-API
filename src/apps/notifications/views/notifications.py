@@ -3,7 +3,10 @@ from rest_framework.permissions import IsAuthenticated
 from django_filters import rest_framework as filters
 
 from src.apps.notifications.filters import NotificationFilter
-from src.apps.notifications.serializers import NotificationListSerializer, NotificationRetrieveSerializer
+from src.apps.notifications.serializers import (
+    NotificationListSerializer,
+    NotificationRetrieveSerializer,
+)
 from src.apps.notifications.services.db import (
     get_all_notifications,
     get_user_shown_notifications,
